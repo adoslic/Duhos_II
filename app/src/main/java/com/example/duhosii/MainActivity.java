@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -19,7 +20,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
 
     TextView zaglavlje;
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +80,9 @@ public class MainActivity extends AppCompatActivity {
             };
 
     public void otvoriDialog(View view) {
-        Dialog dialog=new Dialog();
+        final Dialog dialog=new Dialog();
         dialog.show(getSupportFragmentManager(),"dialog");
+
     }
+
 }
