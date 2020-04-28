@@ -3,10 +3,8 @@
     <item>
         <shape android:shape="rectangle"> <!-- this is for dialog frame -->
             <corners
-                android:bottomLeftRadius="20dp"
-                android:bottomRightRadius="20dp"
-                android:topLeftRadius="20dp" />
-            <solid android:color="@color/white"/>
+                android:radius="10dp" />
+            <solid android:color="@color/duhosPlava"/>
         </shape>
     </item>
 </layer-list>

@@ -12,7 +12,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:src="@drawable/intro_srce"></pl.droidsonroids.gif.GifImageView>
+    android:src="@drawable/intro">
+</pl.droidsonroids.gif.GifImageView>
 
 
 
