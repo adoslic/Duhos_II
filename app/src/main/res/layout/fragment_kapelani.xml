@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+ <ScrollView
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:background="@color/white">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/kapelan1Image"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:src="@drawable/davor"></ImageView>
+
+        <TextView
+            android:id="@+id/kapelan1Naslov1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/kapelan1Image"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="25dp"
+            android:text="@string/kapelan1_naslov1"
+            android:textColor="@color/duhosPlava"
+            android:textSize="24sp"></TextView>
+
+        <TextView
+            android:id="@+id/kapelan1Naslov2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/kapelan1Naslov1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/kapelan1_naslov2"
+            android:textColor="@color/duhosPlava"
+            android:textSize="24sp"></TextView>
+
+        <TextView
+            android:id="@+id/kapelan1Tekst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/kapelan1Naslov2"
+            android:layout_marginTop="25dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/kapelan1_tekst"
+            android:textColor="@color/duhosPlava"
+            android:textSize="16sp"></TextView>
+
+
+        <!--///////////////////drugi kapelan//////////////////////////-->
+        <ImageView
+            android:id="@+id/kapelan2Image"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_below="@id/kapelan1Tekst"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/mario"></ImageView>
+
+        <TextView
+            android:id="@+id/kapelan2Naslov1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/kapelan2Image"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="25dp"
+            android:text="@string/kapelan2_naslov1"
+            android:textColor="@color/duhosPlava"
+            android:textSize="24sp"></TextView>
+
+        <TextView
+            android:id="@+id/kapelan2Naslov2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/kapelan2Naslov1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/kapelan2_naslov2"
+            android:textColor="@color/duhosPlava"
+            android:textSize="24sp"></TextView>
+
+        <TextView
+            android:id="@+id/kapelan2Tekst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/kapelan2Naslov2"
+            android:layout_marginTop="25dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/kapelan2_tekst"
+            android:textColor="@color/duhosPlava"
+            android:textSize="16sp"
+            android:layout_marginBottom="25dp"></TextView>
+    </RelativeLayout>
+</ScrollView>

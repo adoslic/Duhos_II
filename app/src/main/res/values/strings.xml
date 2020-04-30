@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Duhos II</string>
+
+    <string name="knjiznica_naslov">Kada si u nedoumici, idi u knjižnicu.</string>
+    <string name="knjiznica_tekst">Dragi prijatelji, pozivamo vas u jedinstvenu DUHOS knjižnicu, koja besplatno nudi preko 1000 naslova duhovne i srodne literature. Knjige se posuđuju besplatno, bez članarine.\n\nKnjižnica se nalazi u uredu studentskog kapelana u kampusu, u zgradi Studentskog zbora našeg Sveučilišta.\n\nRadno vrijeme je ponedjeljkom do petka od 10 do 16 sati.\n\nDođi, uzmi i čitaj!
+</string>
+
+    <string name="kapelan1_naslov1">Sveučilišni kapelan:</string>
+    <string name="kapelan1_naslov2">doc.dr.sc. Davor Vuković</string>
+    <string name="kapelan1_tekst">Rođen u Vinkovcima 2. studenog 1978. godine. Osnovnu školu završava u Ivankovu a gimnaziju u Vinkovcima. Nakon srednje škole upisuje bogoslovni fakultet u Đakovu te studij filozofije i teologije na Teologiji u Đakovu.\n\nZaređen je za svećenika od 2003. godine nakon čega postaje đakon u župi sv. Ćirila i Metoda u Divaltovoj i župni vikar u župi sv. Petra i Pavla u konkatedrali u Osijeku. 2012. godine doktorira na poslijediplomskom studiju iz fundamentalne teologije na Papinskom sveučilištu Gregoriana.\n\nNakon rimskog studija postaje prvo asistent, a zatim docent na Katoličkom bogoslovnom fakultetu u Đakovu gdje i danas predaje fundamentalnu teologiju. Dvije godine je bio župnik u Selcima Đakovačkim, te četiri godine duhovnik u samostanskoj crkvi Milosrdnih sestara sv. Križa u Đakovu. Od 2018. godine imenovan je sveučilišnim kapelanom na Sveučilištu J.J.Strossmayera u Osijeku.\n\nKapelan Davor poručuje mladima: “Oj budi svoj, budite svoji! Budite svoji, no budite i Božji i crkveni, jer istinska vjera ništa ne oduzima, nego naprotiv doprinosi napretku i rastu svakog čovjeka, vjernika”
+    </string>
+
+    <string name="kapelan2_naslov1">Studenski kapelan:</string>
+    <string name="kapelan2_naslov2">vlč. Mario Žigman</string>
+    <string name="kapelan2_tekst">Rođen 25. svibnja 1990. u Đakovu iz mjesta Selaca Đakovačkih. Završivši srednju upisuje Katolički bogoslovni fakultet u Đakovu te nakon prve godine ulazi u bogoslovno sjemenište.\n\nZaređen je za đakona od 2016. godine nakon čega postaje đakon u župi Preslavnog Imena Marijina u Osijeku. Za svećenika je zaređen 2017. godine te postaje župni vikar u župi Bezgrešnog začeća BDM u Valpovu.\n\nNakon godinu dana odlukom biskupa dolazi na službu nadbiskupijskog povjerenika za mlade i studenskog kapelana na Sveučilištu J.J.Strossmayera u Osijeku.
+</string>
 </resources>
