@@ -1,14 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/grey">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/id1"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/rectangle_shape_shadow">
+        <ImageView
+            android:id="@+id/image1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/rectangle_shape_shadow"
+            android:src="@drawable/ic_molitva"
+            android:padding="16dp">
+        </ImageView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/image1">
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Naslov molitve"
+                android:textSize="20sp"
+                android:textColor="@color/duhosPlava"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"></TextView>
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="28.04.2020."
+                android:textSize="16sp"
+                android:textColor="@color/duhosPlava"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/text1"
+                android:layout_centerHorizontal="true"></TextView>
+        </RelativeLayout>
+    </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Molitva"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"></TextView>
-</RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/id2"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_below="@id/id1"
+            android:background="@drawable/rectangle_shape_shadow">
+            <ImageView
+                android:id="@+id/image2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_molitva"
+                android:padding="16dp"
+                android:background="@drawable/rectangle_shape_shadow">
+            </ImageView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/image2">
+                <TextView
+                    android:id="@+id/text21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Naslov molitve"
+                    android:textSize="20sp"
+                    android:textColor="@color/duhosPlava"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:layout_centerHorizontal="true"></TextView>
+                <TextView
+                    android:id="@+id/text22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="01.05.2020."
+                    android:textSize="16sp"
+                    android:textColor="@color/duhosPlava"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/text21"
+                    android:layout_centerHorizontal="true"></TextView>
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:id="@+id/id3"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_below="@id/id2"
+            android:background="@drawable/rectangle_shape_shadow">
+            <ImageView
+                android:id="@+id/image3"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_molitva"
+                android:background="@drawable/rectangle_shape_shadow"
+                android:padding="16dp">
+            </ImageView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/image3">
+                <TextView
+                    android:id="@+id/text31"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Naslov molitve"
+                    android:textSize="20sp"
+                    android:textColor="@color/duhosPlava"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:layout_centerHorizontal="true"></TextView>
+                <TextView
+                    android:id="@+id/text32"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="06.05.2020."
+                    android:textSize="16sp"
+                    android:textColor="@color/duhosPlava"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/text31"
+                    android:layout_centerHorizontal="true"></TextView>
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</ScrollView>
+

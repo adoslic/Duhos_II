@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/timoviNaslov"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/kapelan1Naslov1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Što želimo?"
+            android:textColor="@color/duhosPlava"
+            android:textSize="24sp"></TextView>
+
+        <TextView
+            android:id="@+id/stoZelimoTeskt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/timoviNaslov"
+            android:layout_marginTop="25dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/stoZelimo"
+            android:textColor="@color/duhosPlava"
+            android:textSize="16sp"></TextView>
+
+        <ImageView
+            android:id="@+id/cuposImage"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_below="@id/stoZelimoTeskt"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/cupos"></ImageView>
+
+        <TextView
+            android:id="@+id/cuposNaslov"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cuposImage"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="25dp"
+            android:text="ČUPOS"
+            android:textColor="@color/duhosPlava"
+            android:textSize="24sp"></TextView>
+
+
+        <TextView
+            android:id="@+id/cuposTekst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cuposNaslov"
+            android:layout_marginTop="25dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/cupos"
+            android:textColor="@color/duhosPlava"
+            android:textSize="16sp"
+            android:layout_marginBottom="25dp"></TextView>
+
+
+
+        <ImageView
+            android:id="@+id/liturgijskiImage"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_below="@id/cuposTekst"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/liturgijski"></ImageView>
+
+        <TextView
+            android:id="@+id/liturgijskiNaslov"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/liturgijskiImage"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="25dp"
+            android:text="LITURGIJSKI TIM"
+            android:textColor="@color/duhosPlava"
+            android:textSize="24sp"></TextView>
+
+
+        <TextView
+            android:id="@+id/liturgijskiTekst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/liturgijskiNaslov"
+            android:layout_marginTop="25dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/liturgijski"
+            android:textColor="@color/duhosPlava"
+            android:textSize="16sp"
+            android:layout_marginBottom="25dp"></TextView>
+
+
+        <ImageView
+            android:id="@+id/medijskiImage"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_below="@id/liturgijskiTekst"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/medijski"></ImageView>
+
+        <TextView
+            android:id="@+id/medijskiNaslov"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/medijskiImage"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="25dp"
+            android:text="MEDIJSKI TIM"
+            android:textColor="@color/duhosPlava"
+            android:textSize="24sp"></TextView>
+
+
+        <TextView
+            android:id="@+id/medijskiTekst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/medijskiNaslov"
+            android:layout_marginTop="25dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="Lorem Ipsum"
+            android:textColor="@color/duhosPlava"
+            android:textSize="16sp"
+            android:layout_marginBottom="25dp"></TextView>
+
+
+        <ImageView
+            android:id="@+id/bandImage"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_below="@id/medijskiTekst"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/duhos_band"></ImageView>
+
+        <TextView
+            android:id="@+id/bandNaslov"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bandImage"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="25dp"
+            android:text="DUHOS BAND"
+            android:textColor="@color/duhosPlava"
+            android:textSize="24sp"></TextView>
+
+
+        <TextView
+            android:id="@+id/bandTeskt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bandNaslov"
+            android:layout_marginTop="25dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/band"
+            android:textColor="@color/duhosPlava"
+            android:textSize="16sp"
+            android:layout_marginBottom="25dp"></TextView>
+
+
+        <ImageView
+            android:id="@+id/volonteriImage"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_below="@id/bandTeskt"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/volonteri"></ImageView>
+
+        <TextView
+            android:id="@+id/volonteriNaslov"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/volonteriImage"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="25dp"
+            android:text="VOLONTERSKI TIM"
+            android:textColor="@color/duhosPlava"
+            android:textSize="24sp"></TextView>
+
+
+        <TextView
+            android:id="@+id/volonteriTekst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/volonteriNaslov"
+            android:layout_marginTop="25dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/volonteri"
+            android:textColor="@color/duhosPlava"
+            android:textSize="16sp"
+            android:layout_marginBottom="25dp"></TextView>
+    </RelativeLayout>
+</ScrollView>
