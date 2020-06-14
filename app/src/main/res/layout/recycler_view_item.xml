@@ -23,8 +23,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_toRightOf="@+id/slika"
-            android:layout_toEndOf="@+id/slika">
+            android:layout_toRightOf="@+id/slika">
             <TextView
                 android:id="@+id/naslov"
                 android:layout_width="wrap_content"
@@ -34,7 +33,7 @@
                 android:textColor="@color/duhosPlava"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
-                android:layout_centerHorizontal="true"/>
+                android:layout_centerHorizontal="true"></TextView>
             <TextView
                 android:id="@+id/datum"
                 android:layout_width="wrap_content"
@@ -44,7 +43,7 @@
                 android:textColor="@color/duhosPlava"
                 android:layout_marginTop="10dp"
                 android:layout_below="@id/naslov"
-                android:layout_centerHorizontal="true"/>
+                android:layout_centerHorizontal="true"></TextView>
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

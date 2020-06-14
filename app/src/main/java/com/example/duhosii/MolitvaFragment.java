@@ -1,12 +1,10 @@
 package com.example.duhosii;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,15 +14,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,16 +24,12 @@ public class MolitvaFragment extends Fragment {
 
     TextView zaglavlje;
     BottomNavigationView bottomNavigationView;
-    private RecyclerView recyclerView;
-    List<Model> itemList = new ArrayList<>();
-    private View molitvaFragmentView;
-    private DatabaseReference molitvaReference;
-    private ItemAdapter adapter;
-    private static final String TAG ="TAG";
 
     public MolitvaFragment() {
     }
 
+    RecyclerView recyclerView;
+    List<Model> itemList;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -57,40 +44,29 @@ public class MolitvaFragment extends Fragment {
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
 
-        molitvaFragmentView = inflater.inflate(R.layout.fragment_molitva,container,false);
+        View view = inflater.inflate(R.layout.fragment_molitva,container,false);
 
-        molitvaReference = FirebaseDatabase.getInstance().getReference().child("Molitva");
+        recyclerView=view.findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        onInit();
-
-        return molitvaFragmentView;
+        recyclerView.setAdapter(new ItemAdapter(initData()));
+        return view;
     }
 
-    public void onInit() {
-        molitvaReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                itemList.clear();
-                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    if(snapshot.exists()) {
-                        final String naziv = snapshot.child("naziv").getValue().toString();
-                        final String datum = snapshot.child("datum").getValue().toString();
-                        itemList.add(new Model(naziv, datum));
-                    }
-                }
-                recyclerView = molitvaFragmentView.findViewById(R.id.recyclerView);
-                recyclerView.setHasFixedSize(true);
-                adapter = new ItemAdapter(itemList);
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                adapter.notifyDataSetChanged();
-            }
+    private List<Model> initData() {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w(TAG, "Greška u čitanju iz baze podataka", databaseError.toException());
-            }
-        });
+        itemList=new ArrayList<>();
+        itemList.add(new Model("Naslov1","Datum1"));
+        itemList.add(new Model("Naslov2","Datum2"));
+        itemList.add(new Model("Naslov3","Datum3"));
+        itemList.add(new Model("Naslov4","Datum4"));
+        itemList.add(new Model("Naslov5","Datum5"));
+        itemList.add(new Model("Naslov6","Datum6"));
+        itemList.add(new Model("Naslov7","Datum7"));
 
+        return itemList;
     }
+
+
 }
