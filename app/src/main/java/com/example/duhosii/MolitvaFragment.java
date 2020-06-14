@@ -1,6 +1,7 @@
 package com.example.duhosii;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +30,16 @@ public class MolitvaFragment extends Fragment {
 
     TextView zaglavlje;
     BottomNavigationView bottomNavigationView;
+    private RecyclerView recyclerView;
+    List<Model> itemList = new ArrayList<>();
+    private View molitvaFragmentView;
+    private DatabaseReference molitvaReference;
+    private ItemAdapter adapter;
+    private static final String TAG ="TAG";
 
     public MolitvaFragment() {
     }
 
-    RecyclerView recyclerView;
-    List<Model> itemList;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,29 +54,40 @@ public class MolitvaFragment extends Fragment {
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
 
-        View view = inflater.inflate(R.layout.fragment_molitva,container,false);
+        molitvaFragmentView = inflater.inflate(R.layout.fragment_molitva,container,false);
 
-        recyclerView=view.findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        molitvaReference = FirebaseDatabase.getInstance().getReference().child("Molitva");
 
-        recyclerView.setAdapter(new ItemAdapter(initData()));
-        return view;
+        onInit();
+
+        return molitvaFragmentView;
     }
 
-    private List<Model> initData() {
+    public void onInit() {
+        molitvaReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                itemList.clear();
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    if(snapshot.exists()) {
+                        final String naziv = snapshot.child("naziv").getValue().toString();
+                        final String datum = snapshot.child("datum").getValue().toString();
+                        itemList.add(new Model(naziv, datum));
+                    }
+                }
+                recyclerView = molitvaFragmentView.findViewById(R.id.recyclerView);
+                recyclerView.setHasFixedSize(true);
+                adapter = new ItemAdapter(itemList);
+                recyclerView.setAdapter(adapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                adapter.notifyDataSetChanged();
+            }
 
-        itemList=new ArrayList<>();
-        itemList.add(new Model("Naslov1","Datum1"));
-        itemList.add(new Model("Naslov2","Datum2"));
-        itemList.add(new Model("Naslov3","Datum3"));
-        itemList.add(new Model("Naslov4","Datum4"));
-        itemList.add(new Model("Naslov5","Datum5"));
-        itemList.add(new Model("Naslov6","Datum6"));
-        itemList.add(new Model("Naslov7","Datum7"));
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, "Greška u čitanju iz baze podataka", databaseError.toException());
+            }
+        });
 
-        return itemList;
     }
-
-
 }
