@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/id1"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/rectangle_shape_shadow">
+        <ImageView
+            android:id="@+id/slika"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/rectangle_shape_shadow"
+            android:src="@drawable/ic_molitva"
+            android:padding="16dp">
+        </ImageView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/slika">
+            <TextView
+                android:id="@+id/naslov"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Naslov molitve"
+                android:textSize="20sp"
+                android:textColor="@color/duhosPlava"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"></TextView>
+            <TextView
+                android:id="@+id/datum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="28.04.2020."
+                android:textSize="16sp"
+                android:textColor="@color/duhosPlava"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/naslov"
+                android:layout_centerHorizontal="true"></TextView>
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>
