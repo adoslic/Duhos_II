@@ -31,10 +31,10 @@ public class MolitvaFragment extends Fragment {
     TextView zaglavlje;
     BottomNavigationView bottomNavigationView;
     private RecyclerView recyclerView;
-    List<Model> itemList = new ArrayList<>();
+    List<Molitva> itemList = new ArrayList<>();
     private View molitvaFragmentView;
     private DatabaseReference molitvaReference;
-    private ItemAdapter adapter;
+    private MolitvaItemAdapter adapter;
     private static final String TAG ="TAG";
 
     public MolitvaFragment() {
@@ -72,15 +72,19 @@ public class MolitvaFragment extends Fragment {
                     if(snapshot.exists()) {
                         final String naziv = snapshot.child("naziv").getValue().toString();
                         final String datum = snapshot.child("datum").getValue().toString();
-                        itemList.add(new Model(naziv, datum));
+                        final String slika = snapshot.child("slika").getValue().toString();
+                        final String tekst = snapshot.child("tekst").getValue().toString();
+                        itemList.add(new Molitva(naziv,datum,slika,tekst));
                     }
                 }
                 recyclerView = molitvaFragmentView.findViewById(R.id.recyclerView);
+
                 recyclerView.setHasFixedSize(true);
-                adapter = new ItemAdapter(itemList);
+                adapter = new MolitvaItemAdapter(itemList);
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 adapter.notifyDataSetChanged();
+
             }
 
             @Override
@@ -90,4 +94,5 @@ public class MolitvaFragment extends Fragment {
         });
 
     }
+
 }
