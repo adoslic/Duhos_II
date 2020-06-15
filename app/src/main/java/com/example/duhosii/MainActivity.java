@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragment=new KalendarFragment();
                             break;
                         case R.id.navigacija_molitva:
-                            selectedFragment=new MolitvaFragment();
+                            selectedFragment=new MolitveneGrupeFregment();
                             break;
                         case R.id.navigacija_multimedija:
                             selectedFragment=new MultimedijaFragment();

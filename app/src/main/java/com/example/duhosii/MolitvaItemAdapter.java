@@ -1,5 +1,8 @@
 package com.example.duhosii;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +21,10 @@ import java.util.List;
 public class MolitvaItemAdapter extends RecyclerView.Adapter<MolitvaItemAdapter.ViewHolder> {
 
     private List<Molitva> itemList;
-
+    private Molitva sharedItem;
+    private int sharedItemPosition;
+    private AppCompatActivity activity;
+    private Context context;
     public MolitvaItemAdapter(List<Molitva> itemList) {
         this.itemList = itemList;
     }
@@ -33,13 +39,15 @@ public class MolitvaItemAdapter extends RecyclerView.Adapter<MolitvaItemAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull final MolitvaItemAdapter.ViewHolder holder, final int position) {
+        context=holder.itemLayout.getContext();
+
         holder.naslov.setText(itemList.get(position).getNaslov());
         holder.datum.setText(itemList.get(position).getDatum());
 
         holder.itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                activity = (AppCompatActivity) v.getContext();
                 MolitvaOpsirno molitvaOpsirno=new MolitvaOpsirno(itemList.get(position));
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,molitvaOpsirno).commit();
             }
@@ -68,5 +76,27 @@ public class MolitvaItemAdapter extends RecyclerView.Adapter<MolitvaItemAdapter.
 
         }
 
+    }
+    public void shareItem(int position) {
+        sharedItem = itemList.get(position);
+        sharedItemPosition = position;
+        itemList.remove(position);
+        notifyItemRemoved(position);
+        undoDelete();
+
+        String tekst = itemList.get(position).tekst.toString();
+        String naslov = itemList.get(position).naslov.toString();
+        Intent share = new Intent();
+        share.setAction(Intent.ACTION_SEND);
+        share.putExtra(Intent.EXTRA_TEXT, tekst);
+        share.putExtra(Intent.EXTRA_SUBJECT, naslov);
+        share.setType("text/plain");
+        context.startActivity(share.createChooser(share, "Share using"));
+
+    }
+
+    private void undoDelete() {
+        itemList.add(sharedItemPosition, sharedItem);
+        notifyItemInserted(sharedItemPosition);
     }
 }
