@@ -5,8 +5,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -51,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragment=new KalendarFragment();
                             break;
                         case R.id.navigacija_molitva:
-                            selectedFragment=new MolitvaFragment();
+                            selectedFragment=new MolitveneGrupeFregment();
                             break;
                         case R.id.navigacija_multimedija:
                             selectedFragment=new MultimedijaFragment();
