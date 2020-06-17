@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -24,7 +26,8 @@ public class MolitveneGrupeFregment extends Fragment {
     private View molitvaFragmentView;
     private static final String TAG ="TAG";
     private RelativeLayout molitva,marijanske,devetnice,standard;
-
+    private RelativeLayout molitvaTextLayout,marijanskeTextLayout,devetniceTextLayout,standardTextLayout;
+    private RelativeLayout molitvaImageLayout,marijanskeImageLayout,devetniceImageLayout,standardImageLayout;
 
     @Nullable
     @Override
@@ -41,16 +44,54 @@ public class MolitveneGrupeFregment extends Fragment {
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
 
         molitvaFragmentView = inflater.inflate(R.layout.fragment_grupe_molitvi,container,false);
+
         molitva=molitvaFragmentView.findViewById(R.id.grupaMolitve);
         marijanske=molitvaFragmentView.findViewById(R.id.grupaMarijanskeMolitve);
         devetnice=molitvaFragmentView.findViewById(R.id.grupaDevetnice);
         standard=molitvaFragmentView.findViewById(R.id.grupaStandard);
+
+        molitvaTextLayout=molitvaFragmentView.findViewById(R.id.molitva_relativeLayout);
+        marijanskeTextLayout=molitvaFragmentView.findViewById(R.id.marijanske_relativeLayout);
+        devetniceTextLayout=molitvaFragmentView.findViewById(R.id.devetnice_relativeLayout);
+        standardTextLayout=molitvaFragmentView.findViewById(R.id.standardne_relativeLayout);
+
+        molitvaImageLayout=molitvaFragmentView.findViewById(R.id.slikaBiblijeLayout);
+        marijanskeImageLayout=molitvaFragmentView.findViewById(R.id.slikaMarijeLayout);
+        devetniceImageLayout=molitvaFragmentView.findViewById(R.id.slikaKruniceLayout);
+        standardImageLayout=molitvaFragmentView.findViewById(R.id.slikaStandardLayout);
+
+        molitvaImageLayout.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.fade_transition_animation));
+        molitvaTextLayout.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.scale_transition_animation));
+        marijanskeImageLayout.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.fade_transition_animation));
+        marijanskeTextLayout.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.scale_transition_animation));
+        devetniceImageLayout.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.fade_transition_animation));
+        devetniceTextLayout.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.scale_transition_animation));
+        standardImageLayout.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.fade_transition_animation));
+        standardTextLayout.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.scale_transition_animation));
 
 
         molitva.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new MolitvaFragment()).commit();
+            }
+        });
+        marijanske.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new MarijanskeMolitveFragment()).commit();
+            }
+        });
+        devetnice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new DevetniceFragment()).commit();
+            }
+        });
+        standard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new StandardneMolitveFragment()).commit();
             }
         });
         return molitvaFragmentView;
