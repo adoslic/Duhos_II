@@ -35,6 +35,7 @@
         </ImageView>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/molitva_relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/slikaBiblijeLayout"
@@ -93,6 +94,7 @@
             </ImageView>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/marijanske_relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/slikaMarijeLayout"
@@ -152,6 +154,7 @@
                 </ImageView>
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/devetnice_relativeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/slikaKruniceLayout"
@@ -211,6 +214,7 @@
                 </ImageView>
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/standardne_relativeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/slikaStandardLayout"
