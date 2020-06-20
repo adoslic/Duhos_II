@@ -6,16 +6,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -62,7 +58,6 @@ public class MarijanskeMolitveFragment extends Fragment {
 
         molitvaFragmentView = inflater.inflate(R.layout.fragment_molitva,container,false);
 
-
         molitvaReference = FirebaseDatabase.getInstance().getReference("Molitve").child("Marijanske_molitve");
 
         onInit();
@@ -71,6 +66,12 @@ public class MarijanskeMolitveFragment extends Fragment {
     }
 
     public void onInit() {
+
+        recyclerView = molitvaFragmentView.findViewById(R.id.recyclerView);
+        adapter = new MolitvaItemAdapter(itemList,"Marijanske");
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapter);
 
         molitvaReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -86,14 +87,9 @@ public class MarijanskeMolitveFragment extends Fragment {
                 }
                 Collections.reverse(itemList);
 
-                recyclerView = molitvaFragmentView.findViewById(R.id.recyclerView);
-
-                recyclerView.setHasFixedSize(true);
-                adapter = new MolitvaItemAdapter(itemList,"Marijanske");
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToShareCallback(adapter));
                 itemTouchHelper.attachToRecyclerView(recyclerView);
+                adapter.showShimer = false;
                 adapter.notifyDataSetChanged();
             }
 

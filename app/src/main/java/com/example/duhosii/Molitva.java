@@ -6,7 +6,7 @@ public class Molitva {
     String datum;
     String tekst;
 
-    public Molitva(String naslov, String datum,  String tekst) {
+    public Molitva(String naslov, String datum, String tekst) {
         this.naslov = naslov;
         this.datum = datum;
         this.tekst = tekst;
@@ -27,7 +27,6 @@ public class Molitva {
     public void setDatum(String datum) {
         this.datum = datum;
     }
-
 
     public String getTekst() {
         return tekst;

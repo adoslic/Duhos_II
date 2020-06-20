@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -67,6 +66,11 @@ public class DevetniceFragment extends Fragment {
     }
 
     public void onInit() {
+        recyclerView = molitvaFragmentView.findViewById(R.id.recyclerView);
+        adapter = new MolitvaItemAdapter(itemList,"Devetnice");
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapter);
 
         molitvaReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -82,14 +86,9 @@ public class DevetniceFragment extends Fragment {
                 }
                 Collections.reverse(itemList);
 
-                recyclerView = molitvaFragmentView.findViewById(R.id.recyclerView);
-
-                recyclerView.setHasFixedSize(true);
-                adapter = new MolitvaItemAdapter(itemList,"Devetnice");
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToShareCallback(adapter));
                 itemTouchHelper.attachToRecyclerView(recyclerView);
+                adapter.showShimer = false;
                 adapter.notifyDataSetChanged();
             }
 
