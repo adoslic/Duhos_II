@@ -26,7 +26,7 @@ public class KalendarFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ActionBar mActionBar =  ((AppCompatActivity)getActivity()).getSupportActionBar();
         mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        mActionBar.setCustomView(R.layout.toolbar);
+        mActionBar.setCustomView(R.layout.toolbar_without_back);
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         View view=mActionBar.getCustomView();
         zaglavlje=view.findViewById(R.id.naslov);

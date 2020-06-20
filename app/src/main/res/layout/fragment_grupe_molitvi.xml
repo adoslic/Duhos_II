@@ -1,28 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 
- <ScrollView
-     xmlns:android="http://schemas.android.com/apk/res/android"
-     android:layout_width="match_parent"
-     android:layout_height="match_parent"
-     android:background="@color/white">
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    <RelativeLayout
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="46"
+        android:layout_gravity="center"
+        android:background="@color/white">
+
+    <LinearLayout
         android:id="@+id/grupaMolitve"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/rectangle_shape_shadow">
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:elevation="4dp"
+        android:background="@drawable/rectangle_shape"
+        android:weightSum="3"
+        android:orientation="horizontal">
         <RelativeLayout
             android:id="@+id/slikaBiblijeLayout"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:layout_centerVertical="true"
-            android:background="@drawable/rectangle_shape_grey"
-            >
+            android:background="@drawable/rectangle_shape_grey">
         <ImageView
             android:id="@+id/slikaBiblije"
             android:layout_width="100dp"
@@ -36,10 +41,11 @@
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/molitva_relativeLayout"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/slikaBiblijeLayout"
-            android:layout_toEndOf="@+id/slikaBiblijeLayout">
+            android:layout_toEndOf="@+id/slikaBiblijeLayout"
+            android:layout_weight="2">
             <TextView
                 android:id="@+id/naslovMolitve"
                 android:layout_width="wrap_content"
@@ -61,27 +67,34 @@
                 android:layout_below="@id/naslovMolitve"
                 android:layout_marginLeft="25dp"/>
         </RelativeLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
     <!--/////////////////////////////////////////////////////////////////-->
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"></Space>
 
-    <RelativeLayout
+    <!--/////////////////////////////////////////////////////////////////-->
+    <LinearLayout
         android:id="@+id/grupaMarijanskeMolitve"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/rectangle_shape_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:elevation="4dp"
+        android:background="@drawable/rectangle_shape"
         android:layout_below="@id/grupaMolitve"
-        >
+        android:weightSum="3"
+        android:orientation="horizontal">
         <RelativeLayout
             android:id="@+id/slikaMarijeLayout"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:background="@drawable/rectangle_shape_grey"
-            >
+            android:layout_weight="1">
             <ImageView
                 android:id="@+id/slikaMarije"
                 android:layout_width="100dp"
@@ -95,10 +108,11 @@
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/marijanske_relativeLayout"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/slikaMarijeLayout"
-            android:layout_toEndOf="@+id/slikaMarijeLayout">
+            android:layout_toEndOf="@+id/slikaMarijeLayout"
+            android:layout_weight="2">
             <TextView
                 android:id="@+id/naslovMarije"
                 android:layout_width="wrap_content"
@@ -120,28 +134,34 @@
                 android:layout_below="@id/naslovMarije"
                 android:layout_marginLeft="25dp"/>
         </RelativeLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
-
+    <!--/////////////////////////////////////////////////////////////////-->
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"></Space>
         <!--/////////////////////////////////////////////////////////////////-->
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/grupaDevetnice"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/rectangle_shape_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:elevation="4dp"
+            android:background="@drawable/rectangle_shape"
             android:layout_below="@id/grupaMarijanskeMolitve"
-            >
+            android:weightSum="3"
+            android:orientation="horizontal">
             <RelativeLayout
                 android:id="@+id/slikaKruniceLayout"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:background="@drawable/rectangle_shape_grey"
-                >
+                android:layout_weight="1">
                 <ImageView
                     android:id="@+id/slikaKrunice"
                     android:layout_width="100dp"
@@ -155,10 +175,11 @@
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/devetnice_relativeLayout"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/slikaKruniceLayout"
-                android:layout_toEndOf="@+id/slikaKruniceLayout">
+                android:layout_toEndOf="@+id/slikaKruniceLayout"
+                android:layout_weight="2">
                 <TextView
                     android:id="@+id/naslovDevetnice"
                     android:layout_width="wrap_content"
@@ -181,27 +202,34 @@
                     android:layout_below="@id/naslovDevetnice"
                     android:layout_marginLeft="25dp"/>
             </RelativeLayout>
-        </RelativeLayout>
-
+        </LinearLayout>
+    <!--/////////////////////////////////////////////////////////////////-->
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"></Space>
         <!--/////////////////////////////////////////////////////////////////-->
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/grupaStandard"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/rectangle_shape_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:elevation="4dp"
+            android:background="@drawable/rectangle_shape"
             android:layout_below="@id/grupaDevetnice"
-            >
+            android:weightSum="3"
+            android:orientation="horizontal">
             <RelativeLayout
                 android:id="@+id/slikaStandardLayout"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:background="@drawable/rectangle_shape_grey"
-                >
+                android:layout_weight="1">
                 <ImageView
                     android:id="@+id/slikaStandard"
                     android:layout_width="100dp"
@@ -215,10 +243,11 @@
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/standardne_relativeLayout"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/slikaStandardLayout"
-                android:layout_toEndOf="@+id/slikaStandardLayout">
+                android:layout_toEndOf="@+id/slikaStandardLayout"
+                android:layout_weight="2">
                 <TextView
                     android:id="@+id/naslovStandard"
                     android:layout_width="wrap_content"
@@ -240,7 +269,6 @@
                     android:layout_below="@id/naslovStandard"
                     android:layout_marginLeft="25dp"/>
             </RelativeLayout>
-        </RelativeLayout>
+        </LinearLayout>
 
-    </RelativeLayout>
-</ScrollView>
+    </LinearLayout>

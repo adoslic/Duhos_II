@@ -40,14 +40,18 @@ public class MolitvaItemAdapter extends RecyclerView.Adapter<MolitvaItemAdapter.
     @Override
     public void onBindViewHolder(@NonNull final MolitvaItemAdapter.ViewHolder holder, final int position) {
         context=holder.itemLayout.getContext();
-        if(izvor.equals("Molitva"))
-        holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_biblija));
-        if(izvor.equals("Standard"))
+        if(izvor.equals("Molitva")) {
+            holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_biblija));
+        }
+        if(izvor.equals("Standard")) {
             holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_standardne));
-        if(izvor.equals("Marijanske"))
+        }
+        if(izvor.equals("Marijanske")) {
             holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_marijanske));
-        if(izvor.equals("Devetnice"))
+        }
+        if(izvor.equals("Devetnice")) {
             holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_devetnice));
+        }
 
         holder.slikaLayout.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition_animation));
         holder.tekstLayout.setAnimation(AnimationUtils.loadAnimation(context,R.anim.scale_transition_animation));
@@ -59,8 +63,8 @@ public class MolitvaItemAdapter extends RecyclerView.Adapter<MolitvaItemAdapter.
             @Override
             public void onClick(View v) {
                 activity = (AppCompatActivity) v.getContext();
-                MolitvaOpsirno molitvaOpsirno=new MolitvaOpsirno(itemList.get(position));
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,molitvaOpsirno).commit();
+                MolitvaOpsirno molitvaOpsirno=new MolitvaOpsirno(itemList.get(position),izvor);
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,molitvaOpsirno).addToBackStack("molitvaOpsirnoFragment").commit();
             }
         });
     }

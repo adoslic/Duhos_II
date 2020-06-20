@@ -92,9 +92,12 @@ public class Dialog extends AppCompatDialogFragment {
         uclaniSe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url="https://docs.google.com/forms/d/e/1FAIpQLSfe8xETG3lyWJkftnyf4N7gcPJ0-UNoB2TjALKaGGv6NY0GAg/viewform?fbclid=IwAR2ppsjJ9aMN3MmjjQCqDIm69SDqKUJuTBL0VFgrgUV3IKBb3sWfTeCEceo";
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(browserIntent);
+                alertDialog.dismiss();
+                UclaniSeFragment frag = new UclaniSeFragment();
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.fragment_containter, frag);
+                ft.addToBackStack(null);
+                ft.commit();
             }
         });
 

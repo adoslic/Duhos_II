@@ -8,10 +8,9 @@
         android:id="@+id/itemLayout"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/rectangle_shape_shadow">
+        android:layout_margin="10dp"
+        android:elevation="4dp"
+        android:background="@drawable/rectangle_shape">
         <RelativeLayout
             android:id="@+id/slikaLayout"
             android:layout_width="100dp"

@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -60,6 +62,7 @@ public class MarijanskeMolitveFragment extends Fragment {
 
         molitvaFragmentView = inflater.inflate(R.layout.fragment_molitva,container,false);
 
+
         molitvaReference = FirebaseDatabase.getInstance().getReference("Molitve").child("Marijanske_molitve");
 
         onInit();
@@ -77,9 +80,8 @@ public class MarijanskeMolitveFragment extends Fragment {
                     if(snapshot.exists()) {
                         final String naziv = snapshot.child("Naziv").getValue().toString();
                         final String datum = snapshot.child("Datum").getValue().toString();
-                        final String slika = snapshot.child("Slika").getValue().toString();
                         final String tekst = snapshot.child("Tekst").getValue().toString();
-                        itemList.add(new Molitva(naziv,datum,slika,tekst));
+                        itemList.add(new Molitva(naziv,datum,tekst));
                     }
                 }
                 Collections.reverse(itemList);
