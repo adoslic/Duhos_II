@@ -5,13 +5,27 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+
+    ArrayList<Molitva> itemListMolitva = new ArrayList<>();
+    ArrayList<Molitva> itemListMarijanske = new ArrayList<>();
+    ArrayList<Molitva> itemListStandardne = new ArrayList<>();
+    ArrayList<Molitva> itemListDevetnice = new ArrayList<>();
+
+    ArrayList<ArrayList<Molitva>> itemList = new ArrayList<>();
 
     BottomNavigationView bottomNavigationView;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -28,6 +42,17 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView=findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+
+        Intent intent=getIntent();
+        itemListMolitva = (ArrayList<Molitva>) intent.getSerializableExtra("listaMolitva");
+        itemListMarijanske = (ArrayList<Molitva>) intent.getSerializableExtra("listaMarijanske");
+        itemListStandardne = (ArrayList<Molitva>) intent.getSerializableExtra("listaStandardne");
+        itemListDevetnice = (ArrayList<Molitva>) intent.getSerializableExtra("listaDevetnice");
+
+        itemList.add(itemListMolitva);
+        itemList.add(itemListMarijanske);
+        itemList.add(itemListStandardne);
+        itemList.add(itemListDevetnice);
 
         //neka pocetni fragment bude molitva
         findViewById(R.id.navigacija_molitva).performClick();
@@ -49,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragment=new KalendarFragment();
                             break;
                         case R.id.navigacija_molitva:
-                            selectedFragment=new MolitveneGrupeFregment();
+                            selectedFragment=new MolitveneGrupeFragment(itemList);
                             break;
                         case R.id.navigacija_multimedija:
                             selectedFragment=new MultimedijaFragment();
@@ -58,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragment=new PitanjaFragment();
                             break;
                     }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,selectedFragment).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,selectedFragment).addToBackStack("selectedFragment").commit();
                     return true;
                 }
             };
@@ -69,4 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void idiNatrag(View view) {
+        getSupportFragmentManager().popBackStack();
+    }
 }

@@ -40,7 +40,8 @@ public class StandardneMolitveFragment extends Fragment {
     private DatabaseReference molitvaReference;
     private MolitvaItemAdapter adapter;
     private static final String TAG ="TAG";
-    public StandardneMolitveFragment() {
+    public StandardneMolitveFragment(List<Molitva> itemList) {
+        this.itemList=itemList;
     }
 
     @Nullable
@@ -59,29 +60,12 @@ public class StandardneMolitveFragment extends Fragment {
 
         molitvaFragmentView = inflater.inflate(R.layout.fragment_molitva,container,false);
 
-        molitvaReference = FirebaseDatabase.getInstance().getReference("Molitve").child("Standardne_molitve");
-
         onInit();
 
         return molitvaFragmentView;
     }
 
     public void onInit() {
-
-        molitvaReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                itemList.clear();
-                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    if(snapshot.exists()) {
-                        final String naziv = snapshot.child("Naziv").getValue().toString();
-                        final String datum = snapshot.child("Datum").getValue().toString();
-                        final String slika = snapshot.child("Slika").getValue().toString();
-                        final String tekst = snapshot.child("Tekst").getValue().toString();
-                        itemList.add(new Molitva(naziv,datum,slika,tekst));
-                    }
-                }
-                Collections.reverse(itemList);
 
                 recyclerView = molitvaFragmentView.findViewById(R.id.recyclerView);
 
@@ -93,13 +77,5 @@ public class StandardneMolitveFragment extends Fragment {
                 itemTouchHelper.attachToRecyclerView(recyclerView);
                 adapter.notifyDataSetChanged();
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w(TAG, "Greška u čitanju iz baze podataka", databaseError.toException());
-            }
-        });
-
-    }
 
 }
