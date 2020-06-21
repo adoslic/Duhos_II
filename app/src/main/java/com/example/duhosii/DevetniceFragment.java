@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,8 +39,7 @@ public class DevetniceFragment extends Fragment {
     private DatabaseReference molitvaReference;
     private MolitvaItemAdapter adapter;
     private static final String TAG ="TAG";
-    public DevetniceFragment(List<Molitva> itemList) {
-        this.itemList=itemList;
+    public DevetniceFragment() {
     }
 
     @Nullable
@@ -60,21 +58,46 @@ public class DevetniceFragment extends Fragment {
 
         molitvaFragmentView = inflater.inflate(R.layout.fragment_molitva,container,false);
 
+        molitvaReference = FirebaseDatabase.getInstance().getReference("Molitve").child("Devetnice");
+
         onInit();
 
         return molitvaFragmentView;
     }
 
     public void onInit() {
-                recyclerView = molitvaFragmentView.findViewById(R.id.recyclerView);
+        recyclerView = molitvaFragmentView.findViewById(R.id.recyclerView);
+        adapter = new MolitvaItemAdapter(itemList,"Devetnice");
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapter);
 
-                recyclerView.setHasFixedSize(true);
-                adapter = new MolitvaItemAdapter(itemList,"Devetnice");
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        molitvaReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                itemList.clear();
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    if(snapshot.exists()) {
+                        final String naziv = snapshot.child("Naziv").getValue().toString();
+                        final String datum = snapshot.child("Datum").getValue().toString();
+                        final String tekst = snapshot.child("Tekst").getValue().toString();
+                        itemList.add(new Molitva(naziv,datum,tekst));
+                    }
+                }
+                Collections.reverse(itemList);
+
                 ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToShareCallback(adapter));
                 itemTouchHelper.attachToRecyclerView(recyclerView);
+                adapter.showShimer = false;
                 adapter.notifyDataSetChanged();
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, "Greška u čitanju iz baze podataka", databaseError.toException());
+            }
+        });
+
+    }
 
 }

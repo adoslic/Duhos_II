@@ -41,4 +41,5 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.2'
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 }
