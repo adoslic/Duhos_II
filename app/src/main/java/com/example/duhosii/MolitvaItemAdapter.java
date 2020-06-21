@@ -78,6 +78,7 @@ public class MolitvaItemAdapter extends RecyclerView.Adapter<MolitvaItemAdapter.
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,molitvaOpsirno).addToBackStack("molitvaOpsirnoFragment").commit();
             }
         });
+        }
     }
 
     @Override
