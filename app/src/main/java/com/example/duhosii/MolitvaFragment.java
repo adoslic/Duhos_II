@@ -6,8 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -65,6 +67,12 @@ public class MolitvaFragment extends Fragment {
 
     public void onInit() {
 
+        recyclerView = molitvaFragmentView.findViewById(R.id.recyclerView);
+        adapter = new MolitvaItemAdapter(itemList,"Molitva");
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapter);
+
         molitvaReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -79,14 +87,9 @@ public class MolitvaFragment extends Fragment {
                 }
                 Collections.reverse(itemList);
 
-                recyclerView = molitvaFragmentView.findViewById(R.id.recyclerView);
-
-                recyclerView.setHasFixedSize(true);
-                adapter = new MolitvaItemAdapter(itemList,"Molitva");
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToShareCallback(adapter));
                 itemTouchHelper.attachToRecyclerView(recyclerView);
+                adapter.showShimer = false;
                 adapter.notifyDataSetChanged();
             }
 

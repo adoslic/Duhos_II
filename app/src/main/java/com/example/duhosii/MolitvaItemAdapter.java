@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
+
 import java.util.List;
 
 public class MolitvaItemAdapter extends RecyclerView.Adapter<MolitvaItemAdapter.ViewHolder> {
@@ -24,6 +26,9 @@ public class MolitvaItemAdapter extends RecyclerView.Adapter<MolitvaItemAdapter.
     private AppCompatActivity activity;
     private Context context;
     private String izvor;
+    boolean showShimer = true;
+    int SHIMMER_ITEM_NUMBER = 5;
+
     public MolitvaItemAdapter(List<Molitva> itemList, String izvor) {
         this.itemList = itemList;
         this.izvor=izvor;
@@ -33,31 +38,37 @@ public class MolitvaItemAdapter extends RecyclerView.Adapter<MolitvaItemAdapter.
     @Override
     public MolitvaItemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final MolitvaItemAdapter.ViewHolder holder, final int position) {
-        context=holder.itemLayout.getContext();
-        if(izvor.equals("Molitva")) {
-            holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_biblija));
-        }
-        if(izvor.equals("Standard")) {
-            holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_standardne));
-        }
-        if(izvor.equals("Marijanske")) {
-            holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_marijanske));
-        }
-        if(izvor.equals("Devetnice")) {
-            holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_devetnice));
-        }
+        if(showShimer){
+            holder.shimmerFrameLayout.startShimmer();
+        } else{
+            holder.shimmerFrameLayout.stopShimmer();
+            holder.shimmerFrameLayout.setShimmer(null);
 
-        holder.slikaLayout.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition_animation));
-        holder.tekstLayout.setAnimation(AnimationUtils.loadAnimation(context,R.anim.scale_transition_animation));
+            holder.slika.setBackground(null);
+            holder.datum.setBackground(null);
+            holder.naslov.setBackground(null);
 
-        holder.naslov.setText(itemList.get(position).getNaslov());
-        holder.datum.setText(itemList.get(position).getDatum());
+            context=holder.itemLayout.getContext();
+            if(izvor.equals("Molitva"))
+                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_biblija));
+            if(izvor.equals("Standard"))
+                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_standardne));
+            if(izvor.equals("Marijanske"))
+                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_marijanske));
+            if(izvor.equals("Devetnice"))
+                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_devetnice));
+
+            holder.slikaLayout.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition_animation));
+            holder.tekstLayout.setAnimation(AnimationUtils.loadAnimation(context,R.anim.scale_transition_animation));
+
+            holder.naslov.setText(itemList.get(position).getNaslov());
+            holder.datum.setText(itemList.get(position).getDatum());
+            holder.slika.setImageResource(R.drawable.ic_biblija);
 
         holder.itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,23 +78,26 @@ public class MolitvaItemAdapter extends RecyclerView.Adapter<MolitvaItemAdapter.
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,molitvaOpsirno).addToBackStack("molitvaOpsirnoFragment").commit();
             }
         });
+        }
     }
 
     @Override
     public int getItemCount() {
-        return itemList.size();
+        return showShimer? SHIMMER_ITEM_NUMBER : itemList.size();
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView naslov, datum;
         ImageView slika;
         RelativeLayout itemLayout,slikaLayout,tekstLayout;
+        ShimmerFrameLayout shimmerFrameLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            shimmerFrameLayout = itemView.findViewById(R.id.shimmer_layout);
             naslov = itemView.findViewById(R.id.naslov);
             datum = itemView.findViewById(R.id.datum);
             slika = itemView.findViewById(R.id.slika);
