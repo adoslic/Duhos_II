@@ -36,9 +36,11 @@ public class MolitvaOpsirno extends Fragment {
     private View molitvaView;
     private TextView naslov,tekst;
     private ImageView slika;
+    private String izvor;
 
 
-    public MolitvaOpsirno(Molitva molitva) {
+    public MolitvaOpsirno(Molitva molitva, String izvor) {
+        this.izvor=izvor;
         this.molitva = molitva;
     }
 
@@ -60,10 +62,21 @@ public class MolitvaOpsirno extends Fragment {
         naslov=molitvaView.findViewById(R.id.naslovOpsirno);
         tekst=molitvaView.findViewById(R.id.tekstOpsirno);
         slika=molitvaView.findViewById(R.id.slikaOpsirno);
-        String url=molitva.getSlika();
-        Picasso.with(getContext()).load(url).into(slika);
         naslov.setText(molitva.getNaslov());
         tekst.setText(molitva.getTekst());
+
+        if(izvor.equals("Molitva")) {
+            slika.setImageDrawable(getResources().getDrawable(R.drawable.molitve));
+        }
+        if(izvor.equals("Standard")) {
+            slika.setImageDrawable(getResources().getDrawable(R.drawable.standardne_molitve));
+        }
+        if(izvor.equals("Marijanske")) {
+            slika.setImageDrawable(getResources().getDrawable(R.drawable.marijanske_molitve));
+        }
+        if(izvor.equals("Devetnice")) {
+            slika.setImageDrawable(getResources().getDrawable(R.drawable.devetnice));
+        }
         return molitvaView;
     }
 

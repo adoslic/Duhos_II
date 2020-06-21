@@ -76,9 +76,8 @@ public class StandardneMolitveFragment extends Fragment {
                     if(snapshot.exists()) {
                         final String naziv = snapshot.child("Naziv").getValue().toString();
                         final String datum = snapshot.child("Datum").getValue().toString();
-                        final String slika = snapshot.child("Slika").getValue().toString();
                         final String tekst = snapshot.child("Tekst").getValue().toString();
-                        itemList.add(new Molitva(naziv,datum,slika,tekst));
+                        itemList.add(new Molitva(naziv,datum,tekst));
                     }
                 }
                 Collections.reverse(itemList);

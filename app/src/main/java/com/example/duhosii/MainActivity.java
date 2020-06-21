@@ -5,10 +5,12 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragment=new KalendarFragment();
                             break;
                         case R.id.navigacija_molitva:
-                            selectedFragment=new MolitveneGrupeFregment();
+                            selectedFragment=new MolitveneGrupeFragment();
                             break;
                         case R.id.navigacija_multimedija:
                             selectedFragment=new MultimedijaFragment();
@@ -58,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragment=new PitanjaFragment();
                             break;
                     }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,selectedFragment).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,selectedFragment).addToBackStack("selectedFragment").commit();
                     return true;
                 }
             };
@@ -69,4 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void idiNatrag(View view) {
+        getSupportFragmentManager().popBackStack();
+    }
 }
