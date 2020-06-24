@@ -6,10 +6,13 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -74,4 +77,8 @@ public class MainActivity extends AppCompatActivity {
     public void idiNatrag(View view) {
         getSupportFragmentManager().popBackStack();
     }
+
+
+
+
 }
