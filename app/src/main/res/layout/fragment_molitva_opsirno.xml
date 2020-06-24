@@ -9,10 +9,12 @@
      android:layout_width="match_parent"
      android:layout_height="match_parent"
      android:background="@color/white"
-     android:layout_above="@id/shareButton">
+     android:fillViewport="true"
+     >
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <ImageView
             android:id="@+id/slikaOpsirno"
@@ -43,10 +45,6 @@
             android:textColor="@color/duhosPlava"
             android:textAlignment="gravity"
             android:gravity="left"></TextView>
-    </RelativeLayout>
-
-</ScrollView>
-
         <ImageButton
             android:id="@+id/shareButton"
             android:layout_width="wrap_content"
@@ -54,6 +52,12 @@
             android:src="@drawable/ic_button_share"
             android:background="#55FFFFFF"
             android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="10dp" />
+            android:layout_below="@+id/tekstOpsirno"
+            android:padding="10dp"/>
+    </RelativeLayout>
+
+</ScrollView>
+
+
+
 </RelativeLayout>

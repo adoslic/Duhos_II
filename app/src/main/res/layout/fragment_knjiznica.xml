@@ -9,51 +9,52 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:layout_above="@id/popisKnjigaButton">
+        android:fillViewport="true">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-    <ImageView
-        android:id="@+id/knjiznicaImage"
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:src="@drawable/knjiznica">
-    </ImageView>
+            <ImageView
+                android:id="@+id/knjiznicaImage"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:src="@drawable/knjiznica">
+            </ImageView>
 
-    <TextView
-        android:id="@+id/knjiznicaNaslov"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/knjiznica_naslov"
-        android:layout_below="@+id/knjiznicaImage"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="25dp"
-        android:textColor="@color/duhosPlava"
-        android:textSize="24sp"></TextView>
+            <TextView
+                android:id="@+id/knjiznicaNaslov"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/knjiznica_naslov"
+                android:layout_below="@+id/knjiznicaImage"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="25dp"
+                android:textColor="@color/duhosPlava"
+                android:textSize="24sp"></TextView>
 
-    <TextView
-        android:id="@+id/knjiznicaTekst"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/knjiznica_tekst"
-        android:layout_below="@+id/knjiznicaNaslov"
-        android:layout_marginTop="25dp"
-        android:textColor="@color/duhosPlava"
-        android:paddingRight="16dp"
-        android:paddingLeft="16dp"
-        android:textSize="16sp"></TextView>
+            <TextView
+                android:id="@+id/knjiznicaTekst"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/knjiznica_tekst"
+                android:layout_below="@+id/knjiznicaNaslov"
+                android:layout_marginTop="25dp"
+                android:textColor="@color/duhosPlava"
+                android:paddingRight="16dp"
+                android:paddingLeft="16dp"
+                android:textSize="16sp"></TextView>
+            <ImageButton
+                android:id="@+id/popisKnjigaButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_button_knjiznica"
+                android:background="#55FFFFFF"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="10dp"/>
         </RelativeLayout>
     </ScrollView>
 
 
-    <ImageButton
-        android:id="@+id/popisKnjigaButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_button_knjiznica"
-        android:background="#55FFFFFF"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="10dp" />
+
 
 </RelativeLayout>
