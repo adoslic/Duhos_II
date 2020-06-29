@@ -7,10 +7,13 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
@@ -23,6 +26,7 @@ public class KnjiznicaFragment extends Fragment {
 
     TextView zaglavlje;
     BottomNavigationView bottomNavigationView;
+    ImageButton popisKnjigaButton;
 
     @Nullable
     @Override
@@ -39,9 +43,22 @@ public class KnjiznicaFragment extends Fragment {
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
+        View knjiznicaView=inflater.inflate(R.layout.fragment_knjiznica, container, false);
+        popisKnjigaButton=knjiznicaView.findViewById(R.id.popisKnjigaButton);
 
+        popisKnjigaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popisKnjiga();
+            }
+        });
 
-        return inflater.inflate(R.layout.fragment_knjiznica, container, false);
+        return knjiznicaView;
     }
+
+    public void popisKnjiga() {
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new PopisKnjigaFragment()).addToBackStack("selectedFragment").commit();
+    }
+
 
 }

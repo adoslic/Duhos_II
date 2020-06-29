@@ -1,6 +1,5 @@
 package com.example.duhosii;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +14,6 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
-
-import org.w3c.dom.Text;
 
 public class PjesmaricaFragment extends Fragment {
 
@@ -41,4 +38,9 @@ public class PjesmaricaFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_pjesmarica,container,false);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity)getActivity()).SetNavItemChecked(0);
+    }
 }
