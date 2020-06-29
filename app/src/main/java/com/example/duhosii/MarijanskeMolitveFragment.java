@@ -68,7 +68,7 @@ public class MarijanskeMolitveFragment extends Fragment {
     public void onInit() {
 
         recyclerView = molitvaFragmentView.findViewById(R.id.recyclerView);
-        adapter = new MolitvaItemAdapter(itemList,"Marijanske");
+        adapter = new MolitvaItemAdapter(itemList,"Marija");
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
