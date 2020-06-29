@@ -17,8 +17,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:elevation="4dp"
-        android:background="@drawable/rectangle_shape"
+        android:background="@drawable/rectangle_shape_shadow"
         android:weightSum="3"
         android:orientation="horizontal">
         <RelativeLayout
@@ -83,8 +82,7 @@
         android:layout_weight="10"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:elevation="4dp"
-        android:background="@drawable/rectangle_shape"
+        android:background="@drawable/rectangle_shape_shadow"
         android:layout_below="@id/grupaMolitve"
         android:weightSum="3"
         android:orientation="horizontal">
@@ -150,8 +148,7 @@
             android:layout_weight="10"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:elevation="4dp"
-            android:background="@drawable/rectangle_shape"
+            android:background="@drawable/rectangle_shape_shadow"
             android:layout_below="@id/grupaMarijanskeMolitve"
             android:weightSum="3"
             android:orientation="horizontal">
@@ -218,8 +215,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
-            android:elevation="4dp"
-            android:background="@drawable/rectangle_shape"
+            android:background="@drawable/rectangle_shape_shadow"
             android:layout_below="@id/grupaDevetnice"
             android:weightSum="3"
             android:orientation="horizontal">

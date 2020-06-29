@@ -49,7 +49,7 @@
                 android:src="@drawable/ic_button_knjiznica"
                 android:background="#55FFFFFF"
                 android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/knjiznicaTekst"
                 android:layout_margin="10dp"/>
         </RelativeLayout>
     </ScrollView>
