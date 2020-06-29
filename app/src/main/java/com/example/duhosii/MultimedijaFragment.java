@@ -37,4 +37,9 @@ public class MultimedijaFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_multimedija,container,false);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity)getActivity()).SetNavItemChecked(3);
+    }
 }

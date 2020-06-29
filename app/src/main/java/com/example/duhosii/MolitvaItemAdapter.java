@@ -68,7 +68,6 @@ public class MolitvaItemAdapter extends RecyclerView.Adapter<MolitvaItemAdapter.
 
             holder.naslov.setText(itemList.get(position).getNaslov());
             holder.datum.setText(itemList.get(position).getDatum());
-            holder.slika.setImageResource(R.drawable.ic_biblija);
 
         holder.itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override

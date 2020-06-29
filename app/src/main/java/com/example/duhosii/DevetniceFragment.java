@@ -100,4 +100,9 @@ public class DevetniceFragment extends Fragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity)getActivity()).SetNavItemChecked(2);
+    }
 }

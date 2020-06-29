@@ -1,15 +1,16 @@
 package com.example.duhosii;
 
+import android.os.Build;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
-import android.os.Build;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -73,5 +74,22 @@ public class MainActivity extends AppCompatActivity {
 
     public void idiNatrag(View view) {
         getSupportFragmentManager().popBackStack();
+    }
+
+    public void SetNavItemChecked(int id) {
+        Menu menu = bottomNavigationView.getMenu();
+        MenuItem menuItem = menu.getItem(id);
+        menuItem.setChecked(true);
+    }
+
+    @Override
+    public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        if (count == 1) {
+            super.onBackPressed();
+            finish();
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
     }
 }

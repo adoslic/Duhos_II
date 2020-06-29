@@ -38,4 +38,9 @@ public class KalendarFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_kalendar,container,false);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity)getActivity()).SetNavItemChecked(1);
+    }
 }

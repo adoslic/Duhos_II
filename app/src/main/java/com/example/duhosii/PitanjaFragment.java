@@ -37,4 +37,9 @@ public class PitanjaFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_pitanja,container,false);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity)getActivity()).SetNavItemChecked(4);
+    }
 }

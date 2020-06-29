@@ -101,4 +101,9 @@ public class MarijanskeMolitveFragment extends Fragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity)getActivity()).SetNavItemChecked(2);
+    }
 }
