@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class DevetniceFragment extends Fragment {
+public class NadahnucaFragment extends Fragment {
 
     TextView zaglavlje;
     BottomNavigationView bottomNavigationView;
@@ -39,7 +39,7 @@ public class DevetniceFragment extends Fragment {
     private DatabaseReference molitvaReference;
     private MolitvaItemAdapter adapter;
     private static final String TAG ="TAG";
-    public DevetniceFragment() {
+    public NadahnucaFragment() {
     }
 
     @Nullable
@@ -67,7 +67,7 @@ public class DevetniceFragment extends Fragment {
 
     public void onInit() {
         recyclerView = molitvaFragmentView.findViewById(R.id.recyclerView);
-        adapter = new MolitvaItemAdapter(itemList,"Devetnice");
+        adapter = new MolitvaItemAdapter(itemList,"Nadahnuća");
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);

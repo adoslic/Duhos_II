@@ -1,13 +1,10 @@
 package com.example.duhosii;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -89,13 +86,13 @@ public class MolitveneGrupeFragment extends Fragment {
         devetnice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new DevetniceFragment()).addToBackStack("devetniceFragment").commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new NadahnucaFragment()).addToBackStack("devetniceFragment").commit();
             }
         });
         standard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new StandardneMolitveFragment()).addToBackStack("standardneMolitveFragment").commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new PoboznostiFragment()).addToBackStack("standardneMolitveFragment").commit();
             }
         });
         return molitvaFragmentView;

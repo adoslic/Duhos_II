@@ -54,21 +54,20 @@ public class MolitvaItemAdapter extends RecyclerView.Adapter<MolitvaItemAdapter.
             holder.naslov.setBackground(null);
 
             context=holder.itemLayout.getContext();
-            if(izvor.equals("Molitva"))
-                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_biblija));
-            if(izvor.equals("Standard"))
-                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_standardne));
-            if(izvor.equals("Marijanske"))
-                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_marijanske));
-            if(izvor.equals("Devetnice"))
-                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_devetnice));
+            if(izvor.equals("OpćeMolitve"))
+                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_opcemolitve));
+            if(izvor.equals("Marija"))
+                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_blazenadjevicamarija));
+            if(izvor.equals("Nadahnuća"))
+                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_nadahnuca));
+            if(izvor.equals("Pobožnosti"))
+                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_poboznosti));
 
             holder.slikaLayout.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition_animation));
             holder.tekstLayout.setAnimation(AnimationUtils.loadAnimation(context,R.anim.scale_transition_animation));
 
             holder.naslov.setText(itemList.get(position).getNaslov());
             holder.datum.setText(itemList.get(position).getDatum());
-            holder.slika.setImageResource(R.drawable.ic_biblija);
 
         holder.itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override

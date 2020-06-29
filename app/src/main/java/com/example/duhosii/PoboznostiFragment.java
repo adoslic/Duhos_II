@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class StandardneMolitveFragment extends Fragment {
+public class PoboznostiFragment extends Fragment {
 
     TextView zaglavlje;
     BottomNavigationView bottomNavigationView;
@@ -39,7 +39,7 @@ public class StandardneMolitveFragment extends Fragment {
     private DatabaseReference molitvaReference;
     private MolitvaItemAdapter adapter;
     private static final String TAG ="TAG";
-    public StandardneMolitveFragment() {
+    public PoboznostiFragment() {
     }
 
     @Nullable
@@ -68,7 +68,7 @@ public class StandardneMolitveFragment extends Fragment {
     public void onInit() {
 
         recyclerView = molitvaFragmentView.findViewById(R.id.recyclerView);
-        adapter = new MolitvaItemAdapter(itemList,"Standard");
+        adapter = new MolitvaItemAdapter(itemList,"Pobožnosti");
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);

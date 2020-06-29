@@ -53,16 +53,16 @@ public class MolitvaOpsirno extends Fragment {
         naslov.setText(molitva.getNaslov());
         tekst.setText(molitva.getTekst());
 
-        if(izvor.equals("Molitva")) {
+        if(izvor.equals("OpćeMolitve")) {
             slika.setImageDrawable(getResources().getDrawable(R.drawable.molitve));
         }
-        if(izvor.equals("Standard")) {
+        if(izvor.equals("Nadahnuća")) {
             slika.setImageDrawable(getResources().getDrawable(R.drawable.standardne_molitve));
         }
-        if(izvor.equals("Marijanske")) {
+        if(izvor.equals("Marija")) {
             slika.setImageDrawable(getResources().getDrawable(R.drawable.marijanske_molitve));
         }
-        if(izvor.equals("Devetnice")) {
+        if(izvor.equals("Pobožnosti")) {
             slika.setImageDrawable(getResources().getDrawable(R.drawable.devetnice));
         }
         return molitvaView;
