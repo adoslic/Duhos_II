@@ -1,6 +1,8 @@
 package com.example.duhosii;
 
 import android.graphics.Canvas;
+import android.opengl.Visibility;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
