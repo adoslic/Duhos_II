@@ -21,7 +21,7 @@ public class UclaniSeFragment extends Fragment {
     TextView zaglavlje;
     BottomNavigationView bottomNavigationView;
     WebView webView;
-    private String url="https://docs.google.com/forms/d/e/1FAIpQLSfe8xETG3lyWJkftnyf4N7gcPJ0-UNoB2TjALKaGGv6NY0GAg/viewform?fbclid=IwAR2ppsjJ9aMN3MmjjQCqDIm69SDqKUJuTBL0VFgrgUV3IKBb3sWfTeCEceo";
+    private String url="https://docs.google.com/forms/d/e/1FAIpQLSexlM7YCFchzTa-wF865I37NLCyKL9voPy0c0rcqnPjD1qV1A/viewform";
 
     @Nullable
     @Override
