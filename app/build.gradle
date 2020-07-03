@@ -42,4 +42,6 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.2'
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+
 }
