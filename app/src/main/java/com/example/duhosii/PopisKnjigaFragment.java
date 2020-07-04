@@ -14,14 +14,14 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.github.barteksc.pdfviewer.PDFView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 
 public class PopisKnjigaFragment extends Fragment {
     TextView zaglavlje;
     BottomNavigationView bottomNavigationView;
-    WebView webView;
-    private String url="https://docs.google.com/spreadsheets/d/1JtsumSGxe9XGNiHPXdmfLNkh10VzaFXP_dbt8RK28_0/edit?fbclid=IwAR35dSsUPGIbYHL6cHzewYEyRtwwEyWf6pND-BnzBJ9aGAxtflwUt1_Uz3Q#gid=840136841";
+    PDFView pdfView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,13 +38,12 @@ public class PopisKnjigaFragment extends Fragment {
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
 
         View popisKnjiga=inflater.inflate(R.layout.fragment_popis_knjiga, container, false);
-        webView=popisKnjiga.findViewById(R.id.popisKnjigaWebView);
+        pdfView=popisKnjiga.findViewById(R.id.popisKnjigaPDFView);
 
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setLoadWithOverviewMode(true);
-        webView.getSettings().setUseWideViewPort(true);
-        webView.getSettings().setPluginState(WebSettings.PluginState.ON);
-        webView.loadUrl(url);
+        pdfView.fromAsset("popis_knjiga_katalog.pdf").load();
+
+
+
 
         return popisKnjiga;
     }

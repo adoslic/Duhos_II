@@ -11,8 +11,8 @@
         <ImageView
             android:id="@+id/opcenitoImage"
             android:layout_width="match_parent"
-            android:layout_height="167dp"
-            android:src="@drawable/opcenito_slika"></ImageView>
+            android:layout_height="200dp"
+            android:src="@drawable/duhos_opca"></ImageView>
 
         <TextView
             android:id="@+id/opcenitoNaslov"
@@ -21,7 +21,7 @@
             android:layout_below="@+id/opcenitoImage"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="25dp"
-            android:text="Uči i moli"
+            android:text="Moli i uči"
             android:textColor="@color/duhosPlava"
             android:textSize="24sp"></TextView>
 

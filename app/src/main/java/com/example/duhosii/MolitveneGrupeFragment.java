@@ -1,13 +1,19 @@
 package com.example.duhosii;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,11 +30,13 @@ public class MolitveneGrupeFragment extends Fragment {
     TextView zaglavlje;
     BottomNavigationView bottomNavigationView;
     private View molitvaFragmentView;
+    private View connectionFragmentView;
+    private ImageButton osvjeziButton;
     private static final String TAG ="TAG";
     private LinearLayout molitva,marijanske,devetnice,standard;
     private RelativeLayout molitvaTextLayout,marijanskeTextLayout,devetniceTextLayout,standardTextLayout;
     private RelativeLayout molitvaImageLayout,marijanskeImageLayout,devetniceImageLayout,standardImageLayout;
-
+    private boolean connectionFlag=false;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,62 +49,95 @@ public class MolitveneGrupeFragment extends Fragment {
         zaglavlje=viewActionBar.findViewById(R.id.naslov);
         zaglavlje.setText("Molitva");
 
+        checkInternetConnection();
+
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
 
-        molitvaFragmentView = inflater.inflate(R.layout.fragment_grupe_molitvi,container,false);
+        if(connectionFlag==true) {
+            molitvaFragmentView = inflater.inflate(R.layout.fragment_grupe_molitvi, container, false);
 
-        molitva=molitvaFragmentView.findViewById(R.id.grupaMolitve);
-        marijanske=molitvaFragmentView.findViewById(R.id.grupaMarijanskeMolitve);
-        devetnice=molitvaFragmentView.findViewById(R.id.grupaDevetnice);
-        standard=molitvaFragmentView.findViewById(R.id.grupaStandard);
+            molitva = molitvaFragmentView.findViewById(R.id.grupaMolitve);
+            marijanske = molitvaFragmentView.findViewById(R.id.grupaMarijanskeMolitve);
+            devetnice = molitvaFragmentView.findViewById(R.id.grupaDevetnice);
+            standard = molitvaFragmentView.findViewById(R.id.grupaStandard);
 
-        molitvaTextLayout=molitvaFragmentView.findViewById(R.id.molitva_relativeLayout);
-        marijanskeTextLayout=molitvaFragmentView.findViewById(R.id.marijanske_relativeLayout);
-        devetniceTextLayout=molitvaFragmentView.findViewById(R.id.devetnice_relativeLayout);
-        standardTextLayout=molitvaFragmentView.findViewById(R.id.standardne_relativeLayout);
+            molitvaTextLayout = molitvaFragmentView.findViewById(R.id.molitva_relativeLayout);
+            marijanskeTextLayout = molitvaFragmentView.findViewById(R.id.marijanske_relativeLayout);
+            devetniceTextLayout = molitvaFragmentView.findViewById(R.id.devetnice_relativeLayout);
+            standardTextLayout = molitvaFragmentView.findViewById(R.id.standardne_relativeLayout);
 
-        molitvaImageLayout=molitvaFragmentView.findViewById(R.id.slikaBiblijeLayout);
-        marijanskeImageLayout=molitvaFragmentView.findViewById(R.id.slikaMarijeLayout);
-        devetniceImageLayout=molitvaFragmentView.findViewById(R.id.slikaKruniceLayout);
-        standardImageLayout=molitvaFragmentView.findViewById(R.id.slikaStandardLayout);
+            molitvaImageLayout = molitvaFragmentView.findViewById(R.id.slikaBiblijeLayout);
+            marijanskeImageLayout = molitvaFragmentView.findViewById(R.id.slikaMarijeLayout);
+            devetniceImageLayout = molitvaFragmentView.findViewById(R.id.slikaKruniceLayout);
+            standardImageLayout = molitvaFragmentView.findViewById(R.id.slikaStandardLayout);
 
-        molitvaImageLayout.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.fade_transition_animation));
-        molitvaTextLayout.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.scale_transition_animation));
-        marijanskeImageLayout.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.fade_transition_animation));
-        marijanskeTextLayout.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.scale_transition_animation));
-        devetniceImageLayout.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.fade_transition_animation));
-        devetniceTextLayout.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.scale_transition_animation));
-        standardImageLayout.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.fade_transition_animation));
-        standardTextLayout.setAnimation(AnimationUtils.loadAnimation(getContext(),R.anim.scale_transition_animation));
+            molitvaImageLayout.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_transition_animation));
+            molitvaTextLayout.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.scale_transition_animation));
+            marijanskeImageLayout.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_transition_animation));
+            marijanskeTextLayout.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.scale_transition_animation));
+            devetniceImageLayout.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_transition_animation));
+            devetniceTextLayout.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.scale_transition_animation));
+            standardImageLayout.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_transition_animation));
+            standardTextLayout.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.scale_transition_animation));
 
 
+            molitva.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new MolitvaFragment()).addToBackStack("molitvaFragment").commit();
+                }
+            });
+            marijanske.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new MarijanskeMolitveFragment()).addToBackStack("marijanskeMolitveFragment").commit();
+                }
+            });
+            devetnice.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new NadahnucaFragment()).addToBackStack("devetniceFragment").commit();
+                }
+            });
+            standard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new PoboznostiFragment()).addToBackStack("standardneMolitveFragment").commit();
+                }
+            });
+            return molitvaFragmentView;
+        }
+        else {
+            connectionFragmentView = inflater.inflate(R.layout.no_internet_connection_fragment, container, false);
+            osvjeziButton=connectionFragmentView.findViewById(R.id.osvjeziButton);
+            osvjeziButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bottomNavigationView.findViewById(R.id.navigacija_molitva).performClick();
+                }
+            });
+            return connectionFragmentView;
+        }
 
-        molitva.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new MolitvaFragment()).addToBackStack("molitvaFragment").commit();
+    }
+
+    private void checkInternetConnection() {
+        ConnectivityManager connectivityManager=(ConnectivityManager) getActivity().getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork=connectivityManager.getActiveNetworkInfo();
+        if(null!=activeNetwork){
+            if(activeNetwork.getType()==ConnectivityManager.TYPE_WIFI){
+                connectionFlag=true;
             }
-        });
-        marijanske.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new MarijanskeMolitveFragment()).addToBackStack("marijanskeMolitveFragment").commit();
+            else if(activeNetwork.getType()==ConnectivityManager.TYPE_MOBILE){
+                connectionFlag=true;
             }
-        });
-        devetnice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new NadahnucaFragment()).addToBackStack("devetniceFragment").commit();
-            }
-        });
-        standard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new PoboznostiFragment()).addToBackStack("standardneMolitveFragment").commit();
-            }
-        });
-        return molitvaFragmentView;
+
+        }
+        else
+        {
+            connectionFlag=false;
+        }
     }
 
     @Override

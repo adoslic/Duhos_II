@@ -12,7 +12,7 @@
         <ImageView
             android:id="@+id/kapelan1Image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:src="@drawable/davor"></ImageView>
 
         <TextView
@@ -54,7 +54,7 @@
         <ImageView
             android:id="@+id/kapelan2Image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:layout_below="@id/kapelan1Tekst"
             android:layout_marginTop="25dp"
             android:src="@drawable/mario"></ImageView>
