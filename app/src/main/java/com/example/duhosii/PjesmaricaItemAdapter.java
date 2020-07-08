@@ -2,6 +2,10 @@ package com.example.duhosii;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +54,10 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
         holder.slikaLayout.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition_animation));
         holder.tekstLayout.setAnimation(AnimationUtils.loadAnimation(context,R.anim.scale_transition_animation));
 
-        holder.naslov.setText(itemList.get(position).getNaslov()+" - "+itemList.get(position).getBend());
+        SpannableString ss = new SpannableString(itemList.get(position).getNaslov() + " - " + itemList.get(position).getBend());
+        StyleSpan boldSpan = new StyleSpan(Typeface.BOLD);
+        ss.setSpan(boldSpan, 0,itemList.get(position).getNaslov().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        holder.naslov.setText(ss);
 
         if(itemList.get(position).getBend().contains("duhos") || itemList.get(position).getBend().contains("DUHOS") || itemList.get(position).getBend().contains("Duhos")){
             holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_duhos_logo));
@@ -139,7 +146,7 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
         notifyItemRemoved(position);
         undoDelete();
 
-        String tekst = itemList.get(position).bend.toString();
+        String tekst = itemList.get(position).tekstPjesme.toString();
         String naslov = itemList.get(position).naslov.toString();
         Intent share = new Intent();
         share.setAction(Intent.ACTION_SEND);

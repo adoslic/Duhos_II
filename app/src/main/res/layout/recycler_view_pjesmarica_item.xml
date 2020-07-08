@@ -37,10 +37,11 @@
                     android:width="250dp"
                     android:textSize="20sp"
                     android:textColor="@color/duhosPlava"
-                    android:textStyle="bold"
                     android:layout_marginLeft="20dp"
                     android:layout_centerVertical="true"
-                    android:text="Naziv pjesme"/>
+                    android:text="Naziv pjesme"
+                    android:ellipsize="end"
+                    android:maxLines="1"/>
             </RelativeLayout>
         </RelativeLayout>
 
