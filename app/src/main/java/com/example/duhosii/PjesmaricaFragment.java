@@ -91,6 +91,8 @@ public class PjesmaricaFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     if(searchEditText.getVisibility()==View.GONE){
+                        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                         searchEditText.setVisibility(View.VISIBLE);
                         searchEditText.getText().clear();
                     }

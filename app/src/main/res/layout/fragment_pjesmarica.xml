@@ -29,13 +29,14 @@
         android:contentDescription="Pretraži pjesme"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="20dp" />
+        android:layout_margin="32dp"
+        />
     <EditText
         android:id="@+id/searchEditText"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="80dp"
+        android:layout_gravity="end|bottom"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/searchButtonPjesma"
         android:layout_margin="20dp"
         android:textSize="20sp"
         android:visibility="gone"
