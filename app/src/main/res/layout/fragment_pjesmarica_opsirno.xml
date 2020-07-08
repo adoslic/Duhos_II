@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+ <ScrollView
+     android:id="@+id/pjesmarica_opsirno_scollView"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:background="@color/white"
+     android:fillViewport="true"
+     >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/naslovOpsirno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            android:text="Naslov"
+            android:textSize="30sp"
+            android:textColor="@color/duhosPlava"
+            android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/tekstOpsirno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/naslovOpsirno"
+            android:layout_marginTop="24dp"
+            android:layout_marginHorizontal="30dp"
+            android:text="Tekst"
+            android:textSize="18sp"
+            android:textColor="@color/duhosPlava"
+            android:textAlignment="center"
+            android:gravity="center"></TextView>
+        <ImageButton
+            android:id="@+id/shareButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_button_share"
+            android:background="#55FFFFFF"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/pdfButton"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"/>
+
+        <ImageButton
+            android:id="@+id/pdfButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_akordi_button"
+            android:background="#55FFFFFF"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tekstOpsirno"
+            android:padding="10dp" />
+    </RelativeLayout>
+
+</ScrollView>
+
+
+
+</RelativeLayout>
