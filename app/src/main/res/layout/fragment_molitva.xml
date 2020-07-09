@@ -12,7 +12,7 @@ android:layout_height="wrap_content">
         android:background="@color/grey"
         tools:context=".MolitvaFragment">
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/recyclerViewMolitva"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"

@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
-public class SwipeToShareCallback extends ItemTouchHelper.SimpleCallback {
+public class SwipeMolitvaToShareCallback extends ItemTouchHelper.SimpleCallback {
     private MolitvaItemAdapter molitvaItemAdapter;
 
-    public SwipeToShareCallback(MolitvaItemAdapter adapter) {
+    public SwipeMolitvaToShareCallback(MolitvaItemAdapter adapter) {
         super(0, ItemTouchHelper.RIGHT);
         molitvaItemAdapter = adapter;
     }

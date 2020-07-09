@@ -70,7 +70,7 @@ public class PoboznostiFragment extends Fragment {
     public void onInit() {
         DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider));
-        recyclerView = molitvaFragmentView.findViewById(R.id.recyclerView);
+        recyclerView = molitvaFragmentView.findViewById(R.id.recyclerViewMolitva);
         adapter = new MolitvaItemAdapter(itemList,"Pobožnosti");
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
@@ -92,7 +92,7 @@ public class PoboznostiFragment extends Fragment {
                 }
                 Collections.reverse(itemList);
 
-                ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToShareCallback(adapter));
+                ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeMolitvaToShareCallback(adapter));
                 itemTouchHelper.attachToRecyclerView(recyclerView);
                 adapter.showShimer = false;
                 adapter.notifyDataSetChanged();
