@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,18 +15,41 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class PitanjaFragment extends Fragment {
 
     TextView zaglavlje;
     BottomNavigationView bottomNavigationView;
     private boolean connectionFlag=false;
-    private View connectionFragmentView;
+    private View connectionFragmentView,pitanjaFragmentView;
     private ImageButton osvjeziButton;
+    private DatabaseReference pitanjaReference;
+    private RecyclerView recyclerView;
+    private PitanjaItemAdapter adapter;
+    private FloatingActionButton pitajKapelanaButton;
+    List<Pitanja> itemList = new ArrayList<>();
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,7 +65,18 @@ public class PitanjaFragment extends Fragment {
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
         if(connectionFlag==true) {
-            return inflater.inflate(R.layout.fragment_pitanja, container, false);
+            pitanjaFragmentView=inflater.inflate(R.layout.fragment_pitanja, container, false);
+            pitanjaReference = FirebaseDatabase.getInstance().getReference("Pitanja");
+            onInit();
+            pitajKapelanaButton=pitanjaFragmentView.findViewById(R.id.pitajKapelanaButton);
+            pitajKapelanaButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new PitajKapelanaFragment()).addToBackStack("pitajKapelanaFragment").commit();
+
+                }
+            });
+            return pitanjaFragmentView;
         }
         else {
             connectionFragmentView = inflater.inflate(R.layout.no_internet_connection_fragment, container, false);
@@ -49,11 +84,43 @@ public class PitanjaFragment extends Fragment {
             osvjeziButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    bottomNavigationView.findViewById(R.id.navigacija_pitanja).performClick();
+            bottomNavigationView.findViewById(R.id.navigacija_pitanja).performClick();
                 }
             });
             return connectionFragmentView;
         }
+    }
+
+    public void onInit() {
+        DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider));
+        recyclerView = pitanjaFragmentView.findViewById(R.id.pitanjarecyclerView);
+        adapter = new PitanjaItemAdapter(itemList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.addItemDecoration(itemDecorator);
+        recyclerView.setAdapter(adapter);
+        pitanjaReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                itemList.clear();
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    if(snapshot.exists()) {
+                        final String pitanje = snapshot.child("Pitanje").getValue().toString();
+                        final String odgovor = snapshot.child("Odgovor").getValue().toString();
+                        itemList.add(new Pitanja(pitanje,odgovor));
+                    }
+                }
+                Collections.reverse(itemList);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, "Greška u čitanju iz baze podataka", databaseError.toException());
+            }
+        });
+
     }
 
     @Override
