@@ -81,6 +81,8 @@ public class PitajKapelanaFragment extends Fragment {
             imeEditText=pitajKapelanaFragmentView.findViewById(R.id.editTextMail);
             pitanjeEditText=pitajKapelanaFragmentView.findViewById(R.id.editTextMessage);
 
+
+
             imeEditText.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -94,7 +96,6 @@ public class PitajKapelanaFragment extends Fragment {
                         imeEditText.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rectangle_shape_shadow_small_radius));
                         imeEditText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_imepitanja, 0, 0, 0);
                         imeEditText.setPadding(padding,padding,padding,padding);
-
                     }
                 }
                 @Override
@@ -138,6 +139,8 @@ public class PitajKapelanaFragment extends Fragment {
                         if(davorImageActive.getVisibility()==View.VISIBLE)
                             mailTo=davorMail;
                         sendMail();
+                        //Toast.makeText(getContext(),("\u2714")+" E-mail je uspješno poslan",Toast.LENGTH_SHORT).show();
+
                     }
                 }
             });
