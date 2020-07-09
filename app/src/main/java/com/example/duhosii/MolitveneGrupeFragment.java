@@ -49,10 +49,9 @@ public class MolitveneGrupeFragment extends Fragment {
         zaglavlje=viewActionBar.findViewById(R.id.naslov);
         zaglavlje.setText("Molitva");
 
-        checkInternetConnection();
-
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
+        checkInternetConnection();
 
         if(connectionFlag==true) {
             molitvaFragmentView = inflater.inflate(R.layout.fragment_grupe_molitvi, container, false);
