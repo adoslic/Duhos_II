@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -44,6 +45,7 @@ public class PitajKapelanaFragment extends Fragment {
     private String mailTo;
     private float density;
     private int padding;
+    private ImageButton back;
     /*private String marioMail="m.zigman6@gmail.com";
     private String davorMail="dav.vuk@gmail.com";*/
     private String marioMail="kresimirtomic1998@gmail.com";
@@ -59,6 +61,7 @@ public class PitajKapelanaFragment extends Fragment {
         mActionBar.setCustomView(R.layout.toolbar);
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         View viewActionBar=mActionBar.getCustomView();
+        back=viewActionBar.findViewById(R.id.idiNatrag);
         zaglavlje=viewActionBar.findViewById(R.id.naslov);
         zaglavlje.setText("Pitaj kapelana");
 
@@ -68,7 +71,7 @@ public class PitajKapelanaFragment extends Fragment {
 
         if(connectionFlag==true) {
             pitajKapelanaFragmentView = inflater.inflate(R.layout.fragment_pitaj_kapelana, container, false);
-
+            otvoriDialog(pitajKapelanaFragmentView);
             density= getContext().getResources().getDisplayMetrics().density;
             padding= (int) (15*density);
             marioImage=pitajKapelanaFragmentView.findViewById(R.id.marioImage);
@@ -125,13 +128,13 @@ public class PitajKapelanaFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     if(marioImageActive.getVisibility()==View.GONE && davorImageActive.getVisibility()==View.GONE){
-                        Toast.makeText(getContext(),"Odaberi kapelana!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),getEmojiByUnicode(0x1F446)+"Odaberi kapelana!",Toast.LENGTH_SHORT).show();
                     }
                     else if(imeEditText.getText().length()==0){
-                        Toast.makeText(getContext(),"Unesi e-mail adresu!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),getEmojiByUnicode(0x1F446)+"Unesi ime i prezime!",Toast.LENGTH_SHORT).show();
                     }
                     else if(pitanjeEditText.getText().length()==0){
-                        Toast.makeText(getContext(),"Unesi pitanje!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),getEmojiByUnicode(0x1F446)+"Unesi pitanje!",Toast.LENGTH_SHORT).show();
                     }
                     else{
                         if(marioImageActive.getVisibility()==View.VISIBLE)
@@ -139,6 +142,7 @@ public class PitajKapelanaFragment extends Fragment {
                         if(davorImageActive.getVisibility()==View.VISIBLE)
                             mailTo=davorMail;
                         sendMail();
+                        //back.performClick();
                         //Toast.makeText(getContext(),("\u2714")+" E-mail je uspješno poslan",Toast.LENGTH_SHORT).show();
 
                     }
@@ -199,6 +203,11 @@ public class PitajKapelanaFragment extends Fragment {
         }
     }
 
+    public void otvoriDialog(View view) {
+        final DialogPitanja dialog=new DialogPitanja();
+        dialog.show(getActivity().getSupportFragmentManager(),"dialog");
+    }
+
     private void sendMail() {
         Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:"+mailTo));
         intent.putExtra(Intent.EXTRA_SUBJECT,"Pitanje za kapelana od: "+imeEditText.getText().toString());
@@ -224,7 +233,9 @@ public class PitajKapelanaFragment extends Fragment {
         }
     }
 
-
+    public String getEmojiByUnicode(int unicode){
+        return new String(Character.toChars(unicode));
+    }
 
     @Override
     public void onResume() {
