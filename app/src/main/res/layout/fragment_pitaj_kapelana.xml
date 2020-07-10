@@ -93,7 +93,7 @@
         android:orientation="vertical"
         android:layout_above="@+id/sendMessageButton">
     <EditText
-        android:id="@+id/editTextMail"
+        android:id="@+id/editTextIme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/ic_imepitanja"
@@ -109,7 +109,7 @@
         android:id="@+id/editTextMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editTextMail"
+        android:layout_below="@id/editTextIme"
         android:drawableLeft="@drawable/ic_pitanjepitanja"
         android:drawablePadding="10dp"
         android:background="@drawable/rectangle_shape_shadow_small_radius"

@@ -8,7 +8,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -46,6 +45,8 @@ public class PitajKapelanaFragment extends Fragment {
     private float density;
     private int padding;
     private ImageButton back;
+    String text="Poštovani, u sljedećoj rubrici tražit će se Vaše ime i prezime, no upit će ostati anoniman za sve osim za kapelana kojemu je namijenjen upit kako bi izbjegli slanje stalnih upita od ljudi loših namjera. Ukoliko ne želite upisati ime i prezime molimo Vas da upišete svoje inicijale. Hvala na razumijevanju!";
+
     /*private String marioMail="m.zigman6@gmail.com";
     private String davorMail="dav.vuk@gmail.com";*/
     private String marioMail="kresimirtomic1998@gmail.com";
@@ -81,7 +82,7 @@ public class PitajKapelanaFragment extends Fragment {
             marioText=pitajKapelanaFragmentView.findViewById(R.id.marioText);
             davorText=pitajKapelanaFragmentView.findViewById(R.id.davorText);
             sendMessageButton=pitajKapelanaFragmentView.findViewById(R.id.sendMessageButton);
-            imeEditText=pitajKapelanaFragmentView.findViewById(R.id.editTextMail);
+            imeEditText=pitajKapelanaFragmentView.findViewById(R.id.editTextIme);
             pitanjeEditText=pitajKapelanaFragmentView.findViewById(R.id.editTextMessage);
 
 
@@ -204,7 +205,7 @@ public class PitajKapelanaFragment extends Fragment {
     }
 
     public void otvoriDialog(View view) {
-        final DialogPitanja dialog=new DialogPitanja();
+        final DialogDisclaimer dialog=new DialogDisclaimer(text);
         dialog.show(getActivity().getSupportFragmentManager(),"dialog");
     }
 

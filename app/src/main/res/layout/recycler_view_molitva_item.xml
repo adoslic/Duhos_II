@@ -4,11 +4,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmer_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
         <RelativeLayout
             android:id="@+id/itemLayout"
             android:layout_width="wrap_content"
@@ -25,8 +20,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_centerInParent="true"
-                    android:layout_margin="10dp"
-                    android:background="@color/shimmer_bg">
+                    android:layout_margin="10dp">
                 </ImageView>
             </RelativeLayout>
             <RelativeLayout
@@ -44,8 +38,7 @@
                     android:textColor="@color/duhosPlava"
                     android:textStyle="bold"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="25dp"
-                    android:background="@color/shimmer_bg"/>
+                    android:layout_marginLeft="25dp"/>
                 <TextView
                     android:id="@+id/datum"
                     android:layout_width="wrap_content"
@@ -55,10 +48,8 @@
                     android:textColor="@color/duhosPlava"
                     android:layout_marginTop="10dp"
                     android:layout_below="@id/naslov"
-                    android:layout_marginLeft="25dp"
-                    android:background="@color/shimmer_bg"/>
+                    android:layout_marginLeft="25dp"/>
             </RelativeLayout>
         </RelativeLayout>
 
-    </com.facebook.shimmer.ShimmerFrameLayout>
 </RelativeLayout>

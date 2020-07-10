@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -59,7 +61,7 @@
                 android:id="@+id/datumMolitve"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="28.04.2020."
+                android:text=""
                 android:textSize="16sp"
                 android:textColor="@color/duhosPlava"
                 android:layout_marginTop="10dp"
@@ -125,7 +127,7 @@
                 android:id="@+id/datumMarije"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="28.04.2020."
+                android:text=""
                 android:textSize="16sp"
                 android:textColor="@color/duhosPlava"
                 android:layout_marginTop="10dp"
@@ -192,7 +194,7 @@
                     android:id="@+id/datumDevetnice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="28.04.2020."
+                    android:text=""
                     android:textSize="16sp"
                     android:textColor="@color/duhosPlava"
                     android:layout_marginTop="10dp"
@@ -258,7 +260,7 @@
                     android:id="@+id/datumStandard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="28.04.2020."
+                    android:text=""
                     android:textSize="16sp"
                     android:textColor="@color/duhosPlava"
                     android:layout_marginTop="10dp"
@@ -268,3 +270,15 @@
         </LinearLayout>
 
     </LinearLayout>
+
+<com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/posaljiMolitvenuNakanu"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end|bottom"
+    android:src="@drawable/ic_plus"
+    android:contentDescription="Pošalji molitvenu nakanu"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentBottom="true"
+    android:layout_margin="32dp" />
+</RelativeLayout>

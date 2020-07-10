@@ -25,10 +25,7 @@
             android:textColor="@color/duhosPlava"
             android:layout_below="@+id/xButton"
             android:layout_margin="20dp"
-            android:text="Poštovani, u sljedećoj rubrici tražit će se Vaše ime i prezime,
-no upit će ostati anoniman za sve osim za kapelana kojemu je namijenjen upit kako bi izbjegli
-slanje stalnih upita od ljudi loših namjera. Ukoliko ne želite upisati ime i prezime molimo Vas da
-upišete svoje inicijale. Hvala na razumijevanju!"></TextView>
+            android:text=""></TextView>
         <Button
             android:id="@+id/nastaviButton"
             android:layout_width="wrap_content"

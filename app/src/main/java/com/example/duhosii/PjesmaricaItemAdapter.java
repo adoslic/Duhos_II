@@ -34,7 +34,6 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
     private AppCompatActivity activity;
     private Context context;
 
-
     public PjesmaricaItemAdapter(List<Pjesma> itemList) {
         this.itemList = itemList;
         itemListFull=new ArrayList<>(itemList);
@@ -49,35 +48,35 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
 
     @Override
     public void onBindViewHolder(@NonNull final PjesmaricaItemAdapter.ViewHolder holder, final int position) {
-        context=holder.itemLayout.getContext();
 
-        holder.slikaLayout.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition_animation));
-        holder.tekstLayout.setAnimation(AnimationUtils.loadAnimation(context,R.anim.scale_transition_animation));
+            context = holder.itemLayout.getContext();
 
-        SpannableString ss = new SpannableString(itemList.get(position).getNaslov() + " - " + itemList.get(position).getBend());
-        StyleSpan boldSpan = new StyleSpan(Typeface.BOLD);
-        ss.setSpan(boldSpan, 0,itemList.get(position).getNaslov().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        holder.naslov.setText(ss);
+            holder.slikaLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition_animation));
+            holder.tekstLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_transition_animation));
 
-        if(itemList.get(position).getBend().contains("duhos") || itemList.get(position).getBend().contains("DUHOS") || itemList.get(position).getBend().contains("Duhos")){
-            holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_duhos_logo));
-        }
-        else if(itemList.get(position).getBend().contains("božja pobjeda") || itemList.get(position).getBend().contains("BOŽJA POBJEDA") || itemList.get(position).getBend().contains("Božja pobjeda")){
-            holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_bozja_pobjeda_logo));
-        }
-        else {
-            holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_trzalica));
-        }
+            SpannableString ss = new SpannableString(itemList.get(position).getNaslov() + " - " + itemList.get(position).getBend());
+            StyleSpan boldSpan = new StyleSpan(Typeface.BOLD);
+            ss.setSpan(boldSpan, 0, itemList.get(position).getNaslov().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            holder.naslov.setText(ss);
 
-
-        holder.itemLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity = (AppCompatActivity) v.getContext();
-                PjesmaOpsirno pjesmaOpsirno=new PjesmaOpsirno(itemList.get(position));
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,pjesmaOpsirno).addToBackStack("pjesmaOpsirnoFragment").commit();
+            if (itemList.get(position).getBend().contains("duhos") || itemList.get(position).getBend().contains("DUHOS") || itemList.get(position).getBend().contains("Duhos")) {
+                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_duhos_logo));
+            } else if (itemList.get(position).getBend().contains("božja pobjeda") || itemList.get(position).getBend().contains("BOŽJA POBJEDA") || itemList.get(position).getBend().contains("Božja pobjeda")) {
+                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_bozja_pobjeda_logo));
+            } else {
+                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_trzalica));
             }
-        });
+
+
+            holder.itemLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    activity = (AppCompatActivity) v.getContext();
+                    PjesmaOpsirno pjesmaOpsirno = new PjesmaOpsirno(itemList.get(position));
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, pjesmaOpsirno).addToBackStack("pjesmaOpsirnoFragment").commit();
+                }
+            });
+
 
     }
 
@@ -124,12 +123,10 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
         TextView naslov;
         ImageView slika;
         RelativeLayout itemLayout,slikaLayout,tekstLayout;
-        ShimmerFrameLayout shimmerFrameLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            shimmerFrameLayout = itemView.findViewById(R.id.shimmer_layout);
             naslov = itemView.findViewById(R.id.naslov);
             slika = itemView.findViewById(R.id.slika);
             itemLayout=itemView.findViewById(R.id.itemLayout);

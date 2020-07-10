@@ -2,9 +2,9 @@ package com.example.duhosii;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.net.Network;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,21 +13,31 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 public class MolitveneGrupeFragment extends Fragment {
 
-    TextView zaglavlje;
+    TextView zaglavlje,marijanskeDatum,opceDatum,poboznostiDatum,nadahnucaDatum;
     BottomNavigationView bottomNavigationView;
     private View molitvaFragmentView;
     private View connectionFragmentView;
@@ -37,6 +47,17 @@ public class MolitveneGrupeFragment extends Fragment {
     private RelativeLayout molitvaTextLayout,marijanskeTextLayout,devetniceTextLayout,standardTextLayout;
     private RelativeLayout molitvaImageLayout,marijanskeImageLayout,devetniceImageLayout,standardImageLayout;
     private boolean connectionFlag=false;
+    private FloatingActionButton posaljiMolitvenuNakanu;
+    private DatabaseReference marijanskeReference,opceReference,poboznostiReference,nadahnucaReference;
+    List<Molitva> itemListMarijanske = new ArrayList<>();
+    List<Molitva> itemListOpce = new ArrayList<>();
+    List<Molitva> itemListNadahnuca = new ArrayList<>();
+    List<Molitva> itemListPoboznosti = new ArrayList<>();
+    String marijanskeZadnjiDatum;
+    String opceZadnjiDatum;
+    String nadahnucaZadnjiDatum;
+    String poboznostiZadnjiDatum;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,6 +76,22 @@ public class MolitveneGrupeFragment extends Fragment {
 
         if(connectionFlag==true) {
             molitvaFragmentView = inflater.inflate(R.layout.fragment_grupe_molitvi, container, false);
+
+            posaljiMolitvenuNakanu=molitvaFragmentView.findViewById(R.id.posaljiMolitvenuNakanu);
+
+            posaljiMolitvenuNakanu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new NakanaFragment()).addToBackStack("nakanaFragment").commit();
+
+                }
+            });
+            marijanskeDatum=molitvaFragmentView.findViewById(R.id.datumMarije);
+            opceDatum=molitvaFragmentView.findViewById(R.id.datumMolitve);
+            poboznostiDatum=molitvaFragmentView.findViewById(R.id.datumStandard);
+            nadahnucaDatum=molitvaFragmentView.findViewById(R.id.datumDevetnice);
+
+            getFirebaseData();
 
             molitva = molitvaFragmentView.findViewById(R.id.grupaMolitve);
             marijanske = molitvaFragmentView.findViewById(R.id.grupaMarijanskeMolitve);
@@ -84,25 +121,25 @@ public class MolitveneGrupeFragment extends Fragment {
             molitva.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new MolitvaFragment()).addToBackStack("molitvaFragment").commit();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new OpceMolitveFragment(itemListOpce)).addToBackStack("molitvaFragment").commit();
                 }
             });
             marijanske.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new MarijanskeMolitveFragment()).addToBackStack("marijanskeMolitveFragment").commit();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new MarijanskeMolitveFragment(itemListMarijanske)).addToBackStack("marijanskeMolitveFragment").commit();
                 }
             });
             devetnice.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new NadahnucaFragment()).addToBackStack("devetniceFragment").commit();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new NadahnucaFragment(itemListNadahnuca)).addToBackStack("devetniceFragment").commit();
                 }
             });
             standard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new PoboznostiFragment()).addToBackStack("standardneMolitveFragment").commit();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new PoboznostiFragment(itemListPoboznosti)).addToBackStack("standardneMolitveFragment").commit();
                 }
             });
             return molitvaFragmentView;
@@ -118,6 +155,115 @@ public class MolitveneGrupeFragment extends Fragment {
             });
             return connectionFragmentView;
         }
+
+    }
+
+    private void getFirebaseData() {
+        opceReference = FirebaseDatabase.getInstance().getReference("Molitve").child("Opće molitve");
+        opceReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                itemListOpce.clear();
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    if(snapshot.exists()) {
+                        final String nazivOpce = snapshot.child("Naziv").getValue().toString();
+                        final String datumOpce = snapshot.child("Datum").getValue().toString();
+                        final String tekstOpce = snapshot.child("Tekst").getValue().toString();
+                        itemListOpce.add(new Molitva(nazivOpce,datumOpce,tekstOpce));
+                    }
+                }
+                Collections.reverse(itemListOpce);
+                if(!itemListOpce.isEmpty()){
+                    opceZadnjiDatum=itemListOpce.get(0).datum;
+                    opceDatum.setText(opceZadnjiDatum);
+                    opceDatum.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_transition_animation));
+
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, "Greška u čitanju iz baze podataka", databaseError.toException());
+            }
+        });
+
+        marijanskeReference = FirebaseDatabase.getInstance().getReference("Molitve").child("Marijanske molitve");
+        marijanskeReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                itemListMarijanske.clear();
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    if(snapshot.exists()) {
+                        final String nazivMarijanske = snapshot.child("Naziv").getValue().toString();
+                        final String datumMarijanske = snapshot.child("Datum").getValue().toString();
+                        final String tekstMarijanske = snapshot.child("Tekst").getValue().toString();
+                        itemListMarijanske.add(new Molitva(nazivMarijanske,datumMarijanske,tekstMarijanske));
+                    }
+                }
+                Collections.reverse(itemListMarijanske);
+                if(!itemListMarijanske.isEmpty()){
+                    marijanskeZadnjiDatum=itemListMarijanske.get(0).datum;
+                    marijanskeDatum.setText(marijanskeZadnjiDatum);
+                    marijanskeDatum.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_transition_animation));
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, "Greška u čitanju iz baze podataka", databaseError.toException());
+            }
+        });
+
+        nadahnucaReference = FirebaseDatabase.getInstance().getReference("Molitve").child("Nadahnuća");
+        nadahnucaReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                itemListNadahnuca.clear();
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    if(snapshot.exists()) {
+                        final String nazivNadahnuca = snapshot.child("Naziv").getValue().toString();
+                        final String datumNadahnuca = snapshot.child("Datum").getValue().toString();
+                        final String tekstNadahnuca = snapshot.child("Tekst").getValue().toString();
+                        itemListNadahnuca.add(new Molitva(nazivNadahnuca,datumNadahnuca,tekstNadahnuca));
+                    }
+                }
+                Collections.reverse(itemListNadahnuca);
+                if(!itemListNadahnuca.isEmpty()){
+                    nadahnucaZadnjiDatum=itemListNadahnuca.get(0).datum;
+                    nadahnucaDatum.setText(nadahnucaZadnjiDatum);
+                    nadahnucaDatum.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_transition_animation));
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, "Greška u čitanju iz baze podataka", databaseError.toException());
+            }
+        });
+
+
+        poboznostiReference = FirebaseDatabase.getInstance().getReference("Molitve").child("Pobožnosti");
+        poboznostiReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                itemListPoboznosti.clear();
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    if(snapshot.exists()) {
+                        final String nazivPoboznosti = snapshot.child("Naziv").getValue().toString();
+                        final String datumPoboznosti = snapshot.child("Datum").getValue().toString();
+                        final String tekstPoboznosti = snapshot.child("Tekst").getValue().toString();
+                        itemListPoboznosti.add(new Molitva(nazivPoboznosti,datumPoboznosti,tekstPoboznosti));
+                    }
+                }
+                Collections.reverse(itemListPoboznosti);
+                if(!itemListPoboznosti.isEmpty()){
+                    poboznostiZadnjiDatum=itemListPoboznosti.get(0).datum;
+                    poboznostiDatum.setText(poboznostiZadnjiDatum);
+                    poboznostiDatum.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_transition_animation));
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, "Greška u čitanju iz baze podataka", databaseError.toException());
+            }
+        });
 
     }
 

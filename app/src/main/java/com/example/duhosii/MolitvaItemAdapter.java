@@ -26,8 +26,6 @@ public class MolitvaItemAdapter extends RecyclerView.Adapter<MolitvaItemAdapter.
     private AppCompatActivity activity;
     private Context context;
     private String izvor;
-    boolean showShimer = true;
-    int SHIMMER_ITEM_NUMBER = 5;
 
     public MolitvaItemAdapter(List<Molitva> itemList, String izvor) {
         this.itemList = itemList;
@@ -43,15 +41,6 @@ public class MolitvaItemAdapter extends RecyclerView.Adapter<MolitvaItemAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull final MolitvaItemAdapter.ViewHolder holder, final int position) {
-        if(showShimer){
-            holder.shimmerFrameLayout.startShimmer();
-        } else{
-            holder.shimmerFrameLayout.stopShimmer();
-            holder.shimmerFrameLayout.setShimmer(null);
-
-            holder.slika.setBackground(null);
-            holder.datum.setBackground(null);
-            holder.naslov.setBackground(null);
 
             context=holder.itemLayout.getContext();
             if(izvor.equals("OpćeMolitve"))
@@ -77,12 +66,11 @@ public class MolitvaItemAdapter extends RecyclerView.Adapter<MolitvaItemAdapter.
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,molitvaOpsirno).addToBackStack("molitvaOpsirnoFragment").commit();
             }
         });
-        }
     }
 
     @Override
     public int getItemCount() {
-        return showShimer? SHIMMER_ITEM_NUMBER : itemList.size();
+        return itemList.size();
     }
 
 
@@ -91,12 +79,10 @@ public class MolitvaItemAdapter extends RecyclerView.Adapter<MolitvaItemAdapter.
         TextView naslov, datum;
         ImageView slika;
         RelativeLayout itemLayout,slikaLayout,tekstLayout;
-        ShimmerFrameLayout shimmerFrameLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            shimmerFrameLayout = itemView.findViewById(R.id.shimmer_layout);
             naslov = itemView.findViewById(R.id.naslov);
             datum = itemView.findViewById(R.id.datum);
             slika = itemView.findViewById(R.id.slika);
