@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
     public void otvoriDialog(View view) {
         final Dialog dialog=new Dialog();
         dialog.show(getSupportFragmentManager(),"dialog");
-
     }
 
     public void idiNatrag(View view) {

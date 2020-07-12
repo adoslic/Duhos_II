@@ -1,29 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/pitanje_odgovor_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rectangle_shape_shadow"
+        android:background="@drawable/rectangle_shape_shadow_small_radius"
         android:padding="10dp">
+
         <RelativeLayout
             android:id="@+id/pitanjeLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_shape"
             android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             >
-
             <TextView
                 android:id="@+id/idPitanje"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Pitanje"
                 android:textColor="@color/duhosPlava"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:layout_centerHorizontal="true"
@@ -37,20 +43,21 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/pitanjeLayout"
             android:background="@drawable/clicked_pitanje_background"
-            android:visibility="gone">
+            android:visibility="gone"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
             <TextView
                 android:id="@+id/idOdgovor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Odgovor"
                 android:textColor="@color/white"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
                 android:visibility="visible"
                 android:layout_centerHorizontal="true"
-                >
+                android:textAlignment="center"
+                android:gravity="center_horizontal">
             </TextView>
                 <ImageButton
                     android:id="@+id/share"
@@ -64,3 +71,5 @@
                     />
         </RelativeLayout>
     </RelativeLayout>
+
+</RelativeLayout>

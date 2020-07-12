@@ -92,13 +92,10 @@ public class PitanjaFragment extends Fragment {
     }
 
     public void onInit() {
-        DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-        itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider));
         recyclerView = pitanjaFragmentView.findViewById(R.id.pitanjarecyclerView);
         adapter = new PitanjaItemAdapter(itemList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(itemDecorator);
         recyclerView.setAdapter(adapter);
         pitanjaReference.addValueEventListener(new ValueEventListener() {
             @Override

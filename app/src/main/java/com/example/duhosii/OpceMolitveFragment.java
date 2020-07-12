@@ -31,19 +31,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MolitvaFragment extends Fragment {
+public class OpceMolitveFragment extends Fragment {
 
     TextView zaglavlje;
     BottomNavigationView bottomNavigationView;
     private RecyclerView recyclerView;
     List<Molitva> itemList = new ArrayList<>();
     private View molitvaFragmentView;
-    private DatabaseReference molitvaReference;
     private MolitvaItemAdapter adapter;
     private static final String TAG ="TAG";
-    private static final int VERTICAL_ITEM_SPACE = 48;
 
-    public MolitvaFragment() {
+    public OpceMolitveFragment(List<Molitva> itemList) {
+        this.itemList=itemList;
     }
 
     @Nullable
@@ -62,7 +61,6 @@ public class MolitvaFragment extends Fragment {
 
         molitvaFragmentView = inflater.inflate(R.layout.fragment_molitva,container,false);
 
-        molitvaReference = FirebaseDatabase.getInstance().getReference("Molitve").child("Molitva");
 
         onInit();
 
@@ -78,32 +76,9 @@ public class MolitvaFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(itemDecorator);
         recyclerView.setAdapter(adapter);
-        molitvaReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                itemList.clear();
-                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    if(snapshot.exists()) {
-                        final String naziv = snapshot.child("Naziv").getValue().toString();
-                        final String datum = snapshot.child("Datum").getValue().toString();
-                        final String tekst = snapshot.child("Tekst").getValue().toString();
-                        itemList.add(new Molitva(naziv,datum,tekst));
-                    }
-                }
-                Collections.reverse(itemList);
-
-                ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeMolitvaToShareCallback(adapter));
-                itemTouchHelper.attachToRecyclerView(recyclerView);
-                adapter.showShimer = false;
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w(TAG, "Greška u čitanju iz baze podataka", databaseError.toException());
-            }
-        });
-
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeMolitvaToShareCallback(adapter));
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+        adapter.notifyDataSetChanged();
     }
 
     @Override

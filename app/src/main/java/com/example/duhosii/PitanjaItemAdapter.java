@@ -29,6 +29,9 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
     private int sharedItemPosition;
     private Context context;
 
+    private int pitanjePosition;
+    private boolean pitanjeShow = false;
+    private boolean doAnimation=true;
     public PitanjaItemAdapter(List<Pitanja> itemList) {
         this.itemList = itemList;
     }
@@ -43,39 +46,54 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
     @Override
     public void onBindViewHolder(@NonNull final PitanjaItemAdapter.ViewHolder holder, final int position) {
 
-            context=holder.pitanjeOdgovorLayout.getContext();
+            context = holder.pitanjeOdgovorLayout.getContext();
 
-            holder.pitanjeOdgovorLayout.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition_animation));
 
             holder.pitanje.setText(itemList.get(position).getPitanje());
             holder.odgovor.setText(itemList.get(position).getOdgovor());
 
-        holder.pitanjeOdgovorLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                holder.pitanje.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition_animation));
-                holder.odgovor.setAnimation(AnimationUtils.loadAnimation(context,R.anim.scale_transition_animation));
-                if(holder.odgovorLayout.getVisibility()==View.GONE){
-                    holder.odgovorLayout.setVisibility(View.VISIBLE);
-                    holder.pitanjeOdgovorLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.clicked_pitanje_background));
-                    holder.pitanjeLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.duhosPlava));
-                    holder.pitanje.setTextColor(ContextCompat.getColor(context, R.color.white));
-                }
-                else {
-                    holder.odgovorLayout.setVisibility(View.GONE);
-                    holder.pitanjeOdgovorLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangle_shape_shadow));
-                    holder.pitanjeLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.white));
-                    holder.pitanje.setTextColor(ContextCompat.getColor(context, R.color.duhosPlava));
-                }
-            }
-        });
+            if (doAnimation)
+                holder.pitanjeOdgovorLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_transition_animation));
 
-        holder.shareButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                shareItem(position);
+            if (pitanjePosition == position && pitanjeShow) {
+                holder.pitanjeLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_transition_animation));
+                holder.odgovorLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_transition_animation));
+                holder.isExpanded = true;
+                holder.odgovorLayout.setVisibility(View.VISIBLE);
+                holder.pitanjeOdgovorLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.clicked_pitanje_background));
+                holder.pitanjeLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.clicked_pitanje_background));
+                holder.pitanje.setTextColor(ContextCompat.getColor(context, R.color.white));
+            } else {
+                holder.isExpanded = false;
+                holder.odgovorLayout.setVisibility(View.GONE);
+                holder.pitanjeOdgovorLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangle_shape_shadow_small_radius));
+                holder.pitanjeLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.white));
+                holder.pitanje.setTextColor(ContextCompat.getColor(context, R.color.duhosPlava));
             }
-        });
+
+            holder.pitanjeOdgovorLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (holder.isExpanded == false) {
+                        pitanjePosition = position;
+                        pitanjeShow = true;
+                        doAnimation = false;
+                        notifyDataSetChanged();
+                    } else if (holder.isExpanded == true) {
+                        pitanjeShow = false;
+                        doAnimation = false;
+                        notifyDataSetChanged();
+                    }
+                }
+            });
+
+            holder.shareButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    shareItem(position);
+                }
+            });
+
     }
 
     @Override
@@ -88,6 +106,7 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
         TextView pitanje, odgovor;
         ImageButton shareButton;
         RelativeLayout pitanjeLayout,odgovorLayout,pitanjeOdgovorLayout;
+        private boolean isExpanded = false;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -98,6 +117,7 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
             pitanjeLayout=itemView.findViewById(R.id.pitanjeLayout);
             odgovorLayout=itemView.findViewById(R.id.odgovorLayout);
             pitanjeOdgovorLayout=itemView.findViewById(R.id.pitanje_odgovor_layout);
+
 
         }
 
