@@ -2,7 +2,6 @@ package com.example.duhosii;
 
 import android.app.Activity;
 import android.content.Context;
-import android.inputmethodservice.Keyboard;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -10,17 +9,12 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -158,6 +152,7 @@ public class PjesmaricaFragment extends Fragment {
 
                 ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipePjesmaToShareCallback(adapter));
                 itemTouchHelper.attachToRecyclerView(recyclerView);
+                adapter.showShimmer = false;
                 adapter.notifyDataSetChanged();
             }
 

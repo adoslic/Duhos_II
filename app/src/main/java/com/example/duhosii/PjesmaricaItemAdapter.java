@@ -33,6 +33,8 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
     private int sharedItemPosition;
     private AppCompatActivity activity;
     private Context context;
+    boolean showShimmer = true;
+    private int SHIMMER_ITEM_NUMBER = 6;
 
     public PjesmaricaItemAdapter(List<Pjesma> itemList) {
         this.itemList = itemList;
@@ -50,6 +52,14 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
     public void onBindViewHolder(@NonNull final PjesmaricaItemAdapter.ViewHolder holder, final int position) {
 
             context = holder.itemLayout.getContext();
+        if (showShimmer) {
+            holder.shimmerFrameLayout.startShimmer();
+        } else {
+            holder.shimmerFrameLayout.stopShimmer();
+            holder.shimmerFrameLayout.setShimmer(null);
+
+            holder.slika.setBackground(null);
+            holder.naslov.setBackground(null);
 
             holder.slikaLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition_animation));
             holder.tekstLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_transition_animation));
@@ -76,13 +86,13 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, pjesmaOpsirno).addToBackStack("pjesmaOpsirnoFragment").commit();
                 }
             });
-
+        }
 
     }
 
     @Override
     public int getItemCount() {
-        return itemList.size();
+        return showShimmer ? SHIMMER_ITEM_NUMBER : itemList.size();
     }
 
     @Override
@@ -123,6 +133,7 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
         TextView naslov;
         ImageView slika;
         RelativeLayout itemLayout,slikaLayout,tekstLayout;
+        ShimmerFrameLayout shimmerFrameLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -132,7 +143,7 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
             itemLayout=itemView.findViewById(R.id.itemLayout);
             slikaLayout=itemView.findViewById(R.id.slikaLayout);
             tekstLayout=itemView.findViewById(R.id.tekstLayout);
-
+            shimmerFrameLayout = itemView.findViewById(R.id.shimmer_layout_pjesme);
         }
 
     }

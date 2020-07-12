@@ -13,6 +13,11 @@
         android:background="@drawable/rectangle_shape_shadow_small_radius"
         android:padding="10dp">
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_layout_pitanja"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
         <RelativeLayout
             android:id="@+id/pitanjeLayout"
             android:layout_width="wrap_content"
@@ -28,7 +33,8 @@
                 android:id="@+id/idPitanje"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pitanje"
+                android:background="@color/shimmer_bg"
+                android:width="500dp"
                 android:textColor="@color/duhosPlava"
                 android:textStyle="bold"
                 android:textAlignment="center"
@@ -52,7 +58,7 @@
                 android:id="@+id/idOdgovor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Odgovor"
+                android:background="@color/shimmer_bg"
                 android:textColor="@color/white"
                 android:visibility="visible"
                 android:layout_centerHorizontal="true"
@@ -70,6 +76,7 @@
                     android:background="@drawable/clicked_pitanje_background"
                     />
         </RelativeLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
     </RelativeLayout>
 
 </RelativeLayout>

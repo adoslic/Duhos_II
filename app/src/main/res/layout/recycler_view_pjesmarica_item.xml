@@ -3,7 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_layout_pjesme"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <RelativeLayout
             android:id="@+id/itemLayout"
             android:layout_width="wrap_content"
@@ -20,7 +23,7 @@
                     android:layout_height="40dp"
                     android:layout_centerInParent="true"
                     android:layout_margin="10dp"
-                    android:src="@drawable/ic_trzalica">
+                    android:background="@color/shimmer_bg">
                 </ImageView>
             </RelativeLayout>
             <RelativeLayout
@@ -38,10 +41,10 @@
                     android:textColor="@color/duhosPlava"
                     android:layout_marginLeft="20dp"
                     android:layout_centerVertical="true"
-                    android:text="Naziv pjesme"
                     android:ellipsize="end"
-                    android:maxLines="1"/>
+                    android:maxLines="1"
+                    android:background="@color/shimmer_bg"/>
             </RelativeLayout>
         </RelativeLayout>
-
+    </com.facebook.shimmer.ShimmerFrameLayout>
 </RelativeLayout>
