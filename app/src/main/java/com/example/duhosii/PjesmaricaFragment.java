@@ -36,6 +36,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -76,6 +79,20 @@ public class PjesmaricaFragment extends Fragment {
 
         searchEditText =pjesmaricaFragmentView.findViewById(R.id.searchEditText);
 
+        KeyboardVisibilityEvent.setEventListener(getActivity(), new KeyboardVisibilityEventListener() {
+            @Override
+            public void onVisibilityChanged(boolean isOpen) {
+                if(isOpen){
+                    searchEditText.setVisibility(View.VISIBLE);
+                    searchEditText.getText().clear();
+                    searchEditText.requestFocus();
+                }
+                else {
+                    searchEditText.setVisibility(View.GONE);
+                }
+            }
+        });
+
         if(connectionFlag==true) {
             pjesmaricaReference = FirebaseDatabase.getInstance().getReference("Pjesmarica");
             onInit();
@@ -87,6 +104,7 @@ public class PjesmaricaFragment extends Fragment {
                     if(searchEditText.getVisibility()==View.GONE){
                         searchEditText.setVisibility(View.VISIBLE);
                         searchEditText.getText().clear();
+                        searchEditText.requestFocus();
                         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
                         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                     }
@@ -185,5 +203,4 @@ public class PjesmaricaFragment extends Fragment {
             connectionFlag=false;
         }
     }
-
 }
