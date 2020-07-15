@@ -61,14 +61,13 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
                 holder.pitanjeOdgovorLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_transition_animation));
 
             if (pitanjePosition == position && pitanjeShow) {
-                holder.pitanjeLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_transition_animation));
-                holder.odgovorLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_transition_animation));
                 holder.isExpanded = true;
                 holder.odgovorLayout.setVisibility(View.VISIBLE);
                 holder.pitanjeOdgovorLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.clicked_pitanje_background));
                 holder.pitanjeLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.clicked_pitanje_background));
                 holder.pitanje.setTextColor(ContextCompat.getColor(context, R.color.white));
             } else {
+
                 holder.isExpanded = false;
                 holder.odgovorLayout.setVisibility(View.GONE);
                 holder.pitanjeOdgovorLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangle_shape_shadow_small_radius));

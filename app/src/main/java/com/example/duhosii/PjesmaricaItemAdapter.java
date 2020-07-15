@@ -77,7 +77,6 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
                 holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_trzalica));
             }
 
-
             holder.itemLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

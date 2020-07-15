@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -93,10 +94,20 @@ public class PjesmaricaFragment extends Fragment {
             }
         });
 
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.getFilter().filter(s);
+            }
+            @Override
+            public void afterTextChanged(Editable s) { }
+        });
+
         if(connectionFlag==true) {
             pjesmaricaReference = FirebaseDatabase.getInstance().getReference("Pjesmarica");
             onInit();
-
             searchButtonPjesma=pjesmaricaFragmentView.findViewById(R.id.searchButtonPjesma);
             searchButtonPjesma.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -114,16 +125,7 @@ public class PjesmaricaFragment extends Fragment {
                         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 
                     }
-                    searchEditText.addTextChangedListener(new TextWatcher() {
-                        @Override
-                        public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-                        @Override
-                        public void onTextChanged(CharSequence s, int start, int before, int count) {
-                            adapter.getFilter().filter(s);
-                        }
-                        @Override
-                        public void afterTextChanged(Editable s) { }
-                    });
+
                 }
             });
             return pjesmaricaFragmentView;
@@ -179,6 +181,7 @@ public class PjesmaricaFragment extends Fragment {
                 Log.w(TAG, "Greška u čitanju iz baze podataka", databaseError.toException());
             }
         });
+
     }
 
     @Override
