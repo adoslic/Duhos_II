@@ -2,25 +2,20 @@ package com.example.duhosii;
 
 import android.app.Activity;
 import android.content.Context;
-import android.inputmethodservice.Keyboard;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,6 +36,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -82,10 +80,34 @@ public class PjesmaricaFragment extends Fragment {
 
         searchEditText =pjesmaricaFragmentView.findViewById(R.id.searchEditText);
 
+        KeyboardVisibilityEvent.setEventListener(getActivity(), new KeyboardVisibilityEventListener() {
+            @Override
+            public void onVisibilityChanged(boolean isOpen) {
+                if(isOpen){
+                    searchEditText.setVisibility(View.VISIBLE);
+                    searchEditText.getText().clear();
+                    searchEditText.requestFocus();
+                }
+                else {
+                    searchEditText.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.getFilter().filter(s);
+            }
+            @Override
+            public void afterTextChanged(Editable s) { }
+        });
+
         if(connectionFlag==true) {
             pjesmaricaReference = FirebaseDatabase.getInstance().getReference("Pjesmarica");
             onInit();
-
             searchButtonPjesma=pjesmaricaFragmentView.findViewById(R.id.searchButtonPjesma);
             searchButtonPjesma.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -93,6 +115,7 @@ public class PjesmaricaFragment extends Fragment {
                     if(searchEditText.getVisibility()==View.GONE){
                         searchEditText.setVisibility(View.VISIBLE);
                         searchEditText.getText().clear();
+                        searchEditText.requestFocus();
                         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
                         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                     }
@@ -102,16 +125,7 @@ public class PjesmaricaFragment extends Fragment {
                         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 
                     }
-                    searchEditText.addTextChangedListener(new TextWatcher() {
-                        @Override
-                        public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-                        @Override
-                        public void onTextChanged(CharSequence s, int start, int before, int count) {
-                            adapter.getFilter().filter(s);
-                        }
-                        @Override
-                        public void afterTextChanged(Editable s) { }
-                    });
+
                 }
             });
             return pjesmaricaFragmentView;
@@ -158,6 +172,7 @@ public class PjesmaricaFragment extends Fragment {
 
                 ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipePjesmaToShareCallback(adapter));
                 itemTouchHelper.attachToRecyclerView(recyclerView);
+                adapter.showShimmer = false;
                 adapter.notifyDataSetChanged();
             }
 
@@ -166,6 +181,7 @@ public class PjesmaricaFragment extends Fragment {
                 Log.w(TAG, "Greška u čitanju iz baze podataka", databaseError.toException());
             }
         });
+
     }
 
     @Override
@@ -190,5 +206,4 @@ public class PjesmaricaFragment extends Fragment {
             connectionFlag=false;
         }
     }
-
 }

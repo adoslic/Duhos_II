@@ -5,6 +5,11 @@
     android:layout_height="wrap_content"
     android:padding="5dp">
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_layout_pitanja"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/pitanje_odgovor_layout"
@@ -28,7 +33,7 @@
                 android:id="@+id/idPitanje"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pitanje"
+                android:text=""
                 android:textColor="@color/duhosPlava"
                 android:textStyle="bold"
                 android:textAlignment="center"
@@ -59,17 +64,17 @@
                 android:textAlignment="center"
                 android:gravity="center_horizontal">
             </TextView>
-                <ImageButton
-                    android:id="@+id/share"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_share"
-                    android:layout_margin="10dp"
-                    android:layout_below="@+id/idOdgovor"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/clicked_pitanje_background"
-                    />
+            <ImageButton
+                android:id="@+id/share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_share"
+                android:layout_margin="10dp"
+                android:layout_below="@+id/idOdgovor"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/clicked_pitanje_background"
+                />
         </RelativeLayout>
     </RelativeLayout>
-
+    </com.facebook.shimmer.ShimmerFrameLayout>
 </RelativeLayout>

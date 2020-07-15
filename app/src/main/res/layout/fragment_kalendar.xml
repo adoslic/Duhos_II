@@ -11,4 +11,10 @@
         android:text="Kalendar"
         android:textSize="30sp"
         android:layout_centerInParent="true"></TextView>
+
+
+    <CalendarView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </CalendarView>
 </RelativeLayout>
