@@ -101,6 +101,6 @@ public class MultimedijaOpsirno extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity)getActivity()).SetNavItemChecked(0);
+        ((MainActivity)getActivity()).SetNavItemChecked(3);
     }
 }
