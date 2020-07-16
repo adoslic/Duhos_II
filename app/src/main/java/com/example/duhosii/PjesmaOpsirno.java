@@ -1,6 +1,7 @@
 package com.example.duhosii;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,7 +30,7 @@ public class PjesmaOpsirno extends Fragment {
     private View pjesmaricaView;
     private TextView naslov,tekstPjesme;
     private ImageView slika;
-    private ImageButton shareButton;
+    private ImageButton shareButton,pdfButton;
     private ScrollView scrollView;
 
 
@@ -57,6 +58,8 @@ public class PjesmaOpsirno extends Fragment {
         tekstPjesme=pjesmaricaView.findViewById(R.id.tekstOpsirno);
         slika=pjesmaricaView.findViewById(R.id.slikaOpsirno);
         shareButton=pjesmaricaView.findViewById(R.id.shareButton);
+        pdfButton=pjesmaricaView.findViewById(R.id.pdfButton);
+
         scrollView=pjesmaricaView.findViewById(R.id.pjesmarica_opsirno_scollView);
 
         naslov.setText(pjesma.getNaslov());
@@ -71,8 +74,19 @@ public class PjesmaOpsirno extends Fragment {
                 share();
             }
         });
+        pdfButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToAkordi();
+            }
+        });
 
         return pjesmaricaView;
+    }
+
+    private void goToAkordi() {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(pjesma.getLink()));
+        startActivity(browserIntent);
     }
 
     public void share() {
