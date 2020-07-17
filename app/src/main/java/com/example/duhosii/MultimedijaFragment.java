@@ -58,14 +58,14 @@ public class MultimedijaFragment extends Fragment {
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         View view=mActionBar.getCustomView();
         zaglavlje=view.findViewById(R.id.naslov);
-        zaglavlje.setText("Multimedija");
+        zaglavlje.setText("Novosti");
         checkInternetConnection();
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
         if(connectionFlag==true) {
             multimedijaFragmentView=inflater.inflate(R.layout.fragment_multimedija, container, false);
-            multimedijaReference = FirebaseDatabase.getInstance().getReference("Multimedija");
+            multimedijaReference = FirebaseDatabase.getInstance().getReference("Novosti");
             onInit();
             return multimedijaFragmentView;
         }
