@@ -17,7 +17,7 @@ public class Dialog extends AppCompatDialogFragment {
 
     AlertDialog alertDialog;
     ImageButton xButton;
-    Button uclaniSe;
+    ImageButton uclaniSe;
     RelativeLayout infoDuhos,infoKapelani,infoTimovi,infoKnjižnica;
 
     @Override
