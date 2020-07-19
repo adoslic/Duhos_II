@@ -13,6 +13,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -64,6 +65,8 @@ public class PitajKapelanaFragment extends Fragment {
         View viewActionBar=mActionBar.getCustomView();
         back=viewActionBar.findViewById(R.id.idiNatrag);
         zaglavlje=viewActionBar.findViewById(R.id.naslov);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
         zaglavlje.setText("Pitaj kapelana");
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
@@ -207,10 +210,15 @@ public class PitajKapelanaFragment extends Fragment {
     }
 
     private void sendMail() {
-        Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:"+mailTo));
-        intent.putExtra(Intent.EXTRA_SUBJECT,"Pitanje za kapelana od: "+imeEditText.getText().toString());
-        intent.putExtra(Intent.EXTRA_TEXT,pitanjeEditText.getText().toString());
-        startActivity(intent);
+        String subject="";
+        if(imeEditText.length()==0)
+            subject="Pitanje za kapelana od anonimnog pošiljatelja";
+        else
+            subject="Pitanje za kapelana od: "+imeEditText.getText().toString();
+
+        String message=pitanjeEditText.getText().toString();
+        JavaMailAPI javaMailAPI = new JavaMailAPI(getContext(), mailTo,subject , message);
+        javaMailAPI.execute();
     }
 
     private void checkInternetConnection() {
