@@ -15,9 +15,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
+import com.applandeo.materialcalendarview.CalendarView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
+
 
 
 public class KalendarFragment extends Fragment {
@@ -25,8 +26,10 @@ public class KalendarFragment extends Fragment {
     TextView zaglavlje;
     BottomNavigationView bottomNavigationView;
     private boolean connectionFlag=false;
-    private View connectionFragmentView;
+    private View connectionFragmentView,kalendarFragmentView;
     private ImageButton osvjeziButton;
+    private CalendarView calendarView;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,7 +45,10 @@ public class KalendarFragment extends Fragment {
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
         if(connectionFlag==true) {
-            return inflater.inflate(R.layout.fragment_kalendar, container, false);
+            kalendarFragmentView=inflater.inflate(R.layout.fragment_kalendar, container, false);
+            calendarView=kalendarFragmentView.findViewById(R.id.calendarView);
+
+            return kalendarFragmentView;
         }
         else {
             connectionFragmentView = inflater.inflate(R.layout.no_internet_connection_fragment, container, false);

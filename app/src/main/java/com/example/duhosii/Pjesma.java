@@ -5,12 +5,23 @@ public class Pjesma {
     String naslov;
     String bend;
     String tekstPjesme;
+    String link;
 
-    public Pjesma(String naslov, String bend,String tekstPjesme) {
+    public Pjesma(String naslov, String bend,String tekstPjesme,String link) {
         this.naslov = naslov;
         this.bend = bend;
         this.tekstPjesme=tekstPjesme;
+        this.link=link;
     }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
     public String getTekstPjesme() { return tekstPjesme; }
     public void setTekstPjesme(String tekstPjesme) { this.tekstPjesme = tekstPjesme; }
     public String getNaslov() {
