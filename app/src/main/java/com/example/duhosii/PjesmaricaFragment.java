@@ -165,7 +165,8 @@ public class PjesmaricaFragment extends Fragment {
                         final String naslov = snapshot.child("Naslov").getValue().toString();
                         final String bend = snapshot.child("Izvođač").getValue().toString();
                         final String tekstPjesme = snapshot.child("Tekst").getValue().toString();
-                        itemList.add(new Pjesma(naslov,bend,tekstPjesme));
+                        final String link = snapshot.child("Link").getValue().toString();
+                        itemList.add(new Pjesma(naslov,bend,tekstPjesme,link));
                     }
                 }
                 Collections.reverse(itemList);
