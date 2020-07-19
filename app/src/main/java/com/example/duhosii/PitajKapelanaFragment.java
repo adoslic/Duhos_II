@@ -131,9 +131,6 @@ public class PitajKapelanaFragment extends Fragment {
                     if(marioImageActive.getVisibility()==View.GONE && davorImageActive.getVisibility()==View.GONE){
                         Toast.makeText(getContext(),getEmojiByUnicode(0x1F446)+"Odaberi kapelana!",Toast.LENGTH_SHORT).show();
                     }
-                    else if(imeEditText.getText().length()==0){
-                        Toast.makeText(getContext(),getEmojiByUnicode(0x1F446)+"Unesi ime i prezime!",Toast.LENGTH_SHORT).show();
-                    }
                     else if(pitanjeEditText.getText().length()==0){
                         Toast.makeText(getContext(),getEmojiByUnicode(0x1F446)+"Unesi pitanje!",Toast.LENGTH_SHORT).show();
                     }

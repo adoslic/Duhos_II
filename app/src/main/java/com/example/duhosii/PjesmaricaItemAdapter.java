@@ -51,7 +51,7 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
     @Override
     public void onBindViewHolder(@NonNull final PjesmaricaItemAdapter.ViewHolder holder, final int position) {
 
-            context = holder.itemLayout.getContext();
+        context = holder.itemLayout.getContext();
         if (showShimmer) {
             holder.shimmerFrameLayout.startShimmer();
         } else {
