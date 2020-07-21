@@ -69,11 +69,30 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
             ss.setSpan(boldSpan, 0, itemList.get(position).getNaslov().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             holder.naslov.setText(ss);
 
-            if (itemList.get(position).getBend().contains("duhos") || itemList.get(position).getBend().contains("DUHOS") || itemList.get(position).getBend().contains("Duhos")) {
-                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_duhos_logo));
-            } else if (itemList.get(position).getBend().contains("božja pobjeda") || itemList.get(position).getBend().contains("BOŽJA POBJEDA") || itemList.get(position).getBend().contains("Božja pobjeda")) {
-                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_bozja_pobjeda_logo));
-            } else {
+            if (itemList.get(position).getBend().toString().toLowerCase().contains("duhos")) {
+                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.duhos_logo));
+            }
+            else if (itemList.get(position).getBend().toString().toLowerCase().contains("emanuel")) {
+                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.emanuel));
+            }
+            else if (itemList.get(position).getBend().toString().toLowerCase().contains("fmk")) {
+                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.fmk));
+            }
+            else if (itemList.get(position).getBend().toString().toLowerCase().contains("kristofori")) {
+                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.kristofori));
+            }
+            else if (itemList.get(position).getBend().toString().toLowerCase().contains("yeshua")) {
+                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_yeshuamusicicon));
+            }
+            else if (itemList.get(position).getBend().toString().toLowerCase().contains("božja pobjeda") ) {
+                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.bozja_pobjeda));
+            }
+            else if (itemList.get(position).getBend().toString().toLowerCase().contains("hržica")) {
+                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.hrzica));
+            }
+            else if (itemList.get(position).getBend().toString().toLowerCase().contains("dom molitve")) {
+                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.dom_molitve_sb));
+            }else {
                 holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_trzalica));
             }
 
