@@ -19,7 +19,7 @@
     <item
         android:id="@+id/navigacija_multimedija"
         android:icon="@drawable/ic_multimedija"
-        android:title="Multimedija"></item>
+        android:title="Novosti"></item>
 
     <item
         android:id="@+id/navigacija_pitanja"
