@@ -2,10 +2,12 @@ package com.example.duhosii;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +36,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.joda.time.DateTime;
+import org.xmlpull.v1.XmlPullParser;
 
 import java.lang.reflect.Array;
 import java.text.DateFormat;
@@ -113,6 +116,7 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
 
 
             picker=(HorizontalPicker)kalendarFragmentView.findViewById(R.id.datePicker);
+
             picker.setListener(this)
                     .setDays(365)
                     .setOffset(7)
@@ -124,10 +128,21 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
                     .setUnselectedDayTextColor(Color.parseColor("#143F61"))
                     .setDayOfWeekTextColor(Color.parseColor("#899FB0"))
                     .setUnselectedDayTextColor(Color.parseColor("#143F61"))
-                    .showTodayButton(false)
+                    .showTodayButton(true)
                     .init();
             picker.setBackgroundColor(Color.WHITE);
             picker.setDate(new DateTime());
+            View view1=picker.getRootView();
+
+            TextView today=view1.findViewById(R.id.tvToday);
+            today.setText("Danas");
+            today.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
+            today.setTypeface(today.getTypeface(), Typeface.BOLD);
+
+            TextView mjesec=view1.findViewById(R.id.tvMonth);
+            mjesec.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
+            mjesec.setTypeface(mjesec.getTypeface(), Typeface.BOLD);
+
             onInit();
             return kalendarFragmentView;
         }
