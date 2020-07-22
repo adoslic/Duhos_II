@@ -40,8 +40,10 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 
@@ -60,6 +62,10 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
     List<Dogadjaj> itemList = new ArrayList<>();
     List<String> listaDatuma=new ArrayList<>();
     String datumBezGodine;
+    private Date danasnjiDatum=new Date();
+    List<String> exDatesString=new ArrayList<String>();
+
+    private int size=0;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -76,7 +82,35 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
         if(connectionFlag==true) {
             kalendarFragmentView=inflater.inflate(R.layout.fragment_kalendar, container, false);
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            for(int i=1;i<366;i++) {
+                Calendar calendar1 = Calendar.getInstance();
+                calendar1.setTime(new Date());
+                calendar1.add(Calendar.DATE, -i);
+                String yesterdayAsString = dateFormat.format(calendar1.getTime());
+                exDatesString.add(yesterdayAsString);
+            }
+
             kalendarReference = FirebaseDatabase.getInstance().getReference("Kalendar");
+            kalendarReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                        if(snapshot.exists()) {
+                            final String datum = snapshot.child("Datum").getValue().toString();
+                            if(exDatesString.contains(datum))
+                                snapshot.getRef().removeValue();
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+
 
             picker=(HorizontalPicker)kalendarFragmentView.findViewById(R.id.datePicker);
             picker.setListener(this)
@@ -123,9 +157,9 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
                         final String lokacija = snapshot.child("Lokacija").getValue().toString();
                         itemList.add(new Dogadjaj(naslov,opis,datum,lokacija));
 
+
                     }
                 }
-                Collections.shuffle(itemList);
                 Collections.sort(itemList, new Comparator<Dogadjaj>() {
                     public int compare(Dogadjaj d1, Dogadjaj d2) {
                         return d1.getDatum().compareTo(d2.getDatum());

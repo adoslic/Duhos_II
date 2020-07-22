@@ -2,6 +2,10 @@ package com.example.duhosii;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
+import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -31,6 +36,9 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
     private Context context;
     boolean showShimmer = true;
     private int SHIMMER_ITEM_NUMBER = 6;
+    private int pitanjePosition;
+    private boolean pitanjeShow = false;
+    private boolean doAnimation=true;
 
     public KalendarItemAdapter(List<Dogadjaj> itemList) {
         this.itemList = itemList;
@@ -59,7 +67,6 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
             holder.datum.setBackground(null);
             holder.dan.setBackground(null);
 
-            holder.itemLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition_animation));
 
 
             String[] parts = itemList.get(position).datum.split("/");
@@ -105,6 +112,54 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                     break;
             }
 
+            TextPaint paint = holder.opis.getPaint();
+            float width = paint.measureText(holder.opis.getText().toString());
+
+            if (doAnimation)
+                holder.itemLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition_animation));
+
+            if (pitanjePosition == position && pitanjeShow) {
+                holder.isExpanded = true;
+                holder.opis.setMaxLines(100000);
+
+                Shader textShader=new LinearGradient(0, 0,0, holder.opis.getPaint().getTextSize()*5,
+                        new int[]{Color.parseColor("#143F61"),Color.parseColor("#143F61")},
+                        new float[]{0, 1}, Shader.TileMode.CLAMP);
+                holder.opis.getPaint().setShader(textShader);
+                holder.lokacijaText.setVisibility(View.VISIBLE);
+                holder.lokacija.setVisibility(View.VISIBLE);
+                holder.obavijest.setVisibility(View.VISIBLE);
+            } else {
+                holder.isExpanded = false;
+                holder.opis.setMaxLines(4);
+                Shader textShader=new LinearGradient(0, 0,0, holder.opis.getPaint().getTextSize()*5,
+                        new int[]{Color.parseColor("#143F61"),Color.TRANSPARENT},
+                        new float[]{0, 1}, Shader.TileMode.CLAMP);
+                holder.opis.getPaint().setShader(textShader);
+                holder.lokacijaText.setVisibility(View.GONE);
+                holder.lokacija.setVisibility(View.GONE);
+                holder.obavijest.setVisibility(View.GONE);
+            }
+
+
+            holder.itemLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (holder.isExpanded == false) {
+                        pitanjePosition = position;
+                        pitanjeShow = true;
+                        doAnimation = false;
+                        notifyDataSetChanged();
+                    } else if (holder.isExpanded == true) {
+                        pitanjeShow = false;
+                        doAnimation = true;
+                        notifyDataSetChanged();
+                    }
+
+
+                }
+            });
+
         }
 
     }
@@ -120,10 +175,11 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView naslov,opis,lokacija,datum,dan;
+        TextView naslov,opis,lokacija,datum,dan,lokacijaText;
         RelativeLayout itemLayout,datumLayout,contentLayout;
         ImageButton obavijest;
         ShimmerFrameLayout shimmerFrameLayout;
+        private boolean isExpanded = false;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -133,6 +189,8 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
             lokacija = itemView.findViewById(R.id.lokacija);
             datum = itemView.findViewById(R.id.datum);
             dan = itemView.findViewById(R.id.dan);
+            lokacijaText = itemView.findViewById(R.id.lokacija_tekst);
+            obavijest=itemView.findViewById(R.id.obavijest);
 
             itemLayout=itemView.findViewById(R.id.itemLayout);
             datumLayout=itemView.findViewById(R.id.datumLayout);
