@@ -6,6 +6,8 @@ import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
+import android.text.InputFilter;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -48,6 +50,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+
+import static android.text.InputType.TYPE_CLASS_TEXT;
+import static android.text.InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS;
 
 
 public class KalendarFragment extends Fragment implements DatePickerListener {
@@ -134,14 +139,17 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
             picker.setDate(new DateTime());
             View view1=picker.getRootView();
 
+            Typeface firaSansBold = Typeface.createFromAsset(getContext().getAssets(), "fonts/firasans_bold.ttf");
+            Typeface monseratBold = Typeface.createFromAsset(getContext().getAssets(), "fonts/montserrat_light.ttf");
+
             TextView today=view1.findViewById(R.id.tvToday);
             today.setText("Danas");
             today.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
-            today.setTypeface(today.getTypeface(), Typeface.BOLD);
+            today.setTypeface(monseratBold);
 
             TextView mjesec=view1.findViewById(R.id.tvMonth);
             mjesec.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
-            mjesec.setTypeface(mjesec.getTypeface(), Typeface.BOLD);
+            mjesec.setTypeface(firaSansBold);
 
             onInit();
             return kalendarFragmentView;

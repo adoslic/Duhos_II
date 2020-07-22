@@ -13,10 +13,9 @@
         android:layout_height="wrap_content"
         android:text="Naslov"
         android:textSize="20sp"
-        android:textStyle="bold"
         android:textColor="@color/duhosPlava"
         android:layout_centerInParent="true"
-        />
+        android:fontFamily="@font/firasans_bold"/>
     <ImageButton
         android:id="@+id/menu"
         android:layout_width="wrap_content"

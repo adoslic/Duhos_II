@@ -46,7 +46,7 @@ public class PitajKapelanaFragment extends Fragment {
     private float density;
     private int padding;
     private ImageButton back;
-    String text="Poštovani, u sljedećoj rubrici tražit će se Vaše ime i prezime, no upit će ostati anoniman za sve osim za kapelana kojemu je namijenjen upit kako bi izbjegli slanje stalnih upita od ljudi loših namjera. Ukoliko ne želite upisati ime i prezime molimo Vas da upišete svoje inicijale. Hvala na razumijevanju!";
+    String text="Prilikom slanja pitanja za našeg kapelana, unos imena i prezimena nije nužan ukoliko želiš ostati anoniman, a u suprotnom će ime i prezime biti vidljivo samo kapelanu. Nakon što kapelan odgovori, pitanje i odgovor ćemo objaviti u aplikaciji.";
 
     /*private String marioMail="m.zigman6@gmail.com";
     private String davorMail="dav.vuk@gmail.com";*/
@@ -219,6 +219,8 @@ public class PitajKapelanaFragment extends Fragment {
         String message=pitanjeEditText.getText().toString();
         JavaMailAPI javaMailAPI = new JavaMailAPI(getContext(), mailTo,subject , message);
         javaMailAPI.execute();
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new VratiSeFragment("pitanje")).commit();
+
     }
 
     private void checkInternetConnection() {

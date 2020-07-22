@@ -36,12 +36,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:width="250dp"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:textColor="@color/duhosPlava"
-                    android:layout_marginLeft="20dp"
                     android:layout_centerVertical="true"
                     android:ellipsize="end"
-                    android:maxLines="1"/>
+                    android:maxLines="1"
+                    android:fontFamily="@font/firasans_regular"/>
             </RelativeLayout>
         </RelativeLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>

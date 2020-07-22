@@ -19,10 +19,13 @@
         android:drawablePadding="10dp"
         android:background="@drawable/rectangle_shape_shadow_small_radius"
         android:hint="Ime i prezime"
+         android:textColorHint="@color/greyText"
         android:singleLine="true"
         android:padding="15dp"
         android:layout_marginBottom="20dp"
-        android:textColor="@color/duhosPlava">
+        android:textColor="@color/duhosPlava"
+         android:fontFamily="@font/montserrat_regular"
+         android:textSize="16sp">
 
     </EditText>
 
@@ -39,7 +42,10 @@
         android:includeFontPadding="true"
         android:inputType="textCapSentences|textMultiLine"
         android:gravity="top"
-        android:textColor="@color/duhosPlava">
+        android:textColor="@color/duhosPlava"
+        android:textColorHint="@color/greyText"
+        android:fontFamily="@font/montserrat_regular"
+        android:textSize="16sp">
 
     </EditText>
     </LinearLayout>

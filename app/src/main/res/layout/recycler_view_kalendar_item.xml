@@ -24,19 +24,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="17.07."
-
                     android:textColor="@color/duhosPlava"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginTop="25dp"></TextView>
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textSize="16sp"></TextView>
                 <TextView
                     android:id="@+id/dan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Čet"
-                    android:textColor="@color/duhosPlava"
+                    android:textColor="#899FB0"
                     android:layout_below="@+id/datum"
-                    android:layout_centerHorizontal="true"></TextView>
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textSize="12sp"></TextView>
             </RelativeLayout>
 
             <RelativeLayout
@@ -51,44 +54,46 @@
                     android:id="@+id/naslov"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:textColor="@color/duhosPlava"
                     android:layout_margin="10dp"
                     android:text="Naslov"
-                    android:textStyle="bold"/>
+                    android:fontFamily="@font/montserrat_bold"/>
                 <TextView
                     android:id="@+id/opis"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="@color/duhosPlava"
+                    android:textSize="12sp"
+                    android:textColor="#899FB0"
                     android:layout_margin="10dp"
                     android:layout_below="@+id/naslov"
                     android:text="Opis"
                     android:ellipsize="end"
-                    android:maxLines="4"/>
+                    android:maxLines="4"
+                    android:fontFamily="@font/montserrat_medium"/>
                 <TextView
                     android:id="@+id/lokacija_tekst"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    android:textSize="12sp"
                     android:textColor="@color/duhosPlava"
                     android:layout_margin="10dp"
                     android:layout_below="@+id/opis"
                     android:text="Lokacija:"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_bold"
                     android:visibility="gone"/>
                 <TextView
                     android:id="@+id/lokacija"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    android:textSize="12sp"
                     android:textColor="@color/duhosPlava"
                     android:layout_marginVertical="10dp"
                     android:layout_below="@+id/opis"
                     android:text="Lokacija"
                     android:layout_toRightOf="@+id/lokacija_tekst"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    android:fontFamily="@font/montserrat_medium"/>
                 <ImageButton
                     android:id="@+id/obavijest"
                     android:layout_width="wrap_content"
