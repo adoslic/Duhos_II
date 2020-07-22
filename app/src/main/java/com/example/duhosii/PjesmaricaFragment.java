@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -70,6 +71,8 @@ public class PjesmaricaFragment extends Fragment {
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         View view=mActionBar.getCustomView();
         zaglavlje=view.findViewById(R.id.naslov);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
         zaglavlje.setText("Pjesmarica");
         checkInternetConnection();
 
@@ -146,16 +149,6 @@ public class PjesmaricaFragment extends Fragment {
 
 
     public void onInit() {
-
-        DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-        itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider_15));
-        recyclerView = pjesmaricaFragmentView.findViewById(R.id.recyclerViewPjesmarica);
-        adapter = new PjesmaricaItemAdapter(itemList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(itemDecorator);
-        recyclerView.setAdapter(adapter);
-
         pjesmaricaReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -170,7 +163,14 @@ public class PjesmaricaFragment extends Fragment {
                     }
                 }
                 Collections.reverse(itemList);
-
+                DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+                itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider_15));
+                recyclerView = pjesmaricaFragmentView.findViewById(R.id.recyclerViewPjesmarica);
+                adapter = new PjesmaricaItemAdapter(itemList);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                recyclerView.setHasFixedSize(true);
+                recyclerView.addItemDecoration(itemDecorator);
+                recyclerView.setAdapter(adapter);
                 ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipePjesmaToShareCallback(adapter));
                 itemTouchHelper.attachToRecyclerView(recyclerView);
                 adapter.showShimmer = false;

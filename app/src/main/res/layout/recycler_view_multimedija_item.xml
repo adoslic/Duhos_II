@@ -11,7 +11,8 @@
             android:id="@+id/itemLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rectangle_shape_shadow_small_radius">
+            android:background="@drawable/rectangle_shape_shadow_small_radius"
+            android:padding="15dp">
 
             <RelativeLayout
                 android:id="@+id/multimedijaLayout"
@@ -22,9 +23,9 @@
                     android:id="@+id/idNaslov"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:textColor="@color/duhosPlava"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/firasans_semibold"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="25dp"
                     android:layout_centerInParent="true"/>

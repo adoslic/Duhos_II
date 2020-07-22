@@ -85,7 +85,7 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
                         notifyDataSetChanged();
                     } else if (holder.isExpanded == true) {
                         pitanjeShow = false;
-                        doAnimation = false;
+                        doAnimation = true;
                         notifyDataSetChanged();
                     }
                 }

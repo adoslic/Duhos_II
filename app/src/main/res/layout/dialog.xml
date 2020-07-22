@@ -46,7 +46,9 @@
                     android:text="Općenito informacije"
                     android:textColor="@color/duhosPlava"
                     android:layout_toRightOf="@id/infoDuhosImage"
-                    android:layout_centerVertical="true"></TextView>
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/firasans_regular"
+                    android:textSize="20sp"></TextView>
 
             </RelativeLayout>
 
@@ -69,7 +71,9 @@
                     android:text="Kapelani"
                     android:textColor="@color/duhosPlava"
                     android:layout_toRightOf="@id/infoKapelaniImage"
-                    android:layout_centerVertical="true"></TextView>
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/firasans_regular"
+                    android:textSize="20sp"></TextView>
 
             </RelativeLayout>
 
@@ -84,7 +88,8 @@
                     android:src="@drawable/ic_timovi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"></ImageView>
+                    android:layout_marginRight="10dp"
+                    ></ImageView>
                 <TextView
                     android:id="@+id/infoTimoviText"
                     android:layout_width="wrap_content"
@@ -92,7 +97,9 @@
                     android:text="DUHOS timovi"
                     android:textColor="@color/duhosPlava"
                     android:layout_toRightOf="@id/infoTimoviImage"
-                    android:layout_centerVertical="true"></TextView>
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/firasans_regular"
+                    android:textSize="20sp"></TextView>
 
           </RelativeLayout>
 
@@ -115,7 +122,9 @@
                     android:text="Knjižnica"
                     android:textColor="@color/duhosPlava"
                     android:layout_toRightOf="@id/infoKnjiznicaImage"
-                    android:layout_centerVertical="true"></TextView>
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/firasans_regular"
+                    android:textSize="20sp"></TextView>
 
             </RelativeLayout>
 

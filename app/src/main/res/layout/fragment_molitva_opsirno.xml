@@ -29,9 +29,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:text="Naslov"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textColor="@color/duhosPlava"
-            android:textStyle="bold"></TextView>
+            android:fontFamily="@font/firasans_bold"></TextView>
 
         <TextView
             android:id="@+id/tekstOpsirno"
@@ -40,11 +40,12 @@
             android:layout_below="@+id/naslovOpsirno"
             android:layout_marginTop="10dp"
             android:text="Tekst"
-            android:textSize="22sp"
+            android:textSize="16sp"
             android:layout_margin="10dp"
             android:textColor="@color/duhosPlava"
             android:textAlignment="gravity"
-            android:gravity="left"></TextView>
+            android:gravity="left"
+            android:fontFamily="@font/montserrat_light"></TextView>
         <ImageButton
             android:id="@+id/shareButton"
             android:layout_width="wrap_content"

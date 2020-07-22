@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -29,7 +30,7 @@ public class NakanaFragment extends Fragment {
     TextView zaglavlje;
     BottomNavigationView bottomNavigationView;
     private View nakanaFragmentView;
-    String text="Poštovani, u sljedećoj rubrici imati će te mogućnost pisanja molitvene nakane, a molitva će ostati anonimna i neće se prikazivati u aplikaciji. Unos imena i prezimena nije nužan. Hvala na razumijevanju!";
+    String text="Prilikom slanja molitvene nakane unos imena i prezimena nije nužan ukoliko želiš ostati anoniman. Molitvena nakana se neće prikazivati u aplikaciji nego ćemo za nju moliti na sljedećem klanjanju.";
     /*private String marioMail="m.zigman6@gmail.com";*/
     private String marioMail="kresimirtomic1998@gmail.com";
     private EditText imeEditText,nakanaEditText;
@@ -50,6 +51,7 @@ public class NakanaFragment extends Fragment {
         View viewActionBar=mActionBar.getCustomView();
         zaglavlje=viewActionBar.findViewById(R.id.naslov);
         zaglavlje.setText("Molitvena nakana");
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
@@ -122,16 +124,16 @@ public class NakanaFragment extends Fragment {
     }
 
     private void sendMail() {
-        String posiljatelj;
+        String subject;
         if(imeEditText.length()>0)
-            posiljatelj=imeEditText.getText().toString();
+            subject="Nakana od: "+imeEditText.getText().toString();
         else
-            posiljatelj="anonimnog pošiljatelja";
+            subject="Nakana od anonimnog pošiljatelja";
 
-        Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:"+marioMail));
-        intent.putExtra(Intent.EXTRA_SUBJECT,"Nakana od: "+posiljatelj);
-        intent.putExtra(Intent.EXTRA_TEXT,nakanaEditText.getText().toString());
-        startActivity(intent);
+        String message=nakanaEditText.getText().toString();
+        JavaMailAPI javaMailAPI = new JavaMailAPI(getContext(), marioMail,subject , message);
+        javaMailAPI.execute();
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new VratiSeFragment("nakana")).commit();
     }
     @Override
     public void onResume() {

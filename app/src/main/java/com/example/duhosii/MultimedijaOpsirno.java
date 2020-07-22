@@ -64,17 +64,21 @@ public class MultimedijaOpsirno extends Fragment {
         naslov.setText(medij.getNaslov());
         sadrzaj.setText(medij.getSadrzaj());
 
-        if(medij.getMedij().equals("Facebook") || medij.getMedij().equals("facebook")) {
+        if(medij.getMedij().toString().toLowerCase().equals("facebook")) {
             idiNaPoveznicu.setText("Više pročitajte u objavi.");
             linkButton.setImageDrawable(getActivity().getDrawable(R.drawable.ic_buttonfacebook));
         }
-        else if(medij.getMedij().equals("Youtube") || medij.getMedij().equals("youtube") || medij.getMedij().equals("YouTube")){
+        else if(medij.getMedij().toString().toLowerCase().equals("youtube")){
             idiNaPoveznicu.setText("U nastavku poslušajte pjesmu.");
             linkButton.setImageDrawable(getActivity().getDrawable(R.drawable.ic_buttonyoutube));
         }
-        else  if(medij.getMedij().equals("Web") || medij.getMedij().equals("web") ){
+        else  if(medij.getMedij().toString().toLowerCase().equals("web")){
             idiNaPoveznicu.setText("U članku pročitajte više.");
             linkButton.setImageDrawable(getActivity().getDrawable(R.drawable.ic_buttoninternet));
+        }
+        else  if(medij.getMedij().toString().toLowerCase().equals("instagram") ){
+            idiNaPoveznicu.setText("Više pročitajte u objavi.");
+            linkButton.setImageDrawable(getActivity().getDrawable(R.drawable.ic_buttoninstagram));
         }
         else{
             idiNaPoveznicu.setText("Za više pritisnite na poveznicu.");

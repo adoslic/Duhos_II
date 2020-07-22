@@ -34,21 +34,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:width="250dp"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:textColor="@color/duhosPlava"
-                    android:textStyle="bold"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="25dp"/>
+                    android:layout_marginLeft="25dp"
+                    android:fontFamily="@font/firasans_semibold"/>
                 <TextView
                     android:id="@+id/datum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:width="150dp"
-                    android:textSize="16sp"
+                    android:textSize="12sp"
                     android:textColor="@color/duhosPlava"
                     android:layout_marginTop="10dp"
                     android:layout_below="@id/naslov"
-                    android:layout_marginLeft="25dp"/>
+                    android:layout_marginLeft="25dp"
+                    android:fontFamily="@font/montserrat_medium"/>
             </RelativeLayout>
         </RelativeLayout>
 

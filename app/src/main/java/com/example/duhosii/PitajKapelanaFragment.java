@@ -13,6 +13,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -45,7 +46,7 @@ public class PitajKapelanaFragment extends Fragment {
     private float density;
     private int padding;
     private ImageButton back;
-    String text="Poštovani, u sljedećoj rubrici tražit će se Vaše ime i prezime, no upit će ostati anoniman za sve osim za kapelana kojemu je namijenjen upit kako bi izbjegli slanje stalnih upita od ljudi loših namjera. Ukoliko ne želite upisati ime i prezime molimo Vas da upišete svoje inicijale. Hvala na razumijevanju!";
+    String text="Prilikom slanja pitanja za našeg kapelana, unos imena i prezimena nije nužan ukoliko želiš ostati anoniman, a u suprotnom će ime i prezime biti vidljivo samo kapelanu. Nakon što kapelan odgovori, pitanje i odgovor ćemo objaviti u aplikaciji.";
 
     /*private String marioMail="m.zigman6@gmail.com";
     private String davorMail="dav.vuk@gmail.com";*/
@@ -64,6 +65,8 @@ public class PitajKapelanaFragment extends Fragment {
         View viewActionBar=mActionBar.getCustomView();
         back=viewActionBar.findViewById(R.id.idiNatrag);
         zaglavlje=viewActionBar.findViewById(R.id.naslov);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
         zaglavlje.setText("Pitaj kapelana");
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
@@ -130,9 +133,6 @@ public class PitajKapelanaFragment extends Fragment {
                 public void onClick(View v) {
                     if(marioImageActive.getVisibility()==View.GONE && davorImageActive.getVisibility()==View.GONE){
                         Toast.makeText(getContext(),getEmojiByUnicode(0x1F446)+"Odaberi kapelana!",Toast.LENGTH_SHORT).show();
-                    }
-                    else if(imeEditText.getText().length()==0){
-                        Toast.makeText(getContext(),getEmojiByUnicode(0x1F446)+"Unesi ime i prezime!",Toast.LENGTH_SHORT).show();
                     }
                     else if(pitanjeEditText.getText().length()==0){
                         Toast.makeText(getContext(),getEmojiByUnicode(0x1F446)+"Unesi pitanje!",Toast.LENGTH_SHORT).show();
@@ -210,10 +210,17 @@ public class PitajKapelanaFragment extends Fragment {
     }
 
     private void sendMail() {
-        Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:"+mailTo));
-        intent.putExtra(Intent.EXTRA_SUBJECT,"Pitanje za kapelana od: "+imeEditText.getText().toString());
-        intent.putExtra(Intent.EXTRA_TEXT,pitanjeEditText.getText().toString());
-        startActivity(intent);
+        String subject="";
+        if(imeEditText.length()==0)
+            subject="Pitanje za kapelana od anonimnog pošiljatelja";
+        else
+            subject="Pitanje za kapelana od: "+imeEditText.getText().toString();
+
+        String message=pitanjeEditText.getText().toString();
+        JavaMailAPI javaMailAPI = new JavaMailAPI(getContext(), mailTo,subject , message);
+        javaMailAPI.execute();
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new VratiSeFragment("pitanje")).commit();
+
     }
 
     private void checkInternetConnection() {

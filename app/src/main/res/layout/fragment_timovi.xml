@@ -18,7 +18,8 @@
             android:layout_marginTop="16dp"
             android:text="Što želimo?"
             android:textColor="@color/duhosPlava"
-            android:textSize="24sp"></TextView>
+            android:textSize="20sp"
+            android:fontFamily="@font/firasans_bold"></TextView>
 
         <TextView
             android:id="@+id/stoZelimoTeskt"
@@ -30,7 +31,8 @@
             android:paddingRight="16dp"
             android:text="@string/stoZelimo"
             android:textColor="@color/duhosPlava"
-            android:textSize="16sp"></TextView>
+            android:textSize="16sp"
+            android:fontFamily="@font/montserrat_light"></TextView>
 
         <ImageView
             android:id="@+id/cuposImage"
@@ -49,7 +51,8 @@
             android:layout_marginTop="25dp"
             android:text="ČUPOS"
             android:textColor="@color/duhosPlava"
-            android:textSize="24sp"></TextView>
+            android:textSize="20sp"
+            android:fontFamily="@font/firasans_bold"></TextView>
 
 
         <TextView
@@ -63,6 +66,7 @@
             android:text="@string/cupos"
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
+            android:fontFamily="@font/montserrat_light"
             android:layout_marginBottom="25dp"></TextView>
 
 
@@ -84,7 +88,8 @@
             android:layout_marginTop="25dp"
             android:text="LITURGIJSKI TIM"
             android:textColor="@color/duhosPlava"
-            android:textSize="24sp"></TextView>
+            android:textSize="20sp"
+            android:fontFamily="@font/firasans_bold"></TextView>
 
 
         <TextView
@@ -98,6 +103,7 @@
             android:text="@string/liturgijski"
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
+            android:fontFamily="@font/montserrat_light"
             android:layout_marginBottom="25dp"></TextView>
 
 
@@ -118,7 +124,8 @@
             android:layout_marginTop="25dp"
             android:text="MEDIJSKI TIM"
             android:textColor="@color/duhosPlava"
-            android:textSize="24sp"></TextView>
+            android:textSize="20sp"
+            android:fontFamily="@font/firasans_bold"></TextView>
 
 
         <TextView
@@ -132,6 +139,7 @@
             android:text="@string/medijski"
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
+            android:fontFamily="@font/montserrat_light"
             android:layout_marginBottom="25dp"></TextView>
 
 
@@ -152,7 +160,8 @@
             android:layout_marginTop="25dp"
             android:text="DUHOS BAND"
             android:textColor="@color/duhosPlava"
-            android:textSize="24sp"></TextView>
+            android:textSize="20sp"
+            android:fontFamily="@font/firasans_bold"></TextView>
 
 
         <TextView
@@ -166,6 +175,7 @@
             android:text="@string/band"
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
+            android:fontFamily="@font/montserrat_light"
             android:layout_marginBottom="25dp"></TextView>
 
 
@@ -186,7 +196,8 @@
             android:layout_marginTop="25dp"
             android:text="VOLONTERSKI TIM"
             android:textColor="@color/duhosPlava"
-            android:textSize="24sp"></TextView>
+            android:textSize="20sp"
+            android:fontFamily="@font/firasans_bold"></TextView>
 
 
         <TextView
@@ -200,6 +211,7 @@
             android:text="@string/volonteri"
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
+            android:fontFamily="@font/montserrat_light"
             android:layout_marginBottom="25dp"></TextView>
     </RelativeLayout>
 </ScrollView>

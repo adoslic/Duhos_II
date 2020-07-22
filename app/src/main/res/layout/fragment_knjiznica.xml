@@ -29,7 +29,8 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="25dp"
                 android:textColor="@color/duhosPlava"
-                android:textSize="24sp"></TextView>
+                android:textSize="20sp"
+                android:fontFamily="@font/firasans_bold"></TextView>
 
             <TextView
                 android:id="@+id/knjiznicaTekst"
@@ -41,7 +42,8 @@
                 android:textColor="@color/duhosPlava"
                 android:paddingRight="16dp"
                 android:paddingLeft="16dp"
-                android:textSize="16sp"></TextView>
+                android:textSize="16sp"
+                android:fontFamily="@font/montserrat_light"></TextView>
             <ImageButton
                 android:id="@+id/popisKnjigaButton"
                 android:layout_width="wrap_content"

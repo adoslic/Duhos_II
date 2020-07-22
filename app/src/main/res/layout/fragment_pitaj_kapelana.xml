@@ -21,8 +21,9 @@
             android:text="Odaberi kapelana"
             android:textColor="@color/duhosPlava"
             android:textStyle="bold"
-            android:textSize="20sp"
-            android:layout_centerHorizontal="true"></TextView>
+            android:textSize="16sp"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/firasans_medium"></TextView>
         <RelativeLayout
             android:id="@+id/marioLayout"
             android:layout_width="175dp"
@@ -50,7 +51,9 @@
                 android:textColor="@color/greyText"
                 android:layout_below="@+id/marioImage"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"></TextView>
+                android:layout_marginTop="15dp"
+                android:textSize="10sp"
+                android:fontFamily="@font/montserrat_semibold"></TextView>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/davorLayout"
@@ -80,7 +83,9 @@
                 android:textColor="@color/greyText"
                 android:layout_below="@+id/davorImage"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"></TextView>
+                android:layout_marginTop="15dp"
+                android:textSize="10sp"
+                android:fontFamily="@font/montserrat_semibold"></TextView>
         </RelativeLayout>
     </RelativeLayout>
     <LinearLayout
@@ -100,10 +105,13 @@
         android:drawablePadding="10dp"
         android:background="@drawable/rectangle_shape_shadow_small_radius"
         android:hint="Ime i prezime"
+        android:textColorHint="@color/greyText"
         android:singleLine="true"
         android:padding="15dp"
         android:layout_marginBottom="20dp"
-        android:textColor="@color/duhosPlava"></EditText>
+        android:textColor="@color/duhosPlava"
+        android:fontFamily="@font/montserrat_regular"
+        android:textSize="16sp"></EditText>
 
     <EditText
         android:id="@+id/editTextMessage"
@@ -114,11 +122,14 @@
         android:drawablePadding="10dp"
         android:background="@drawable/rectangle_shape_shadow_small_radius"
         android:hint="Pitanje"
+        android:textColorHint="@color/greyText"
         android:padding="15dp"
         android:includeFontPadding="true"
         android:inputType="textCapSentences|textMultiLine"
         android:gravity="top"
-        android:textColor="@color/duhosPlava"></EditText>
+        android:textColor="@color/duhosPlava"
+        android:fontFamily="@font/montserrat_regular"
+        android:textSize="16sp"></EditText>
     </LinearLayout>
     <ImageButton
         android:id="@+id/sendMessageButton"
@@ -129,6 +140,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:paddingTop="20dp"
-        android:background="@color/grey"></ImageButton>
+        android:background="@color/grey"
+        ></ImageButton>
 </RelativeLayout>
 </ScrollView>

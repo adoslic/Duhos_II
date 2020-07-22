@@ -17,11 +17,11 @@
             android:id="@+id/noInternetText"
             android:textColor="#F73C57"
             android:text="Nema interneta"
-            android:textStyle="bold"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/noInternetImage"
             android:layout_marginTop="24dp"
-            android:textSize="20dp"></TextView>
+            android:textSize="20sp"
+            android:fontFamily="@font/firasans_bold"></TextView>
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,7 +30,8 @@
             android:layout_marginTop="10dp"
             android:text="Molim te da provjeriš jesi li povezan na internet pa se vrati po sadržaj"
             android:textColor="@color/duhosPlava"
-            android:textSize="20dp"
+            android:textSize="16sp"
+            android:fontFamily="@font/montserrat_light"
             android:textAlignment="center"
             android:gravity="center_horizontal"></TextView>
 
