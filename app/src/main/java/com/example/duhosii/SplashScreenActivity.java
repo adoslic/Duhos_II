@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Objects;
 
 
+
 public class SplashScreenActivity extends AppCompatActivity{
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
