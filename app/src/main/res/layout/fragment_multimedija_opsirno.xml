@@ -41,7 +41,7 @@
             android:textAlignment="center"
             android:gravity="center"
             android:padding="10dp"
-            android:fontFamily="@font/montserrat_light"></TextView>
+            android:fontFamily="@font/montserrat_medium"></TextView>
 
         <TextView
             android:id="@+id/idiNaPoveznicu"

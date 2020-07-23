@@ -12,11 +12,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomnavigation.LabelVisibilityMode;
+
 public class VratiSeFragment extends Fragment {
     ImageButton vratiSeButton;
     private View vratiSeFragmentView;
     TextView veciTekst,manjiTekst;
     String flag="";
+    BottomNavigationView bottomNavigationView;
 
     public VratiSeFragment(String flag) {
         this.flag=flag;
@@ -29,6 +33,9 @@ public class VratiSeFragment extends Fragment {
 
         vratiSeFragmentView = inflater.inflate(R.layout.fragment_vrati_se, container, false);
         vratiSeButton = vratiSeFragmentView.findViewById(R.id.butonVrati);
+
+        bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setVisibility(View.GONE);
 
         veciTekst=vratiSeFragmentView.findViewById(R.id.veciTekst);
         manjiTekst=vratiSeFragmentView.findViewById(R.id.manjiTekst);
@@ -47,6 +54,7 @@ public class VratiSeFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     getActivity().getSupportFragmentManager().popBackStack();
+
                 }
             });
         return vratiSeFragmentView;

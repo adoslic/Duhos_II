@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView=findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+        bottomNavigationView.setVisibility(View.VISIBLE);
 
         //neka pocetni fragment bude molitva
         findViewById(R.id.navigacija_molitva).performClick();

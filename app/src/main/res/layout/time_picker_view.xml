@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/duhosPlava">
+    <TextView
+        android:id="@+id/timeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Odaberi vrijeme kada želiš da ti dođe obavijest toga dana kada je događaj."
+        android:fontFamily="@font/montserrat_medium"
+        android:textSize="12sp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textColor="@color/white"></TextView>
+
+</RelativeLayout>

@@ -44,6 +44,7 @@ public class MolitvaOpsirno extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ActionBar mActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        mActionBar.show();
         mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         mActionBar.setCustomView(R.layout.toolbar);
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
@@ -52,6 +53,7 @@ public class MolitvaOpsirno extends Fragment {
         zaglavlje.setText("Molitva");
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
 
         molitvaView = inflater.inflate(R.layout.fragment_molitva_opsirno, container, false);
@@ -65,7 +67,7 @@ public class MolitvaOpsirno extends Fragment {
         tekst.setText(molitva.getTekst());
 
         if(izvor.equals("OpćeMolitve")) {
-            slika.setImageDrawable(getResources().getDrawable(R.drawable.molitve));
+            slika.setImageDrawable(getResources().getDrawable(R.drawable.standardne_molitve));
         }
         if(izvor.equals("Nadahnuća")) {
             slika.setImageDrawable(getResources().getDrawable(R.drawable.standardne_molitve));
@@ -74,7 +76,7 @@ public class MolitvaOpsirno extends Fragment {
             slika.setImageDrawable(getResources().getDrawable(R.drawable.marijanske_molitve));
         }
         if(izvor.equals("Pobožnosti")) {
-            slika.setImageDrawable(getResources().getDrawable(R.drawable.devetnice));
+            slika.setImageDrawable(getResources().getDrawable(R.drawable.molitve));
         }
 
         shareButton.setOnClickListener(new View.OnClickListener() {
