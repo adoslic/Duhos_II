@@ -31,7 +31,9 @@
                 android:textStyle="bold"
                 android:layout_below="@id/checkImage"
                 android:layout_margin="5dp"
-                android:layout_centerHorizontal="true">
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"
+                android:gravity="center">
             </TextView>
             <TextView
                 android:id="@+id/manjiTekst"

@@ -48,7 +48,7 @@
                     android:layout_toRightOf="@id/infoDuhosImage"
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/firasans_regular"
-                    android:textSize="20sp"></TextView>
+                    android:textSize="16sp"></TextView>
 
             </RelativeLayout>
 
@@ -73,7 +73,7 @@
                     android:layout_toRightOf="@id/infoKapelaniImage"
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/firasans_regular"
-                    android:textSize="20sp"></TextView>
+                    android:textSize="16sp"></TextView>
 
             </RelativeLayout>
 
@@ -99,7 +99,7 @@
                     android:layout_toRightOf="@id/infoTimoviImage"
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/firasans_regular"
-                    android:textSize="20sp"></TextView>
+                    android:textSize="16sp"></TextView>
 
           </RelativeLayout>
 
@@ -124,7 +124,7 @@
                     android:layout_toRightOf="@id/infoKnjiznicaImage"
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/firasans_regular"
-                    android:textSize="20sp"></TextView>
+                    android:textSize="16sp"></TextView>
 
             </RelativeLayout>
 

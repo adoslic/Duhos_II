@@ -29,6 +29,7 @@ public class UclaniSeFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         ActionBar mActionBar =  ((AppCompatActivity)getActivity()).getSupportActionBar();
+        mActionBar.show();
         mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         mActionBar.setCustomView(R.layout.toolbar);
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
@@ -37,6 +38,7 @@ public class UclaniSeFragment extends Fragment {
         zaglavlje.setText("DUHOS timovi");
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
 
         View uclaniSeView=inflater.inflate(R.layout.fragment_uclani_se, container, false);

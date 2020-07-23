@@ -32,7 +32,7 @@
             android:text="@string/stoZelimo"
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
-            android:fontFamily="@font/montserrat_light"></TextView>
+            android:fontFamily="@font/montserrat_medium"></TextView>
 
         <ImageView
             android:id="@+id/cuposImage"
@@ -66,7 +66,7 @@
             android:text="@string/cupos"
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
-            android:fontFamily="@font/montserrat_light"
+            android:fontFamily="@font/montserrat_medium"
             android:layout_marginBottom="25dp"></TextView>
 
 
@@ -103,7 +103,7 @@
             android:text="@string/liturgijski"
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
-            android:fontFamily="@font/montserrat_light"
+            android:fontFamily="@font/montserrat_medium"
             android:layout_marginBottom="25dp"></TextView>
 
 
@@ -139,7 +139,7 @@
             android:text="@string/medijski"
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
-            android:fontFamily="@font/montserrat_light"
+            android:fontFamily="@font/montserrat_medium"
             android:layout_marginBottom="25dp"></TextView>
 
 
@@ -175,7 +175,7 @@
             android:text="@string/band"
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
-            android:fontFamily="@font/montserrat_light"
+            android:fontFamily="@font/montserrat_medium"
             android:layout_marginBottom="25dp"></TextView>
 
 
@@ -211,7 +211,7 @@
             android:text="@string/volonteri"
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
-            android:fontFamily="@font/montserrat_light"
+            android:fontFamily="@font/montserrat_medium"
             android:layout_marginBottom="25dp"></TextView>
     </RelativeLayout>
 </ScrollView>

@@ -1,21 +1,34 @@
 package com.example.duhosii;
 
+import android.app.DatePickerDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
+import android.icu.text.UnicodeSetSpanner;
+import android.os.Message;
 import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.DatePicker;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -88,6 +101,8 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
             holder.opis.setText(itemList.get(position).opis);
             holder.lokacija.setText(itemList.get(position).lokacija);
             holder.datum.setText(dan+"/"+mjesec);
+            holder.timeTime.setText(itemList.get(position).vrijeme);
+
             switch (dayOfWeek){
                 case (2):
                     holder.dan.setText("Pon");
@@ -141,6 +156,55 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                 holder.obavijest.setVisibility(View.GONE);
             }
 
+            holder.obavijest.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (holder.alarm == false) {
+                        Calendar mcurrentTime = Calendar.getInstance();
+                        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                        int minute = mcurrentTime.get(Calendar.MINUTE);
+                        TimePickerDialog mTimePicker;
+                        mTimePicker = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                                String min = String.valueOf(selectedMinute);
+                                String h = String.valueOf(selectedHour);
+                                if (selectedHour < 10)
+                                    holder.sati = "0" + h;
+                                else
+                                    holder.sati = h;
+
+                                if (selectedMinute < 10)
+                                    holder.minute = "0" + min;
+                                else
+                                    holder.minute = min;
+
+                                holder.alarmLayout.setVisibility(View.VISIBLE);
+                                holder.alarmTime.setText(holder.sati + ":" + holder.minute);
+                                holder.alarm = true;
+                                holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_buttoninstagram));
+
+                            }
+                        }, hour, minute, true);//Yes 24 hour time
+                        Toast.makeText(context,"Obavijest će stići na dan događaja u odabrano vrijeme!",Toast.LENGTH_SHORT).show();
+                        mTimePicker.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialog) {
+
+                            }
+                        });
+                        mTimePicker.show();
+
+                    }
+                    else{
+                        holder.alarmLayout.setVisibility(View.GONE);
+                        holder.alarmTime.setText("");
+                        holder.alarm = false;
+                        holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_addnotification));
+
+                    }
+                }
+            });
 
             holder.itemLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -164,6 +228,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
 
     }
 
+
     @Override
     public int getItemCount() {
         return showShimmer ? SHIMMER_ITEM_NUMBER : itemList.size();
@@ -175,11 +240,16 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView naslov,opis,lokacija,datum,dan,lokacijaText;
-        RelativeLayout itemLayout,datumLayout,contentLayout;
+        TextView naslov,opis,lokacija,datum,dan,lokacijaText,alarmTime,timeTime;
+        RelativeLayout itemLayout,datumLayout,contentLayout,alarmLayout;
         ImageButton obavijest;
+        ImageView alarmIcon;
         ShimmerFrameLayout shimmerFrameLayout;
         private boolean isExpanded = false;
+        private boolean alarm=false;
+
+        String danMjeseca,mjesec,godina,sati,minute;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -191,6 +261,11 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
             dan = itemView.findViewById(R.id.dan);
             lokacijaText = itemView.findViewById(R.id.lokacija_tekst);
             obavijest=itemView.findViewById(R.id.obavijest);
+            timeTime=itemView.findViewById(R.id.timeTime);
+
+            alarmLayout=itemView.findViewById(R.id.alarmLayout);
+            alarmTime=itemView.findViewById(R.id.alarmTime);
+            alarmIcon=itemView.findViewById(R.id.alarmIcon);
 
             itemLayout=itemView.findViewById(R.id.itemLayout);
             datumLayout=itemView.findViewById(R.id.datumLayout);

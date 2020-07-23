@@ -38,11 +38,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.joda.time.DateTime;
-import org.xmlpull.v1.XmlPullParser;
 
-import java.lang.reflect.Array;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -50,9 +46,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-
-import static android.text.InputType.TYPE_CLASS_TEXT;
-import static android.text.InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS;
 
 
 public class KalendarFragment extends Fragment implements DatePickerListener {
@@ -78,6 +71,7 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ActionBar mActionBar =  ((AppCompatActivity)getActivity()).getSupportActionBar();
+        mActionBar.show();
         mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         mActionBar.setCustomView(R.layout.toolbar_without_back);
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
@@ -87,6 +81,7 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
         checkInternetConnection();
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
         if(connectionFlag==true) {
             kalendarFragmentView=inflater.inflate(R.layout.fragment_kalendar, container, false);
@@ -178,7 +173,9 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
                         final String opis = snapshot.child("Opis").getValue().toString();
                         final String datum = snapshot.child("Datum").getValue().toString();
                         final String lokacija = snapshot.child("Lokacija").getValue().toString();
-                        itemList.add(new Dogadjaj(naslov,opis,datum,lokacija));
+                        final String vrijeme = snapshot.child("Vrijeme").getValue().toString();
+
+                        itemList.add(new Dogadjaj(naslov,opis,datum,vrijeme,lokacija));
 
 
                     }

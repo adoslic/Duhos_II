@@ -51,6 +51,7 @@ public class PitanjaFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ActionBar mActionBar =  ((AppCompatActivity)getActivity()).getSupportActionBar();
+        mActionBar.show();
         mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         mActionBar.setCustomView(R.layout.toolbar_without_back);
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
@@ -60,6 +61,7 @@ public class PitanjaFragment extends Fragment {
         checkInternetConnection();
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
         if(connectionFlag==true) {
             pitanjaFragmentView=inflater.inflate(R.layout.fragment_pitanja, container, false);

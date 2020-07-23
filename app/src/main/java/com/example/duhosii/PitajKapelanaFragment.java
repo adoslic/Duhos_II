@@ -59,6 +59,7 @@ public class PitajKapelanaFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ActionBar mActionBar =  ((AppCompatActivity)getActivity()).getSupportActionBar();
+        mActionBar.show();
         mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         mActionBar.setCustomView(R.layout.toolbar);
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
@@ -70,6 +71,7 @@ public class PitajKapelanaFragment extends Fragment {
         zaglavlje.setText("Pitaj kapelana");
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
         checkInternetConnection();
 

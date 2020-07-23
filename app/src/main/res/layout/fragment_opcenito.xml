@@ -38,6 +38,6 @@
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
             android:layout_marginBottom="10dp"
-            android:fontFamily="@font/montserrat_light"></TextView>
+            android:fontFamily="@font/montserrat_medium"></TextView>
     </RelativeLayout>
 </ScrollView>

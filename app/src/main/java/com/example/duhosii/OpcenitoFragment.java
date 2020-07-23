@@ -25,6 +25,7 @@ public class OpcenitoFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         ActionBar mActionBar =  ((AppCompatActivity)getActivity()).getSupportActionBar();
+        mActionBar.show();
         mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         mActionBar.setCustomView(R.layout.toolbar);
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
@@ -33,6 +34,7 @@ public class OpcenitoFragment extends Fragment {
         zaglavlje.setText("Općenito informacije");
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
 
 
