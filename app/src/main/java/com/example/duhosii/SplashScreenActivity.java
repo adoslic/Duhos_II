@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Objects;
 
+import io.realm.Realm;
 
 
 public class SplashScreenActivity extends AppCompatActivity{
@@ -23,6 +24,7 @@ public class SplashScreenActivity extends AppCompatActivity{
         setContentView(R.layout.activity_splash_screen);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         Objects.requireNonNull(getSupportActionBar()).hide(); //hide app name bar
+        Realm.init(getApplicationContext());
         //wait for 5 seconds
         new Handler().postDelayed(new Runnable() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,6 +48,8 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import io.realm.Realm;
+
 
 public class KalendarFragment extends Fragment implements DatePickerListener {
 
@@ -63,7 +66,9 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
     List<Dogadjaj> itemList = new ArrayList<>();
     List<String> listaDatuma=new ArrayList<>();
     String datumBezGodine;
-    private Date danasnjiDatum=new Date();
+    private List<AlarmDate> listaAlarma=new ArrayList<>();
+    private List<AlarmDate> konacnaListaAlarma=new ArrayList<>();
+
     List<String> exDatesString=new ArrayList<String>();
 
     private int size=0;
@@ -85,6 +90,23 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
         if(connectionFlag==true) {
             kalendarFragmentView=inflater.inflate(R.layout.fragment_kalendar, container, false);
+
+            final ArrayList<AlarmDate> list = new ArrayList<>();
+            final Realm realm = Realm.getDefaultInstance();
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm1) {
+                    List<AlarmDate> resultList = realm.where(AlarmDate.class).findAll();
+                    list.addAll(resultList);
+                }
+            });
+
+            if (!list.isEmpty()) {
+                for (int i = 0; i < list.size(); i++) {
+                    konacnaListaAlarma.add(list.get(i));
+                    Toast.makeText(getContext(), konacnaListaAlarma.get(i).datum + " - " + konacnaListaAlarma.get(i).vrijeme, Toast.LENGTH_SHORT).show();
+                }
+            }
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             for(int i=1;i<366;i++) {
@@ -188,7 +210,7 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
                 DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
                 itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider_15));
                 recyclerView = kalendarFragmentView.findViewById(R.id.recyclerViewKalendar);
-                adapter = new KalendarItemAdapter(itemList);
+                adapter = new KalendarItemAdapter(itemList,konacnaListaAlarma);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerView.setHasFixedSize(true);
                 recyclerView.addItemDecoration(itemDecorator);

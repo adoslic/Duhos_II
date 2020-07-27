@@ -44,7 +44,7 @@
                     android:id="@+id/timeLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentLeft="true"
                     android:layout_marginTop="5dp"
                     android:layout_below="@+id/dan"
                     android:visibility="visible">
@@ -69,8 +69,9 @@
                     android:id="@+id/alarmLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentLeft="true"
                     android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_below="@+id/timeLayout"
                     android:visibility="gone">
                 <ImageView

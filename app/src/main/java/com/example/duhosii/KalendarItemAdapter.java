@@ -1,9 +1,5 @@
 package com.example.duhosii;
 
-import android.app.DatePickerDialog;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,14 +7,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
-import android.icu.text.UnicodeSetSpanner;
-import android.os.Message;
 import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -28,17 +21,19 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapter.ViewHolder> {
 
@@ -52,9 +47,12 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
     private int pitanjePosition;
     private boolean pitanjeShow = false;
     private boolean doAnimation=true;
+    private List<AlarmDate> konacnaListaAlarma=new ArrayList<>();
 
-    public KalendarItemAdapter(List<Dogadjaj> itemList) {
+
+    public KalendarItemAdapter(List<Dogadjaj> itemList, List<AlarmDate> konacnaListaAlarma) {
         this.itemList = itemList;
+        this.konacnaListaAlarma=konacnaListaAlarma;
     }
 
     @NonNull
@@ -80,8 +78,6 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
             holder.datum.setBackground(null);
             holder.dan.setBackground(null);
 
-
-
             String[] parts = itemList.get(position).datum.split("/");
             String dan = parts[0];
             String mjesec = parts[1];
@@ -102,6 +98,14 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
             holder.lokacija.setText(itemList.get(position).lokacija);
             holder.datum.setText(dan+"/"+mjesec);
             holder.timeTime.setText(itemList.get(position).vrijeme);
+            for(int i=0;i<konacnaListaAlarma.size();i++){
+                if(konacnaListaAlarma.get(i).getDatum().equals(itemList.get(position).datum)){
+                    holder.alarmLayout.setVisibility(View.VISIBLE);
+                    holder.alarm=true;
+                    holder.alarmTime.setText(konacnaListaAlarma.get(i).getVrijeme().toString());
+                    holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_buttoninstagram));
+                }
+            }
 
             switch (dayOfWeek){
                 case (2):
@@ -134,6 +138,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                 holder.itemLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition_animation));
 
             if (pitanjePosition == position && pitanjeShow) {
+
                 holder.isExpanded = true;
                 holder.opis.setMaxLines(100000);
 
@@ -145,6 +150,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                 holder.lokacija.setVisibility(View.VISIBLE);
                 holder.obavijest.setVisibility(View.VISIBLE);
             } else {
+
                 holder.isExpanded = false;
                 holder.opis.setMaxLines(4);
                 Shader textShader=new LinearGradient(0, 0,0, holder.opis.getPaint().getTextSize()*5,
@@ -190,13 +196,41 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                         mTimePicker.setOnDismissListener(new DialogInterface.OnDismissListener() {
                             @Override
                             public void onDismiss(DialogInterface dialog) {
-
+                                AlarmDate alarmDate=new AlarmDate();
+                                alarmDate.setDatum(itemList.get(position).datum);
+                                alarmDate.setVrijeme(holder.sati+":"+holder.minute);
+                                boolean dataExist=false;
+                                for(int i=0;i<konacnaListaAlarma.size();i++){
+                                    if(konacnaListaAlarma.get(i).getDatum().equals(alarmDate.getDatum()) && konacnaListaAlarma.get(i).getVrijeme().equals(alarmDate.getVrijeme()))
+                                        dataExist=true;
+                                }
+                                if(dataExist==false) {
+                                    Realm realm = Realm.getDefaultInstance();
+                                    realm.beginTransaction();
+                                    realm.copyToRealm(alarmDate);
+                                    realm.commitTransaction();
+                                }
                             }
                         });
                         mTimePicker.show();
 
                     }
                     else{
+
+                        for(int i=0;i<konacnaListaAlarma.size();i++){
+                            if(konacnaListaAlarma.get(i).getDatum().equals(itemList.get(position).datum) && konacnaListaAlarma.get(i).getVrijeme().equals(holder.alarmTime.getText().toString())){
+                                konacnaListaAlarma.remove(i);
+                            }
+                        }
+
+                        Realm realm = Realm.getDefaultInstance();
+                        final RealmResults<AlarmDate> results = realm.where(AlarmDate.class).equalTo("datum",itemList.get(position).datum).equalTo("vrijeme",holder.alarmTime.getText().toString()).findAll();
+                        realm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                results.deleteAllFromRealm();
+                            }
+                        });
                         holder.alarmLayout.setVisibility(View.GONE);
                         holder.alarmTime.setText("");
                         holder.alarm = false;
@@ -216,7 +250,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                         notifyDataSetChanged();
                     } else if (holder.isExpanded == true) {
                         pitanjeShow = false;
-                        doAnimation = true;
+                        doAnimation = false;
                         notifyDataSetChanged();
                     }
 
