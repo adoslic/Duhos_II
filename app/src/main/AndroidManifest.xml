@@ -27,6 +27,7 @@
             android:windowSoftInputMode="adjustPan" >
         </activity>
 
+        <receiver android:name=".ReminderBroadcast"/>
     </application>
 
 </manifest>
