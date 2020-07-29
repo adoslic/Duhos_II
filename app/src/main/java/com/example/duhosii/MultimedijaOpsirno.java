@@ -48,7 +48,7 @@ public class MultimedijaOpsirno extends Fragment {
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         View viewActionBar = mActionBar.getCustomView();
         zaglavlje = viewActionBar.findViewById(R.id.naslov);
-        zaglavlje.setText("Multimedija");
+        zaglavlje.setText("Novosti");
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
@@ -62,7 +62,6 @@ public class MultimedijaOpsirno extends Fragment {
 
         scrollView=multimedijaView.findViewById(R.id.multimedija_opsirno_scollView);
 
-        String naslovString="aaaaaa"+medij.getNaslov().toString()+"&";
         naslov.setText(medij.getNaslov());
         sadrzaj.setText(medij.getSadrzaj());
 

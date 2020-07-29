@@ -104,7 +104,6 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
             if (!list.isEmpty()) {
                 for (int i = 0; i < list.size(); i++) {
                     konacnaListaAlarma.add(list.get(i));
-                    Toast.makeText(getContext(), konacnaListaAlarma.get(i).datum + " - " + konacnaListaAlarma.get(i).vrijeme, Toast.LENGTH_SHORT).show();
                 }
             }
 
