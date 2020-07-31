@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 
@@ -69,7 +70,7 @@ public class MolitveneGrupeFragment extends Fragment {
         View viewActionBar=mActionBar.getCustomView();
 
         zaglavlje=viewActionBar.findViewById(R.id.naslov);
-        zaglavlje.setText("Molitva");
+        zaglavlje.setText("Od srca k Srcu");
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
@@ -292,4 +293,6 @@ public class MolitveneGrupeFragment extends Fragment {
         super.onResume();
         ((MainActivity)getActivity()).SetNavItemChecked(2);
     }
+
+
 }

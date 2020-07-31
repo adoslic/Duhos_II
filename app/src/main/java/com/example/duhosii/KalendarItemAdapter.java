@@ -43,6 +43,7 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 
 import static android.content.Context.ALARM_SERVICE;
+import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
 import static java.util.Random.*;
 
 public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapter.ViewHolder> {
@@ -110,6 +111,11 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
             holder.lokacija.setText(itemList.get(position).lokacija);
             holder.datum.setText(dan+"/"+mjesec);
             holder.timeTime.setText(itemList.get(position).vrijeme);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                holder.opis.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
+            }
+
             for(int i=0;i<konacnaListaAlarma.size();i++){
                 if(konacnaListaAlarma.get(i).getDatum().equals(itemList.get(position).datum) && konacnaListaAlarma.get(i).getNaslov().equals(itemList.get(position).naslov)){
                     holder.alarmLayout.setVisibility(View.VISIBLE);

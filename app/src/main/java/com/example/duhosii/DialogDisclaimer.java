@@ -2,6 +2,7 @@ package com.example.duhosii;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
+
+import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
+
 public class DialogDisclaimer extends AppCompatDialogFragment {
 
     AlertDialog alertDialog;
@@ -39,6 +43,10 @@ public class DialogDisclaimer extends AppCompatDialogFragment {
                 getFragmentManager().popBackStack();
             }
         });
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            disclaimer.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
+        }
 
         nastavi=view.findViewById(R.id.nastaviButton);
         nastavi.setOnClickListener(new View.OnClickListener() {

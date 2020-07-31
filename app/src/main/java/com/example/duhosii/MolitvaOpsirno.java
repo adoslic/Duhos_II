@@ -21,6 +21,8 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 
+import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
+
 public class MolitvaOpsirno extends Fragment {
 
     private TextView zaglavlje;
@@ -50,7 +52,7 @@ public class MolitvaOpsirno extends Fragment {
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         View viewActionBar = mActionBar.getCustomView();
         zaglavlje = viewActionBar.findViewById(R.id.naslov);
-        zaglavlje.setText("Molitva");
+        zaglavlje.setText("Od srca k Srcu");
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
@@ -66,17 +68,21 @@ public class MolitvaOpsirno extends Fragment {
         naslov.setText(molitva.getNaslov());
         tekst.setText(molitva.getTekst());
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            tekst.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
+        }
+
         if(izvor.equals("OpćeMolitve")) {
             slika.setImageDrawable(getResources().getDrawable(R.drawable.standardne_molitve));
         }
         if(izvor.equals("Nadahnuća")) {
-            slika.setImageDrawable(getResources().getDrawable(R.drawable.standardne_molitve));
+            slika.setImageDrawable(getResources().getDrawable(R.drawable.molitve));
         }
         if(izvor.equals("Marija")) {
             slika.setImageDrawable(getResources().getDrawable(R.drawable.marijanske_molitve));
         }
         if(izvor.equals("Pobožnosti")) {
-            slika.setImageDrawable(getResources().getDrawable(R.drawable.molitve));
+            slika.setImageDrawable(getResources().getDrawable(R.drawable.devetnice));
         }
 
         shareButton.setOnClickListener(new View.OnClickListener() {

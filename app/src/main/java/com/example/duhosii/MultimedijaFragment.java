@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -84,13 +85,10 @@ public class MultimedijaFragment extends Fragment {
         }
     }
     public void onInit() {
-        DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-        itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider));
         recyclerView = multimedijaFragmentView.findViewById(R.id.multimedijarecyclerView);
         adapter = new MultimedijaItemAdapter(itemList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(itemDecorator);
         recyclerView.setAdapter(adapter);
         multimedijaReference.addValueEventListener(new ValueEventListener() {
             @Override

@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -40,6 +41,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.joda.time.DateTime;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -201,18 +203,35 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
 
                     }
                 }
-                Collections.sort(itemList, new Comparator<Dogadjaj>() {
-                    public int compare(Dogadjaj d1, Dogadjaj d2) {
-                        return d1.getDatum().compareTo(d2.getDatum());
+
+                for(int i=0;i<itemList.size()-1;i++){
+                    for(int j=0;j<itemList.size()-i-1;j++) {
+                        String date1String=itemList.get(j).datum+" "+itemList.get(j).vrijeme+":00";
+                        Date date1 = null;
+                        try {
+                            date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(date1String);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        Date date2 = null;
+                        String date2String=itemList.get(j+1).datum+" "+itemList.get(j+1).vrijeme+":00";
+
+                        try {
+                            date2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(date2String);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        if(date2.before(date1)){
+                            Collections.swap(itemList,j+1,j);
+                        }
                     }
-                });
-                DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-                itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider_15));
+                }
+
                 recyclerView = kalendarFragmentView.findViewById(R.id.recyclerViewKalendar);
                 adapter = new KalendarItemAdapter(itemList,konacnaListaAlarma);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerView.setHasFixedSize(true);
-                recyclerView.addItemDecoration(itemDecorator);
                 recyclerView.setAdapter(adapter);
                 ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeKalendarToShareCallback(adapter));
                 itemTouchHelper.attachToRecyclerView(recyclerView);
@@ -267,13 +286,21 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
         }
         datumBezGodine=danUMjesecu+"/"+mjesec;
         int position = 0;
+        boolean flag=false;
         for(int i=0;i<itemList.size();i++) {
             String[] parts = adapter.getDatum(i).getDatum().split("/");
             String danIzAdaptera = parts[0];
             String mjesecIzAdaptera = parts[1];
-            if ((danIzAdaptera+"/"+mjesecIzAdaptera).equals(datumBezGodine))
+            if ((danIzAdaptera+"/"+mjesecIzAdaptera).equals(datumBezGodine)) {
                 position = i;
+                flag=true;
+                break;
+            }
         }
-        recyclerView.scrollToPosition(position);
+        if(flag==false)
+            Toast.makeText(getContext(),"Nema predviđenih događaja za odabrani datum!",Toast.LENGTH_SHORT).show();
+        ((LinearLayoutManager)recyclerView.getLayoutManager()).scrollToPositionWithOffset(position,0);
     }
+
+
 }

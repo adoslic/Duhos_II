@@ -28,9 +28,11 @@ import org.w3c.dom.Text;
 
 import java.io.Externalizable;
 
+import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
+
 public class KapelaniFragment extends Fragment {
 
-    TextView zaglavlje;
+    TextView zaglavlje,kapelan1Tekst,kapelan2Tekst;
     BottomNavigationView bottomNavigationView;
 
     @Nullable
@@ -51,7 +53,17 @@ public class KapelaniFragment extends Fragment {
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
 
-        return inflater.inflate(R.layout.fragment_kapelani, container, false);
+
+        View kapelaniFragmentView=inflater.inflate(R.layout.fragment_kapelani, container, false);
+        kapelan1Tekst=kapelaniFragmentView.findViewById(R.id.kapelan1Tekst);
+        kapelan2Tekst=kapelaniFragmentView.findViewById(R.id.kapelan2Tekst);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            kapelan1Tekst.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
+            kapelan2Tekst.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
+
+        }
+        return kapelaniFragmentView;
     }
 
 }

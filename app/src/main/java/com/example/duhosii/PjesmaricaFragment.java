@@ -165,13 +165,10 @@ public class PjesmaricaFragment extends Fragment {
                     }
                 }
                 Collections.reverse(itemList);
-                DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-                itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider_15));
                 recyclerView = pjesmaricaFragmentView.findViewById(R.id.recyclerViewPjesmarica);
                 adapter = new PjesmaricaItemAdapter(itemList);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerView.setHasFixedSize(true);
-                recyclerView.addItemDecoration(itemDecorator);
                 recyclerView.setAdapter(adapter);
                 ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipePjesmaToShareCallback(adapter));
                 itemTouchHelper.attachToRecyclerView(recyclerView);

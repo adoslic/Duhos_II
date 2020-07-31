@@ -2,6 +2,7 @@ package com.example.duhosii;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +17,11 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 
+import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
+
 public class TimoviFragment extends Fragment {
 
-    TextView zaglavlje;
+    TextView zaglavlje,stoZelimoTeskt,cuposTekst,liturgijskiTekst,medijskiTekst,bandTeskt,volonteriTekst;
     BottomNavigationView bottomNavigationView;
     @Nullable
     @Override
@@ -38,7 +41,23 @@ public class TimoviFragment extends Fragment {
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
 
-        return inflater.inflate(R.layout.fragment_timovi, container, false);
+        View timoviFragmentView=inflater.inflate(R.layout.fragment_timovi, container, false);
+        stoZelimoTeskt=timoviFragmentView.findViewById(R.id.stoZelimoTeskt);
+        cuposTekst=timoviFragmentView.findViewById(R.id.cuposTekst);
+        liturgijskiTekst=timoviFragmentView.findViewById(R.id.liturgijskiTekst);
+        medijskiTekst=timoviFragmentView.findViewById(R.id.medijskiTekst);
+        bandTeskt=timoviFragmentView.findViewById(R.id.bandTeskt);
+        volonteriTekst=timoviFragmentView.findViewById(R.id.volonteriTekst);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            stoZelimoTeskt.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
+            cuposTekst.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
+            liturgijskiTekst.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
+            medijskiTekst.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
+            bandTeskt.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
+            volonteriTekst.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
+        }
+        return timoviFragmentView;
     }
 
 }

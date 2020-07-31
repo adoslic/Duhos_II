@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +22,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
+
+import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
 
 public class PjesmaOpsirno extends Fragment {
 
@@ -67,8 +70,17 @@ public class PjesmaOpsirno extends Fragment {
         naslov.setText(pjesma.getNaslov());
         String formatedText=pjesma.getTekstPjesme();
 
+        if(pjesma.getLink().equals("Link je nedostupan"))
+            pdfButton.setImageDrawable(getActivity().getDrawable(R.drawable.ic_buttonakordimissing));
+        else
+            pdfButton.setImageDrawable(getActivity().getDrawable(R.drawable.ic_akordi_button));
 
         tekstPjesme.setText(formatedText);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            tekstPjesme.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
+        }
+
 
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +91,11 @@ public class PjesmaOpsirno extends Fragment {
         pdfButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToAkordi();
+                if(!pjesma.getLink().equals("Link je nedostupan")){
+                    goToAkordi();
+                }
+                else
+                    Toast.makeText(getContext(),"Link je trenutačno nedostupan",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -87,6 +103,7 @@ public class PjesmaOpsirno extends Fragment {
     }
 
     private void goToAkordi() {
+
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(pjesma.getLink()));
         startActivity(browserIntent);
     }

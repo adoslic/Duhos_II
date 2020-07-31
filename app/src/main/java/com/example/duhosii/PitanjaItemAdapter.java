@@ -2,6 +2,7 @@ package com.example.duhosii;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.List;
+
+import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
 
 public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.ViewHolder> {
 
@@ -56,6 +59,11 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
 
             holder.pitanje.setText(itemList.get(position).getPitanje());
             holder.odgovor.setText(itemList.get(position).getOdgovor());
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                holder.pitanje.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
+                holder.odgovor.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
+            }
 
             if (doAnimation)
                 holder.pitanjeOdgovorLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_transition_animation));
