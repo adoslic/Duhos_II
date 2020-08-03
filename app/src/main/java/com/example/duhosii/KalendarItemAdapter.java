@@ -78,6 +78,8 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
     public void onBindViewHolder(@NonNull final KalendarItemAdapter.ViewHolder holder, final int position) {
 
         context = holder.itemLayout.getContext();
+
+        //pokupi iz baze sve spremljene datume za alarm
         final ArrayList<AlarmDate> list = new ArrayList<>();
         final Realm realm = Realm.getDefaultInstance();
         realm.executeTransaction(new Realm.Transaction() {
@@ -88,9 +90,11 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
             }
         });
 
+        //kopiraj alarme u dodatnu listu s kojom ćese baratati
         if (!list.isEmpty()) {
             konacnaListaAlarma=list;
         }
+
 
         if (showShimmer) {
             holder.shimmerFrameLayout.startShimmer();
@@ -129,6 +133,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                 holder.opis.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
             }
 
+            //provjeravaj je li u listi alarma postoji trenuacni item i ako postoji postavi sliku alarma - tu je vjerojatno greška
             for(int i=0;i<konacnaListaAlarma.size();i++){
                 if(konacnaListaAlarma.get(i).getDatum().equals(itemList.get(position).datum) && konacnaListaAlarma.get(i).getNaslov().equals(itemList.get(position).naslov)){
                     holder.alarmLayout.setVisibility(View.VISIBLE);
@@ -144,6 +149,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                     holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_addnotification));
                 }
             }
+
 
             switch (dayOfWeek){
                 case (2):
@@ -200,15 +206,18 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                 holder.obavijest.setVisibility(View.GONE);
             }
 
+            //klik na gumb za dodavanje ili brisanje obavijesti
             holder.obavijest.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
+                    //ako nema alarma => dodaj alarm
                     if (holder.alarm == false) {
                         Calendar mcurrentTime = Calendar.getInstance();
                         int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                         int minute = mcurrentTime.get(Calendar.MINUTE);
                         final TimePickerDialog mTimePicker;
+                        //otvori dialog za odabir vremena alarma
                         mTimePicker = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
@@ -226,6 +235,8 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                             }
                         }, hour, minute, true);
                         Toast.makeText(context,"Obavijest će stići na dan događaja u odabrano vrijeme!",Toast.LENGTH_SHORT).show();
+                        //kad se stisne uredu onda pohrani taj alarm i postavi zastavicu na true, cancel flag je zbog toga sto se i onDismiss i onCancel flag
+                        // pozivaju kada se stisne uredu, pa se rusila apk, ugl.. nebitno, to je pomocna zastavica
                         mTimePicker.setOnDismissListener(new DialogInterface.OnDismissListener() {
                             @Override
                             public void onDismiss(DialogInterface dialog) {
@@ -243,6 +254,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                                     int randomID = random.nextInt(100000000);
                                     alarmDate.setAlarmID(randomID);
 
+                                    //provjera postoji li vec takav alarm u bazi - mozda sada nebitno jer sam onemogucio da budu u bazi vise događaja istih parametara
                                     boolean dataExist = false;
                                     for (int i = 0; i < konacnaListaAlarma.size(); i++) {
                                         if (konacnaListaAlarma.get(i).getDatum().equals(alarmDate.getDatum()) && konacnaListaAlarma.get(i).getVrijeme().equals(alarmDate.getVrijeme()) && konacnaListaAlarma.get(i).getNaslov().equals(alarmDate.getNaslov()) && konacnaListaAlarma.get(i).getAlarmID() == alarmDate.getAlarmID())
@@ -265,7 +277,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                         mTimePicker.setOnCancelListener(new DialogInterface.OnCancelListener() {
                             @Override
                             public void onCancel(DialogInterface dialog) {
-                                holder.alarm=false;
+                                holder.alarm = false;
                                 holder.alarmLayout.setVisibility(View.GONE);
                                 holder.alarmTime.setText("");
                                 holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_addnotification));
@@ -275,7 +287,9 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                         });
                         mTimePicker.show();
                     }
+                    //ako je postojao alarm, mozes ga samo obrisat
                     else{
+                        //brisanje alarma i notifikacija za odabrano vrijeme
                         for(int i=0;i<konacnaListaAlarma.size();i++){
                             if(konacnaListaAlarma.get(i).getDatum().equals(itemList.get(position).datum) && konacnaListaAlarma.get(i).getNaslov().equals(itemList.get(position).naslov) && konacnaListaAlarma.get(i).getVrijeme().equals(holder.alarmTime.getText().toString())){
                                 unsetNotificationAlarm(konacnaListaAlarma.get(i).alarmID);
@@ -299,6 +313,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                 }
             });
 
+            //klik na jedan cijeli item
             holder.itemLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

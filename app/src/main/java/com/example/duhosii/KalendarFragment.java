@@ -110,6 +110,10 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
                 }
             }
 
+            for(int i=0;i<konacnaListaAlarma.size();i++){
+                Toast.makeText(getContext(),konacnaListaAlarma.get(i).getNaslov().toString()+"-"+konacnaListaAlarma.get(i).getDatum().toString(),Toast.LENGTH_SHORT).show();
+            }
+
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             for(int i=1;i<366;i++) {
                 Calendar calendar1 = Calendar.getInstance();
