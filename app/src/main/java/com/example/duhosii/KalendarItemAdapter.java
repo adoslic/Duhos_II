@@ -198,6 +198,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                 holder.obavijest.setVisibility(View.GONE);
             }
 
+
             //klik na gumb za dodavanje ili brisanje obavijesti
             holder.obavijest.setOnClickListener(new View.OnClickListener() {
                 @Override
