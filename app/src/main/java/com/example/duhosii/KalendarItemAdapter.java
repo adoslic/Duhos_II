@@ -5,7 +5,6 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,13 +23,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.facebook.shimmer.ShimmerFrameLayout;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,13 +34,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-
 import io.realm.Realm;
 import io.realm.RealmResults;
-
 import static android.content.Context.ALARM_SERVICE;
 import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
-import static java.util.Random.*;
 
 public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapter.ViewHolder> {
 
@@ -141,8 +134,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                     holder.alarmTime.setText(konacnaListaAlarma.get(i).getVrijeme().toString());
                     holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_deletenotification));
                 }
-                else
-                {
+                else{
                     holder.alarmLayout.setVisibility(View.GONE);
                     holder.alarm=false;
                     holder.alarmTime.setText("");
@@ -210,9 +202,23 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
             holder.obavijest.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    final ArrayList<AlarmDate> list = new ArrayList<>();
+                    final Realm realm = Realm.getDefaultInstance();
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm1) {
+                            List<AlarmDate> resultList = realm.where(AlarmDate.class).findAll();
+                            list.addAll(resultList);
+                        }
+                    });
 
+                    //kopiraj alarme u dodatnu listu s kojom ćese baratati
+                    if (!list.isEmpty()) {
+                        konacnaListaAlarma=list;
+                    }
                     //ako nema alarma => dodaj alarm
                     if (holder.alarm == false) {
+
                         Calendar mcurrentTime = Calendar.getInstance();
                         int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                         int minute = mcurrentTime.get(Calendar.MINUTE);
@@ -317,13 +323,10 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
             holder.itemLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-
                     if (holder.isExpanded == false) {
                         pitanjePosition = position;
                         pitanjeShow = true;
                         doAnimation = false;
-
                         notifyDataSetChanged();
                     } else if (holder.isExpanded == true) {
                         pitanjeShow = false;
