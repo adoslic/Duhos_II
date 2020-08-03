@@ -78,6 +78,19 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
     public void onBindViewHolder(@NonNull final KalendarItemAdapter.ViewHolder holder, final int position) {
 
         context = holder.itemLayout.getContext();
+        final ArrayList<AlarmDate> list = new ArrayList<>();
+        final Realm realm = Realm.getDefaultInstance();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm1) {
+                List<AlarmDate> resultList = realm.where(AlarmDate.class).findAll();
+                list.addAll(resultList);
+            }
+        });
+
+        if (!list.isEmpty()) {
+            konacnaListaAlarma=list;
+        }
 
         if (showShimmer) {
             holder.shimmerFrameLayout.startShimmer();
@@ -183,22 +196,6 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
             holder.obavijest.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final ArrayList<AlarmDate> list = new ArrayList<>();
-                    final Realm realm = Realm.getDefaultInstance();
-                    realm.executeTransaction(new Realm.Transaction() {
-                        @Override
-                        public void execute(Realm realm1) {
-                            List<AlarmDate> resultList = realm.where(AlarmDate.class).findAll();
-                            list.addAll(resultList);
-                        }
-                    });
-
-                    if (!list.isEmpty()) {
-                        for (int i = 0; i < list.size(); i++) {
-                            konacnaListaAlarma.add(list.get(i));
-                            Toast.makeText(context, konacnaListaAlarma.get(i).datum + " - " + konacnaListaAlarma.get(i).vrijeme + " - " + konacnaListaAlarma.get(i).naslov + " - " + konacnaListaAlarma.get(i).alarmID, Toast.LENGTH_SHORT).show();
-                        }
-                    }
 
                     if (holder.alarm == false) {
                         Calendar mcurrentTime = Calendar.getInstance();
@@ -219,12 +216,6 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                                     holder.minute = "0" + min;
                                 else
                                     holder.minute = min;
-
-                                holder.alarmLayout.setVisibility(View.VISIBLE);
-                                holder.alarmTime.setText(holder.sati + ":" + holder.minute);
-                                holder.alarm = true;
-                                holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_deletenotification));
-
                             }
                         }, hour, minute, true);
                         Toast.makeText(context,"Obavijest će stići na dan događaja u odabrano vrijeme!",Toast.LENGTH_SHORT).show();
@@ -232,6 +223,10 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                             @Override
                             public void onDismiss(DialogInterface dialog) {
                                 if(cancelFlag==false) {
+                                    holder.alarmLayout.setVisibility(View.VISIBLE);
+                                    holder.alarmTime.setText(holder.sati + ":" + holder.minute);
+                                    holder.alarm = true;
+                                    holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_deletenotification));
                                     AlarmDate alarmDate = new AlarmDate();
                                     alarmDate.setDatum(itemList.get(position).datum);
                                     alarmDate.setVrijeme(holder.sati + ":" + holder.minute);
@@ -253,7 +248,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                                         realm.close();
                                     }
                                     createNotificationChannel();
-                                    setNotificationAlarm(itemList.get(position).datum.toString() + " " + holder.alarmTime.getText().toString() + ":00", randomID);
+                                    setNotificationAlarm(itemList.get(position).datum.toString() + " " + holder.alarmTime.getText().toString() + ":00", randomID, holder.naslov.getText().toString(),holder.timeTime.getText().toString(),holder.lokacija.getText().toString());
                                 }
                                 else {
                                     cancelFlag=false;
@@ -278,6 +273,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                             if(konacnaListaAlarma.get(i).getDatum().equals(itemList.get(position).datum) && konacnaListaAlarma.get(i).getNaslov().equals(itemList.get(position).naslov) && konacnaListaAlarma.get(i).getVrijeme().equals(holder.alarmTime.getText().toString())){
                                 unsetNotificationAlarm(konacnaListaAlarma.get(i).alarmID);
                                 konacnaListaAlarma.remove(i);
+                                i=0;
                             }
                         }
                         final RealmResults<AlarmDate> results = realm.where(AlarmDate.class).equalTo("datum",itemList.get(position).datum).equalTo("vrijeme",holder.alarmTime.getText().toString()).equalTo("naslov",itemList.get(position).naslov).findAll();
@@ -325,8 +321,12 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
         alarmManager.cancel(pendingIntent);
     }
 
-    private void setNotificationAlarm(String vrijemeAlarmaString,int randomID) {
+    private void setNotificationAlarm(String vrijemeAlarmaString,int randomID,String naslov,String vrijeme,String lokacija) {
         Intent intent=new Intent(context, ReminderBroadcast.class);
+        intent.putExtra("naslov",naslov);
+        intent.putExtra("vrijeme",vrijeme);
+        intent.putExtra("lokacija",lokacija);
+
         PendingIntent pendingIntent=PendingIntent.getBroadcast(context, randomID,intent,0);
 
         AlarmManager alarmManager=(AlarmManager)context.getSystemService(ALARM_SERVICE);
@@ -374,7 +374,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
         ImageView alarmIcon;
         ShimmerFrameLayout shimmerFrameLayout;
         private boolean isExpanded = false;
-        private boolean alarm=false;
+        private boolean alarm = false;
 
         String danMjeseca,mjesec,godina,sati,minute;
 
@@ -411,9 +411,12 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
 
         String opis = itemList.get(position).opis.toString();
         String naslov = itemList.get(position).naslov.toString();
+        String vrijeme = itemList.get(position).vrijeme.toString();
+        String lokacija = itemList.get(position).lokacija.toString();
+
         Intent share = new Intent();
         share.setAction(Intent.ACTION_SEND);
-        share.putExtra(Intent.EXTRA_TEXT, opis);
+        share.putExtra(Intent.EXTRA_TEXT, naslov+"\n"+vrijeme+"\n"+lokacija+"\n\n"+opis);
         share.putExtra(Intent.EXTRA_SUBJECT, naslov);
         share.setType("text/plain");
         context.startActivity(share.createChooser(share, "Share using"));

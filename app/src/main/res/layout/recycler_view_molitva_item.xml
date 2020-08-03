@@ -38,7 +38,9 @@
                     android:textColor="@color/duhosPlava"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="25dp"
-                    android:fontFamily="@font/firasans_semibold"/>
+                    android:fontFamily="@font/firasans_semibold"
+                    android:ellipsize="end"
+                    android:maxLines="2"/>
                 <TextView
                     android:id="@+id/datum"
                     android:layout_width="wrap_content"
@@ -46,8 +48,8 @@
                     android:width="150dp"
                     android:textSize="12sp"
                     android:textColor="@color/duhosPlava"
-                    android:layout_marginTop="10dp"
-                    android:layout_below="@id/naslov"
+                    android:layout_marginBottom="10dp"
+                    android:layout_alignParentBottom="true"
                     android:layout_marginLeft="25dp"
                     android:fontFamily="@font/montserrat_medium"/>
             </RelativeLayout>

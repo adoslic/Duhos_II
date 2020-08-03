@@ -71,7 +71,7 @@ public class OpceMolitveFragment extends Fragment {
 
     public void onInit() {
         recyclerView = molitvaFragmentView.findViewById(R.id.recyclerViewMolitva);
-        adapter = new MolitvaItemAdapter(itemList,"OpćeMolitve");
+        adapter = new MolitvaItemAdapter(itemList,"Molitve i pobožnosti");
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);

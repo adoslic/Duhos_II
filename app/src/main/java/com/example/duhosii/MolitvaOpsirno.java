@@ -72,7 +72,7 @@ public class MolitvaOpsirno extends Fragment {
             tekst.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
         }
 
-        if(izvor.equals("OpćeMolitve")) {
+        if(izvor.equals("Molitve i pobožnosti")) {
             slika.setImageDrawable(getResources().getDrawable(R.drawable.standardne_molitve));
         }
         if(izvor.equals("Nadahnuća")) {
@@ -81,7 +81,7 @@ public class MolitvaOpsirno extends Fragment {
         if(izvor.equals("Marija")) {
             slika.setImageDrawable(getResources().getDrawable(R.drawable.marijanske_molitve));
         }
-        if(izvor.equals("Pobožnosti")) {
+        if(izvor.equals("Svjedočanstva")) {
             slika.setImageDrawable(getResources().getDrawable(R.drawable.devetnice));
         }
 

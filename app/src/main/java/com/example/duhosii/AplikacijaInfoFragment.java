@@ -1,5 +1,6 @@
 package com.example.duhosii;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.transition.Slide;
@@ -59,6 +60,10 @@ public class AplikacijaInfoFragment extends Fragment {
         iduceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(currentPage==4){
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new MolitveneGrupeFragment()).addToBackStack("molitveneGrupeFragment").commit();
+
+                }
                 viewPager.setCurrentItem(currentPage+1);
             }
         });
@@ -83,7 +88,7 @@ public class AplikacijaInfoFragment extends Fragment {
             dots[i]=new TextView(getContext());
             dots[i].setText(Html.fromHtml("&#8226;"));
             dots[i].setTextSize(35);
-            dots[i].setTextColor(getResources().getColor(R.color.black));
+            dots[i].setTextColor(Color.parseColor("#C4CFD7"));
             linearLayout.addView(dots[i]);
         }
         if(dots.length>0)
@@ -103,12 +108,16 @@ public class AplikacijaInfoFragment extends Fragment {
             if(position==0){
                 iduceButton.setVisibility(View.VISIBLE);
                 natragButton.setVisibility(View.GONE);
+                iduceButton.setText("IDUĆE");
+
             }
             else if(position==dots.length-1){
-                iduceButton.setVisibility(View.GONE);
+                iduceButton.setVisibility(View.VISIBLE);
+                iduceButton.setText("ZAVRŠI");
                 natragButton.setVisibility(View.VISIBLE);
             }
             else {
+                iduceButton.setText("IDUĆE");
                 iduceButton.setVisibility(View.VISIBLE);
                 natragButton.setVisibility(View.VISIBLE);
             }

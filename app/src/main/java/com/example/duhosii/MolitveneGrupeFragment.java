@@ -136,13 +136,13 @@ public class MolitveneGrupeFragment extends Fragment {
             devetnice.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new NadahnucaFragment(itemListNadahnuca)).addToBackStack("devetniceFragment").commit();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new NadahnucaFragment(itemListNadahnuca)).addToBackStack("nadahnucaFragment").commit();
                 }
             });
             standard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new PoboznostiFragment(itemListPoboznosti)).addToBackStack("standardneMolitveFragment").commit();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new PoboznostiFragment(itemListPoboznosti)).addToBackStack("svjedocanstvaFragment").commit();
                 }
             });
             return molitvaFragmentView;
@@ -162,7 +162,7 @@ public class MolitveneGrupeFragment extends Fragment {
     }
 
     private void getFirebaseData() {
-        opceReference = FirebaseDatabase.getInstance().getReference("Molitve").child("Opće molitve");
+        opceReference = FirebaseDatabase.getInstance().getReference("Molitve").child("Molitve i pobožnosti");
         opceReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -242,7 +242,7 @@ public class MolitveneGrupeFragment extends Fragment {
         });
 
 
-        poboznostiReference = FirebaseDatabase.getInstance().getReference("Molitve").child("Pobožnosti");
+        poboznostiReference = FirebaseDatabase.getInstance().getReference("Molitve").child("Svjedočanstva");
         poboznostiReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

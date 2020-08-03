@@ -2,6 +2,9 @@ package com.example.duhosii;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,19 +46,20 @@ public class MolitvaItemAdapter extends RecyclerView.Adapter<MolitvaItemAdapter.
     public void onBindViewHolder(@NonNull final MolitvaItemAdapter.ViewHolder holder, final int position) {
 
             context=holder.itemLayout.getContext();
-            if(izvor.equals("OpćeMolitve"))
+            if(izvor.equals("Molitve i pobožnosti"))
                 holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_opcemolitve));
             if(izvor.equals("Marija"))
                 holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_blazenadjevicamarija));
             if(izvor.equals("Nadahnuća"))
                 holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_nadahnuca));
-            if(izvor.equals("Pobožnosti"))
+            if(izvor.equals("Svjedočanstva"))
                 holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_poboznosti));
 
             holder.slikaLayout.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition_animation));
             holder.tekstLayout.setAnimation(AnimationUtils.loadAnimation(context,R.anim.scale_transition_animation));
 
             holder.naslov.setText(itemList.get(position).getNaslov());
+
             holder.datum.setText(itemList.get(position).getDatum());
 
         holder.itemLayout.setOnClickListener(new View.OnClickListener() {

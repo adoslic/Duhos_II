@@ -94,6 +94,7 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
             kalendarFragmentView=inflater.inflate(R.layout.fragment_kalendar, container, false);
 
             final ArrayList<AlarmDate> list = new ArrayList<>();
+            Realm.init(getContext());
             final Realm realm = Realm.getDefaultInstance();
             realm.executeTransaction(new Realm.Transaction() {
                 @Override

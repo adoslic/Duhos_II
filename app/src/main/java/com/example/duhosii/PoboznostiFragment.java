@@ -71,7 +71,7 @@ public class PoboznostiFragment extends Fragment {
         //DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         //itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider));
         recyclerView = molitvaFragmentView.findViewById(R.id.recyclerViewMolitva);
-        adapter = new MolitvaItemAdapter(itemList,"Pobožnosti");
+        adapter = new MolitvaItemAdapter(itemList,"Svjedočanstva");
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
         //recyclerView.addItemDecoration(itemDecorator);

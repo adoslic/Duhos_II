@@ -2,6 +2,7 @@ package com.example.duhosii;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,6 +75,9 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
                 holder.pitanjeOdgovorLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.clicked_pitanje_background));
                 holder.pitanjeLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.clicked_pitanje_background));
                 holder.pitanje.setTextColor(ContextCompat.getColor(context, R.color.white));
+                Typeface firaSansItalic = Typeface.createFromAsset(context.getAssets(), "fonts/firasans_semibolditalic.ttf");
+                holder.pitanje.setTypeface(firaSansItalic);
+
             } else {
 
                 holder.isExpanded = false;
@@ -81,6 +85,8 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
                 holder.pitanjeOdgovorLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangle_shape_shadow_small_radius));
                 holder.pitanjeLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.white));
                 holder.pitanje.setTextColor(ContextCompat.getColor(context, R.color.duhosPlava));
+                Typeface firaSansSemiBold = Typeface.createFromAsset(context.getAssets(), "fonts/firasans_semibold.ttf");
+                holder.pitanje.setTypeface(firaSansSemiBold);
             }
 
             holder.pitanjeOdgovorLayout.setOnClickListener(new View.OnClickListener() {
