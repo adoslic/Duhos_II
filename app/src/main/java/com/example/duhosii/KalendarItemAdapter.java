@@ -136,6 +136,13 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                     holder.alarmTime.setText(konacnaListaAlarma.get(i).getVrijeme().toString());
                     holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_deletenotification));
                 }
+                else
+                {
+                    holder.alarmLayout.setVisibility(View.GONE);
+                    holder.alarm=false;
+                    holder.alarmTime.setText("");
+                    holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_addnotification));
+                }
             }
 
             switch (dayOfWeek){
@@ -295,10 +302,13 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
             holder.itemLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+
                     if (holder.isExpanded == false) {
                         pitanjePosition = position;
                         pitanjeShow = true;
                         doAnimation = false;
+
                         notifyDataSetChanged();
                     } else if (holder.isExpanded == true) {
                         pitanjeShow = false;
