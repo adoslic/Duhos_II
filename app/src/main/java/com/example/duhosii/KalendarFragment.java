@@ -70,6 +70,7 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
     String datumBezGodine;
     private List<AlarmDate> listaAlarma=new ArrayList<>();
     private List<AlarmDate> konacnaListaAlarma=new ArrayList<>();
+    private ArrayList<Boolean> alarmVisibility = new ArrayList<>();
 
     List<String> exDatesString=new ArrayList<String>();
 
@@ -175,6 +176,7 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
             mjesec.setTypeface(firaSansBold);
 
             onInit();
+
             return kalendarFragmentView;
         }
         else {
@@ -233,8 +235,12 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
                     }
                 }
 
+                for (int i = 0; i < itemList.size(); i++) {
+                    alarmVisibility.add(false);
+                }
+
                 recyclerView = kalendarFragmentView.findViewById(R.id.recyclerViewKalendar);
-                adapter = new KalendarItemAdapter(itemList,konacnaListaAlarma);
+                adapter = new KalendarItemAdapter(itemList,konacnaListaAlarma,alarmVisibility);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setAdapter(adapter);
