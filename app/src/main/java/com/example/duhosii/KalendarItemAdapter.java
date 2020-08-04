@@ -93,7 +93,23 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
             konacnaListaAlarma=list;
         }
 
-
+        final boolean visible = alarmVisibility.get(position);
+        if(visible==true){
+            holder.alarmLayout.setVisibility(View.VISIBLE);
+            for(int i=0;i<konacnaListaAlarma.size();i++){
+                if(konacnaListaAlarma.get(i).getNaslov().equals(itemList.get(position).getNaslov().toString()) && konacnaListaAlarma.get(i).getDatum().equals(itemList.get(position).getDatum().toString())){
+                    holder.alarmTime.setText(konacnaListaAlarma.get(i).getVrijeme().toString());
+                }
+            }
+            holder.alarm = true;
+            holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_deletenotification));
+        }
+        else {
+            holder.alarmLayout.setVisibility(View.GONE);
+            holder.alarmTime.setText("");
+            holder.alarm = false;
+            holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_addnotification));
+        }
 
 
         if (showShimmer) {
@@ -129,19 +145,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
             holder.datum.setText(dan+"/"+mjesec);
             holder.timeTime.setText(itemList.get(position).vrijeme);
 
-            final boolean visible = alarmVisibility.get(position);
-            if(visible==true){
-                holder.alarmLayout.setVisibility(View.VISIBLE);
-                holder.alarmTime.setText(holder.sati + ":" + holder.minute);
-                holder.alarm = true;
-                holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_deletenotification));
-            }
-            else {
-                holder.alarmLayout.setVisibility(View.GONE);
-                holder.alarmTime.setText("");
-                holder.alarm = false;
-                holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_addnotification));
-            }
+
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 holder.opis.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
@@ -337,19 +341,11 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                                 results.deleteAllFromRealm();
                             }
                         });
-                        final boolean visible = alarmVisibility.get(position);
-                        if(visible==true){
-                            holder.alarmLayout.setVisibility(View.VISIBLE);
-                            holder.alarmTime.setText(holder.sati + ":" + holder.minute);
-                            holder.alarm = true;
-                            holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_deletenotification));
-                        }
-                        else {
-                            holder.alarmLayout.setVisibility(View.GONE);
-                            holder.alarmTime.setText("");
-                            holder.alarm = false;
-                            holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_addnotification));
-                        }
+
+                        holder.alarmLayout.setVisibility(View.GONE);
+                        holder.alarmTime.setText("");
+                        holder.alarm = false;
+                        holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_addnotification));
                         alarmVisibility.set(position, false);
 
                         realm.close();

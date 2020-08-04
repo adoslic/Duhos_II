@@ -235,9 +235,23 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
                     }
                 }
 
-                for (int i = 0; i < itemList.size(); i++) {
-                    alarmVisibility.add(false);
+                if(alarmVisibility.size()==0){
+                    for (int i = 0; i < itemList.size(); i++) {
+                        alarmVisibility.add(false);
+                    }
                 }
+
+                for (int i = 0; i < itemList.size(); i++) {
+                    for(int j=0;j<konacnaListaAlarma.size();j++){
+                        if(konacnaListaAlarma.get(j).getNaslov().toString().equals(itemList.get(i).getNaslov().toString()) && konacnaListaAlarma.get(j).getDatum().toString().equals(itemList.get(i).getDatum().toString())) {
+                            alarmVisibility.set(i, true);
+                            break;
+                        }
+                        else
+                            alarmVisibility.set(i,false);
+                    }
+                }
+
 
                 recyclerView = kalendarFragmentView.findViewById(R.id.recyclerViewKalendar);
                 adapter = new KalendarItemAdapter(itemList,konacnaListaAlarma,alarmVisibility);
