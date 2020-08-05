@@ -51,6 +51,7 @@ import java.util.Date;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 
 public class KalendarFragment extends Fragment implements DatePickerListener {
@@ -106,8 +107,27 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
             });
 
             if (!list.isEmpty()) {
-                for (int i = 0; i < list.size(); i++) {
-                    konacnaListaAlarma.add(list.get(i));
+                konacnaListaAlarma=list;
+
+                for(int i=0;i<konacnaListaAlarma.size();i++){
+                    String vrijemeSdatumom=konacnaListaAlarma.get(i).getDatum() + " " + konacnaListaAlarma.get(i).getVrijeme()+":00";
+                    Date vrijemeAlarma=null;
+                    try {
+                        vrijemeAlarma=new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(vrijemeSdatumom);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    if(vrijemeAlarma.before(new Date())){
+                        final RealmResults<AlarmDate> results = realm.where(AlarmDate.class).equalTo("datum",konacnaListaAlarma.get(i).datum.toString()).equalTo("vrijeme",konacnaListaAlarma.get(i).vrijeme.toString()).equalTo("naslov",konacnaListaAlarma.get(i).naslov.toString()).findAll();
+                        realm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                results.deleteAllFromRealm();
+                            }
+                        });
+                        konacnaListaAlarma.remove(i);
+                        i=0;
+                    }
                 }
             }
 

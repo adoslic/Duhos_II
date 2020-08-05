@@ -75,15 +75,18 @@ public class PjesmaricaFragment extends Fragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         zaglavlje.setText("Pjesmarica");
+
+        pjesmaricaFragmentView=inflater.inflate(R.layout.fragment_pjesmarica, container, false);
+
+        searchEditText =pjesmaricaFragmentView.findViewById(R.id.searchEditText);
+
+
         checkInternetConnection();
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
 
-        pjesmaricaFragmentView=inflater.inflate(R.layout.fragment_pjesmarica, container, false);
-
-        searchEditText =pjesmaricaFragmentView.findViewById(R.id.searchEditText);
 
         KeyboardVisibilityEvent.setEventListener(getActivity(), new KeyboardVisibilityEventListener() {
             @Override
@@ -101,13 +104,19 @@ public class PjesmaricaFragment extends Fragment {
 
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                adapter.getFilter().filter(s);
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                adapter.getFilter().filter(s);
+
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         });
 
         if(connectionFlag==true) {

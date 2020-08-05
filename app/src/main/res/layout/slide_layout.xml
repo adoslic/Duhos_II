@@ -12,13 +12,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="75dp">
+        android:layout_marginTop="35dp">
     <ImageView
         android:id="@+id/infoSlika"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_kalendar_info"
-        android:layout_marginBottom="75dp"
+        android:layout_marginBottom="35dp"
         android:layout_centerHorizontal="true"></ImageView>
 
     <TextView
@@ -46,6 +46,8 @@
             android:textColor="@color/duhosPlava"
             android:textAlignment="center"
             android:gravity="center"
-            android:layout_marginHorizontal="10dp"></TextView>
+            android:layout_marginHorizontal="10dp"
+            android:scrollbars = "vertical"
+            ></TextView>
     </RelativeLayout>
 </RelativeLayout>

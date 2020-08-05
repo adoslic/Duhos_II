@@ -91,7 +91,34 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
         //kopiraj alarme u dodatnu listu s kojom ćese baratati
         if (!list.isEmpty()) {
             konacnaListaAlarma=list;
+
+            for(int i=0;i<konacnaListaAlarma.size();i++){
+                String vrijemeSdatumom=konacnaListaAlarma.get(i).getDatum() + " " + konacnaListaAlarma.get(i).getVrijeme()+":00";
+                Date vrijemeAlarma=null;
+                try {
+                    vrijemeAlarma=new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(vrijemeSdatumom);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                if(vrijemeAlarma.before(new Date())){
+                    for(int j=0;j<itemList.size();j++) {
+                        if (konacnaListaAlarma.get(i).getDatum().equals(itemList.get(j).getDatum()) && konacnaListaAlarma.get(i).getNaslov().equals(itemList.get(j).getNaslov())) {
+                            alarmVisibility.set(j,false);
+                        }
+                    }
+                    final RealmResults<AlarmDate> results = realm.where(AlarmDate.class).equalTo("datum",konacnaListaAlarma.get(i).datum.toString()).equalTo("vrijeme",konacnaListaAlarma.get(i).vrijeme.toString()).equalTo("naslov",konacnaListaAlarma.get(i).naslov.toString()).findAll();
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            results.deleteAllFromRealm();
+                        }
+                    });
+                    konacnaListaAlarma.remove(i);
+                    i=0;
+                }
+            }
         }
+
 
         final boolean visible = alarmVisibility.get(position);
         if(visible==true){
@@ -294,7 +321,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                                         realm.close();
                                     }
                                     createNotificationChannel();
-                                    setNotificationAlarm(itemList.get(position).datum.toString() + " " + holder.alarmTime.getText().toString() + ":00", randomID, holder.naslov.getText().toString(),holder.timeTime.getText().toString(),holder.lokacija.getText().toString());
+                                    setNotificationAlarm(itemList.get(position).datum.toString() + " " + holder.alarmTime.getText().toString(), randomID, holder.naslov.getText().toString(),holder.timeTime.getText().toString(),holder.lokacija.getText().toString());
                                 }
                                 else {
                                     cancelFlag=false;
@@ -304,20 +331,12 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                         mTimePicker.setOnCancelListener(new DialogInterface.OnCancelListener() {
                             @Override
                             public void onCancel(DialogInterface dialog) {
-                                alarmVisibility.set(position, true);
                                 final boolean visible = alarmVisibility.get(position);
-                                if(visible==true){
-                                    holder.alarmLayout.setVisibility(View.VISIBLE);
-                                    holder.alarmTime.setText(holder.sati + ":" + holder.minute);
-                                    holder.alarm = true;
-                                    holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_deletenotification));
-                                }
-                                else {
-                                    holder.alarmLayout.setVisibility(View.GONE);
-                                    holder.alarmTime.setText("");
-                                    holder.alarm = false;
-                                    holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_addnotification));
-                                }
+                                holder.alarmLayout.setVisibility(View.GONE);
+                                holder.alarmTime.setText("");
+                                holder.alarm = false;
+                                holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_addnotification));
+                                alarmVisibility.set(position, false);
                                 cancelFlag=true;
                                 mTimePicker.dismiss();
                             }
@@ -363,6 +382,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                         doAnimation = false;
                         notifyDataSetChanged();
                     } else if (holder.isExpanded == true) {
+
                         pitanjeShow = false;
                         doAnimation = false;
                         notifyDataSetChanged();
@@ -388,6 +408,8 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
         intent.putExtra("naslov",naslov);
         intent.putExtra("vrijeme",vrijeme);
         intent.putExtra("lokacija",lokacija);
+
+        vrijemeAlarmaString=vrijemeAlarmaString + ":00";
 
         PendingIntent pendingIntent=PendingIntent.getBroadcast(context, randomID,intent,0);
 
