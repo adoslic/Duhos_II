@@ -500,7 +500,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
 
         Intent share = new Intent();
         share.setAction(Intent.ACTION_SEND);
-        share.putExtra(Intent.EXTRA_TEXT, naslov+"\n"+vrijeme+"\n"+lokacija+"\n\n"+opis);
+        share.putExtra(Intent.EXTRA_TEXT, naslov+"\n"+"Vrijeme: "+vrijeme+"\n"+"Lokacija: "+lokacija+"\n\n"+opis);
         share.putExtra(Intent.EXTRA_SUBJECT, naslov);
         share.setType("text/plain");
         context.startActivity(share.createChooser(share, "Share using"));

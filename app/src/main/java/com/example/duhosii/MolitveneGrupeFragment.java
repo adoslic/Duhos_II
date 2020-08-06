@@ -1,6 +1,7 @@
 package com.example.duhosii;
 
 import android.content.Context;
+import android.content.res.XmlResourceParser;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -68,6 +69,8 @@ public class MolitveneGrupeFragment extends Fragment {
         mActionBar.setCustomView(R.layout.toolbar_without_back);
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         View viewActionBar=mActionBar.getCustomView();
+
+
 
         zaglavlje=viewActionBar.findViewById(R.id.naslov);
         zaglavlje.setText("Od srca k Srcu");
@@ -179,7 +182,7 @@ public class MolitveneGrupeFragment extends Fragment {
                 if(!itemListOpce.isEmpty()){
                     opceZadnjiDatum=itemListOpce.get(0).datum;
                     opceDatum.setText(opceZadnjiDatum);
-                    opceDatum.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_transition_animation));
+                    //opceDatum.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_transition_animation));
 
                 }
             }
@@ -206,7 +209,8 @@ public class MolitveneGrupeFragment extends Fragment {
                 if(!itemListMarijanske.isEmpty()){
                     marijanskeZadnjiDatum=itemListMarijanske.get(0).datum;
                     marijanskeDatum.setText(marijanskeZadnjiDatum);
-                    marijanskeDatum.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_transition_animation));
+                    //marijanskeDatum.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_transition_animation));
+
                 }
             }
             @Override
@@ -232,7 +236,7 @@ public class MolitveneGrupeFragment extends Fragment {
                 if(!itemListNadahnuca.isEmpty()){
                     nadahnucaZadnjiDatum=itemListNadahnuca.get(0).datum;
                     nadahnucaDatum.setText(nadahnucaZadnjiDatum);
-                    nadahnucaDatum.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_transition_animation));
+                    //nadahnucaDatum.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_transition_animation));
                 }
             }
             @Override
@@ -259,7 +263,7 @@ public class MolitveneGrupeFragment extends Fragment {
                 if(!itemListPoboznosti.isEmpty()){
                     poboznostiZadnjiDatum=itemListPoboznosti.get(0).datum;
                     poboznostiDatum.setText(poboznostiZadnjiDatum);
-                    poboznostiDatum.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_transition_animation));
+                    //poboznostiDatum.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_transition_animation));
                 }
             }
             @Override

@@ -108,7 +108,7 @@ public class AplikacijaInfoFragment extends Fragment {
             if(position==0){
                 iduceButton.setVisibility(View.VISIBLE);
                 natragButton.setVisibility(View.GONE);
-                iduceButton.setText("IDUĆE");
+                iduceButton.setText("SLJEDEĆE");
 
             }
             else if(position==dots.length-1){
@@ -117,7 +117,7 @@ public class AplikacijaInfoFragment extends Fragment {
                 natragButton.setVisibility(View.VISIBLE);
             }
             else {
-                iduceButton.setText("IDUĆE");
+                iduceButton.setText("SLJEDEĆE");
                 iduceButton.setVisibility(View.VISIBLE);
                 natragButton.setVisibility(View.VISIBLE);
             }
