@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,6 +41,8 @@ public class NadahnucaFragment extends Fragment {
     private View molitvaFragmentView;
     private MolitvaItemAdapter adapter;
     private static final String TAG ="TAG";
+    private FloatingActionButton casoslovButton;
+
     public NadahnucaFragment(List<Molitva> itemList) {
         this.itemList=itemList;
     }
@@ -54,14 +57,15 @@ public class NadahnucaFragment extends Fragment {
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         View viewActionBar=mActionBar.getCustomView();
         zaglavlje=viewActionBar.findViewById(R.id.naslov);
-        zaglavlje.setText("Molitva");
+        zaglavlje.setText("Od srca k Srcu");
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
 
         molitvaFragmentView = inflater.inflate(R.layout.fragment_molitva,container,false);
-
+        casoslovButton=molitvaFragmentView.findViewById(R.id.casoslovButton);
+        casoslovButton.hide();
 
         onInit();
 
@@ -69,13 +73,10 @@ public class NadahnucaFragment extends Fragment {
     }
 
     public void onInit() {
-        DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-        itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider));
         recyclerView = molitvaFragmentView.findViewById(R.id.recyclerViewMolitva);
         adapter = new MolitvaItemAdapter(itemList,"Nadahnuća");
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(itemDecorator);
         recyclerView.setAdapter(adapter);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeMolitvaToShareCallback(adapter));
         itemTouchHelper.attachToRecyclerView(recyclerView);

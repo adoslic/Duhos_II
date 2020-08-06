@@ -18,7 +18,7 @@ public class Dialog extends AppCompatDialogFragment {
     AlertDialog alertDialog;
     ImageButton xButton;
     ImageButton uclaniSe;
-    RelativeLayout infoDuhos,infoKapelani,infoTimovi,infoKnjižnica;
+    RelativeLayout infoDuhos,infoKapelani,infoTimovi,infoKnjižnica,infoApk;
 
     @Override
     public android.app.Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -31,6 +31,19 @@ public class Dialog extends AppCompatDialogFragment {
         infoKapelani=view.findViewById(R.id.infoKapelaniLayout);
         infoTimovi=view.findViewById(R.id.infoTimoviLayout);
         infoKnjižnica=view.findViewById(R.id.infoKnjiznicaLayout);
+        infoApk=view.findViewById(R.id.infoApk);
+
+        infoApk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                AplikacijaInfoFragment frag = new AplikacijaInfoFragment();
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.fragment_containter, frag);
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        });
 
         infoDuhos.setOnClickListener(new View.OnClickListener() {
             @Override

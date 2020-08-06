@@ -1,15 +1,21 @@
 package com.example.duhosii;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -29,13 +35,19 @@ public class VratiSeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+        ActionBar mActionBar =  ((AppCompatActivity)getActivity()).getSupportActionBar();
+        mActionBar.show();
+        mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        mActionBar.setCustomView(R.layout.vrati_se_toolbar);
+        mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.duhosPlava));
+
 
         vratiSeFragmentView = inflater.inflate(R.layout.fragment_vrati_se, container, false);
         vratiSeButton = vratiSeFragmentView.findViewById(R.id.butonVrati);
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.GONE);
+
 
         veciTekst=vratiSeFragmentView.findViewById(R.id.veciTekst);
         manjiTekst=vratiSeFragmentView.findViewById(R.id.manjiTekst);

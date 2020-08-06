@@ -1,5 +1,6 @@
 package com.example.duhosii;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +15,11 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 
+import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
+
 public class OpcenitoFragment extends Fragment {
 
-    TextView zaglavlje;
+    TextView zaglavlje,opcenitoText;
     BottomNavigationView bottomNavigationView;
 
     @Nullable
@@ -37,8 +40,13 @@ public class OpcenitoFragment extends Fragment {
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
 
+        View opcenitoFragmentView= inflater.inflate(R.layout.fragment_opcenito, container, false);
+        opcenitoText=opcenitoFragmentView.findViewById(R.id.opcenitoText);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            opcenitoText.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
+        }
 
-        return inflater.inflate(R.layout.fragment_opcenito, container, false);
+        return opcenitoFragmentView;
     }
 
 }

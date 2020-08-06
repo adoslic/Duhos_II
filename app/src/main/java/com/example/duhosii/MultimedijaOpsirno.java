@@ -22,6 +22,8 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 
+import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
+
 public class MultimedijaOpsirno extends Fragment {
 
     private TextView zaglavlje;
@@ -64,6 +66,10 @@ public class MultimedijaOpsirno extends Fragment {
 
         naslov.setText(medij.getNaslov());
         sadrzaj.setText(medij.getSadrzaj());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            sadrzaj.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
+        }
 
         if(medij.getMedij().toString().toLowerCase().equals("facebook")) {
             idiNaPoveznicu.setText("Više pročitajte u objavi.");

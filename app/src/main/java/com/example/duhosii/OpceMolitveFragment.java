@@ -2,33 +2,22 @@ package com.example.duhosii;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class OpceMolitveFragment extends Fragment {
@@ -40,6 +29,8 @@ public class OpceMolitveFragment extends Fragment {
     private View molitvaFragmentView;
     private MolitvaItemAdapter adapter;
     private static final String TAG ="TAG";
+    private FloatingActionButton casoslovButton;
+
 
     public OpceMolitveFragment(List<Molitva> itemList) {
         this.itemList=itemList;
@@ -55,7 +46,7 @@ public class OpceMolitveFragment extends Fragment {
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         View viewActionBar=mActionBar.getCustomView();
         zaglavlje=viewActionBar.findViewById(R.id.naslov);
-        zaglavlje.setText("Molitva");
+        zaglavlje.setText("Od srca k Srcu");
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
@@ -63,6 +54,15 @@ public class OpceMolitveFragment extends Fragment {
 
         molitvaFragmentView = inflater.inflate(R.layout.fragment_molitva,container,false);
 
+        casoslovButton=molitvaFragmentView.findViewById(R.id.casoslovButton);
+
+        casoslovButton.show();
+        casoslovButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new CasoslovFragment()).addToBackStack("casoslovFragment").commit();
+            }
+        });
 
         onInit();
 
@@ -70,13 +70,10 @@ public class OpceMolitveFragment extends Fragment {
     }
 
     public void onInit() {
-        DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-        itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider));
         recyclerView = molitvaFragmentView.findViewById(R.id.recyclerViewMolitva);
-        adapter = new MolitvaItemAdapter(itemList,"OpćeMolitve");
+        adapter = new MolitvaItemAdapter(itemList,"Molitve i pobožnosti");
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(itemDecorator);
         recyclerView.setAdapter(adapter);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeMolitvaToShareCallback(adapter));
         itemTouchHelper.attachToRecyclerView(recyclerView);

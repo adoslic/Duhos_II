@@ -1,15 +1,19 @@
 package com.example.duhosii;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -18,12 +22,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    SharedPreferences sharedPreferences = null;
+    SharedPreferences.Editor editor;
+
     BottomNavigationView bottomNavigationView;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sharedPreferences = getSharedPreferences("com.duhosii", MODE_PRIVATE);
 
         //micanje default action bara i postavljanje posebnog
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -95,4 +103,19 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().popBackStack();
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (sharedPreferences.getBoolean("firstRun", true)) {
+            //You can perform anything over here. This will call only first time
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new AplikacijaInfoFragment()).addToBackStack("aplikacijaInfoFragment").commit();
+            editor = sharedPreferences.edit();
+            editor.putBoolean("firstRun", false);
+            editor.commit();
+
+        }
+    }
+    
 }

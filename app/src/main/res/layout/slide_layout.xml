@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    tools:context=".SliderAdapter">
+
+    <RelativeLayout
+        android:id="@+id/infoLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp">
+    <ImageView
+        android:id="@+id/infoSlika"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_kalendar_info"
+        android:layout_marginBottom="35dp"
+        android:layout_centerHorizontal="true"></ImageView>
+
+    <TextView
+        android:id="@+id/infoNaslov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kalendar"
+        android:fontFamily="@font/firasans_bold"
+        android:textSize="24sp"
+        android:layout_below="@+id/infoSlika"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/duhosPlava"
+        android:layout_marginBottom="24dp"
+        android:layout_marginHorizontal="10dp"></TextView>
+
+        <TextView
+            android:id="@+id/infoOpis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Opis"
+            android:fontFamily="@font/montserrat_regular"
+            android:textSize="16sp"
+            android:layout_below="@+id/infoNaslov"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/duhosPlava"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:layout_marginHorizontal="10dp"
+            android:scrollbars = "vertical"
+            ></TextView>
+    </RelativeLayout>
+</RelativeLayout>

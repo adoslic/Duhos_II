@@ -128,6 +128,31 @@
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/infoApk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/infoKnjiznicaLayout"
+                android:padding="10dp">
+                <ImageView
+                    android:id="@+id/infoApkImage"
+                    android:src="@drawable/ic_apk_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"></ImageView>
+                <TextView
+                    android:id="@+id/infoApkText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="O aplikaciji"
+                    android:textColor="@color/duhosPlava"
+                    android:layout_toRightOf="@id/infoApkImage"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/firasans_regular"
+                    android:textSize="16sp"></TextView>
+
+            </RelativeLayout>
+
         </RelativeLayout>
         <ImageButton
             android:id="@+id/uclaniSeButton"

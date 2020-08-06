@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -147,4 +148,6 @@ public class NakanaFragment extends Fragment {
         final DialogDisclaimer dialog=new DialogDisclaimer(text);
         dialog.show(getActivity().getSupportFragmentManager(),"dialog");
     }
+
+
 }

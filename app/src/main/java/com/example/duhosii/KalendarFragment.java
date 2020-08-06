@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -40,6 +41,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.joda.time.DateTime;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -49,6 +51,7 @@ import java.util.Date;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 
 public class KalendarFragment extends Fragment implements DatePickerListener {
@@ -68,6 +71,7 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
     String datumBezGodine;
     private List<AlarmDate> listaAlarma=new ArrayList<>();
     private List<AlarmDate> konacnaListaAlarma=new ArrayList<>();
+    private ArrayList<Boolean> alarmVisibility = new ArrayList<>();
 
     List<String> exDatesString=new ArrayList<String>();
 
@@ -92,6 +96,7 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
             kalendarFragmentView=inflater.inflate(R.layout.fragment_kalendar, container, false);
 
             final ArrayList<AlarmDate> list = new ArrayList<>();
+            Realm.init(getContext());
             final Realm realm = Realm.getDefaultInstance();
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
@@ -102,9 +107,32 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
             });
 
             if (!list.isEmpty()) {
-                for (int i = 0; i < list.size(); i++) {
-                    konacnaListaAlarma.add(list.get(i));
+                konacnaListaAlarma=list;
+
+                for(int i=0;i<konacnaListaAlarma.size();i++){
+                    String vrijemeSdatumom=konacnaListaAlarma.get(i).getDatum() + " " + konacnaListaAlarma.get(i).getVrijeme()+":00";
+                    Date vrijemeAlarma=null;
+                    try {
+                        vrijemeAlarma=new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(vrijemeSdatumom);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    if(vrijemeAlarma.before(new Date())){
+                        final RealmResults<AlarmDate> results = realm.where(AlarmDate.class).equalTo("datum",konacnaListaAlarma.get(i).datum.toString()).equalTo("vrijeme",konacnaListaAlarma.get(i).vrijeme.toString()).equalTo("naslov",konacnaListaAlarma.get(i).naslov.toString()).findAll();
+                        realm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                results.deleteAllFromRealm();
+                            }
+                        });
+                        konacnaListaAlarma.remove(i);
+                        i=0;
+                    }
                 }
+            }
+
+            for(int i=0;i<konacnaListaAlarma.size();i++){
+                Toast.makeText(getContext(),konacnaListaAlarma.get(i).getNaslov().toString()+"-"+konacnaListaAlarma.get(i).getDatum().toString(),Toast.LENGTH_SHORT).show();
             }
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -168,6 +196,7 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
             mjesec.setTypeface(firaSansBold);
 
             onInit();
+
             return kalendarFragmentView;
         }
         else {
@@ -201,18 +230,53 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
 
                     }
                 }
-                Collections.sort(itemList, new Comparator<Dogadjaj>() {
-                    public int compare(Dogadjaj d1, Dogadjaj d2) {
-                        return d1.getDatum().compareTo(d2.getDatum());
+
+                for(int i=0;i<itemList.size()-1;i++){
+                    for(int j=0;j<itemList.size()-i-1;j++) {
+                        String date1String=itemList.get(j).datum+" "+itemList.get(j).vrijeme+":00";
+                        Date date1 = null;
+                        try {
+                            date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(date1String);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        Date date2 = null;
+                        String date2String=itemList.get(j+1).datum+" "+itemList.get(j+1).vrijeme+":00";
+
+                        try {
+                            date2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(date2String);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        if(date2.before(date1)){
+                            Collections.swap(itemList,j+1,j);
+                        }
                     }
-                });
-                DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-                itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider_15));
+                }
+
+                if(alarmVisibility.size()==0){
+                    for (int i = 0; i < itemList.size(); i++) {
+                        alarmVisibility.add(false);
+                    }
+                }
+
+                for (int i = 0; i < itemList.size(); i++) {
+                    for(int j=0;j<konacnaListaAlarma.size();j++){
+                        if(konacnaListaAlarma.get(j).getNaslov().toString().equals(itemList.get(i).getNaslov().toString()) && konacnaListaAlarma.get(j).getDatum().toString().equals(itemList.get(i).getDatum().toString())) {
+                            alarmVisibility.set(i, true);
+                            break;
+                        }
+                        else
+                            alarmVisibility.set(i,false);
+                    }
+                }
+
+
                 recyclerView = kalendarFragmentView.findViewById(R.id.recyclerViewKalendar);
-                adapter = new KalendarItemAdapter(itemList,konacnaListaAlarma);
+                adapter = new KalendarItemAdapter(itemList,konacnaListaAlarma,alarmVisibility);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerView.setHasFixedSize(true);
-                recyclerView.addItemDecoration(itemDecorator);
                 recyclerView.setAdapter(adapter);
                 ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeKalendarToShareCallback(adapter));
                 itemTouchHelper.attachToRecyclerView(recyclerView);
@@ -267,13 +331,21 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
         }
         datumBezGodine=danUMjesecu+"/"+mjesec;
         int position = 0;
+        boolean flag=false;
         for(int i=0;i<itemList.size();i++) {
             String[] parts = adapter.getDatum(i).getDatum().split("/");
             String danIzAdaptera = parts[0];
             String mjesecIzAdaptera = parts[1];
-            if ((danIzAdaptera+"/"+mjesecIzAdaptera).equals(datumBezGodine))
+            if ((danIzAdaptera+"/"+mjesecIzAdaptera).equals(datumBezGodine)) {
                 position = i;
+                flag=true;
+                break;
+            }
         }
-        recyclerView.scrollToPosition(position);
+        if(flag==false)
+            Toast.makeText(getContext(),"Nema predviđenih događaja za odabrani datum!",Toast.LENGTH_SHORT).show();
+        ((LinearLayoutManager)recyclerView.getLayoutManager()).scrollToPositionWithOffset(position,0);
     }
+
+
 }

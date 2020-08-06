@@ -47,5 +47,4 @@ dependencies {
     implementation 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:2.1.0'
     implementation 'com.applandeo:material-calendar-view:1.0.1'
     implementation 'com.github.jhonnyx2012:horizontal-picker:1.0.6'
-
 }

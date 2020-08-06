@@ -1,5 +1,8 @@
 package com.example.duhosii;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -22,11 +25,14 @@ import org.w3c.dom.Text;
 
 import java.io.Externalizable;
 
+import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
+
 public class KnjiznicaFragment extends Fragment {
 
-    TextView zaglavlje;
+    TextView zaglavlje,knjiznicaTekst;
     BottomNavigationView bottomNavigationView;
     ImageButton popisKnjigaButton;
+    String linkNaPopisKnjiga="https://drive.google.com/file/d/11ssoe11OqW4b6JtyPU-CPQaghVKCn1fC/view?usp=sharing";
 
     @Nullable
     @Override
@@ -56,11 +62,16 @@ public class KnjiznicaFragment extends Fragment {
             }
         });
 
+        knjiznicaTekst=knjiznicaView.findViewById(R.id.knjiznicaTekst);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            knjiznicaTekst.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
+        }
         return knjiznicaView;
     }
 
     public void popisKnjiga() {
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new PopisKnjigaFragment()).addToBackStack("selectedFragment").commit();
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkNaPopisKnjiga));
+        startActivity(browserIntent);
     }
 
 

@@ -15,12 +15,19 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
+
+import net.yslibrary.android.keyboardvisibilityevent.util.UIUtil;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +42,7 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
     private Context context;
     boolean showShimmer = true;
     private int SHIMMER_ITEM_NUMBER = 6;
+    private boolean searchFlag=false;
 
     public PjesmaricaItemAdapter(List<Pjesma> itemList) {
         this.itemList = itemList;
@@ -102,10 +110,11 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
                     activity = (AppCompatActivity) v.getContext();
                     PjesmaOpsirno pjesmaOpsirno = new PjesmaOpsirno(itemList.get(position));
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, pjesmaOpsirno).addToBackStack("pjesmaOpsirnoFragment").commit();
+                    UIUtil.hideKeyboard(activity);
+                    searchFlag=true;
                 }
             });
         }
-
     }
 
     @Override
@@ -115,13 +124,14 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
 
     @Override
     public Filter getFilter() {
+        searchFlag=false;
         return itemFilter;
     }
     private Filter itemFilter=new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             List<Pjesma> filteredList=new ArrayList<>();
-            if(constraint==null || constraint.length()==0){
+            if(constraint==null || constraint.length()==0 || searchFlag==true){
                 filteredList.addAll(itemListFull);
             }
             else {
@@ -133,6 +143,11 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
                 }
 
             }
+            if(filteredList.isEmpty()) {
+                Toast.makeText(context, "Nema rezultata pretrage", Toast.LENGTH_SHORT).show();
+            }
+
+
             FilterResults results=new FilterResults();
             results.values=filteredList;
             return results;
@@ -140,9 +155,9 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            itemList.clear();
-            itemList.addAll((List)results.values);
-            notifyDataSetChanged();
+                itemList.clear();
+                itemList.addAll((List) results.values);
+                notifyDataSetChanged();
         }
     };
 
@@ -153,6 +168,7 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
         RelativeLayout itemLayout,slikaLayout,tekstLayout;
         ShimmerFrameLayout shimmerFrameLayout;
 
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -162,6 +178,8 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
             slikaLayout=itemView.findViewById(R.id.slikaLayout);
             tekstLayout=itemView.findViewById(R.id.tekstLayout);
             shimmerFrameLayout = itemView.findViewById(R.id.shimmer_layout_pjesme);
+
+
         }
 
     }

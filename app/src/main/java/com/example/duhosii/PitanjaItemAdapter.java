@@ -2,6 +2,8 @@ package com.example.duhosii;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.List;
+
+import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
 
 public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.ViewHolder> {
 
@@ -57,6 +61,11 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
             holder.pitanje.setText(itemList.get(position).getPitanje());
             holder.odgovor.setText(itemList.get(position).getOdgovor());
 
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                holder.pitanje.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
+                holder.odgovor.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
+            }
+
             if (doAnimation)
                 holder.pitanjeOdgovorLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_transition_animation));
 
@@ -66,6 +75,9 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
                 holder.pitanjeOdgovorLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.clicked_pitanje_background));
                 holder.pitanjeLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.clicked_pitanje_background));
                 holder.pitanje.setTextColor(ContextCompat.getColor(context, R.color.white));
+                Typeface firaSansItalic = Typeface.createFromAsset(context.getAssets(), "fonts/firasans_semibolditalic.ttf");
+                holder.pitanje.setTypeface(firaSansItalic);
+
             } else {
 
                 holder.isExpanded = false;
@@ -73,6 +85,8 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
                 holder.pitanjeOdgovorLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangle_shape_shadow_small_radius));
                 holder.pitanjeLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.white));
                 holder.pitanje.setTextColor(ContextCompat.getColor(context, R.color.duhosPlava));
+                Typeface firaSansSemiBold = Typeface.createFromAsset(context.getAssets(), "fonts/firasans_semibold.ttf");
+                holder.pitanje.setTypeface(firaSansSemiBold);
             }
 
             holder.pitanjeOdgovorLayout.setOnClickListener(new View.OnClickListener() {

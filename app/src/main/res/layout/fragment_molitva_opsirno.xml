@@ -28,10 +28,13 @@
             android:layout_below="@+id/slikaOpsirno"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:text="Naslov"
+            android:layout_marginHorizontal="10dp"
+            android:text="Naslovaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             android:textSize="20sp"
             android:textColor="@color/duhosPlava"
-            android:fontFamily="@font/firasans_bold"></TextView>
+            android:fontFamily="@font/firasans_bold"
+            android:textAlignment="center"
+            android:gravity="center"></TextView>
 
         <TextView
             android:id="@+id/tekstOpsirno"
@@ -39,12 +42,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/naslovOpsirno"
             android:layout_marginTop="10dp"
-            android:text="Tekst"
+            android:text="@string/kapelan1_tekst"
             android:textSize="16sp"
             android:layout_margin="10dp"
             android:textColor="@color/duhosPlava"
-            android:textAlignment="gravity"
-            android:gravity="left"
+            android:layout_gravity="center_vertical|end"
+            android:gravity="start"
             android:fontFamily="@font/montserrat_medium"></TextView>
         <ImageButton
             android:id="@+id/shareButton"
