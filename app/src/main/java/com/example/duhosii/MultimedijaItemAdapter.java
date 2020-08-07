@@ -101,7 +101,7 @@ public class MultimedijaItemAdapter extends RecyclerView.Adapter<MultimedijaItem
         String sadrzaj = itemList.get(position).getSadrzaj().toString();
         Intent share = new Intent();
         share.setAction(Intent.ACTION_SEND);
-        share.putExtra(Intent.EXTRA_TEXT, sadrzaj);
+        share.putExtra(Intent.EXTRA_TEXT, naslov+"\n\n"+sadrzaj);
         share.putExtra(Intent.EXTRA_SUBJECT, naslov);
         share.setType("text/plain");
         context.startActivity(share.createChooser(share, "Share using"));

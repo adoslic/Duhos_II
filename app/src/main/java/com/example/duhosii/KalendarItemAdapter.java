@@ -497,14 +497,14 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
         String naslov = itemList.get(position).naslov.toString();
         String vrijeme = itemList.get(position).vrijeme.toString();
         String lokacija = itemList.get(position).lokacija.toString();
+        String datum = itemList.get(position).datum.toString();
 
         Intent share = new Intent();
         share.setAction(Intent.ACTION_SEND);
-        share.putExtra(Intent.EXTRA_TEXT, naslov+"\n"+"Vrijeme: "+vrijeme+"\n"+"Lokacija: "+lokacija+"\n\n"+opis);
+        share.putExtra(Intent.EXTRA_TEXT, naslov+"\n"+"Datum: "+datum+"\n"+"Vrijeme: "+vrijeme+"\n"+"Lokacija: "+lokacija+"\n\n"+"Opis: "+opis);
         share.putExtra(Intent.EXTRA_SUBJECT, naslov);
         share.setType("text/plain");
         context.startActivity(share.createChooser(share, "Share using"));
-
     }
 
     private void undoDelete() {
