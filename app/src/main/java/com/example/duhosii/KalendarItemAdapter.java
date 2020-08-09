@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -403,11 +404,13 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
         alarmManager.cancel(pendingIntent);
     }
 
-    private void setNotificationAlarm(String vrijemeAlarmaString,int randomID,String naslov,String vrijeme,String lokacija) {
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void setNotificationAlarm(String vrijemeAlarmaString, int randomID, String naslov, String vrijeme, String lokacija) {
         Intent intent=new Intent(context, ReminderBroadcast.class);
         intent.putExtra("naslov",naslov);
         intent.putExtra("vrijeme",vrijeme);
         intent.putExtra("lokacija",lokacija);
+        intent.putExtra("randomID",randomID);
 
         vrijemeAlarmaString=vrijemeAlarmaString + ":00";
 
@@ -422,7 +425,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
         }
         long vrijemeAlarmaMillis = vrijemeAlarma.getTime();
 
-        alarmManager.set(AlarmManager.RTC_WAKEUP,vrijemeAlarmaMillis,pendingIntent);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP,vrijemeAlarmaMillis,pendingIntent);
 
 
     }

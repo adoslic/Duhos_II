@@ -18,6 +18,7 @@ public class ReminderBroadcast extends BroadcastReceiver {
         String naslov=intent.getStringExtra("naslov");
         String vrijeme=intent.getStringExtra("vrijeme");
         String lokacija=intent.getStringExtra("lokacija");
+        int randomID=intent.getIntExtra("randomID",200);
 
         Intent intent1=new Intent(context,MainActivity.class);
 
@@ -30,7 +31,7 @@ public class ReminderBroadcast extends BroadcastReceiver {
                 .setAutoCancel(true);
 
         NotificationManagerCompat notificationManagerCompat=NotificationManagerCompat.from(context);
-        notificationManagerCompat.notify(200,builder.build());
+        notificationManagerCompat.notify(randomID,builder.build());
 
 
         builder.build();

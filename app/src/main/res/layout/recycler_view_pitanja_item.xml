@@ -38,7 +38,8 @@
                 android:textSize="16sp"
                 android:textAlignment="center"
                 android:layout_centerHorizontal="true"
-                android:gravity="center_horizontal">
+                android:gravity="center_horizontal"
+                android:textIsSelectable="false">
             </TextView>
 
         </RelativeLayout>
@@ -64,7 +65,8 @@
                 android:textAlignment="center"
                 android:gravity="center_horizontal"
                 android:textSize="16sp"
-                android:fontFamily="@font/montserrat_regular">
+                android:fontFamily="@font/montserrat_regular"
+                android:textIsSelectable="false">
             </TextView>
             <ImageButton
                 android:id="@+id/share"

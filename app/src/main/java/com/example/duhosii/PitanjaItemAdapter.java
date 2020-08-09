@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,8 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
 
             holder.pitanje.setText(itemList.get(position).getPitanje());
             holder.odgovor.setText(itemList.get(position).getOdgovor());
+            holder.odgovor.setMovementMethod(LinkMovementMethod.getInstance());
+
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 holder.pitanje.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
@@ -77,6 +80,11 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
                 holder.pitanje.setTextColor(ContextCompat.getColor(context, R.color.white));
                 Typeface firaSansItalic = Typeface.createFromAsset(context.getAssets(), "fonts/firasans_semibolditalic.ttf");
                 holder.pitanje.setTypeface(firaSansItalic);
+                /*
+                holder.pitanje.setTextIsSelectable(true);
+                holder.odgovor.setTextIsSelectable(true);
+
+                 */
 
             } else {
 
@@ -87,6 +95,11 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
                 holder.pitanje.setTextColor(ContextCompat.getColor(context, R.color.duhosPlava));
                 Typeface firaSansSemiBold = Typeface.createFromAsset(context.getAssets(), "fonts/firasans_semibold.ttf");
                 holder.pitanje.setTypeface(firaSansSemiBold);
+                /*
+                holder.pitanje.setTextIsSelectable(false);
+                holder.odgovor.setTextIsSelectable(false);
+
+                 */
             }
 
             holder.pitanjeOdgovorLayout.setOnClickListener(new View.OnClickListener() {

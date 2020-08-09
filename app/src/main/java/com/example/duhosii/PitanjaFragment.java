@@ -99,7 +99,7 @@ public class PitanjaFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
-        recyclerView.addOnItemTouchListener(
+        /*recyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View v, int position) {
@@ -108,6 +108,7 @@ public class PitanjaFragment extends Fragment {
                     }
                 })
         );
+         */
 
         pitanjaReference.addValueEventListener(new ValueEventListener() {
             @Override

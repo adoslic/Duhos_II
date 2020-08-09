@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -76,7 +78,7 @@ public class MultimedijaOpsirno extends Fragment {
             linkButton.setImageDrawable(getActivity().getDrawable(R.drawable.ic_buttonfacebook));
         }
         else if(medij.getMedij().toString().toLowerCase().equals("youtube")){
-            idiNaPoveznicu.setText("U nastavku poslušajte pjesmu.");
+            idiNaPoveznicu.setText("U nastavku pogledajte video.");
             linkButton.setImageDrawable(getActivity().getDrawable(R.drawable.ic_buttonyoutube));
         }
         else  if(medij.getMedij().toString().toLowerCase().equals("web")){
@@ -104,8 +106,13 @@ public class MultimedijaOpsirno extends Fragment {
     }
 
     public void goToLink() {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(medij.getLink()));
-        startActivity(browserIntent);
+        if(URLUtil.isValidUrl(medij.getLink())) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(medij.getLink()));
+            startActivity(browserIntent);
+        }
+        else
+            Toast.makeText(getContext(),"Link je neispravan, kontaktirajte nadležnu osobu!",Toast.LENGTH_SHORT).show();
+
     }
 
 

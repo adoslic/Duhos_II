@@ -23,7 +23,8 @@
             android:text="Naslov"
             android:textSize="20sp"
             android:textColor="@color/duhosPlava"
-            android:fontFamily="@font/firasans_bold"></TextView>
+            android:fontFamily="@font/firasans_bold"
+            android:textIsSelectable="true"></TextView>
 
         <TextView
             android:id="@+id/tekstOpsirno"
@@ -37,7 +38,8 @@
             android:textColor="@color/duhosPlava"
             android:textAlignment="center"
             android:gravity="center"
-            android:fontFamily="@font/montserrat_medium"></TextView>
+            android:fontFamily="@font/montserrat_medium"
+            android:textIsSelectable="true"></TextView>
         <ImageButton
             android:id="@+id/shareButton"
             android:layout_width="wrap_content"

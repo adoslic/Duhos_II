@@ -26,7 +26,8 @@
             android:fontFamily="@font/firasans_bold"
             android:textAlignment="center"
             android:gravity="center"
-            android:padding="10dp"></TextView>
+            android:padding="10dp"
+            android:textIsSelectable="true"></TextView>
 
         <TextView
             android:id="@+id/sadrzajOpsirno"
@@ -41,7 +42,8 @@
             android:textAlignment="center"
             android:gravity="center"
             android:paddingVertical="10dp"
-            android:fontFamily="@font/montserrat_medium"></TextView>
+            android:fontFamily="@font/montserrat_medium"
+            android:textIsSelectable="true"></TextView>
 
         <TextView
             android:id="@+id/idiNaPoveznicu"
