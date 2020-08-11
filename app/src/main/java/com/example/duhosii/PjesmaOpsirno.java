@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -103,15 +104,18 @@ public class PjesmaOpsirno extends Fragment {
     }
 
     private void goToAkordi() {
-
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(pjesma.getLink()));
-        startActivity(browserIntent);
+        if(URLUtil.isValidUrl(pjesma.getLink())) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(pjesma.getLink()));
+            startActivity(browserIntent);
+        }
+        else
+            Toast.makeText(getContext(),"Link je neispravan, kontaktirajte nadležnu osobu!",Toast.LENGTH_SHORT).show();
     }
 
     public void share() {
         Intent share = new Intent();
         share.setAction(Intent.ACTION_SEND);
-        share.putExtra(Intent.EXTRA_TEXT, tekstPjesme.getText().toString());
+        share.putExtra(Intent.EXTRA_TEXT,naslov.getText().toString()+" - "+pjesma.getBend() + "\n\n" + tekstPjesme.getText().toString());
         share.putExtra(Intent.EXTRA_SUBJECT, naslov.getText().toString()+" - "+pjesma.getBend());
         share.setType("text/plain");
         getContext().startActivity(share.createChooser(share, "Share using"));

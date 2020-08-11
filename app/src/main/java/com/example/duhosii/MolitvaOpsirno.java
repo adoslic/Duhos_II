@@ -98,7 +98,7 @@ public class MolitvaOpsirno extends Fragment {
     public void share() {
         Intent share = new Intent();
         share.setAction(Intent.ACTION_SEND);
-        share.putExtra(Intent.EXTRA_TEXT, tekst.getText().toString());
+        share.putExtra(Intent.EXTRA_TEXT, naslov.getText().toString()+"\n\n"+tekst.getText().toString());
         share.putExtra(Intent.EXTRA_SUBJECT, naslov.getText().toString());
         share.setType("text/plain");
         getContext().startActivity(share.createChooser(share, "Share using"));

@@ -67,7 +67,8 @@
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_medium"
-            android:layout_marginBottom="25dp"></TextView>
+            android:layout_marginBottom="25dp"
+            android:textIsSelectable="true"></TextView>
 
 
 
@@ -104,7 +105,8 @@
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_medium"
-            android:layout_marginBottom="25dp"></TextView>
+            android:layout_marginBottom="25dp"
+            android:textIsSelectable="true"></TextView>
 
 
         <ImageView
@@ -140,7 +142,8 @@
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_medium"
-            android:layout_marginBottom="25dp"></TextView>
+            android:layout_marginBottom="25dp"
+            android:textIsSelectable="true"></TextView>
 
 
         <ImageView
@@ -176,7 +179,8 @@
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_medium"
-            android:layout_marginBottom="25dp"></TextView>
+            android:layout_marginBottom="25dp"
+            android:textIsSelectable="true"></TextView>
 
 
         <ImageView
@@ -212,6 +216,7 @@
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_medium"
-            android:layout_marginBottom="25dp"></TextView>
+            android:layout_marginBottom="25dp"
+            android:textIsSelectable="true"></TextView>
     </RelativeLayout>
 </ScrollView>

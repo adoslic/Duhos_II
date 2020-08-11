@@ -108,7 +108,7 @@ public class MolitvaItemAdapter extends RecyclerView.Adapter<MolitvaItemAdapter.
         String naslov = itemList.get(position).naslov.toString();
         Intent share = new Intent();
         share.setAction(Intent.ACTION_SEND);
-        share.putExtra(Intent.EXTRA_TEXT, tekst);
+        share.putExtra(Intent.EXTRA_TEXT, naslov+"\n\n"+tekst);
         share.putExtra(Intent.EXTRA_SUBJECT, naslov);
         share.setType("text/plain");
         context.startActivity(share.createChooser(share, "Share using"));

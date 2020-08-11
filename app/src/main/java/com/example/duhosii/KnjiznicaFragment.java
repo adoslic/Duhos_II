@@ -14,6 +14,7 @@ import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,8 +71,12 @@ public class KnjiznicaFragment extends Fragment {
     }
 
     public void popisKnjiga() {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkNaPopisKnjiga));
-        startActivity(browserIntent);
+        if(URLUtil.isValidUrl(linkNaPopisKnjiga)) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkNaPopisKnjiga));
+            startActivity(browserIntent);
+        }
+        else
+            Toast.makeText(getContext(),"Link je neispravan, kontaktirajte nadležnu osobu!",Toast.LENGTH_SHORT).show();
     }
 
 

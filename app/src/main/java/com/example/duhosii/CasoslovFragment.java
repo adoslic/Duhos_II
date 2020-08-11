@@ -4,9 +4,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -45,11 +48,15 @@ public class CasoslovFragment extends Fragment {
         casoslovView = inflater.inflate(R.layout.fragment_casoslov,container,false);
         casoslovWebView=casoslovView.findViewById(R.id.casoslovWebView);
 
-        casoslovWebView.getSettings().setJavaScriptEnabled(true);
-        casoslovWebView.getSettings().setLoadWithOverviewMode(true);
-        casoslovWebView.getSettings().setUseWideViewPort(true);
-        casoslovWebView.getSettings().setPluginState(WebSettings.PluginState.ON);
-        casoslovWebView.loadUrl(url);
+        if(URLUtil.isValidUrl(url)) {
+            casoslovWebView.getSettings().setJavaScriptEnabled(true);
+            casoslovWebView.getSettings().setLoadWithOverviewMode(true);
+            casoslovWebView.getSettings().setUseWideViewPort(true);
+            casoslovWebView.getSettings().setPluginState(WebSettings.PluginState.ON);
+            casoslovWebView.loadUrl(url);
+        }
+        else
+            Toast.makeText(getContext(),"Link je neispravan, kontaktirajte nadležnu osobu!",Toast.LENGTH_SHORT).show();
 
         return casoslovView;
     }
