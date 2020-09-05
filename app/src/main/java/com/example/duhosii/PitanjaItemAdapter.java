@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -38,7 +39,14 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
     public PitanjaItemAdapter(List<Pitanja> itemList) {
         this.itemList = itemList;
     }
+    RecyclerView mRecyclerView;
 
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        mRecyclerView = recyclerView;
+    }
     @NonNull
     @Override
     public PitanjaItemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -105,12 +113,14 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
             holder.pitanjeOdgovorLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (holder.isExpanded == false) {
+                    if (!holder.isExpanded) {
                         pitanjePosition = position;
                         pitanjeShow = true;
                         doAnimation = false;
+                        LinearLayoutManager layoutManager = (LinearLayoutManager)mRecyclerView.getLayoutManager();
+                        layoutManager.scrollToPositionWithOffset(position, 0);
                         notifyDataSetChanged();
-                    } else if (holder.isExpanded == true) {
+                    } else {
                         pitanjeShow = false;
                         doAnimation = true;
                         notifyDataSetChanged();
