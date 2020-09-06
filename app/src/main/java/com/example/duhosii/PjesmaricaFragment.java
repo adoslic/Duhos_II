@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -22,11 +23,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -61,6 +60,11 @@ public class PjesmaricaFragment extends Fragment {
     private DatabaseReference pjesmaricaReference;
     private FloatingActionButton searchButtonPjesma;
     private  EditText searchEditText;
+    private final String KEY_RECYCLER_STATE = "recycler_state";
+    private static Bundle mBundleRecyclerViewState;
+    private Parcelable mListState = null;
+    GridLayoutManager gridLayoutManager;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -73,7 +77,6 @@ public class PjesmaricaFragment extends Fragment {
         View view=mActionBar.getCustomView();
         zaglavlje=view.findViewById(R.id.naslov);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
         zaglavlje.setText("Pjesmarica");
 
         pjesmaricaFragmentView=inflater.inflate(R.layout.fragment_pjesmarica, container, false);
@@ -121,6 +124,7 @@ public class PjesmaricaFragment extends Fragment {
 
         if(connectionFlag==true) {
             pjesmaricaReference = FirebaseDatabase.getInstance().getReference("Pjesmarica");
+            gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 1);
             onInit();
             searchButtonPjesma=pjesmaricaFragmentView.findViewById(R.id.searchButtonPjesma);
             searchButtonPjesma.setOnClickListener(new View.OnClickListener() {
@@ -176,7 +180,7 @@ public class PjesmaricaFragment extends Fragment {
                 Collections.reverse(itemList);
                 recyclerView = pjesmaricaFragmentView.findViewById(R.id.recyclerViewPjesmarica);
                 adapter = new PjesmaricaItemAdapter(itemList);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                recyclerView.setLayoutManager(gridLayoutManager);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setAdapter(adapter);
                 ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipePjesmaToShareCallback(adapter));
@@ -197,7 +201,28 @@ public class PjesmaricaFragment extends Fragment {
     public void onResume() {
         super.onResume();
         ((MainActivity)getActivity()).SetNavItemChecked(0);
+
+        if (mBundleRecyclerViewState != null) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mListState = mBundleRecyclerViewState.getParcelable(KEY_RECYCLER_STATE);
+                    gridLayoutManager.onRestoreInstanceState(mListState);
+                }
+            }, 50);
+        }
     }
+
+    @Override
+    public void onPause() {
+        // Save ListView state @ onPause
+        Log.d(TAG, "saving listview state");
+        mBundleRecyclerViewState = new Bundle();
+        mListState = recyclerView.getLayoutManager().onSaveInstanceState();
+        mBundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, mListState);
+        super.onPause();
+    }
+
     private void checkInternetConnection() {
         ConnectivityManager connectivityManager=(ConnectivityManager) getActivity().getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork=connectivityManager.getActiveNetworkInfo();
