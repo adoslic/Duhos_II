@@ -4,6 +4,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,15 +17,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.behavior.SwipeDismissBehavior;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.google.firebase.database.DataSnapshot;
@@ -49,6 +48,10 @@ public class MultimedijaFragment extends Fragment {
     private RecyclerView recyclerView;
     private MultimedijaItemAdapter adapter;
     List<Medij> itemList = new ArrayList<>();
+    private final String KEY_RECYCLER_STATE = "recycler_state";
+    private static Bundle mBundleRecyclerViewState;
+    private Parcelable mListState = null;
+    GridLayoutManager gridLayoutManager;
 
     @Nullable
     @Override
@@ -69,6 +72,7 @@ public class MultimedijaFragment extends Fragment {
         if(connectionFlag==true) {
             multimedijaFragmentView=inflater.inflate(R.layout.fragment_multimedija, container, false);
             multimedijaReference = FirebaseDatabase.getInstance().getReference("Novosti");
+            gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 1);
             onInit();
             return multimedijaFragmentView;
         }
@@ -123,6 +127,29 @@ public class MultimedijaFragment extends Fragment {
     public void onResume() {
         super.onResume();
         ((MainActivity)getActivity()).SetNavItemChecked(3);
+
+        if (mBundleRecyclerViewState != null) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mListState = mBundleRecyclerViewState.getParcelable(KEY_RECYCLER_STATE);
+                    recyclerView.getLayoutManager().onRestoreInstanceState(mListState);
+                }
+            }, 50);
+        }
+
+
+        recyclerView.setLayoutManager(gridLayoutManager);
+    }
+
+        @Override
+    public void onPause() {
+        // Save ListView state @ onPause
+        Log.d(TAG, "saving listview state");
+            mBundleRecyclerViewState = new Bundle();
+            mListState = recyclerView.getLayoutManager().onSaveInstanceState();
+            mBundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, mListState);
+        super.onPause();
     }
 
     private void checkInternetConnection() {
