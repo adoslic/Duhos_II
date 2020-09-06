@@ -283,50 +283,62 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                         //kad se stisne uredu onda povisibleani taj alarm i postavi zastavicu na true, cancel flag je zbog toga sto se i onDismiss i onCancel flag
                         // pozivaju kada se stisne uredu, pa se rusila apk, ugl.. nebitno, to je pomocna zastavica
                         mTimePicker.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                             @Override
                             public void onDismiss(DialogInterface dialog) {
                                 if(cancelFlag==false) {
-                                    alarmVisibility.set(position, true);
-                                    final boolean visible = alarmVisibility.get(position);
-                                    if(visible==true){
-                                        holder.alarmLayout.setVisibility(View.VISIBLE);
-                                        holder.alarmTime.setText(holder.sati + ":" + holder.minute);
-                                        holder.alarm = true;
-                                        holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_deletenotification));
+                                    String vrijemeSdatumom = itemList.get(position).datum + " " + holder.sati + ":" + holder.minute + ":00";
+                                    Date vrijemeAlarma = null;
+                                    try {
+                                        vrijemeAlarma = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(vrijemeSdatumom);
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
                                     }
-                                    else {
-                                        holder.alarmLayout.setVisibility(View.GONE);
-                                        holder.alarmTime.setText("");
-                                        holder.alarm = false;
-                                        holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_addnotification));
-                                    }
-                                    AlarmDate alarmDate = new AlarmDate();
-                                    alarmDate.setDatum(itemList.get(position).datum);
-                                    alarmDate.setVrijeme(holder.sati + ":" + holder.minute);
-                                    alarmDate.setNaslov(itemList.get(position).naslov);
+                                    if (vrijemeAlarma.before(new Date())) {
+                                        Toast.makeText(context, "Odabrali ste vrijeme koje je prošlo! Pokušajte ponovno!", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        alarmVisibility.set(position, true);
+                                        final boolean visible = alarmVisibility.get(position);
+                                        if (visible == true) {
+                                            holder.alarmLayout.setVisibility(View.VISIBLE);
+                                            holder.alarmTime.setText(holder.sati + ":" + holder.minute);
+                                            holder.alarm = true;
+                                            holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_deletenotification));
+                                        } else {
+                                            holder.alarmLayout.setVisibility(View.GONE);
+                                            holder.alarmTime.setText("");
+                                            holder.alarm = false;
+                                            holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_addnotification));
+                                        }
+                                        AlarmDate alarmDate = new AlarmDate();
+                                        alarmDate.setDatum(itemList.get(position).datum);
+                                        alarmDate.setVrijeme(holder.sati + ":" + holder.minute);
+                                        alarmDate.setNaslov(itemList.get(position).naslov);
 
-                                    Random random = new Random();
-                                    int randomID = random.nextInt(100000000);
-                                    alarmDate.setAlarmID(randomID);
+                                        Random random = new Random();
+                                        int randomID = random.nextInt(100000000);
+                                        alarmDate.setAlarmID(randomID);
 
-                                    //provjera postoji li vec takav alarm u bazi - mozda sada nebitno jer sam onemogucio da budu u bazi vise događaja istih parametara
-                                    boolean dataExist = false;
-                                    for (int i = 0; i < konacnaListaAlarma.size(); i++) {
-                                        if (konacnaListaAlarma.get(i).getDatum().equals(alarmDate.getDatum()) && konacnaListaAlarma.get(i).getVrijeme().equals(alarmDate.getVrijeme()) && konacnaListaAlarma.get(i).getNaslov().equals(alarmDate.getNaslov()) && konacnaListaAlarma.get(i).getAlarmID() == alarmDate.getAlarmID())
-                                            dataExist = true;
+                                        //provjera postoji li vec takav alarm u bazi - mozda sada nebitno jer sam onemogucio da budu u bazi vise događaja istih parametara
+                                        boolean dataExist = false;
+                                        for (int i = 0; i < konacnaListaAlarma.size(); i++) {
+                                            if (konacnaListaAlarma.get(i).getDatum().equals(alarmDate.getDatum()) && konacnaListaAlarma.get(i).getVrijeme().equals(alarmDate.getVrijeme()) && konacnaListaAlarma.get(i).getNaslov().equals(alarmDate.getNaslov()) && konacnaListaAlarma.get(i).getAlarmID() == alarmDate.getAlarmID())
+                                                dataExist = true;
+                                        }
+                                        if (dataExist == false) {
+                                            realm.beginTransaction();
+                                            realm.copyToRealm(alarmDate);
+                                            realm.commitTransaction();
+                                            realm.close();
+                                        }
+                                        createNotificationChannel();
+                                        setNotificationAlarm(itemList.get(position).datum.toString() + " " + holder.alarmTime.getText().toString(), randomID, holder.naslov.getText().toString(), holder.timeTime.getText().toString(), holder.lokacija.getText().toString());
                                     }
-                                    if (dataExist == false) {
-                                        realm.beginTransaction();
-                                        realm.copyToRealm(alarmDate);
-                                        realm.commitTransaction();
-                                        realm.close();
+                                }
+                                else{
+                                        cancelFlag = false;
                                     }
-                                    createNotificationChannel();
-                                    setNotificationAlarm(itemList.get(position).datum.toString() + " " + holder.alarmTime.getText().toString(), randomID, holder.naslov.getText().toString(),holder.timeTime.getText().toString(),holder.lokacija.getText().toString());
-                                }
-                                else {
-                                    cancelFlag=false;
-                                }
+
                             }
                         });
                         mTimePicker.setOnCancelListener(new DialogInterface.OnCancelListener() {

@@ -121,6 +121,7 @@
                     android:text="Opis"
                     android:ellipsize="end"
                     android:maxLines="4"
+                    android:lines="3"
                     android:fontFamily="@font/montserrat_medium"/>
                 <TextView
                     android:id="@+id/lokacija_tekst"
