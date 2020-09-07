@@ -66,7 +66,9 @@
                 android:gravity="center_horizontal"
                 android:textSize="16sp"
                 android:fontFamily="@font/montserrat_regular"
-                android:textIsSelectable="false">
+                android:textIsSelectable="false"
+                android:autoLink="web"
+                android:textColorLink="@color/linkColor">
             </TextView>
             <ImageButton
                 android:id="@+id/share"

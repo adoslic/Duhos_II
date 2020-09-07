@@ -50,7 +50,9 @@
             android:layout_gravity="center_vertical|end"
             android:gravity="start"
             android:fontFamily="@font/montserrat_medium"
-            android:textIsSelectable="true"></TextView>
+            android:textIsSelectable="true"
+            android:autoLink="web"
+            android:textColorLink="@color/linkColor"></TextView>
         <ImageButton
             android:id="@+id/shareButton"
             android:layout_width="wrap_content"
