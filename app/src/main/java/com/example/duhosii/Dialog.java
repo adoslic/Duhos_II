@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 public class Dialog extends AppCompatDialogFragment {
 
     AlertDialog alertDialog;
+    RelativeLayout xButtonLayout;
     ImageButton xButton;
     ImageButton uclaniSe;
     RelativeLayout infoDuhos,infoKapelani,infoTimovi,infoKnjižnica,infoApk;
@@ -95,6 +96,14 @@ public class Dialog extends AppCompatDialogFragment {
 
         xButton=view.findViewById(R.id.xButton);
         xButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+        xButtonLayout=view.findViewById(R.id.xButtonLayout);
+        xButtonLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();

@@ -72,7 +72,7 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
     private List<AlarmDate> listaAlarma=new ArrayList<>();
     private List<AlarmDate> konacnaListaAlarma=new ArrayList<>();
     private ArrayList<Boolean> alarmVisibility = new ArrayList<>();
-
+    private boolean flagClicked=false;
     List<String> exDatesString=new ArrayList<String>();
 
     private int size=0;
@@ -88,6 +88,8 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
         zaglavlje=view.findViewById(R.id.naslov);
         zaglavlje.setText("Kalendar");
         checkInternetConnection();
+
+        flagClicked=false;
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
@@ -339,8 +341,10 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
                 break;
             }
         }
-        if(flag==false)
-            Toast.makeText(getContext(),"Nema predviđenih događaja za odabrani datum!",Toast.LENGTH_SHORT).show();
+        if(flag==false && flagClicked==true) {
+            Toast.makeText(getContext(), "Nema predviđenih događaja za odabrani datum!", Toast.LENGTH_SHORT).show();
+        }
+        flagClicked=true;
         ((LinearLayoutManager)recyclerView.getLayoutManager()).scrollToPositionWithOffset(position,0);
     }
 

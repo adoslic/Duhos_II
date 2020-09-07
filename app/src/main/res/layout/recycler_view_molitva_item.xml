@@ -33,11 +33,11 @@
                     android:id="@+id/naslov"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:width="250dp"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textColor="@color/duhosPlava"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
                     android:fontFamily="@font/firasans_semibold"
                     android:ellipsize="end"
                     android:maxLines="2"/>

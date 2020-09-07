@@ -122,12 +122,29 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
                         notifyDataSetChanged();
                     } else {
                         pitanjeShow = false;
-                        doAnimation = true;
+                        doAnimation = false;
                         notifyDataSetChanged();
                     }
                 }
             });
 
+            holder.odgovor.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!holder.isExpanded) {
+                        pitanjePosition = position;
+                        pitanjeShow = true;
+                        doAnimation = false;
+                        LinearLayoutManager layoutManager = (LinearLayoutManager)mRecyclerView.getLayoutManager();
+                        layoutManager.scrollToPositionWithOffset(position, 0);
+                        notifyDataSetChanged();
+                    } else {
+                        pitanjeShow = false;
+                        doAnimation = false;
+                        notifyDataSetChanged();
+                    }
+                }
+            });
             holder.shareButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
