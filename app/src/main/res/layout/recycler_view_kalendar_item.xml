@@ -122,7 +122,9 @@
                     android:ellipsize="end"
                     android:maxLines="4"
                     android:lines="3"
-                    android:fontFamily="@font/montserrat_medium"/>
+                    android:fontFamily="@font/montserrat_medium"
+                    android:autoLink="web"
+                    android:textColorLink="@color/linkColor"/>
                 <TextView
                     android:id="@+id/lokacija_tekst"
                     android:layout_width="wrap_content"
