@@ -40,9 +40,10 @@ public class Dialog extends AppCompatDialogFragment {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment_containter, frag);
                 int count = getFragmentManager().getBackStackEntryCount();
-                if(getFragmentManager().getBackStackEntryAt(count-1).getName() != null){
-                    ft.addToBackStack(null);
+                if(getFragmentManager().getBackStackEntryAt(count-1).getName() == "dialogBox"){
+                    getFragmentManager().popBackStack();
                 }
+                ft.addToBackStack("dialogBox");
                 ft.commit();
             }
         });
@@ -55,9 +56,10 @@ public class Dialog extends AppCompatDialogFragment {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment_containter, frag);
                 int count = getFragmentManager().getBackStackEntryCount();
-                if(getFragmentManager().getBackStackEntryAt(count-1).getName() != null){
-                    ft.addToBackStack(null);
+                if(getFragmentManager().getBackStackEntryAt(count-1).getName() == "dialogBox"){
+                    getFragmentManager().popBackStack();
                 }
+                ft.addToBackStack("dialogBox");
                 ft.commit();
             }
         });
@@ -70,9 +72,10 @@ public class Dialog extends AppCompatDialogFragment {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment_containter, frag);
                 int count = getFragmentManager().getBackStackEntryCount();
-                if(getFragmentManager().getBackStackEntryAt(count-1).getName() != null){
-                    ft.addToBackStack(null);
+                if(getFragmentManager().getBackStackEntryAt(count-1).getName() == "dialogBox"){
+                    getFragmentManager().popBackStack();
                 }
+                ft.addToBackStack("dialogBox");
                 ft.commit();
             }
         });
@@ -85,9 +88,10 @@ public class Dialog extends AppCompatDialogFragment {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment_containter, frag);
                 int count = getFragmentManager().getBackStackEntryCount();
-                if(getFragmentManager().getBackStackEntryAt(count-1).getName() != null){
-                    ft.addToBackStack(null);
+                if(getFragmentManager().getBackStackEntryAt(count-1).getName() == "dialogBox"){
+                    getFragmentManager().popBackStack();
                 }
+                ft.addToBackStack("dialogBox");
                 ft.commit();
             }
         });
@@ -100,9 +104,10 @@ public class Dialog extends AppCompatDialogFragment {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment_containter, frag);
                 int count = getFragmentManager().getBackStackEntryCount();
-                if(getFragmentManager().getBackStackEntryAt(count-1).getName() != null){
-                    ft.addToBackStack(null);
+                if(getFragmentManager().getBackStackEntryAt(count-1).getName() == "dialogBox"){
+                    getFragmentManager().popBackStack();
                 }
+                ft.addToBackStack("dialogBox");
                 ft.commit();
             }
         });
@@ -132,9 +137,10 @@ public class Dialog extends AppCompatDialogFragment {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment_containter, frag);
                 int count = getFragmentManager().getBackStackEntryCount();
-                if(getFragmentManager().getBackStackEntryAt(count-1).getName() != null){
-                    ft.addToBackStack(null);
+                if(getFragmentManager().getBackStackEntryAt(count-1).getName() == "dialogBox"){
+                    getFragmentManager().popBackStack();
                 }
+                ft.addToBackStack("dialogBox");
                 ft.commit();
             }
         });
