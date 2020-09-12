@@ -7,13 +7,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -42,9 +40,8 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView=findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         bottomNavigationView.setVisibility(View.VISIBLE);
+        onNewIntent(getIntent());
 
-        //neka pocetni fragment bude molitva
-        findViewById(R.id.navigacija_molitva).performClick();
     }
 
 
@@ -115,6 +112,26 @@ public class MainActivity extends AppCompatActivity {
             editor.putBoolean("firstRun", false);
             editor.commit();
 
+        }
+
+        String menuFragment = getIntent().getStringExtra("notification");
+        if (menuFragment != null) {
+            if (menuFragment.equals("openCalendar")) {
+                findViewById(R.id.navigacija_kalendar).performClick();
+            }
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        String menuFragment = intent.getStringExtra("notification");
+        if (menuFragment != null) {
+            if (menuFragment.equals("openCalendar")) {
+                findViewById(R.id.navigacija_kalendar).performClick();
+            }
+        } else {
+            //neka pocetni fragment bude molitva
+            findViewById(R.id.navigacija_molitva).performClick();
         }
     }
     

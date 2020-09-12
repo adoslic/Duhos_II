@@ -1,6 +1,5 @@
 package com.example.duhosii;
 
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -8,9 +7,6 @@ import android.content.Intent;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-
-import io.realm.Realm;
-import io.realm.RealmResults;
 
 public class ReminderBroadcast extends BroadcastReceiver {
     @Override
@@ -21,6 +17,7 @@ public class ReminderBroadcast extends BroadcastReceiver {
         int randomID=intent.getIntExtra("randomID",200);
 
         Intent intent1=new Intent(context,MainActivity.class);
+        intent1.putExtra("notification", "openCalendar");
 
         NotificationCompat.Builder builder=new NotificationCompat.Builder(context,"notify")
                 .setSmallIcon(R.drawable.ic_duhos_logo)
