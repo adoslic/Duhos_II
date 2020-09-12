@@ -1,15 +1,13 @@
 package com.example.duhosii;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -41,7 +39,11 @@ public class Dialog extends AppCompatDialogFragment {
                 AplikacijaInfoFragment frag = new AplikacijaInfoFragment();
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment_containter, frag);
-                ft.addToBackStack(null);
+                int count = getFragmentManager().getBackStackEntryCount();
+                if(getFragmentManager().getBackStackEntryAt(count-1).getName() == "dialogBox"){
+                    getFragmentManager().popBackStack();
+                }
+                ft.addToBackStack("dialogBox");
                 ft.commit();
             }
         });
@@ -53,7 +55,11 @@ public class Dialog extends AppCompatDialogFragment {
                 OpcenitoFragment frag = new OpcenitoFragment();
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment_containter, frag);
-                ft.addToBackStack(null);
+                int count = getFragmentManager().getBackStackEntryCount();
+                if(getFragmentManager().getBackStackEntryAt(count-1).getName() == "dialogBox"){
+                    getFragmentManager().popBackStack();
+                }
+                ft.addToBackStack("dialogBox");
                 ft.commit();
             }
         });
@@ -65,7 +71,11 @@ public class Dialog extends AppCompatDialogFragment {
                 KapelaniFragment frag = new KapelaniFragment();
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment_containter, frag);
-                ft.addToBackStack(null);
+                int count = getFragmentManager().getBackStackEntryCount();
+                if(getFragmentManager().getBackStackEntryAt(count-1).getName() == "dialogBox"){
+                    getFragmentManager().popBackStack();
+                }
+                ft.addToBackStack("dialogBox");
                 ft.commit();
             }
         });
@@ -77,7 +87,11 @@ public class Dialog extends AppCompatDialogFragment {
                 KnjiznicaFragment frag = new KnjiznicaFragment();
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment_containter, frag);
-                ft.addToBackStack(null);
+                int count = getFragmentManager().getBackStackEntryCount();
+                if(getFragmentManager().getBackStackEntryAt(count-1).getName() == "dialogBox"){
+                    getFragmentManager().popBackStack();
+                }
+                ft.addToBackStack("dialogBox");
                 ft.commit();
             }
         });
@@ -89,7 +103,11 @@ public class Dialog extends AppCompatDialogFragment {
                 TimoviFragment frag = new TimoviFragment();
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment_containter, frag);
-                ft.addToBackStack(null);
+                int count = getFragmentManager().getBackStackEntryCount();
+                if(getFragmentManager().getBackStackEntryAt(count-1).getName() == "dialogBox"){
+                    getFragmentManager().popBackStack();
+                }
+                ft.addToBackStack("dialogBox");
                 ft.commit();
             }
         });
@@ -118,7 +136,11 @@ public class Dialog extends AppCompatDialogFragment {
                 UclaniSeFragment frag = new UclaniSeFragment();
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment_containter, frag);
-                ft.addToBackStack(null);
+                int count = getFragmentManager().getBackStackEntryCount();
+                if(getFragmentManager().getBackStackEntryAt(count-1).getName() == "dialogBox"){
+                    getFragmentManager().popBackStack();
+                }
+                ft.addToBackStack("dialogBox");
                 ft.commit();
             }
         });

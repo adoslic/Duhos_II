@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
@@ -40,7 +41,6 @@ public class DialogDisclaimer extends AppCompatDialogFragment {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
-                getFragmentManager().popBackStack();
             }
         });
 
