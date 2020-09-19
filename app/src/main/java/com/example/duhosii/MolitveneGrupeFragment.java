@@ -1,7 +1,6 @@
 package com.example.duhosii;
 
 import android.content.Context;
-import android.content.res.XmlResourceParser;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -19,9 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.ItemTouchHelper;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
@@ -73,7 +70,7 @@ public class MolitveneGrupeFragment extends Fragment {
 
 
         zaglavlje=viewActionBar.findViewById(R.id.naslov);
-        zaglavlje.setText("Od srca k Srcu");
+        zaglavlje.setText(getContext().getResources().getString(R.string.odSrcaKsrcuNaslov));
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
@@ -88,7 +85,7 @@ public class MolitveneGrupeFragment extends Fragment {
             posaljiMolitvenuNakanu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new NakanaFragment()).addToBackStack("nakanaFragment").commit();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new NakanaFragment()).addToBackStack("").commit();
 
                 }
             });
@@ -127,25 +124,25 @@ public class MolitveneGrupeFragment extends Fragment {
             molitva.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new OpceMolitveFragment(itemListOpce)).addToBackStack("molitvaFragment").commit();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new OpceMolitveFragment(itemListOpce)).addToBackStack("").commit();
                 }
             });
             marijanske.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new MarijanskeMolitveFragment(itemListMarijanske)).addToBackStack("marijanskeMolitveFragment").commit();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new MarijanskeMolitveFragment(itemListMarijanske)).addToBackStack("").commit();
                 }
             });
             devetnice.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new NadahnucaFragment(itemListNadahnuca)).addToBackStack("nadahnucaFragment").commit();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new NadahnucaFragment(itemListNadahnuca)).addToBackStack("").commit();
                 }
             });
             standard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new PoboznostiFragment(itemListPoboznosti)).addToBackStack("svjedocanstvaFragment").commit();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new PoboznostiFragment(itemListPoboznosti)).addToBackStack("").commit();
                 }
             });
             return molitvaFragmentView;
@@ -188,7 +185,7 @@ public class MolitveneGrupeFragment extends Fragment {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w(TAG, "Greška u čitanju iz baze podataka", databaseError.toException());
+                Log.w(TAG, getContext().getResources().getString(R.string.greskaUbaziString), databaseError.toException());
             }
         });
 
@@ -215,7 +212,7 @@ public class MolitveneGrupeFragment extends Fragment {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w(TAG, "Greška u čitanju iz baze podataka", databaseError.toException());
+                Log.w(TAG, getContext().getResources().getString(R.string.greskaUbaziString), databaseError.toException());
             }
         });
 
@@ -241,7 +238,7 @@ public class MolitveneGrupeFragment extends Fragment {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w(TAG, "Greška u čitanju iz baze podataka", databaseError.toException());
+                Log.w(TAG, getContext().getResources().getString(R.string.greskaUbaziString), databaseError.toException());
             }
         });
 
@@ -268,7 +265,7 @@ public class MolitveneGrupeFragment extends Fragment {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w(TAG, "Greška u čitanju iz baze podataka", databaseError.toException());
+                Log.w(TAG, getContext().getResources().getString(R.string.greskaUbaziString), databaseError.toException());
             }
         });
 

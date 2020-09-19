@@ -46,7 +46,7 @@ public class OpceMolitveFragment extends Fragment {
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         View viewActionBar=mActionBar.getCustomView();
         zaglavlje=viewActionBar.findViewById(R.id.naslov);
-        zaglavlje.setText("Od srca k Srcu");
+        zaglavlje.setText(getContext().getResources().getString(R.string.odSrcaKsrcuNaslov));
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
@@ -60,7 +60,7 @@ public class OpceMolitveFragment extends Fragment {
         casoslovButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new CasoslovFragment()).addToBackStack("casoslovFragment").commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new CasoslovFragment()).addToBackStack("").commit();
             }
         });
 
@@ -71,7 +71,7 @@ public class OpceMolitveFragment extends Fragment {
 
     public void onInit() {
         recyclerView = molitvaFragmentView.findViewById(R.id.recyclerViewMolitva);
-        adapter = new MolitvaItemAdapter(itemList,"Molitve i pobožnosti");
+        adapter = new MolitvaItemAdapter(itemList,getContext().getResources().getString(R.string.molitvaIpozonostiString));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);

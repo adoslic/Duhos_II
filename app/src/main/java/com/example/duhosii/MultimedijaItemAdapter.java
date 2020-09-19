@@ -60,7 +60,7 @@ public class MultimedijaItemAdapter extends RecyclerView.Adapter<MultimedijaItem
                 public void onClick(View v) {
                     activity = (AppCompatActivity) v.getContext();
                     MultimedijaOpsirno multimedijaOpsirno = new MultimedijaOpsirno(itemList.get(position));
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, multimedijaOpsirno).addToBackStack("multimedijaOpsirnoFragment").commit();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, multimedijaOpsirno).addToBackStack("").commit();
                 }
             });
 

@@ -63,7 +63,7 @@ public class MultimedijaFragment extends Fragment {
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         View view=mActionBar.getCustomView();
         zaglavlje=view.findViewById(R.id.naslov);
-        zaglavlje.setText("Novosti");
+        zaglavlje.setText(getContext().getResources().getString(R.string.novostiNaslov));
         checkInternetConnection();
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
@@ -117,7 +117,7 @@ public class MultimedijaFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w(TAG, "Greška u čitanju iz baze podataka", databaseError.toException());
+                Log.w(TAG, getContext().getResources().getString(R.string.greskaUbaziString), databaseError.toException());
             }
         });
 

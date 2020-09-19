@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.URLUtil;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,7 +51,7 @@ public class MultimedijaOpsirno extends Fragment {
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         View viewActionBar = mActionBar.getCustomView();
         zaglavlje = viewActionBar.findViewById(R.id.naslov);
-        zaglavlje.setText("Novosti");
+        zaglavlje.setText(getContext().getResources().getString(R.string.novostiNaslov));
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
@@ -73,24 +72,24 @@ public class MultimedijaOpsirno extends Fragment {
             sadrzaj.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
         }
 
-        if(medij.getMedij().toString().toLowerCase().equals("facebook")) {
-            idiNaPoveznicu.setText("Više pročitajte u objavi.");
+        if(medij.getMedij().toString().toLowerCase().equals(getContext().getResources().getString(R.string.facebookString))) {
+            idiNaPoveznicu.setText(getContext().getResources().getString(R.string.viseProcitajteUObjavi));
             linkButton.setImageDrawable(getActivity().getDrawable(R.drawable.ic_buttonfacebook));
         }
-        else if(medij.getMedij().toString().toLowerCase().equals("youtube")){
-            idiNaPoveznicu.setText("U nastavku pogledajte video.");
+        else if(medij.getMedij().toString().toLowerCase().equals(getContext().getResources().getString(R.string.youtubeString))) {
+            idiNaPoveznicu.setText(getContext().getResources().getString(R.string.uNastavkuPogledajte));
             linkButton.setImageDrawable(getActivity().getDrawable(R.drawable.ic_buttonyoutube));
         }
-        else  if(medij.getMedij().toString().toLowerCase().equals("web")){
-            idiNaPoveznicu.setText("U članku pročitajte više.");
+        else  if(medij.getMedij().toString().toLowerCase().equals(getContext().getResources().getString(R.string.webString))) {
+            idiNaPoveznicu.setText(getContext().getResources().getString(R.string.uClankuProcitajte));
             linkButton.setImageDrawable(getActivity().getDrawable(R.drawable.ic_buttoninternet));
         }
-        else  if(medij.getMedij().toString().toLowerCase().equals("instagram") ){
-            idiNaPoveznicu.setText("Više pročitajte u objavi.");
+        else  if(medij.getMedij().toString().toLowerCase().equals(getContext().getResources().getString(R.string.instagramString))) {
+            idiNaPoveznicu.setText(getContext().getResources().getString(R.string.viseProcitajteUObjavi));
             linkButton.setImageDrawable(getActivity().getDrawable(R.drawable.ic_buttoninstagram));
         }
         else{
-            idiNaPoveznicu.setText("Za više pritisnite na poveznicu.");
+            idiNaPoveznicu.setText(getContext().getResources().getString(R.string.zaVisePritisnite));
             linkButton.setImageDrawable(getActivity().getDrawable(R.drawable.ic_buttoninternet));
         }
 
@@ -111,7 +110,7 @@ public class MultimedijaOpsirno extends Fragment {
             startActivity(browserIntent);
         }
         else
-            Toast.makeText(getContext(),"Link je neispravan, kontaktirajte nadležnu osobu!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),getContext().getResources().getString(R.string.neispravanLinkString),Toast.LENGTH_SHORT).show();
 
     }
 

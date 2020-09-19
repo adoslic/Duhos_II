@@ -35,7 +35,7 @@ public class TimoviFragment extends Fragment {
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         View view=mActionBar.getCustomView();
         zaglavlje=view.findViewById(R.id.naslov);
-        zaglavlje.setText("DUHOS timovi");
+        zaglavlje.setText(getContext().getResources().getString(R.string.duhosTimoviNaslov));
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);

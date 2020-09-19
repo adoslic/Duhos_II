@@ -6,8 +6,6 @@ import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
-import android.text.InputFilter;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -21,10 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,7 +41,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -86,7 +80,7 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         View view=mActionBar.getCustomView();
         zaglavlje=view.findViewById(R.id.naslov);
-        zaglavlje.setText("Kalendar");
+        zaglavlje.setText(getContext().getResources().getString(R.string.kalendarNaslov));
         checkInternetConnection();
 
         flagClicked=false;
@@ -186,7 +180,7 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
             Typeface monseratBold = Typeface.createFromAsset(getContext().getAssets(), "fonts/montserrat_light.ttf");
 
             TextView today=view1.findViewById(R.id.tvToday);
-            today.setText("Danas");
+            today.setText(getContext().getResources().getString(R.string.danasString));
             today.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
             today.setTypeface(monseratBold);
 
@@ -285,7 +279,7 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w(TAG, "Greška u čitanju iz baze podataka", databaseError.toException());
+                Log.w(TAG, getContext().getResources().getString(R.string.greskaUbaziString), databaseError.toException());
             }
         });
 
@@ -342,7 +336,7 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
             }
         }
         if(flag==false && flagClicked==true) {
-            Toast.makeText(getContext(), "Nema predviđenih događaja za odabrani datum!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getContext().getResources().getString(R.string.nemaPodatakaUbazi), Toast.LENGTH_SHORT).show();
         }
         flagClicked=true;
         ((LinearLayoutManager)recyclerView.getLayoutManager()).scrollToPositionWithOffset(position,0);

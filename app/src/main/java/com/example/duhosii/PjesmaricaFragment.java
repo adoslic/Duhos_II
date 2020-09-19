@@ -77,7 +77,7 @@ public class PjesmaricaFragment extends Fragment {
         View view=mActionBar.getCustomView();
         zaglavlje=view.findViewById(R.id.naslov);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-        zaglavlje.setText("Pjesmarica");
+        zaglavlje.setText(getContext().getResources().getString(R.string.pjesmaricaNaslov));
 
         pjesmaricaFragmentView=inflater.inflate(R.layout.fragment_pjesmarica, container, false);
 
@@ -191,7 +191,7 @@ public class PjesmaricaFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w(TAG, "Greška u čitanju iz baze podataka", databaseError.toException());
+                Log.w(TAG, getContext().getResources().getString(R.string.greskaUbaziString), databaseError.toException());
             }
         });
 
