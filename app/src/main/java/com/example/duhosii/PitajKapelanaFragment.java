@@ -46,11 +46,7 @@ public class PitajKapelanaFragment extends Fragment {
     private float density;
     private int padding;
     private ImageButton back;
-    String text=getContext().getResources().getString(R.string.pitanjeDisclaimer);
-    /*private String marioMail="m.zigman6@gmail.com";
-    private String davorMail="dav.vuk@gmail.com";*/
-    private String marioMail=getContext().getResources().getString(R.string.mailZaPitanjaKapelan2);
-    private String davorMail=getContext().getResources().getString(R.string.mailZaPitanjaKapelan1);
+
     public PitajKapelanaFragment() {
     }
 
@@ -132,6 +128,10 @@ public class PitajKapelanaFragment extends Fragment {
             sendMessageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    /*private String marioMail="m.zigman6@gmail.com";
+                    private String davorMail="dav.vuk@gmail.com";*/
+                    String marioMail=getContext().getResources().getString(R.string.mailZaPitanjaKapelan2);
+                    String davorMail=getContext().getResources().getString(R.string.mailZaPitanjaKapelan1);
                     if(marioImageActive.getVisibility()==View.GONE && davorImageActive.getVisibility()==View.GONE){
                         Toast.makeText(getContext(),getEmojiByUnicode(0x1F446)+"Odaberi kapelana!",Toast.LENGTH_SHORT).show();
                     }
@@ -206,6 +206,7 @@ public class PitajKapelanaFragment extends Fragment {
     }
 
     public void otvoriDialog(View view) {
+        String text=getContext().getResources().getString(R.string.pitanjeDisclaimer);
         final DialogDisclaimer dialog=new DialogDisclaimer(text);
         dialog.show(getActivity().getSupportFragmentManager(),"dialog");
     }
