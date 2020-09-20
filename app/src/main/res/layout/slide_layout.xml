@@ -48,6 +48,6 @@
             android:gravity="center"
             android:layout_marginHorizontal="10dp"
             android:scrollbars = "vertical"
-            ></TextView>
+            android:padding="12dp"></TextView>
     </RelativeLayout>
 </RelativeLayout>

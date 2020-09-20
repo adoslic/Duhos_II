@@ -72,11 +72,6 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
             holder.odgovor.setMovementMethod(LinkMovementMethod.getInstance());
 
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                holder.pitanje.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
-                holder.odgovor.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
-            }
-
             if (doAnimation)
                 holder.pitanjeOdgovorLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_transition_animation));
 

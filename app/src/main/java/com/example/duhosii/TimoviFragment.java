@@ -49,14 +49,7 @@ public class TimoviFragment extends Fragment {
         bandTeskt=timoviFragmentView.findViewById(R.id.bandTeskt);
         volonteriTekst=timoviFragmentView.findViewById(R.id.volonteriTekst);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            stoZelimoTeskt.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
-            cuposTekst.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
-            liturgijskiTekst.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
-            medijskiTekst.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
-            bandTeskt.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
-            volonteriTekst.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
-        }
+
         return timoviFragmentView;
     }
 

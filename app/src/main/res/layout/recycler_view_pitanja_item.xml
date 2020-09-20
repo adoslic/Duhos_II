@@ -54,6 +54,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp">
+
             <TextView
                 android:id="@+id/idOdgovor"
                 android:layout_width="wrap_content"
@@ -62,14 +63,13 @@
                 android:textColor="@color/white"
                 android:visibility="visible"
                 android:layout_centerHorizontal="true"
-                android:textAlignment="center"
-                android:gravity="center_horizontal"
                 android:textSize="16sp"
                 android:fontFamily="@font/montserrat_regular"
                 android:textIsSelectable="false"
                 android:autoLink="web"
                 android:textColorLink="@color/linkColor">
             </TextView>
+
             <ImageButton
                 android:id="@+id/share"
                 android:layout_width="wrap_content"
