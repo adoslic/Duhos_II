@@ -53,12 +53,12 @@ public class VratiSeFragment extends Fragment {
         manjiTekst=vratiSeFragmentView.findViewById(R.id.manjiTekst);
 
         if(flag.equals("pitanje")){
-            veciTekst.setText("PITANJE JE POSLANO!");
-            manjiTekst.setText("Kapelan će odgovoriti na pitanje te ćemo isto objaviti u aplikaciji kako bi vidio odgovor. Hvala ti na korištenju aplikacije i popunjavanju naše rubrike.");
+            veciTekst.setText(getContext().getResources().getString(R.string.pitanjeJePoslano));
+            manjiTekst.setText(getContext().getResources().getString(R.string.kapelanCeOdgovoritiNaPitanjeTekst));
         }
         if(flag.equals("nakana")){
-            veciTekst.setText("MOLITVENA NAKANA JE POSLANA!");
-            manjiTekst.setText("Vidimo se na sljedećem euharistijskom klanjanju na kojem ćemo moliti za tvoju nakanu.");
+            veciTekst.setText(getContext().getResources().getString(R.string.nakanaJePoslana));
+            manjiTekst.setText(getContext().getResources().getString(R.string.vidimoSeNaKlanjaju));
         }
 
 

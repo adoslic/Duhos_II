@@ -39,7 +39,7 @@ public class CasoslovFragment extends Fragment {
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         View viewActionBar=mActionBar.getCustomView();
         zaglavlje=viewActionBar.findViewById(R.id.naslov);
-        zaglavlje.setText("Časoslov");
+        zaglavlje.setText(getContext().getResources().getString(R.string.casoslovNaslov));
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
@@ -56,7 +56,7 @@ public class CasoslovFragment extends Fragment {
             casoslovWebView.loadUrl(url);
         }
         else
-            Toast.makeText(getContext(),"Link je neispravan, kontaktirajte nadležnu osobu!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),getContext().getResources().getString(R.string.neispravanLinkString),Toast.LENGTH_SHORT).show();
 
         return casoslovView;
     }

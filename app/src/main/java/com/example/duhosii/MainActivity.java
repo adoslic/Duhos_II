@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
                     }
                     getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,selectedFragment).addToBackStack("selectedFragment").commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,selectedFragment).addToBackStack("").commit();
                     return true;
                 }
             };
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (sharedPreferences.getBoolean("firstRun", true)) {
             //You can perform anything over here. This will call only first time
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new AplikacijaInfoFragment()).addToBackStack("aplikacijaInfoFragment").commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new AplikacijaInfoFragment()).addToBackStack("").commit();
             editor = sharedPreferences.edit();
             editor.putBoolean("firstRun", false);
             editor.commit();

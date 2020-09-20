@@ -48,7 +48,7 @@ public class KnjiznicaFragment extends Fragment {
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         View view=mActionBar.getCustomView();
         zaglavlje=view.findViewById(R.id.naslov);
-        zaglavlje.setText("Knjižnica");
+        zaglavlje.setText(getContext().getResources().getString(R.string.knjiznicaString));
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
@@ -76,7 +76,7 @@ public class KnjiznicaFragment extends Fragment {
             startActivity(browserIntent);
         }
         else
-            Toast.makeText(getContext(),"Link je neispravan, kontaktirajte nadležnu osobu!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),getContext().getResources().getString(R.string.neispravanLinkString),Toast.LENGTH_SHORT).show();
     }
 
 

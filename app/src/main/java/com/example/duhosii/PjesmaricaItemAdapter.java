@@ -109,7 +109,7 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
                 public void onClick(View v) {
                     activity = (AppCompatActivity) v.getContext();
                     PjesmaOpsirno pjesmaOpsirno = new PjesmaOpsirno(itemList.get(position));
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, pjesmaOpsirno).addToBackStack("pjesmaOpsirnoFragment").commit();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, pjesmaOpsirno).addToBackStack("").commit();
                     UIUtil.hideKeyboard(activity);
                     searchFlag=true;
                 }
