@@ -60,7 +60,7 @@ public class PitanjaFragment extends Fragment {
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         View view=mActionBar.getCustomView();
         zaglavlje=view.findViewById(R.id.naslov);
-        zaglavlje.setText("Pitanja");
+        zaglavlje.setText(getContext().getResources().getString(R.string.pitanjaNaslov));
         checkInternetConnection();
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
@@ -74,7 +74,7 @@ public class PitanjaFragment extends Fragment {
             pitajKapelanaButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new PitajKapelanaFragment()).addToBackStack("pitajKapelanaFragment").commit();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new PitajKapelanaFragment()).addToBackStack("").commit();
 
                 }
             });
@@ -128,7 +128,7 @@ public class PitanjaFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w(TAG, "Greška u čitanju iz baze podataka", databaseError.toException());
+                Log.w(TAG, getContext().getResources().getString(R.string.greskaUbaziString), databaseError.toException());
             }
         });
 

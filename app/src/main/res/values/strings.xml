@@ -2,17 +2,19 @@
     <string name="app_name">DUHOS</string>
 
     <string name="knjiznica_naslov">Kada si u nedoumici, idi u knjižnicu.</string>
-    <string name="knjiznica_tekst">Dragi prijatelji, pozivamo vas u jedinstvenu DUHOS knjižnicu, koja besplatno nudi preko 1000 naslova duhovne i srodne literature. Knjige se posuđuju besplatno, bez članarine.\n\nKnjižnica se nalazi u uredu studentskog kapelana u kampusu, u zgradi Studentskog zbora našeg Sveučilišta.\n\nRadno vrijeme je ponedjeljkom do petka od 10 do 16 sati.\n\nDođi, uzmi i čitaj!
-</string>
+    <string name="knjiznica_tekst">Dragi prijatelji, pozivamo vas u jedinstvenu DUHOS knjižnicu, koja besplatno nudi preko 1000 naslova duhovne i srodne literature. Knjige se posuđuju besplatno, bez članarine.\n\nKnjižnica se nalazi u uredu studentskog kapelana na Kampusu, u zgradi Studentskog zbora našeg Sveučilišta. Radno vrijeme je od ponedjeljka do petka od 10 do 16 sati.\n\nDođi, uzmi i čitaj!</string>
 
     <string name="kapelan1_naslov1">Sveučilišni kapelan:</string>
     <string name="kapelan1_naslov2">doc.dr.sc. Davor Vuković</string>
-    <string name="kapelan1_tekst">Rođen u Vinkovcima 2. studenog 1978. godine. Osnovnu školu završava u Ivankovu a gimnaziju u Vinkovcima. Nakon srednje škole upisuje bogoslovni fakultet u Đakovu te studij filozofije i teologije na Teologiji u Đakovu.\n\nZaređen je za svećenika od 2003. godine nakon čega postaje đakon u župi sv. Ćirila i Metoda u Divaltovoj i župni vikar u župi sv. Petra i Pavla u konkatedrali u Osijeku. 2012. godine doktorira na poslijediplomskom studiju iz fundamentalne teologije na Papinskom sveučilištu Gregoriana.\n\nNakon rimskog studija postaje prvo asistent, a zatim docent na Katoličkom bogoslovnom fakultetu u Đakovu gdje i danas predaje fundamentalnu teologiju. Dvije godine je bio župnik u Selcima Đakovačkim, te četiri godine duhovnik u samostanskoj crkvi Milosrdnih sestara sv. Križa u Đakovu. Od 2018. godine imenovan je sveučilišnim kapelanom na Sveučilištu J.J.Strossmayera u Osijeku.\n\nKapelan Davor poručuje mladima: “Oj budi svoj, budite svoji! Budite svoji, no budite i Božji i crkveni, jer istinska vjera ništa ne oduzima, nego naprotiv doprinosi napretku i rastu svakog čovjeka, vjernika”.
-    </string>
+    <string name="kapelan1_tekst">Rođen u Vinkovcima 2. studenog 1978. godine. Osnovnu školu završava u Ivankovu, a gimnaziju u Vinkovcima. Nakon srednje škole upisuje Bogoslovni fakultet u Đakovu te Studij filozofije i teologije na Teologiji u Đakovu.\n\nZaređen je za svećenika od 2003. godine nakon čega postaje đakon u župi sv. Ćirila i Metoda u Divaltovoj i župni vikar u župi sv. Petra i Pavla u konkatedrali u Osijeku. Zatim 2012. godine doktorira na Poslijediplomskom studiju iz fundamentalne teologije na Papinskom sveučilištu Gregoriana.\n\nNakon rimskog studija postaje prvo asistent, a zatim docent na Katoličkom bogoslovnom fakultetu u Đakovu gdje i danas predaje Fundamentalnu teologiju. Dvije godine je bio župnik u Selcima Đakovačkim, te četiri godine duhovnik u samostanskoj crkvi Milosrdnih sestara sv. Križa u Đakovu. Od 2018. godine imenovan je sveučilišnim kapelanom na Sveučilištu J.J. Strossmayera u Osijeku.\n\nKapelan Davor poručuje mladima: “Oj, budi svoj, budite svoji! Budite svoji, no budite i Božji i crkveni, jer istinska vjera ništa ne oduzima, nego naprotiv doprinosi napretku i rastu svakog čovjeka, vjernika.”</string>
 
     <string name="kapelan2_naslov1">Studentski kapelan:</string>
     <string name="kapelan2_naslov2">vlč. Mario Žigman</string>
-    <string name="kapelan2_tekst">Rođen 25. svibnja 1990. u Đakovu iz mjesta Selaca Đakovačkih. Završivši srednju upisuje Katolički bogoslovni fakultet u Đakovu te nakon prve godine ulazi u bogoslovno sjemenište.\n\nZaređen je za đakona od 2016. godine nakon čega postaje đakon u župi Preslavnog Imena Marijina u Osijeku. Za svećenika je zaređen 2017. godine te postaje župni vikar u župi Bezgrešnog začeća BDM u Valpovu.\n\nNakon godinu dana odlukom biskupa dolazi na službu nadbiskupijskog povjerenika za mlade i studenskog kapelana na Sveučilištu J.J.Strossmayera u Osijeku.
+    <string name="kapelan2_tekst">Rođen 25. svibnja 1990. u Đakovu iz mjesta Selaca Đakovačkih. Završivši srednju upisuje Katolički bogoslovni fakultet u Đakovu te nakon prve godine ulazi u bogoslovno sjemenište.\n\nZaređen je za đakona 2016. godine, nakon čega postaje đakon u župi Preslavnog Imena Marijina u Osijeku. Za svećenika je zaređen 2017. godine te postaje župni vikar u župi Bezgrešnog začeća BDM u Valpovu.\n\nNakon godinu dana odlukom biskupa dolazi na službu nadbiskupijskog povjerenika za mlade i studenskog kapelana na Sveučilištu J.J. Strossmayera u Osijeku.</string>
+
+    <string name="opcenito_info">Udruga Duhovnost osječkih studenata – DUHOS - osnovana je 2011. godine i djeluje s misijom evangelizacije na Sveučilištu J.J. Strossmayera u Osijeku pri Pastoralu studenata Đakovačko-osječke nadbiskupije.\n\nDUHOS je udruga koja želi dovesti
+studente i mlade bliže Kristu. Naglasak je na tome koliko je bitno za mladog čovjek duhovno se razvijati i rasti u krilu Božjem. Svakog je utorka studentski vjeronauk i klanjanje pred Presvetim oltarskim sakramentom, a zadnji utorak u mjesecu je sveta misa.\n\nNakon vjeronauka studenti i mladi imaju priliku upoznati se i sklopiti nova prijateljstva, podijeliti životne priče odlaskom u “družbaonu” gdje se druži, razgovara i igraju društvene igre.\n\n Na početku svake akademske godine organizira se misa zaziva Duha Svetoga u konkatedrali Svetog Petra i Pavla u Osijeku. Osim mise, na početku akademske godine postoji i već tradicionalna DUHOS brucošijada na koju su pozvani svi brucoši Sveučilišta, ali i svi drugi studenti.\n\n Svake se godine  organizira i duhovsko bdijenje u subotu uoči blagdana Duhova. Za “Prvi maj” se odlazi na izlet u Đakovačku Breznicu i Ovčaru gdje se organizira radna akcija te pravi roštilj. Na kraju akademske godine u osječkoj konkatedrali organizira se i misa zahvalnica za sve uspjehe i padove u protekloj akademskoj godini.\n\nOsim toga DUHOS
+ima razne timove u koje se možete priključiti: ČUPOS, liturgijski tim, medijski tim, DUHOS bend i volonterski tim. Cilj je uvijek isti - upoznavati Gospodina u svom njegovom veličanstvu i slavi, svjedočiti i živjeti za njega.
 </string>
 
     <string name="opcenito_info">Udruga Duhovnost osječkih studenata DUHOS osnovana je
@@ -35,28 +37,84 @@ je uvijek isti - upoznavati Gospodina u svom njegovom veličanstvu i slavi, svje
 za njega.</string>
 
     <string name="cupos">„Biti pred Gospodinom polako mijenja naša srca.” Čuvari Presvetog oltarskog
-sakramenta čine studenti koji izdvajaju svoje vrijeme kako bi otvorili studensku kapelicu i
-DUHOS knjižnicu koja se nalazi u sklopu kapelice. Članovi ČUPOS-a svaki se ponedjeljak
-okupljaju na molitvi srcem u 20 sati u studenskoj kapelici na koju pozivaju i tebe.</string>
+sakramenta čine studenti koji izdvajaju svoje vrijeme kako bi otvorili studensku kapelicu i DUHOS knjižnicu koja se nalazi u sklopu kapelice. Članovi ČUPOS-a svaki se ponedjeljak okupljaju na molitvi srcem u 20 sati u studenskoj kapelici na koju pozivaju i tebe.
+</string>
 
     <string name="band">Slavljenički tim čine studenti koji svojim talentima i instrumentima žele slaviti
-Gospodina. Animiramo susrete utorkom, misna slavlja i klanjanja te ponekad organiziramo
-večer slavljenja ili otvorenu probu. Okupljamo se svaki tjedan na probi na kojoj molimo Duha
-Svetoga za vodstvo, jačanje u osobnoj i zajedničkoj molitvi te nove članove.</string>
+Gospodina. Animiraju susrete utorkom, misna slavlja i klanjanja te ponekad organiziraju večer slavljenja ili otvorenu probu. Okupljaju se svaki tjedan na probi na kojoj mole Duha Svetoga za vodstvo, jačanje u osobnoj i zajedničkoj molitvi te nove članove.
+</string>
 
     <string name="volonteri">Članovi volonterskog tima imaju priliku djelovati karitativno. Posjećuju
-Dom za odgoj djece i mladih, Dom za starije i nemoćne osobe te ostale domove gdje se trude
-donijeti radost korisnicima. Također imaju kreativne radionice, na kojima izrađuju razne
-predmete, a dobivenu zaradu daruju potrebitima.</string>
+Dom za odgoj djece i mladih, Dom za starije i nemoćne osobe te ostale domove gdje se trude donijeti radost korisnicima. Također imaju kreativne radionice na kojima izrađuju razne predmete, a dobivenu zaradu daruju potrebitima.
+</string>
 
-    <string name="stoZelimo">DUHOS članovi žele biti \"bilo\" grada, odgovarati na potrebe sadašnjeg trenutka kroz donošenje istine, radosti i nade mladima u našem gradu Osijeku i cijelome svijetu kroz različite timove.</string>
+    <string name="stoZelimo">DUHOS članovi žele biti \„bilo“\ grada, odgovarati na potrebe sadašnjeg trenutka kroz donošenje istine, radosti i nade mladima u gradu Osijeku i cijelome svijetu kroz različite timove.</string>
 
     <string name="liturgijski">Liturgijski tim čine ministranti koji vode brigu oko posluživanja tijekom
-misa i Euharstijskih klanjanja u sklopu naših susreta, ali i nedjeljne svete mise u konkatedrali.
-Jednako tako u timu su oni koji žele i čitaju Božju riječ na svetim misama. Ako se dvoumiš otvori Lk 22,8. Možda Isus i tebe šalje... osluškuj.</string>
-    <string name="medijski">Medijski tim Duhosa okuplja mlade različitih interesa u širokom dijapazonu aktivnosti tima.
-        Iako se često nalazi u pozadini svih djelatnosti, predstavlja prvu frontu, koja dopire do brojnih srca putem aktualnih društvenih mreža
-        (Instagram, Facebook i Youtube), web stranice i radijske emisije u sklopu studentskog radija UNIOS. Svjesni smo odgovornosti koji imamo za
-        evangelizaciju našega Sveučilišta i njegovih mladih. Žetva je velika, a radnika malo. Nama je svaki važan i potreban. Želiš li svjedočiti i
-        raditi za Istinu te sudjelovati u stvaranju boljeg društva – pridruži nam se i budi odvažan! </string>
+misa i Euharistijskih klanjanja u sklopu naših susreta, ali i nedjeljne svete mise u konkatedrali. Jednako tako u timu su oni koji žele i čitaju Božju riječ na svetim misama. Ako se dvoumiš otvori Lk 22,8. Možda Isus i tebe šalje... osluškuj.
+</string>
+    <string name="medijski">Medijski tim Duhosa okuplja mlade različitih interesa u širokom dijapazonu aktivnosti tima. Iako se često nalazi u pozadini svih djelatnosti, predstavlja prvu frontu koja dopire do brojnih srca putem aktualnih društvenih mreža (Instagram, Facebook i Youtube), web stranice i radijske emisije u sklopu studentskog radija UNIOS. Svjesni su odgovornosti koju imaju za evangelizaciju Sveučilišta i njegovih mladih. Žetva je velika, a radnika malo. Njima je svaki važan i potreban. Želiš li svjedočiti i raditi za Istinu te sudjelovati u stvaranju boljeg društva – pridruži im se i budi odvažan!</string>
+
+    <string name="odSrcakSrcuInfo">Ovaj dio aplikacije namijenjen je za tvoj duhovni rast. Moli zajedno s nama i dijeli molitve koje ti se sviđaju pomoću swipe-a. Slobodno nam pošalji svoju molitvenu nakanu klikom na + i molit ćemo zajedno s tobom na sljedećem euharistijskom klanjanju.</string>
+    <string name="kalendarInfo">Budući da Udruga organizira puno aktivnosti, u ovom dijelu aplikacije jednostavno i brzo prati svaki događaj. Za događaje koje bi htio posjetiti omogućili smo ti postavljanje obavijesti, a možeš događaj podijeliti i s prijateljima pomoću swipe-a.</string>
+    <string name="novostiInfo">U novostima prati naše objave na društvenim mrežama sve na jednom mjestu. Informirat ćemo te i o novostima koje dolaze izvan naše udruge.</string>
+    <string name="pitanjaInfo">Ako imaš neko pitanje, a nemaš svećenika u blizini da ti odgovori, slobodno pošalji pitanje našim kapelanima klikom na +. Pitanje možeš postaviti i anonimno, a odgovor ćemo objaviti u našoj aplikaciji.</string>
+    <string name="pjesmaricaInfo">S mnoštvom pjesama naša pjesmarica ti omogućuje lako pronalaženje tekstova i akorda za tvoje potrebe. Pomoću swipe-a jednostavno podijeli tekst putem društvenih mreža.</string>
+
+    <string name="oAplikacijiNaslov">O aplikaciji</string>
+
+    <string name="sljedeceNaslov">SLJEDEĆE</string>
+    <string name="zavrsiString">ZAVRŠI</string>
+    <string name="natragString">NATRAG</string>
+
+    <string name="casoslovNaslov">Časoslov</string>
+    <string name="neispravanLinkString">Link je neispravan, kontaktirajte nadležnu osobu!</string>
+    <string name="slanjePorukeString">Slanje poruke</string>
+    <string name="molimPricekajteString">Molim pričekajte...</string>
+
+    <string name="kalendarNaslov">Kalendar</string>
+    <string name="danasString">Danas</string>
+    <string name="greskaUbaziString">Greška u čitanju iz baze podataka</string>
+    <string name="nemaPodatakaUbazi">Nema predviđenih događaja za odabrani datum!</string>
+    <string name="kadObavijestStize">Obavijest će stići na dan događaja u odabrano vrijeme!</string>
+    <string name="odabranoJeProsloVrijeme">Odabrali ste vrijeme koje je prošlo! Pokušajte ponovno!</string>
+
+    <string name="kapelaniNaslov">Kapelani</string>
+
+    <string name="knjiznicaString">Knjižnica</string>
+
+    <string name="odSrcaKsrcuNaslov">Od srca k Srcu</string>
+    <string name="molitvaIpozonostiString">Molitve i pobožnosti</string>
+    <string name="marijaString">Marija</string>
+    <string name="nadahnucaString">Nadahnuća</string>
+    <string name="svjedocanstvaString">Svjedočanstva</string>
+
+    <string name="novostiNaslov">Novosti</string>
+    <string name="facebookString">facebook</string>
+    <string name="youtubeString">youtube</string>
+    <string name="webString">web</string>
+    <string name="instagramString">instagram</string>
+    <string name="viseProcitajteUObjavi">Više pročitajte u objavi.</string>
+    <string name="uNastavkuPogledajte">U nastavku pogledajte video.</string>
+    <string name="uClankuProcitajte">U članku pročitajte više.</string>
+    <string name="zaVisePritisnite">Za više pritisnite na poveznicu.</string>
+
+    <string name="molitvenaNakanaString">Molitvena nakana</string>
+    <string name="opceniteInformacijeString">Općenito informacije</string>
+
+    <string name="pitanjeDisclaimer">Prilikom slanja pitanja za našeg kapelana, unos imena i prezimena nije nužan ukoliko želiš ostati anoniman, a u suprotnom će ime i prezime biti vidljivo samo kapelanu. Nakon što kapelan odgovori, pitanje i odgovor ćemo objaviti u aplikaciji.</string>
+    <string name="mailZaPitanjaKapelan2">kresimirtomic1998@gmail.com</string>
+    <string name="mailZaPitanjaKapelan1">ktomic@etfos.hr</string>
+    <string name="pitajKapelanaNaslov">Pitaj kapelana</string>
+    <string name="pitanjaNaslov">Pitanja</string>
+
+    <string name="pjesmaricaNaslov">Pjesmarica</string>
+
+    <string name="duhosTimoviNaslov">DUHOS timovi</string>
+
+    <string name="pitanjeJePoslano">PITANJE JE POSLANO!</string>
+    <string name="kapelanCeOdgovoritiNaPitanjeTekst">Kapelan će odgovoriti na pitanje te ćemo isto objaviti u aplikaciji kako bi vidio odgovor. Hvala ti na korištenju aplikacije i popunjavanju naše rubrike.</string>
+    <string name="nakanaJePoslana">MOLITVENA NAKANA JE POSLANA!</string>
+    <string name="vidimoSeNaKlanjaju">Vidimo se na sljedećem euharistijskom klanjanju na kojem ćemo moliti za tvoju nakanu.</string>
+
 </resources>

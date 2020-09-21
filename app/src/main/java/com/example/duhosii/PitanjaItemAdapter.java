@@ -58,6 +58,7 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
     public void onBindViewHolder(@NonNull final PitanjaItemAdapter.ViewHolder holder, final int position) {
 
             context = holder.pitanjeOdgovorLayout.getContext();
+
         if (showShimmer) {
             holder.shimmerFrameLayout.startShimmer();
         } else {

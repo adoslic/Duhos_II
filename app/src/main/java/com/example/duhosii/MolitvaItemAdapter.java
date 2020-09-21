@@ -46,13 +46,13 @@ public class MolitvaItemAdapter extends RecyclerView.Adapter<MolitvaItemAdapter.
     public void onBindViewHolder(@NonNull final MolitvaItemAdapter.ViewHolder holder, final int position) {
 
             context=holder.itemLayout.getContext();
-            if(izvor.equals("Molitve i pobožnosti"))
+            if(izvor.equals(context.getResources().getString(R.string.molitvaIpozonostiString)))
                 holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_opcemolitve));
-            if(izvor.equals("Marija"))
+            if(izvor.equals(context.getResources().getString(R.string.marijaString)))
                 holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_blazenadjevicamarija));
-            if(izvor.equals("Nadahnuća"))
+            if(izvor.equals(context.getResources().getString(R.string.nadahnucaString)))
                 holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_nadahnuca));
-            if(izvor.equals("Svjedočanstva"))
+            if(izvor.equals(context.getResources().getString(R.string.svjedocanstvaString)))
                 holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_poboznosti));
 
             holder.slikaLayout.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition_animation));
@@ -67,7 +67,7 @@ public class MolitvaItemAdapter extends RecyclerView.Adapter<MolitvaItemAdapter.
             public void onClick(View v) {
                 activity = (AppCompatActivity) v.getContext();
                 MolitvaOpsirno molitvaOpsirno=new MolitvaOpsirno(itemList.get(position),izvor);
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,molitvaOpsirno).addToBackStack("molitvaOpsirnoFragment").commit();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,molitvaOpsirno).addToBackStack("").commit();
             }
         });
     }

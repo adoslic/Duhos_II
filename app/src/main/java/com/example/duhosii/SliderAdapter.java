@@ -37,13 +37,7 @@ public class SliderAdapter extends PagerAdapter {
             "Pitanja",
             "Pjesmarica"
     };
-    public String[] slide_descriptions={
-            "Ovaj dio aplikacije namijenjen je za tvoj duhovni rast. Moli zajedno s nama i dijeli molitve koje ti se sviđaju pomoću swipe-a. Slobodno nam pošalji svoju molitvenu nakanu klikom na + i molit ćemo zajedno s tobom na sljedećem euharistijskom klanjanju.",
-            "Budući da Udruga organizira puno aktivnosti, u ovom dijelu aplikacije jednostavno i brzo prati svaki događaj. Za događaje koje bi htio posjetiti omogućili smo ti postavljanje obavijesti, a možeš događaj podijeliti i s prijateljima pomoću swipe-a.",
-            "U novostima prati naše objave na društvenim mrežama sve na jednom mjestu. Informirat ćemo te i o novostima koje dolaze izvan naše udruge.",
-            "Ako imaš neko pitanje, a nemaš svećenika u blizini da ti odgovori, slobodno pošalji pitanje našim kapelanima klikom na +. Pitanje možeš postaviti i anonimno, a odgovor ćemo objaviti u našoj aplikaciji.",
-            "Sa mnoštvom pjesama naša pjesmarica ti omogućuje lako pronalaženje tekstova i akorda za svoje potrebe. Pomoću swipe-a jednostavno podijeli tekst putem društvenih mreža.",
-    };
+
 
     @Override
     public int getCount() {
@@ -58,6 +52,14 @@ public class SliderAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
+
+        String[] slide_descriptions={
+                context.getResources().getString(R.string.odSrcakSrcuInfo),
+                context.getResources().getString(R.string.kalendarInfo),
+                context.getResources().getString(R.string.novostiInfo),
+                context.getResources().getString(R.string.pitanjaInfo),
+                context.getResources().getString(R.string.pjesmaricaInfo)
+        };
         layoutInflater=(LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view=layoutInflater.inflate(R.layout.slide_layout,container,false);
 

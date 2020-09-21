@@ -274,7 +274,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                                     holder.minute = min;
                             }
                         }, hour, minute, true);
-                        Toast.makeText(context,"Obavijest će stići na dan događaja u odabrano vrijeme!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,context.getResources().getString(R.string.kadObavijestStize),Toast.LENGTH_SHORT).show();
                         //kad se stisne uredu onda povisibleani taj alarm i postavi zastavicu na true, cancel flag je zbog toga sto se i onDismiss i onCancel flag
                         // pozivaju kada se stisne uredu, pa se rusila apk, ugl.. nebitno, to je pomocna zastavica
                         mTimePicker.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -290,7 +290,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                                         e.printStackTrace();
                                     }
                                     if (vrijemeAlarma.before(new Date())) {
-                                        Toast.makeText(context, "Odabrali ste vrijeme koje je prošlo! Pokušajte ponovno!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(context, context.getResources().getString(R.string.odabranoJeProsloVrijeme), Toast.LENGTH_SHORT).show();
                                     } else {
                                         alarmVisibility.set(position, true);
                                         final boolean visible = alarmVisibility.get(position);

@@ -53,7 +53,7 @@ public class PjesmaOpsirno extends Fragment {
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         View viewActionBar = mActionBar.getCustomView();
         zaglavlje = viewActionBar.findViewById(R.id.naslov);
-        zaglavlje.setText("Pjesmarica");
+        zaglavlje.setText(getContext().getResources().getString(R.string.pjesmaricaNaslov));
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
@@ -105,7 +105,7 @@ public class PjesmaOpsirno extends Fragment {
             startActivity(browserIntent);
         }
         else
-            Toast.makeText(getContext(),"Link je neispravan, kontaktirajte nadležnu osobu!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),getContext().getResources().getString(R.string.neispravanLinkString),Toast.LENGTH_SHORT).show();
     }
 
     public void share() {

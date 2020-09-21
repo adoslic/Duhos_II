@@ -46,12 +46,7 @@ public class PitajKapelanaFragment extends Fragment {
     private float density;
     private int padding;
     private ImageButton back;
-    String text="Prilikom slanja pitanja za našeg kapelana, unos imena i prezimena nije nužan ukoliko želiš ostati anoniman, a u suprotnom će ime i prezime biti vidljivo samo kapelanu. Nakon što kapelan odgovori, pitanje i odgovor ćemo objaviti u aplikaciji.";
 
-    /*private String marioMail="m.zigman6@gmail.com";
-    private String davorMail="dav.vuk@gmail.com";*/
-    private String marioMail="kresimirtomic1998@gmail.com";
-    private String davorMail="ktomic@etfos.hr";
     public PitajKapelanaFragment() {
     }
 
@@ -68,7 +63,7 @@ public class PitajKapelanaFragment extends Fragment {
         zaglavlje=viewActionBar.findViewById(R.id.naslov);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
-        zaglavlje.setText("Pitaj kapelana");
+        zaglavlje.setText(getContext().getResources().getString(R.string.pitajKapelanaNaslov));
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
@@ -133,6 +128,10 @@ public class PitajKapelanaFragment extends Fragment {
             sendMessageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    /*private String marioMail="m.zigman6@gmail.com";
+                    private String davorMail="dav.vuk@gmail.com";*/
+                    String marioMail=getContext().getResources().getString(R.string.mailZaPitanjaKapelan2);
+                    String davorMail=getContext().getResources().getString(R.string.mailZaPitanjaKapelan1);
                     if(marioImageActive.getVisibility()==View.GONE && davorImageActive.getVisibility()==View.GONE){
                         Toast.makeText(getContext(),getEmojiByUnicode(0x1F446)+"Odaberi kapelana!",Toast.LENGTH_SHORT).show();
                     }
@@ -207,6 +206,7 @@ public class PitajKapelanaFragment extends Fragment {
     }
 
     public void otvoriDialog(View view) {
+        String text=getContext().getResources().getString(R.string.pitanjeDisclaimer);
         final DialogDisclaimer dialog=new DialogDisclaimer(text);
         dialog.show(getActivity().getSupportFragmentManager(),"dialog");
     }

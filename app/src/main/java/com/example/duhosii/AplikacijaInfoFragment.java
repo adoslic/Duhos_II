@@ -3,11 +3,9 @@ package com.example.duhosii;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
-import android.transition.Slide;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -44,7 +42,7 @@ public class AplikacijaInfoFragment extends Fragment {
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         View view=mActionBar.getCustomView();
         zaglavlje=view.findViewById(R.id.naslov);
-        zaglavlje.setText("O aplikaciji");
+        zaglavlje.setText(getContext().getResources().getString(R.string.oAplikacijiNaslov));
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.GONE);
@@ -61,7 +59,7 @@ public class AplikacijaInfoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(currentPage==4){
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new MolitveneGrupeFragment()).addToBackStack("molitveneGrupeFragment").commit();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new MolitveneGrupeFragment()).addToBackStack("").commit();
 
                 }
                 viewPager.setCurrentItem(currentPage+1);
@@ -108,16 +106,16 @@ public class AplikacijaInfoFragment extends Fragment {
             if(position==0){
                 iduceButton.setVisibility(View.VISIBLE);
                 natragButton.setVisibility(View.GONE);
-                iduceButton.setText("SLJEDEĆE");
+                iduceButton.setText(getContext().getResources().getString(R.string.sljedeceNaslov));
 
             }
             else if(position==dots.length-1){
                 iduceButton.setVisibility(View.VISIBLE);
-                iduceButton.setText("ZAVRŠI");
+                iduceButton.setText(getContext().getResources().getString(R.string.zavrsiString));
                 natragButton.setVisibility(View.VISIBLE);
             }
             else {
-                iduceButton.setText("SLJEDEĆE");
+                iduceButton.setText(getContext().getResources().getString(R.string.sljedeceNaslov));
                 iduceButton.setVisibility(View.VISIBLE);
                 natragButton.setVisibility(View.VISIBLE);
             }

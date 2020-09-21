@@ -52,7 +52,7 @@ public class MolitvaOpsirno extends Fragment {
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         View viewActionBar = mActionBar.getCustomView();
         zaglavlje = viewActionBar.findViewById(R.id.naslov);
-        zaglavlje.setText("Od srca k Srcu");
+        zaglavlje.setText(getContext().getResources().getString(R.string.odSrcaKsrcuNaslov));
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
@@ -69,16 +69,16 @@ public class MolitvaOpsirno extends Fragment {
         tekst.setText(molitva.getTekst());
 
 
-        if(izvor.equals("Molitve i pobožnosti")) {
+        if(izvor.equals(getContext().getResources().getString(R.string.molitvaIpozonostiString))) {
             slika.setImageDrawable(getResources().getDrawable(R.drawable.standardne_molitve));
         }
-        if(izvor.equals("Nadahnuća")) {
+        if(izvor.equals(getContext().getResources().getString(R.string.nadahnucaString))) {
             slika.setImageDrawable(getResources().getDrawable(R.drawable.molitve));
         }
-        if(izvor.equals("Marija")) {
+        if(izvor.equals(getContext().getResources().getString(R.string.marijaString))) {
             slika.setImageDrawable(getResources().getDrawable(R.drawable.marijanske_molitve));
         }
-        if(izvor.equals("Svjedočanstva")) {
+        if(izvor.equals(getContext().getResources().getString(R.string.svjedocanstvaString))) {
             slika.setImageDrawable(getResources().getDrawable(R.drawable.devetnice));
         }
 
