@@ -64,9 +64,7 @@ public class KnjiznicaFragment extends Fragment {
         });
 
         knjiznicaTekst=knjiznicaView.findViewById(R.id.knjiznicaTekst);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            knjiznicaTekst.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
-        }
+
         return knjiznicaView;
     }
 

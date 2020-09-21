@@ -44,9 +44,6 @@ public class DialogDisclaimer extends AppCompatDialogFragment {
             }
         });
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            disclaimer.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
-        }
 
         nastavi=view.findViewById(R.id.nastaviButton);
         nastavi.setOnClickListener(new View.OnClickListener() {

@@ -68,9 +68,6 @@ public class MolitvaOpsirno extends Fragment {
         naslov.setText(molitva.getNaslov());
         tekst.setText(molitva.getTekst());
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            tekst.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
-        }
 
         if(izvor.equals(getContext().getResources().getString(R.string.molitvaIpozonostiString))) {
             slika.setImageDrawable(getResources().getDrawable(R.drawable.standardne_molitve));

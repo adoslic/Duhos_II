@@ -33,8 +33,6 @@
             android:textSize="20sp"
             android:textColor="@color/duhosPlava"
             android:fontFamily="@font/firasans_bold"
-            android:textAlignment="center"
-            android:gravity="center"
             android:textIsSelectable="true"></TextView>
 
         <TextView
@@ -47,8 +45,6 @@
             android:textSize="16sp"
             android:layout_margin="10dp"
             android:textColor="@color/duhosPlava"
-            android:layout_gravity="center_vertical|end"
-            android:gravity="start"
             android:fontFamily="@font/montserrat_medium"
             android:textIsSelectable="true"
             android:autoLink="web"

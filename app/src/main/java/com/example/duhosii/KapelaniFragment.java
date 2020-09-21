@@ -46,11 +46,6 @@ public class KapelaniFragment extends Fragment {
         kapelan1Tekst=kapelaniFragmentView.findViewById(R.id.kapelan1Tekst);
         kapelan2Tekst=kapelaniFragmentView.findViewById(R.id.kapelan2Tekst);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            kapelan1Tekst.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
-            kapelan2Tekst.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
-
-        }
         return kapelaniFragmentView;
     }
 

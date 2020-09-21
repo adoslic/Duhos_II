@@ -78,10 +78,6 @@ public class PjesmaOpsirno extends Fragment {
 
         tekstPjesme.setText(formatedText);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            tekstPjesme.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
-        }
-
 
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override

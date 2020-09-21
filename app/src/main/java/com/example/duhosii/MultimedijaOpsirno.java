@@ -68,9 +68,6 @@ public class MultimedijaOpsirno extends Fragment {
         naslov.setText(medij.getNaslov());
         sadrzaj.setText(medij.getSadrzaj());
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            sadrzaj.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
-        }
 
         if(medij.getMedij().toString().toLowerCase().equals(getContext().getResources().getString(R.string.facebookString))) {
             idiNaPoveznicu.setText(getContext().getResources().getString(R.string.viseProcitajteUObjavi));

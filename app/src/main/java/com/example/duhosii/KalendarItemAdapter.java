@@ -174,11 +174,6 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
             holder.timeTime.setText(itemList.get(position).vrijeme);
 
 
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                holder.opis.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
-            }
-
             //provjeravaj je li u listi alarma postoji trenuacni item i ako postoji postavi sliku alarma - tu je vjerojatno greška
 
 

@@ -42,9 +42,6 @@ public class OpcenitoFragment extends Fragment {
 
         View opcenitoFragmentView= inflater.inflate(R.layout.fragment_opcenito, container, false);
         opcenitoText=opcenitoFragmentView.findViewById(R.id.opcenitoText);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            opcenitoText.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
-        }
 
         return opcenitoFragmentView;
     }
