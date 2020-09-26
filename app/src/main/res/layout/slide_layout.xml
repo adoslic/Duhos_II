@@ -44,8 +44,7 @@
             android:layout_below="@+id/infoNaslov"
             android:layout_centerHorizontal="true"
             android:textColor="@color/duhosPlava"
-            android:textAlignment="center"
-            android:gravity="center"
+            android:justificationMode="inter_word"
             android:layout_marginHorizontal="10dp"
             android:scrollbars = "vertical"
             android:padding="12dp"></TextView>

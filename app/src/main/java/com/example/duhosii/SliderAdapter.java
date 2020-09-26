@@ -2,6 +2,8 @@ package com.example.duhosii;
 
 import android.content.Context;
 import android.media.Image;
+import android.os.Build;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.viewpager.widget.PagerAdapter;
 
 import org.w3c.dom.Text;
@@ -66,6 +69,7 @@ public class SliderAdapter extends PagerAdapter {
         ImageView slideImageView=view.findViewById(R.id.infoSlika);
         TextView slideHeaderView=view.findViewById(R.id.infoNaslov);
         TextView slideDescriptionView=view.findViewById(R.id.infoOpis);
+
 
         slideImageView.setImageResource(slide_images[position]);
         slideHeaderView.setText(slide_headers[position]);

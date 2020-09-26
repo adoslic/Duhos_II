@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,6 +55,7 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
         return new ViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull final PitanjaItemAdapter.ViewHolder holder, final int position) {
 
@@ -70,8 +72,9 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
 
             holder.pitanje.setText(itemList.get(position).getPitanje());
             holder.odgovor.setText(itemList.get(position).getOdgovor());
-            holder.odgovor.setMovementMethod(LinkMovementMethod.getInstance());
+            //holder.odgovor.setMovementMethod(LinkMovementMethod.getInstance());
 
+            holder.odgovor.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
 
             if (doAnimation)
                 holder.pitanjeOdgovorLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_transition_animation));

@@ -60,7 +60,8 @@
             android:text="@string/kapelan1_tekst"
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
-            android:fontFamily="@font/montserrat_medium"></TextView>
+            android:fontFamily="@font/montserrat_medium"
+            android:justificationMode="inter_word"></TextView>
 
 
         <!--///////////////////drugi kapelan//////////////////////////-->
@@ -120,6 +121,7 @@
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_medium"
-            android:layout_marginBottom="25dp"></TextView>
+            android:layout_marginBottom="25dp"
+            android:justificationMode="inter_word"></TextView>
     </RelativeLayout>
 </ScrollView>

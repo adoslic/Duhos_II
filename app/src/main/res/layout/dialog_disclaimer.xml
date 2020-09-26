@@ -25,7 +25,8 @@
             android:textColor="@color/duhosPlava"
             android:layout_below="@+id/xButton"
             android:layout_margin="20dp"
-            android:text=""></TextView>
+            android:text=""
+            android:justificationMode="inter_word"></TextView>
         <Button
             android:id="@+id/nastaviButton"
             android:layout_width="wrap_content"
