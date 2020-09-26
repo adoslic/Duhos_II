@@ -40,7 +40,7 @@
             android:textColor="@color/duhosPlava"
             android:paddingVertical="10dp"
             android:fontFamily="@font/montserrat_medium"
-            android:textIsSelectable="true"
+            android:justificationMode="inter_word"
             android:autoLink="web"
             android:textColorLink="@color/linkColor"></TextView>
 
