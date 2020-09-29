@@ -18,6 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,6 +44,7 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventList
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.TooManyListenersException;
 
 public class PjesmaricaFragment extends Fragment {
 
@@ -125,7 +127,20 @@ public class PjesmaricaFragment extends Fragment {
         if(connectionFlag==true) {
             pjesmaricaReference = FirebaseDatabase.getInstance().getReference("Pjesmarica");
             gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 1);
-            onInit();
+            try {
+                onInit();
+            }
+            catch(Exception e){
+                connectionFragmentView = inflater.inflate(R.layout.no_internet_connection_fragment, container, false);
+                osvjeziButton=connectionFragmentView.findViewById(R.id.osvjeziButton);
+                osvjeziButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomNavigationView.findViewById(R.id.navigacija_pjesmarica).performClick();
+                    }
+                });
+                return connectionFragmentView;
+            }
             searchButtonPjesma=pjesmaricaFragmentView.findViewById(R.id.searchButtonPjesma);
             searchButtonPjesma.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -202,7 +217,7 @@ public class PjesmaricaFragment extends Fragment {
         super.onResume();
         ((MainActivity)getActivity()).SetNavItemChecked(0);
 
-        if (mBundleRecyclerViewState != null) {
+        if (mBundleRecyclerViewState != null && connectionFlag==true) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -216,10 +231,12 @@ public class PjesmaricaFragment extends Fragment {
     @Override
     public void onPause() {
         // Save ListView state @ onPause
-        Log.d(TAG, "saving listview state");
-        mBundleRecyclerViewState = new Bundle();
-        mListState = recyclerView.getLayoutManager().onSaveInstanceState();
-        mBundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, mListState);
+        if(connectionFlag==true) {
+            Log.d(TAG, "saving listview state");
+            mBundleRecyclerViewState = new Bundle();
+            mListState = recyclerView.getLayoutManager().onSaveInstanceState();
+            mBundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, mListState);
+        }
         super.onPause();
     }
 

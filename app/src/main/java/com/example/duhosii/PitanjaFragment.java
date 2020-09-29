@@ -19,6 +19,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -69,7 +70,20 @@ public class PitanjaFragment extends Fragment {
         if(connectionFlag==true) {
             pitanjaFragmentView=inflater.inflate(R.layout.fragment_pitanja, container, false);
             pitanjaReference = FirebaseDatabase.getInstance().getReference("Pitanja");
-            onInit();
+            try {
+                onInit();
+            }
+            catch(Exception e){
+                connectionFragmentView = inflater.inflate(R.layout.no_internet_connection_fragment, container, false);
+                osvjeziButton=connectionFragmentView.findViewById(R.id.osvjeziButton);
+                osvjeziButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomNavigationView.findViewById(R.id.navigacija_pjesmarica).performClick();
+                    }
+                });
+                return connectionFragmentView;
+            }
             pitajKapelanaButton=pitanjaFragmentView.findViewById(R.id.pitajKapelanaButton);
             pitajKapelanaButton.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -69,8 +69,8 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
             holder.slika.setBackground(null);
             holder.naslov.setBackground(null);
 
-            holder.slikaLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition_animation));
-            holder.tekstLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_transition_animation));
+            //holder.slikaLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition_animation));
+            holder.itemLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_transition_animation));
 
             SpannableString ss = new SpannableString(itemList.get(position).getNaslov() + " - " + itemList.get(position).getBend());
             StyleSpan boldSpan = new StyleSpan(Typeface.BOLD);

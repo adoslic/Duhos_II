@@ -38,7 +38,9 @@
                 android:fontFamily="@font/firasans_semibold"
                 android:textSize="16sp"
                 android:layout_centerHorizontal="true"
-                android:justificationMode="inter_word">
+                android:textAlignment="center"
+                android:gravity="center"
+                android:justificationMode="none">
             </TextView>
 
         </RelativeLayout>
@@ -65,9 +67,11 @@
                 android:layout_centerHorizontal="true"
                 android:textSize="16sp"
                 android:fontFamily="@font/montserrat_regular"
-                android:justificationMode="inter_word"
                 android:autoLink="web"
-                android:textColorLink="@color/linkColor">
+                android:textColorLink="@color/linkColor"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:justificationMode="none">
             </TextView>
 
             <ImageButton

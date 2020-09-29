@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.text.Layout;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,7 +25,6 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.List;
 
-import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
 
 public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.ViewHolder> {
 
@@ -59,11 +60,15 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
     @Override
     public void onBindViewHolder(@NonNull final PitanjaItemAdapter.ViewHolder holder, final int position) {
 
-            context = holder.pitanjeOdgovorLayout.getContext();
+        context = holder.pitanjeOdgovorLayout.getContext();
 
         if (showShimmer) {
             holder.shimmerFrameLayout.startShimmer();
         } else {
+
+            if (doAnimation)
+                holder.pitanjeOdgovorLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_transition_animation));
+
             holder.shimmerFrameLayout.stopShimmer();
             holder.shimmerFrameLayout.setShimmer(null);
 
@@ -72,12 +77,6 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
 
             holder.pitanje.setText(itemList.get(position).getPitanje());
             holder.odgovor.setText(itemList.get(position).getOdgovor());
-            //holder.odgovor.setMovementMethod(LinkMovementMethod.getInstance());
-
-            holder.odgovor.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
-
-            if (doAnimation)
-                holder.pitanjeOdgovorLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_transition_animation));
 
             if (pitanjePosition == position && pitanjeShow) {
                 holder.isExpanded = true;
@@ -87,14 +86,8 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
                 holder.pitanje.setTextColor(ContextCompat.getColor(context, R.color.white));
                 Typeface firaSansItalic = Typeface.createFromAsset(context.getAssets(), "fonts/firasans_semibolditalic.ttf");
                 holder.pitanje.setTypeface(firaSansItalic);
-                /*
-                holder.pitanje.setTextIsSelectable(true);
-                holder.odgovor.setTextIsSelectable(true);
-
-                 */
-
-            } else {
-
+            }
+            else {
                 holder.isExpanded = false;
                 holder.odgovorLayout.setVisibility(View.GONE);
                 holder.pitanjeOdgovorLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangle_shape_shadow_small_radius));
@@ -102,11 +95,7 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
                 holder.pitanje.setTextColor(ContextCompat.getColor(context, R.color.duhosPlava));
                 Typeface firaSansSemiBold = Typeface.createFromAsset(context.getAssets(), "fonts/firasans_semibold.ttf");
                 holder.pitanje.setTypeface(firaSansSemiBold);
-                /*
-                holder.pitanje.setTextIsSelectable(false);
-                holder.odgovor.setTextIsSelectable(false);
 
-                 */
             }
 
             holder.pitanjeOdgovorLayout.setOnClickListener(new View.OnClickListener() {
@@ -144,6 +133,7 @@ public class PitanjaItemAdapter extends RecyclerView.Adapter<PitanjaItemAdapter.
                     }
                 }
             });
+
             holder.shareButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

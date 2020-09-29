@@ -94,7 +94,20 @@ public class MolitveneGrupeFragment extends Fragment {
             poboznostiDatum=molitvaFragmentView.findViewById(R.id.datumStandard);
             nadahnucaDatum=molitvaFragmentView.findViewById(R.id.datumDevetnice);
 
-            getFirebaseData();
+            try {
+                getFirebaseData();
+            }
+            catch(Exception e){
+                connectionFragmentView = inflater.inflate(R.layout.no_internet_connection_fragment, container, false);
+                osvjeziButton=connectionFragmentView.findViewById(R.id.osvjeziButton);
+                osvjeziButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomNavigationView.findViewById(R.id.navigacija_pjesmarica).performClick();
+                    }
+                });
+                return connectionFragmentView;
+            }
 
             molitva = molitvaFragmentView.findViewById(R.id.grupaMolitve);
             marijanske = molitvaFragmentView.findViewById(R.id.grupaMarijanskeMolitve);

@@ -56,7 +56,7 @@ public class PitajKapelanaFragment extends Fragment {
         ActionBar mActionBar =  ((AppCompatActivity)getActivity()).getSupportActionBar();
         mActionBar.show();
         mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        mActionBar.setCustomView(R.layout.toolbar);
+        mActionBar.setCustomView(R.layout.toolbar_without_menu);
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         View viewActionBar=mActionBar.getCustomView();
         back=viewActionBar.findViewById(R.id.idiNatrag);

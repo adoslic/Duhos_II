@@ -93,6 +93,7 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
 
             final ArrayList<AlarmDate> list = new ArrayList<>();
             Realm.init(getContext());
+
             final Realm realm = Realm.getDefaultInstance();
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
@@ -188,7 +189,20 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
             mjesec.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
             mjesec.setTypeface(firaSansBold);
 
-            onInit();
+            try {
+                onInit();
+            }
+            catch(Exception e){
+                connectionFragmentView = inflater.inflate(R.layout.no_internet_connection_fragment, container, false);
+                osvjeziButton=connectionFragmentView.findViewById(R.id.osvjeziButton);
+                osvjeziButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomNavigationView.findViewById(R.id.navigacija_pjesmarica).performClick();
+                    }
+                });
+                return connectionFragmentView;
+            }
 
             return kalendarFragmentView;
         }
@@ -339,7 +353,11 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
             Toast.makeText(getContext(), getContext().getResources().getString(R.string.nemaPodatakaUbazi), Toast.LENGTH_SHORT).show();
         }
         flagClicked=true;
-        ((LinearLayoutManager)recyclerView.getLayoutManager()).scrollToPositionWithOffset(position,0);
+        try {
+            ((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPositionWithOffset(position, 0);
+        }
+        catch (Exception e){
+        }
     }
 
 
