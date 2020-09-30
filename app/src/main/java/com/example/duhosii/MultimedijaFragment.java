@@ -73,7 +73,20 @@ public class MultimedijaFragment extends Fragment {
             multimedijaFragmentView=inflater.inflate(R.layout.fragment_multimedija, container, false);
             multimedijaReference = FirebaseDatabase.getInstance().getReference("Novosti");
             gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 1);
-            onInit();
+            try {
+                onInit();
+            }
+            catch(Exception e){
+                connectionFragmentView = inflater.inflate(R.layout.no_internet_connection_fragment, container, false);
+                osvjeziButton=connectionFragmentView.findViewById(R.id.osvjeziButton);
+                osvjeziButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bottomNavigationView.findViewById(R.id.navigacija_pjesmarica).performClick();
+                    }
+                });
+                return connectionFragmentView;
+            }
             return multimedijaFragmentView;
         }
         else {
@@ -128,7 +141,7 @@ public class MultimedijaFragment extends Fragment {
         super.onResume();
         ((MainActivity)getActivity()).SetNavItemChecked(3);
 
-        if (mBundleRecyclerViewState != null) {
+        if (mBundleRecyclerViewState != null && connectionFlag==true) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -138,17 +151,19 @@ public class MultimedijaFragment extends Fragment {
             }, 50);
         }
 
-
-        recyclerView.setLayoutManager(gridLayoutManager);
+        if(connectionFlag==true)
+            recyclerView.setLayoutManager(gridLayoutManager);
     }
 
         @Override
     public void onPause() {
         // Save ListView state @ onPause
-        Log.d(TAG, "saving listview state");
-            mBundleRecyclerViewState = new Bundle();
-            mListState = recyclerView.getLayoutManager().onSaveInstanceState();
-            mBundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, mListState);
+            if(connectionFlag==true) {
+                Log.d(TAG, "saving listview state");
+                mBundleRecyclerViewState = new Bundle();
+                mListState = recyclerView.getLayoutManager().onSaveInstanceState();
+                mBundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, mListState);
+            }
         super.onPause();
     }
 

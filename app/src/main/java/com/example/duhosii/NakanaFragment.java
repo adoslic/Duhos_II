@@ -48,7 +48,7 @@ public class NakanaFragment extends Fragment {
         ActionBar mActionBar =  ((AppCompatActivity)getActivity()).getSupportActionBar();
         mActionBar.show();
         mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        mActionBar.setCustomView(R.layout.toolbar);
+        mActionBar.setCustomView(R.layout.toolbar_without_menu);
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         View viewActionBar=mActionBar.getCustomView();
         zaglavlje=viewActionBar.findViewById(R.id.naslov);
@@ -138,6 +138,7 @@ public class NakanaFragment extends Fragment {
         javaMailAPI.execute();
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new VratiSeFragment("nakana")).commit();
     }
+
     @Override
     public void onResume() {
         super.onResume();
