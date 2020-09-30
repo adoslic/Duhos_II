@@ -54,6 +54,7 @@
                         android:layout_height="20dp"
                         android:src="@drawable/ic_time"
                         android:layout_centerVertical="true"></ImageView>
+
                     <TextView
                         android:id="@+id/timeTime"
                         android:layout_width="wrap_content"
@@ -65,6 +66,20 @@
                         android:fontFamily="@font/montserrat_medium"
                         android:layout_marginLeft="5dp"></TextView>
                 </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/dateDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--.--.----."
+                    android:textColor="@color/duhosPlava"
+                    android:layout_below="@+id/timeLayout"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:visibility="gone"></TextView>
+
                 <RelativeLayout
                     android:id="@+id/alarmLayout"
                     android:layout_width="wrap_content"
