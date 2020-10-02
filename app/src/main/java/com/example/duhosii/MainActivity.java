@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences = null;
     SharedPreferences.Editor editor;
+    private Boolean subFragment = false;
 
     BottomNavigationView bottomNavigationView;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -81,6 +82,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void idiNatrag(View view) {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        if(getSupportFragmentManager().getBackStackEntryAt(count-1).getName().equals("subFragment")) {
+            subFragment = true;
+        }
         getSupportFragmentManager().popBackStack();
     }
 
@@ -96,7 +101,11 @@ public class MainActivity extends AppCompatActivity {
         if (count == 1) {
             super.onBackPressed();
             finish();
-        } else {
+        } else if(getSupportFragmentManager().getBackStackEntryAt(count-1).getName().equals("subFragment")) {
+            subFragment = true;
+            getSupportFragmentManager().popBackStack();
+        }
+        else {
             getSupportFragmentManager().popBackStack();
         }
     }
@@ -134,5 +143,13 @@ public class MainActivity extends AppCompatActivity {
             findViewById(R.id.navigacija_molitva).performClick();
         }
     }
-    
+
+    public Boolean getSubFragmentData() {
+        return subFragment;
+    }
+
+    public void setSubFragmentData(Boolean subFragment) {
+        this.subFragment = subFragment;
+    }
+
 }

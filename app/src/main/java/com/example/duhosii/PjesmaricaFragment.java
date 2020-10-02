@@ -18,7 +18,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,7 +43,6 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventList
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.TooManyListenersException;
 
 public class PjesmaricaFragment extends Fragment {
 
@@ -124,7 +122,7 @@ public class PjesmaricaFragment extends Fragment {
             }
         });
 
-        if(connectionFlag==true) {
+        if(connectionFlag) {
             pjesmaricaReference = FirebaseDatabase.getInstance().getReference("Pjesmarica");
             gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 1);
             try {
@@ -217,7 +215,10 @@ public class PjesmaricaFragment extends Fragment {
         super.onResume();
         ((MainActivity)getActivity()).SetNavItemChecked(0);
 
-        if (mBundleRecyclerViewState != null && connectionFlag==true) {
+        MainActivity activity = (MainActivity) getActivity();
+        Boolean subFragmentData = activity.getSubFragmentData();
+
+        if (mBundleRecyclerViewState != null && connectionFlag && subFragmentData) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -226,12 +227,13 @@ public class PjesmaricaFragment extends Fragment {
                 }
             }, 50);
         }
+        activity.setSubFragmentData(false);
     }
 
     @Override
     public void onPause() {
         // Save ListView state @ onPause
-        if(connectionFlag==true) {
+        if(connectionFlag) {
             Log.d(TAG, "saving listview state");
             mBundleRecyclerViewState = new Bundle();
             mListState = recyclerView.getLayoutManager().onSaveInstanceState();

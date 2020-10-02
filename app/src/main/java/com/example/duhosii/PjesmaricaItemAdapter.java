@@ -19,15 +19,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 import net.yslibrary.android.keyboardvisibilityevent.util.UIUtil;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,7 +105,7 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
                 public void onClick(View v) {
                     activity = (AppCompatActivity) v.getContext();
                     PjesmaOpsirno pjesmaOpsirno = new PjesmaOpsirno(itemList.get(position));
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, pjesmaOpsirno).addToBackStack("").commit();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, pjesmaOpsirno).addToBackStack("subFragment").commit();
                     UIUtil.hideKeyboard(activity);
                     searchFlag=true;
                 }

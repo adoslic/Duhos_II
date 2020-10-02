@@ -141,7 +141,10 @@ public class MultimedijaFragment extends Fragment {
         super.onResume();
         ((MainActivity)getActivity()).SetNavItemChecked(3);
 
-        if (mBundleRecyclerViewState != null && connectionFlag==true) {
+        MainActivity activity = (MainActivity) getActivity();
+        Boolean subFragmentData = activity.getSubFragmentData();
+
+        if (mBundleRecyclerViewState != null && connectionFlag && subFragmentData) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -151,14 +154,16 @@ public class MultimedijaFragment extends Fragment {
             }, 50);
         }
 
-        if(connectionFlag==true)
+        if(connectionFlag)
             recyclerView.setLayoutManager(gridLayoutManager);
+
+        activity.setSubFragmentData(false);
     }
 
         @Override
     public void onPause() {
         // Save ListView state @ onPause
-            if(connectionFlag==true) {
+            if(connectionFlag) {
                 Log.d(TAG, "saving listview state");
                 mBundleRecyclerViewState = new Bundle();
                 mListState = recyclerView.getLayoutManager().onSaveInstanceState();
