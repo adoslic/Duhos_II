@@ -196,7 +196,7 @@ public class PjesmaricaFragment extends Fragment {
                 recyclerView = pjesmaricaFragmentView.findViewById(R.id.recyclerViewPjesmarica);
                 adapter = new PjesmaricaItemAdapter(itemList);
                 recyclerView.setLayoutManager(gridLayoutManager);
-                recyclerView.setHasFixedSize(true);
+                //recyclerView.setHasFixedSize(true);
                 recyclerView.setAdapter(adapter);
                 ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipePjesmaToShareCallback(adapter));
                 itemTouchHelper.attachToRecyclerView(recyclerView);

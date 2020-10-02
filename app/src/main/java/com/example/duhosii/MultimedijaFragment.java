@@ -105,7 +105,7 @@ public class MultimedijaFragment extends Fragment {
         recyclerView = multimedijaFragmentView.findViewById(R.id.multimedijarecyclerView);
         adapter = new MultimedijaItemAdapter(itemList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setHasFixedSize(true);
+        //recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         multimedijaReference.addValueEventListener(new ValueEventListener() {
             @Override

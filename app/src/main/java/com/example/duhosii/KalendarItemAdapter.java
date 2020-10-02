@@ -106,7 +106,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                 }
                 if(vrijemeAlarma.before(new Date())){
                     for(int j=0;j<itemList.size();j++) {
-                        if (konacnaListaAlarma.get(i).getDatum().equals(itemList.get(j).getDatum()) && konacnaListaAlarma.get(i).getNaslov().equals(itemList.get(j).getNaslov())) {
+                        if(konacnaListaAlarma.get(i).getNaslov().toString().equals(itemList.get(j).getNaslov().toString())) {
                             alarmVisibility.set(j,false);
                         }
                     }
@@ -127,9 +127,12 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
         final boolean visible = alarmVisibility.get(position);
         if(visible==true){
             holder.alarmLayout.setVisibility(View.VISIBLE);
-            for(int i=0;i<konacnaListaAlarma.size();i++){
-                if(konacnaListaAlarma.get(i).getNaslov().equals(itemList.get(position).getNaslov().toString()) && konacnaListaAlarma.get(i).getDatum().equals(itemList.get(position).getDatum().toString())){
-                    holder.alarmTime.setText(konacnaListaAlarma.get(i).getVrijeme().toString());
+            for(int i=0;i<konacnaListaAlarma.size();i++) {
+                for (int j = 0; j < itemList.size(); j++) {
+                    if (konacnaListaAlarma.get(i).getNaslov().toString().equals(itemList.get(j).getNaslov().toString())) {
+                        holder.alarmTime.setText(konacnaListaAlarma.get(i).getVrijeme().toString());
+                        holder.dateDate.setText(konacnaListaAlarma.get(i).getDatum().toString());
+                    }
                 }
             }
             holder.alarm = true;
@@ -138,6 +141,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
         else {
             holder.alarmLayout.setVisibility(View.GONE);
             holder.alarmTime.setText("");
+            holder.dateDate.setText("");
             holder.alarm = false;
             holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_addnotification));
         }
@@ -215,7 +219,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                 holder.isExpanded = true;
                 holder.opis.setMaxLines(100000);
 
-                Shader textShader=new LinearGradient(0, 0,0, holder.opis.getPaint().getTextSize()*5,
+                Shader textShader=new LinearGradient(0, 0,0, holder.opis.getPaint().getTextSize()*7,
                         new int[]{Color.parseColor("#143F61"),Color.parseColor("#143F61")},
                         new float[]{0, 1}, Shader.TileMode.CLAMP);
                 holder.opis.getPaint().setShader(textShader);
@@ -225,8 +229,8 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
             } else {
 
                 holder.isExpanded = false;
-                holder.opis.setMaxLines(4);
-                Shader textShader=new LinearGradient(0, 0,0, holder.opis.getPaint().getTextSize()*5,
+                holder.opis.setMaxLines(5);
+                Shader textShader=new LinearGradient(0, 0,0, holder.opis.getPaint().getTextSize()*7,
                         new int[]{Color.parseColor("#143F61"),Color.TRANSPARENT},
                         new float[]{0, 1}, Shader.TileMode.CLAMP);
                 holder.opis.getPaint().setShader(textShader);
@@ -276,7 +280,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                                     holder.danMjeseca = "0" + dan;
                                 else
                                     holder.danMjeseca = dan;
-                                if (month < 10)
+                                if (month+1 < 10)
                                     holder.mjesec = "0" + mjesec;
                                 else
                                     holder.mjesec = mjesec;
@@ -334,10 +338,12 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                                                     if (visible == true) {
                                                         holder.alarmLayout.setVisibility(View.VISIBLE);
                                                         holder.alarmTime.setText(holder.sati + ":" + holder.minute);
+                                                        holder.dateDate.setText(holder.danMjeseca+"/"+holder.mjesec+"/"+holder.godina);
                                                         holder.alarm = true;
                                                         holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_deletenotification));
                                                     } else {
                                                         holder.alarmLayout.setVisibility(View.GONE);
+                                                        holder.dateDate.setText("");
                                                         holder.alarmTime.setText("");
                                                         holder.alarm = false;
                                                         holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_addnotification));
@@ -384,6 +390,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                                         public void onCancel(DialogInterface dialog) {
                                             final boolean visible = alarmVisibility.get(position);
                                             holder.alarmLayout.setVisibility(View.GONE);
+                                            holder.dateDate.setText("");
                                             holder.alarmTime.setText("");
                                             holder.alarm = false;
                                             holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_addnotification));
@@ -405,6 +412,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                                     final boolean visible = alarmVisibility.get(position);
                                     holder.alarmLayout.setVisibility(View.GONE);
                                     holder.alarmTime.setText("");
+                                    holder.dateDate.setText("");
                                     holder.alarm = false;
                                     holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_addnotification));
                                     alarmVisibility.set(position, false);
@@ -420,13 +428,13 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                     else{
                         //brisanje alarma i notifikacija za odabrano vrijeme
                         for(int i=0;i<konacnaListaAlarma.size();i++){
-                            if(konacnaListaAlarma.get(i).getDatum().equals(itemList.get(position).datum) && konacnaListaAlarma.get(i).getNaslov().equals(itemList.get(position).naslov) && konacnaListaAlarma.get(i).getVrijeme().equals(holder.alarmTime.getText().toString())){
+                            if( konacnaListaAlarma.get(i).getNaslov().equals(itemList.get(position).naslov) && konacnaListaAlarma.get(i).getVrijeme().equals(holder.alarmTime.getText().toString())){
                                 unsetNotificationAlarm(konacnaListaAlarma.get(i).alarmID);
                                 konacnaListaAlarma.remove(i);
                                 i=0;
                             }
                         }
-                        final RealmResults<AlarmDate> results = realm.where(AlarmDate.class).equalTo("datum",itemList.get(position).datum).equalTo("vrijeme",holder.alarmTime.getText().toString()).equalTo("naslov",itemList.get(position).naslov).findAll();
+                        final RealmResults<AlarmDate> results = realm.where(AlarmDate.class).equalTo("datum",holder.dateDate.getText().toString()).equalTo("vrijeme",holder.alarmTime.getText().toString()).equalTo("naslov",itemList.get(position).naslov).findAll();
                         realm.executeTransaction(new Realm.Transaction() {
                             @Override
                             public void execute(Realm realm) {
@@ -436,6 +444,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
 
                         holder.alarmLayout.setVisibility(View.GONE);
                         holder.alarmTime.setText("");
+                        holder.dateDate.setText("");
                         holder.alarm = false;
                         holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_addnotification));
                         alarmVisibility.set(position, false);
@@ -455,7 +464,6 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                         doAnimation = false;
                         notifyDataSetChanged();
                     } else if (holder.isExpanded == true) {
-
                         pitanjeShow = false;
                         doAnimation = false;
                         notifyDataSetChanged();
@@ -530,7 +538,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView naslov,opis,lokacija,datum,dan,lokacijaText,alarmTime,timeTime;
+        TextView naslov,opis,lokacija,datum,dan,lokacijaText,alarmTime,timeTime,dateDate;
         RelativeLayout itemLayout,datumLayout,contentLayout,alarmLayout;
         ImageButton obavijest;
         ImageView alarmIcon;
@@ -552,6 +560,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
             lokacijaText = itemView.findViewById(R.id.lokacija_tekst);
             obavijest=itemView.findViewById(R.id.obavijest);
             timeTime=itemView.findViewById(R.id.timeTime);
+            dateDate=itemView.findViewById(R.id.dateDate);
 
             alarmLayout=itemView.findViewById(R.id.alarmLayout);
             alarmTime=itemView.findViewById(R.id.alarmTime);
