@@ -67,7 +67,7 @@ public class NadahnucaFragment extends Fragment {
         recyclerView = molitvaFragmentView.findViewById(R.id.recyclerViewMolitva);
         adapter = new MolitvaItemAdapter(itemList,getContext().getResources().getString(R.string.nadahnucaString));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setHasFixedSize(true);
+        //recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeMolitvaToShareCallback(adapter));
         itemTouchHelper.attachToRecyclerView(recyclerView);

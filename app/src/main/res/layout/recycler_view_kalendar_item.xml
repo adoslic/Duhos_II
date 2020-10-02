@@ -45,15 +45,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="15dp"
                     android:layout_below="@+id/dan"
                     android:visibility="visible">
                     <ImageView
                         android:id="@+id/timeIcon"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/ic_time"
-                        android:layout_centerVertical="true"></ImageView>
+                        android:src="@drawable/ic_time"></ImageView>
+
                     <TextView
                         android:id="@+id/timeTime"
                         android:layout_width="wrap_content"
@@ -61,10 +61,11 @@
                         android:layout_toRightOf="@id/timeIcon"
                         android:text="10:30"
                         android:textColor="@color/duhosPlava"
-                        android:layout_centerVertical="true"
                         android:fontFamily="@font/montserrat_medium"
                         android:layout_marginLeft="5dp"></TextView>
                 </RelativeLayout>
+
+
                 <RelativeLayout
                     android:id="@+id/alarmLayout"
                     android:layout_width="wrap_content"
@@ -78,18 +79,27 @@
                     android:id="@+id/alarmIcon"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/ic_alarm"
-                    android:layout_centerVertical="true"></ImageView>
+                    android:src="@drawable/ic_alarm"></ImageView>
                     <TextView
                         android:id="@+id/alarmTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@id/alarmIcon"
-                        android:text=""
+                        android:text="Trala"
                         android:textColor="@color/duhosPlava"
-                        android:layout_centerVertical="true"
                         android:fontFamily="@font/montserrat_medium"
                         android:layout_marginLeft="5dp"></TextView>
+                    <TextView
+                        android:id="@+id/dateDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="--.--.----."
+                        android:textColor="@color/duhosPlava"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/alarmTime"
+                        android:layout_centerHorizontal="true"></TextView>
                 </RelativeLayout>
             </RelativeLayout>
 
@@ -120,8 +130,8 @@
                     android:layout_below="@+id/naslov"
                     android:text="Opis"
                     android:ellipsize="end"
-                    android:maxLines="4"
-                    android:lines="3"
+                    android:maxLines="5"
+                    android:lines="4"
                     android:fontFamily="@font/montserrat_medium"
                     android:autoLink="web"
                     android:textColorLink="@color/linkColor"

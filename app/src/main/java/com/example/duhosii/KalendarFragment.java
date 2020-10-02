@@ -270,7 +270,7 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
 
                 for (int i = 0; i < itemList.size(); i++) {
                     for(int j=0;j<konacnaListaAlarma.size();j++){
-                        if(konacnaListaAlarma.get(j).getNaslov().toString().equals(itemList.get(i).getNaslov().toString()) && konacnaListaAlarma.get(j).getDatum().toString().equals(itemList.get(i).getDatum().toString())) {
+                        if(konacnaListaAlarma.get(j).getNaslov().toString().equals(itemList.get(i).getNaslov().toString())) {
                             alarmVisibility.set(i, true);
                             break;
                         }
@@ -283,7 +283,7 @@ public class KalendarFragment extends Fragment implements DatePickerListener {
                 recyclerView = kalendarFragmentView.findViewById(R.id.recyclerViewKalendar);
                 adapter = new KalendarItemAdapter(itemList,konacnaListaAlarma,alarmVisibility);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                recyclerView.setHasFixedSize(true);
+                //recyclerView.setHasFixedSize(true);
                 recyclerView.setAdapter(adapter);
                 ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeKalendarToShareCallback(adapter));
                 itemTouchHelper.attachToRecyclerView(recyclerView);

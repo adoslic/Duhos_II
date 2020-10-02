@@ -111,7 +111,7 @@ public class PitanjaFragment extends Fragment {
         recyclerView = pitanjaFragmentView.findViewById(R.id.pitanjarecyclerView);
         adapter = new PitanjaItemAdapter(itemList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setHasFixedSize(true);
+        //recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         /*recyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {

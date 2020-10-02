@@ -67,7 +67,7 @@ public class MarijanskeMolitveFragment extends Fragment {
         recyclerView = molitvaFragmentView.findViewById(R.id.recyclerViewMolitva);
         adapter = new MolitvaItemAdapter(itemList, getResources().getString(R.string.marijaString));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setHasFixedSize(true);
+        //recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeMolitvaToShareCallback(adapter));
         itemTouchHelper.attachToRecyclerView(recyclerView);

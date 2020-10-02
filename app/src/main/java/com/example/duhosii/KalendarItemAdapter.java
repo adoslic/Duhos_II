@@ -1,6 +1,7 @@
 package com.example.duhosii;
 
 import android.app.AlarmManager;
+import android.app.DatePickerDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -17,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -54,6 +56,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
     private boolean doAnimation=true;
     private List<AlarmDate> konacnaListaAlarma=new ArrayList<>();
     private boolean cancelFlag=false;
+    private boolean cancelKalendarFlag=false;
 
     private ArrayList<Boolean> alarmVisibility = new ArrayList<>();
 
@@ -103,7 +106,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                 }
                 if(vrijemeAlarma.before(new Date())){
                     for(int j=0;j<itemList.size();j++) {
-                        if (konacnaListaAlarma.get(i).getDatum().equals(itemList.get(j).getDatum()) && konacnaListaAlarma.get(i).getNaslov().equals(itemList.get(j).getNaslov())) {
+                        if(konacnaListaAlarma.get(i).getNaslov().toString().equals(itemList.get(j).getNaslov().toString())) {
                             alarmVisibility.set(j,false);
                         }
                     }
@@ -124,9 +127,12 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
         final boolean visible = alarmVisibility.get(position);
         if(visible==true){
             holder.alarmLayout.setVisibility(View.VISIBLE);
-            for(int i=0;i<konacnaListaAlarma.size();i++){
-                if(konacnaListaAlarma.get(i).getNaslov().equals(itemList.get(position).getNaslov().toString()) && konacnaListaAlarma.get(i).getDatum().equals(itemList.get(position).getDatum().toString())){
-                    holder.alarmTime.setText(konacnaListaAlarma.get(i).getVrijeme().toString());
+            for(int i=0;i<konacnaListaAlarma.size();i++) {
+                for (int j = 0; j < itemList.size(); j++) {
+                    if (konacnaListaAlarma.get(i).getNaslov().toString().equals(itemList.get(j).getNaslov().toString())) {
+                        holder.alarmTime.setText(konacnaListaAlarma.get(i).getVrijeme().toString());
+                        holder.dateDate.setText(konacnaListaAlarma.get(i).getDatum().toString());
+                    }
                 }
             }
             holder.alarm = true;
@@ -135,6 +141,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
         else {
             holder.alarmLayout.setVisibility(View.GONE);
             holder.alarmTime.setText("");
+            holder.dateDate.setText("");
             holder.alarm = false;
             holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_addnotification));
         }
@@ -212,7 +219,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                 holder.isExpanded = true;
                 holder.opis.setMaxLines(100000);
 
-                Shader textShader=new LinearGradient(0, 0,0, holder.opis.getPaint().getTextSize()*5,
+                Shader textShader=new LinearGradient(0, 0,0, holder.opis.getPaint().getTextSize()*7,
                         new int[]{Color.parseColor("#143F61"),Color.parseColor("#143F61")},
                         new float[]{0, 1}, Shader.TileMode.CLAMP);
                 holder.opis.getPaint().setShader(textShader);
@@ -222,8 +229,8 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
             } else {
 
                 holder.isExpanded = false;
-                holder.opis.setMaxLines(4);
-                Shader textShader=new LinearGradient(0, 0,0, holder.opis.getPaint().getTextSize()*5,
+                holder.opis.setMaxLines(5);
+                Shader textShader=new LinearGradient(0, 0,0, holder.opis.getPaint().getTextSize()*7,
                         new int[]{Color.parseColor("#143F61"),Color.TRANSPARENT},
                         new float[]{0, 1}, Shader.TileMode.CLAMP);
                 holder.opis.getPaint().setShader(textShader);
@@ -254,114 +261,180 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                     //ako nema alarma => dodaj alarm
                     if (holder.alarm == false) {
                         Calendar mcurrentTime = Calendar.getInstance();
-                        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                        int minute = mcurrentTime.get(Calendar.MINUTE);
-                        final TimePickerDialog mTimePicker;
-                        //otvori dialog za odabir vremena alarma
-                        mTimePicker = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                                String min = String.valueOf(selectedMinute);
-                                String h = String.valueOf(selectedHour);
-                                if (selectedHour < 10)
-                                    holder.sati = "0" + h;
-                                else
-                                    holder.sati = h;
+                        final int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                        final int minute = mcurrentTime.get(Calendar.MINUTE);
 
-                                if (selectedMinute < 10)
-                                    holder.minute = "0" + min;
-                                else
-                                    holder.minute = min;
-                            }
-                        }, hour, minute, true);
-                        Toast.makeText(context,context.getResources().getString(R.string.kadObavijestStize),Toast.LENGTH_SHORT).show();
-                        //kad se stisne uredu onda povisibleani taj alarm i postavi zastavicu na true, cancel flag je zbog toga sto se i onDismiss i onCancel flag
-                        // pozivaju kada se stisne uredu, pa se rusila apk, ugl.. nebitno, to je pomocna zastavica
-                        mTimePicker.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                        int my_day = mcurrentTime.get(Calendar.DAY_OF_MONTH);
+                        int my_month = mcurrentTime.get(Calendar.MONTH);
+                        int my_year = mcurrentTime.get(Calendar.YEAR);
+//*******************************************ovo sam dodao i ugnijezdio timePicker u njega i postavio neke flagove za cancel i dismiss
+                        final DatePickerDialog mDatePicker;
+                        mDatePicker = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                             @Override
-                            public void onDismiss(DialogInterface dialog) {
-                                if(cancelFlag==false) {
-                                    String vrijemeSdatumom = itemList.get(position).datum + " " + holder.sati + ":" + holder.minute + ":00";
-                                    Date vrijemeAlarma = null;
-                                    try {
-                                        vrijemeAlarma = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(vrijemeSdatumom);
-                                    } catch (ParseException e) {
-                                        e.printStackTrace();
-                                    }
-                                    if (vrijemeAlarma.before(new Date())) {
-                                        Toast.makeText(context, context.getResources().getString(R.string.odabranoJeProsloVrijeme), Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        alarmVisibility.set(position, true);
-                                        final boolean visible = alarmVisibility.get(position);
-                                        if (visible == true) {
-                                            holder.alarmLayout.setVisibility(View.VISIBLE);
-                                            holder.alarmTime.setText(holder.sati + ":" + holder.minute);
-                                            holder.alarm = true;
-                                            holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_deletenotification));
-                                        } else {
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                String dan = String.valueOf(dayOfMonth);
+                                String mjesec = String.valueOf(month+1);
+                                String godina = String.valueOf(year);
+
+                                if (dayOfMonth < 10)
+                                    holder.danMjeseca = "0" + dan;
+                                else
+                                    holder.danMjeseca = dan;
+                                if (month+1 < 10)
+                                    holder.mjesec = "0" + mjesec;
+                                else
+                                    holder.mjesec = mjesec;
+                                holder.godina = godina;
+
+                            }
+                        }, my_year, my_month, my_day);
+                        mDatePicker.show();
+
+                            mDatePicker.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                @Override
+                                public void onDismiss(DialogInterface dialog) {
+                                    if(!cancelKalendarFlag){
+                                    final TimePickerDialog mTimePicker;
+                                    //otvori dialog za odabir vremena alarma
+                                    mTimePicker = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+                                        @Override
+                                        public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                                            String min = String.valueOf(selectedMinute);
+                                            String h = String.valueOf(selectedHour);
+                                            if (selectedHour < 10)
+                                                holder.sati = "0" + h;
+                                            else
+                                                holder.sati = h;
+
+                                            if (selectedMinute < 10)
+                                                holder.minute = "0" + min;
+                                            else
+                                                holder.minute = min;
+                                        }
+                                    }, hour, minute, true);
+                                    //Toast.makeText(context,context.getResources().getString(R.string.kadObavijestStize),Toast.LENGTH_SHORT).show();
+                                    //kad se stisne uredu onda povisibleani taj alarm i postavi zastavicu na true, cancel flag je zbog toga sto se i onDismiss i onCancel flag
+                                    // pozivaju kada se stisne uredu, pa se rusila apk, ugl.. nebitno, to je pomocna zastavica
+                                    mTimePicker.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                                        @Override
+                                        public void onDismiss(DialogInterface dialog) {
+                                            if (cancelFlag == false) {
+//*******************************************ovdje sam stavio novi datum
+                                                String vrijemeSdatumom = holder.danMjeseca+"/"+holder.mjesec+"/"+holder.godina + " " + holder.sati + ":" + holder.minute + ":00";
+
+
+                                                Date vrijemeAlarma = null;
+                                                try {
+                                                    vrijemeAlarma = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(vrijemeSdatumom);
+                                                } catch (ParseException e) {
+                                                    e.printStackTrace();
+                                                }
+                                                if (vrijemeAlarma.before(new Date())) {
+                                                    Toast.makeText(context, context.getResources().getString(R.string.odabranoJeProsloVrijeme), Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    alarmVisibility.set(position, true);
+                                                    final boolean visible = alarmVisibility.get(position);
+                                                    if (visible == true) {
+                                                        holder.alarmLayout.setVisibility(View.VISIBLE);
+                                                        holder.alarmTime.setText(holder.sati + ":" + holder.minute);
+                                                        holder.dateDate.setText(holder.danMjeseca+"/"+holder.mjesec+"/"+holder.godina);
+                                                        holder.alarm = true;
+                                                        holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_deletenotification));
+                                                    } else {
+                                                        holder.alarmLayout.setVisibility(View.GONE);
+                                                        holder.dateDate.setText("");
+                                                        holder.alarmTime.setText("");
+                                                        holder.alarm = false;
+                                                        holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_addnotification));
+                                                    }
+                                                    AlarmDate alarmDate = new AlarmDate();
+
+
+  //*******************************************ovo sam dodao
+                                                    alarmDate.setDatum(holder.danMjeseca+"/"+holder.mjesec+"/"+holder.godina);
+
+
+
+                                                    alarmDate.setVrijeme(holder.sati + ":" + holder.minute);
+                                                    alarmDate.setNaslov(itemList.get(position).naslov);
+
+                                                    Random random = new Random();
+                                                    int randomID = random.nextInt(100000000);
+                                                    alarmDate.setAlarmID(randomID);
+
+                                                    //provjera postoji li vec takav alarm u bazi - mozda sada nebitno jer sam onemogucio da budu u bazi vise događaja istih parametara
+                                                    boolean dataExist = false;
+                                                    for (int i = 0; i < konacnaListaAlarma.size(); i++) {
+                                                        if (konacnaListaAlarma.get(i).getDatum().equals(alarmDate.getDatum()) && konacnaListaAlarma.get(i).getVrijeme().equals(alarmDate.getVrijeme()) && konacnaListaAlarma.get(i).getNaslov().equals(alarmDate.getNaslov()) && konacnaListaAlarma.get(i).getAlarmID() == alarmDate.getAlarmID())
+                                                            dataExist = true;
+                                                    }
+                                                    if (dataExist == false) {
+                                                        realm.beginTransaction();
+                                                        realm.copyToRealm(alarmDate);
+                                                        realm.commitTransaction();
+                                                        realm.close();
+                                                    }
+                                                    createNotificationChannel();
+//*******************************************dodao prvi parametar novi datum  i zadnja dva da se ispise u notifikaciji
+                                                    setNotificationAlarm(holder.danMjeseca+"/"+holder.mjesec+"/"+holder.godina + " " + holder.alarmTime.getText().toString(), randomID, holder.naslov.getText().toString(), holder.lokacija.getText().toString(),itemList.get(position).getDatum().toString(),itemList.get(position).getVrijeme().toString());
+                                                }
+                                            } else {
+                                                cancelFlag = false;
+                                            }
+
+                                        }
+                                    });
+                                    mTimePicker.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                        @Override
+                                        public void onCancel(DialogInterface dialog) {
+                                            final boolean visible = alarmVisibility.get(position);
                                             holder.alarmLayout.setVisibility(View.GONE);
+                                            holder.dateDate.setText("");
                                             holder.alarmTime.setText("");
                                             holder.alarm = false;
                                             holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_addnotification));
+                                            alarmVisibility.set(position, false);
+                                            cancelFlag = true;
+                                            mTimePicker.dismiss();
                                         }
-                                        AlarmDate alarmDate = new AlarmDate();
-                                        alarmDate.setDatum(itemList.get(position).datum);
-                                        alarmDate.setVrijeme(holder.sati + ":" + holder.minute);
-                                        alarmDate.setNaslov(itemList.get(position).naslov);
-
-                                        Random random = new Random();
-                                        int randomID = random.nextInt(100000000);
-                                        alarmDate.setAlarmID(randomID);
-
-                                        //provjera postoji li vec takav alarm u bazi - mozda sada nebitno jer sam onemogucio da budu u bazi vise događaja istih parametara
-                                        boolean dataExist = false;
-                                        for (int i = 0; i < konacnaListaAlarma.size(); i++) {
-                                            if (konacnaListaAlarma.get(i).getDatum().equals(alarmDate.getDatum()) && konacnaListaAlarma.get(i).getVrijeme().equals(alarmDate.getVrijeme()) && konacnaListaAlarma.get(i).getNaslov().equals(alarmDate.getNaslov()) && konacnaListaAlarma.get(i).getAlarmID() == alarmDate.getAlarmID())
-                                                dataExist = true;
-                                        }
-                                        if (dataExist == false) {
-                                            realm.beginTransaction();
-                                            realm.copyToRealm(alarmDate);
-                                            realm.commitTransaction();
-                                            realm.close();
-                                        }
-                                        createNotificationChannel();
-                                        setNotificationAlarm(itemList.get(position).datum.toString() + " " + holder.alarmTime.getText().toString(), randomID, holder.naslov.getText().toString(), holder.timeTime.getText().toString(), holder.lokacija.getText().toString());
-                                    }
+                                    });
+                                    mTimePicker.show();
                                 }
-                                else{
-                                        cancelFlag = false;
+                                    else{
+                                        cancelKalendarFlag=false;
                                     }
+                            }
+                            });
+                            mDatePicker.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                @Override
+                                public void onCancel(DialogInterface dialog) {
+                                    final boolean visible = alarmVisibility.get(position);
+                                    holder.alarmLayout.setVisibility(View.GONE);
+                                    holder.alarmTime.setText("");
+                                    holder.dateDate.setText("");
+                                    holder.alarm = false;
+                                    holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_addnotification));
+                                    alarmVisibility.set(position, false);
+                                    cancelFlag = true;
+                                    mDatePicker.dismiss();
+                                    cancelKalendarFlag = true;
+                                }
+                            });
 
-                            }
-                        });
-                        mTimePicker.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                            @Override
-                            public void onCancel(DialogInterface dialog) {
-                                final boolean visible = alarmVisibility.get(position);
-                                holder.alarmLayout.setVisibility(View.GONE);
-                                holder.alarmTime.setText("");
-                                holder.alarm = false;
-                                holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_addnotification));
-                                alarmVisibility.set(position, false);
-                                cancelFlag=true;
-                                mTimePicker.dismiss();
-                            }
-                        });
-                        mTimePicker.show();
+
                     }
                     //ako je postojao alarm, mozes ga samo obrisat
                     else{
                         //brisanje alarma i notifikacija za odabrano vrijeme
                         for(int i=0;i<konacnaListaAlarma.size();i++){
-                            if(konacnaListaAlarma.get(i).getDatum().equals(itemList.get(position).datum) && konacnaListaAlarma.get(i).getNaslov().equals(itemList.get(position).naslov) && konacnaListaAlarma.get(i).getVrijeme().equals(holder.alarmTime.getText().toString())){
+                            if( konacnaListaAlarma.get(i).getNaslov().equals(itemList.get(position).naslov) && konacnaListaAlarma.get(i).getVrijeme().equals(holder.alarmTime.getText().toString())){
                                 unsetNotificationAlarm(konacnaListaAlarma.get(i).alarmID);
                                 konacnaListaAlarma.remove(i);
                                 i=0;
                             }
                         }
-                        final RealmResults<AlarmDate> results = realm.where(AlarmDate.class).equalTo("datum",itemList.get(position).datum).equalTo("vrijeme",holder.alarmTime.getText().toString()).equalTo("naslov",itemList.get(position).naslov).findAll();
+                        final RealmResults<AlarmDate> results = realm.where(AlarmDate.class).equalTo("datum",holder.dateDate.getText().toString()).equalTo("vrijeme",holder.alarmTime.getText().toString()).equalTo("naslov",itemList.get(position).naslov).findAll();
                         realm.executeTransaction(new Realm.Transaction() {
                             @Override
                             public void execute(Realm realm) {
@@ -371,6 +444,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
 
                         holder.alarmLayout.setVisibility(View.GONE);
                         holder.alarmTime.setText("");
+                        holder.dateDate.setText("");
                         holder.alarm = false;
                         holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_addnotification));
                         alarmVisibility.set(position, false);
@@ -390,7 +464,6 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                         doAnimation = false;
                         notifyDataSetChanged();
                     } else if (holder.isExpanded == true) {
-
                         pitanjeShow = false;
                         doAnimation = false;
                         notifyDataSetChanged();
@@ -412,10 +485,13 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void setNotificationAlarm(String vrijemeAlarmaString, int randomID, String naslov, String vrijeme, String lokacija) {
+    private void setNotificationAlarm(String vrijemeAlarmaString, int randomID, String naslov, String lokacija,String datum,String vrijeme) {
         Intent intent=new Intent(context, ReminderBroadcast.class);
         intent.putExtra("naslov",naslov);
+//******************dodao da ispise u notifikaciji
+        intent.putExtra("datum",datum);
         intent.putExtra("vrijeme",vrijeme);
+
         intent.putExtra("lokacija",lokacija);
         intent.putExtra("randomID",randomID);
 
@@ -462,7 +538,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView naslov,opis,lokacija,datum,dan,lokacijaText,alarmTime,timeTime;
+        TextView naslov,opis,lokacija,datum,dan,lokacijaText,alarmTime,timeTime,dateDate;
         RelativeLayout itemLayout,datumLayout,contentLayout,alarmLayout;
         ImageButton obavijest;
         ImageView alarmIcon;
@@ -484,6 +560,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
             lokacijaText = itemView.findViewById(R.id.lokacija_tekst);
             obavijest=itemView.findViewById(R.id.obavijest);
             timeTime=itemView.findViewById(R.id.timeTime);
+            dateDate=itemView.findViewById(R.id.dateDate);
 
             alarmLayout=itemView.findViewById(R.id.alarmLayout);
             alarmTime=itemView.findViewById(R.id.alarmTime);
