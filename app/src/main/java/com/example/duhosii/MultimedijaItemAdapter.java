@@ -6,13 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -61,7 +59,7 @@ public class MultimedijaItemAdapter extends RecyclerView.Adapter<MultimedijaItem
                 public void onClick(View v) {
                     activity = (AppCompatActivity) v.getContext();
                     MultimedijaOpsirno multimedijaOpsirno = new MultimedijaOpsirno(itemList.get(position));
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, multimedijaOpsirno).addToBackStack("").commit();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, multimedijaOpsirno).addToBackStack("subFragment").commit();
                 }
             });
 
