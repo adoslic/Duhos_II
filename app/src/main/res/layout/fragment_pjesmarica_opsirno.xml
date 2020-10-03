@@ -27,10 +27,23 @@
             android:textIsSelectable="true"></TextView>
 
         <TextView
+            android:id="@+id/izvodjacOpsirno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/naslovOpsirno"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="14dp"
+            android:text="Izvođač"
+            android:textSize="14sp"
+            android:textColor="@color/duhosPlava"
+            android:fontFamily="@font/firasans_medium"
+            android:textIsSelectable="true"></TextView>
+
+        <TextView
             android:id="@+id/tekstOpsirno"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/naslovOpsirno"
+            android:layout_below="@+id/izvodjacOpsirno"
             android:layout_marginTop="24dp"
             android:layout_marginHorizontal="10dp"
             android:text="Tekst"

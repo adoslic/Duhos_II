@@ -32,7 +32,7 @@ public class PjesmaOpsirno extends Fragment {
     private BottomNavigationView bottomNavigationView;
     private Pjesma pjesma;
     private View pjesmaricaView;
-    private TextView naslov,tekstPjesme;
+    private TextView naslov,tekstPjesme,izvodjac;
     private ImageView slika;
     private ImageButton shareButton,pdfButton;
     private ScrollView scrollView;
@@ -65,10 +65,12 @@ public class PjesmaOpsirno extends Fragment {
         slika=pjesmaricaView.findViewById(R.id.slikaOpsirno);
         shareButton=pjesmaricaView.findViewById(R.id.shareButton);
         pdfButton=pjesmaricaView.findViewById(R.id.pdfButton);
+        izvodjac=pjesmaricaView.findViewById(R.id.izvodjacOpsirno);
 
         scrollView=pjesmaricaView.findViewById(R.id.pjesmarica_opsirno_scollView);
 
         naslov.setText(pjesma.getNaslov());
+        izvodjac.setText(pjesma.getBend());
         String formatedText=pjesma.getTekstPjesme();
 
         if(pjesma.getLink().equals("Link je nedostupan"))
