@@ -76,6 +76,12 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
             if (itemList.get(position).getBend().toString().toLowerCase().contains("duhos")) {
                 holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.duhos_logo));
             }
+            else if (itemList.get(position).getBend().toString().toLowerCase().contains("duhos band")) {
+                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.duhos_logo));
+            }
+            else if (itemList.get(position).getBend().toString().toLowerCase().contains("duhos bend")) {
+                holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.duhos_logo));
+            }
             else if (itemList.get(position).getBend().toString().toLowerCase().contains("emanuel")) {
                 holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.emanuel));
             }
