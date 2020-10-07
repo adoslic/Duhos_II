@@ -48,7 +48,8 @@
             android:text="e-mail: dav.vuk@gmail.com"
             android:textColor="@color/duhosPlava"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_medium"></TextView>
+            android:fontFamily="@font/montserrat_medium"
+            android:textIsSelectable="true"></TextView>
         <TextView
             android:id="@+id/kapelan1Tekst"
             android:layout_width="wrap_content"
@@ -107,7 +108,8 @@
             android:text="e-mail: m.zigman6@gmail.com"
             android:textColor="@color/duhosPlava"
             android:textSize="12sp"
-            android:fontFamily="@font/montserrat_medium"></TextView>
+            android:fontFamily="@font/montserrat_medium"
+            android:textIsSelectable="true"></TextView>
 
         <TextView
             android:id="@+id/kapelan2Tekst"
