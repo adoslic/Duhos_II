@@ -2,7 +2,7 @@
     <string name="app_name">DUHOS</string>
 
     <string name="knjiznica_naslov">Kada si u nedoumici, idi u knjižnicu.</string>
-    <string name="knjiznica_tekst">Dragi prijatelji, pozivamo vas u jedinstvenu DUHOS knjižnicu, koja besplatno nudi preko 1000 naslova duhovne i srodne literature. Knjige se posuđuju besplatno, bez članarine.\n\nKnjižnica se nalazi u uredu studentskog kapelana na Kampusu, u zgradi Studentskog zbora našeg Sveučilišta. Radno vrijeme je od ponedjeljka do petka od 10 do 16 sati.\n\nDođi, uzmi i čitaj!</string>
+    <string name="knjiznica_tekst">Dragi prijatelji, pozivamo vas u jedinstvenu DUHOS knjižnicu, koja besplatno nudi preko 1000 naslova duhovne i srodne literature. Knjige se posuđuju besplatno, bez članarine.\n\nKnjižnica se nalazi u uredu studentskog kapelana na Kampusu, u zgradi Studentskog zbora našeg Sveučilišta. Radno vrijeme je od ponedjeljka do petka od 10 do 16 sati (osim srijedom).\n\nDođi, uzmi i čitaj!</string>
 
     <string name="kapelan1_naslov1">Sveučilišni kapelan:</string>
     <string name="kapelan1_naslov2">doc.dr.sc. Davor Vuković</string>
@@ -94,5 +94,7 @@ misa i Euharistijskih klanjanja u sklopu naših susreta, ali i nedjeljne svete m
     <string name="kapelanCeOdgovoritiNaPitanjeTekst">Kapelan će odgovoriti na pitanje te ćemo isto objaviti u aplikaciji kako bi vidio odgovor. Hvala ti na korištenju aplikacije i popunjavanju naše rubrike.</string>
     <string name="nakanaJePoslana">MOLITVENA NAKANA JE POSLANA!</string>
     <string name="vidimoSeNaKlanjaju">Vidimo se na sljedećem euharistijskom klanjanju na kojem ćemo moliti za tvoju nakanu.</string>
+    <string name="svjedocanstvoJePoslano">TVOJE SVJEDOČANSTVO JE POSLANO</string>
+    <string name="objavaSvjedocanstva">Biti će objavljeno uskoro!</string>
 
 </resources>
