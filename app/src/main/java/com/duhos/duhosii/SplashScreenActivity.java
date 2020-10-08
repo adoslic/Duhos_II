@@ -1,9 +1,13 @@
 package com.duhos.duhosii;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -15,33 +19,68 @@ import java.util.Objects;
 import io.realm.Realm;
 
 
-public class SplashScreenActivity extends AppCompatActivity{
+public class SplashScreenActivity extends Activity {
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    protected int _splashTime = 5000;
+
+    private Thread splashTread;
+
+    /** Called when the activity is first created. */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_splash_screen);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        Objects.requireNonNull(getSupportActionBar()).hide(); //hide app name bar
-        Realm.init(getApplicationContext());
-        //wait for 5 seconds
-        new Handler().postDelayed(new Runnable() {
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+
+
+        final SplashScreenActivity sPlashScreen = this;
+
+        // thread for displaying the SplashScreen
+        splashTread = new Thread() {
             @Override
             public void run() {
-                SplashScreenActivity.this.startActivity(new Intent(SplashScreenActivity.this,MainActivity.class));
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                SplashScreenActivity.this.finish();
-            }
-        },3600);
-    }
+                try {
+                    synchronized(this){
+                        wait(_splashTime);
+                    }
 
+                } catch(InterruptedException e) {}
+                finally {
+
+                    if(!isFinishing()) // This pretty useful boolean val tells if
+                    //user has pressed the back button. very useful.
+                    {Intent i = new Intent(SplashScreenActivity.this, MainActivity.class);
+
+                        startActivity(i);
+                        finish();
+                    }
+                    onStop();
+                }
+            }
+        };
+
+        splashTread.start();
+    }
     @Override
-    public void onBackPressed() {
-        finish();
-        System.exit(0);
-        super.onBackPressed();
+    public boolean onTouchEvent(MotionEvent event) {
+
+
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            Toast.makeText(this,"exec---",Toast.LENGTH_LONG).show();
+            synchronized(splashTread){
+                splashTread.notifyAll();
+            }
+        }
+        return true;
+    }
+    @Override
+    protected void onPause() {
+
+        super.onPause();
+
+        if(splashTread.getState()==Thread.State.TIMED_WAITING){
+            //Thread is still waiting and Activity is paused. Means user has pressed Home. Bail out
+            finish();
+        }
+
     }
 }
