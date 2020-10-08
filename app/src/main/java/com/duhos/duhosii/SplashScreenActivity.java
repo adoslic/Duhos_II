@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,5 +36,12 @@ public class SplashScreenActivity extends AppCompatActivity{
                 SplashScreenActivity.this.finish();
             }
         },3600);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        System.exit(0);
+        super.onBackPressed();
     }
 }
