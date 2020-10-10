@@ -4,6 +4,8 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -23,8 +25,11 @@ public class ReminderBroadcast extends BroadcastReceiver {
 
         NotificationCompat.Builder builder=new NotificationCompat.Builder(context,"notify")
                 .setSmallIcon(R.drawable.ic_duhos_logo)
+                //.setLargeIcon(BitmapFactory.decodeResource(context.getResources(),
+                        //        R.drawable.davor))
                 .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText(naslov+"\n"+datum+ " u "+vrijeme+"h"+"\n"+"Lokacija: "+lokacija))
+                       .bigText(naslov+"\n"+datum+ " u "+vrijeme+"h"+"\n"+"Lokacija: "+lokacija))
+                //.setContentText(naslov+"\n"+datum+ " u "+vrijeme+"h"+"\n"+"Lokacija: "+lokacija)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(PendingIntent.getActivity(context, 0, intent1, 0))
                 .setAutoCancel(true);

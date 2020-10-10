@@ -29,8 +29,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 
@@ -188,7 +191,29 @@ public class MolitveneGrupeFragment extends Fragment {
                         itemListOpce.add(new Molitva(nazivOpce,datumOpce,tekstOpce));
                     }
                 }
-                Collections.reverse(itemListOpce);
+                for(int i=0;i<itemListOpce.size()-1;i++){
+                    for(int j=0;j<itemListOpce.size()-i-1;j++) {
+                        String date1String=itemListOpce.get(j).datum+" "+"00:00:00";
+                        Date date1 = null;
+                        try {
+                            date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(date1String);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        Date date2 = null;
+                        String date2String=itemListOpce.get(j+1).datum+" "+"00:00:00";
+
+                        try {
+                            date2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(date2String);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        if(date1.before(date2)){
+                            Collections.swap(itemListOpce,j+1,j);
+                        }
+                    }
+                }
                 if(!itemListOpce.isEmpty()){
                     opceZadnjiDatum=itemListOpce.get(0).datum;
                     opceDatum.setText(opceZadnjiDatum);
@@ -215,7 +240,29 @@ public class MolitveneGrupeFragment extends Fragment {
                         itemListMarijanske.add(new Molitva(nazivMarijanske,datumMarijanske,tekstMarijanske));
                     }
                 }
-                Collections.reverse(itemListMarijanske);
+                for(int i=0;i<itemListMarijanske.size()-1;i++){
+                    for(int j=0;j<itemListMarijanske.size()-i-1;j++) {
+                        String date1String=itemListMarijanske.get(j).datum+" "+"00:00:00";
+                        Date date1 = null;
+                        try {
+                            date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(date1String);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        Date date2 = null;
+                        String date2String=itemListMarijanske.get(j+1).datum+" "+"00:00:00";
+
+                        try {
+                            date2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(date2String);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        if(date1.before(date2)){
+                            Collections.swap(itemListMarijanske,j+1,j);
+                        }
+                    }
+                }
                 if(!itemListMarijanske.isEmpty()){
                     marijanskeZadnjiDatum=itemListMarijanske.get(0).datum;
                     marijanskeDatum.setText(marijanskeZadnjiDatum);
@@ -242,7 +289,29 @@ public class MolitveneGrupeFragment extends Fragment {
                         itemListNadahnuca.add(new Molitva(nazivNadahnuca,datumNadahnuca,tekstNadahnuca));
                     }
                 }
-                Collections.reverse(itemListNadahnuca);
+                for(int i=0;i<itemListNadahnuca.size()-1;i++){
+                    for(int j=0;j<itemListNadahnuca.size()-i-1;j++) {
+                        String date1String=itemListNadahnuca.get(j).datum+" "+"00:00:00";
+                        Date date1 = null;
+                        try {
+                            date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(date1String);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        Date date2 = null;
+                        String date2String=itemListNadahnuca.get(j+1).datum+" "+"00:00:00";
+
+                        try {
+                            date2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(date2String);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        if(date1.before(date2)){
+                            Collections.swap(itemListNadahnuca,j+1,j);
+                        }
+                    }
+                }
                 if(!itemListNadahnuca.isEmpty()){
                     nadahnucaZadnjiDatum=itemListNadahnuca.get(0).datum;
                     nadahnucaDatum.setText(nadahnucaZadnjiDatum);
@@ -269,7 +338,29 @@ public class MolitveneGrupeFragment extends Fragment {
                         itemListPoboznosti.add(new Molitva(nazivPoboznosti,datumPoboznosti,tekstPoboznosti));
                     }
                 }
-                Collections.reverse(itemListPoboznosti);
+                for(int i=0;i<itemListPoboznosti.size()-1;i++){
+                    for(int j=0;j<itemListPoboznosti.size()-i-1;j++) {
+                        String date1String=itemListPoboznosti.get(j).datum+" "+"00:00:00";
+                        Date date1 = null;
+                        try {
+                            date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(date1String);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        Date date2 = null;
+                        String date2String=itemListPoboznosti.get(j+1).datum+" "+"00:00:00";
+
+                        try {
+                            date2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(date2String);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        if(date1.before(date2)){
+                            Collections.swap(itemListPoboznosti,j+1,j);
+                        }
+                    }
+                }
                 if(!itemListPoboznosti.isEmpty()){
                     poboznostiZadnjiDatum=itemListPoboznosti.get(0).datum;
                     poboznostiDatum.setText(poboznostiZadnjiDatum);
