@@ -127,11 +127,9 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
         if(visible==true){
             holder.alarmLayout.setVisibility(View.VISIBLE);
             for(int i=0;i<konacnaListaAlarma.size();i++) {
-                for (int j = 0; j < itemList.size(); j++) {
-                    if (konacnaListaAlarma.get(i).getNaslov().toString().equals(itemList.get(j).getNaslov().toString())) {
+                    if (konacnaListaAlarma.get(i).getNaslov().toString().equals(itemList.get(position).getNaslov().toString())) {
                         holder.alarmTime.setText(konacnaListaAlarma.get(i).getVrijeme().toString());
                         holder.dateDate.setText(konacnaListaAlarma.get(i).getDatum().toString());
-                    }
                 }
             }
             holder.alarm = true;
@@ -352,7 +350,6 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
 
   //*******************************************ovo sam dodao
                                                     alarmDate.setDatum(holder.danMjeseca+"/"+holder.mjesec+"/"+holder.godina);
-
 
 
                                                     alarmDate.setVrijeme(holder.sati + ":" + holder.minute);
