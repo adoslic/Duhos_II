@@ -1,5 +1,8 @@
 package com.duhos.duhosii;
 
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.duhos.duhosii.R;
 
+import java.util.List;
 import java.util.Objects;
 
 import io.realm.Realm;
@@ -37,6 +41,28 @@ public class SplashScreenActivity extends AppCompatActivity{
                 SplashScreenActivity.this.finish();
             }
         },3600);
+    }
+
+    public boolean isApplicationSentToBackground(final Context context)
+    {
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
+        if (!tasks.isEmpty()) {
+            ComponentName topActivity = tasks.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    @Override
+    public void onStop() {
+        if (isApplicationSentToBackground(this)){
+            //put your code here what u want to do
+            finish();
+            System.exit(0);
+        }
+        super.onStop();
     }
 
     @Override
