@@ -139,7 +139,7 @@ public class PjesmaricaItemAdapter extends RecyclerView.Adapter<PjesmaricaItemAd
             else {
                 String filterPattern=constraint.toString().toLowerCase().trim();
                 for(Pjesma item:itemListFull){
-                    if((item.getNaslov().toLowerCase()+" - "+item.getBend().toLowerCase()).contains(filterPattern)){
+                    if((item.getNaslov().toLowerCase()+" - "+item.getBend().toLowerCase()).contains(filterPattern) || (item.getNaslov().toLowerCase()+" "+item.getBend().toLowerCase()).contains(filterPattern)){
                         filteredList.add(item);
                     }
                 }
