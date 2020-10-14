@@ -125,5 +125,58 @@
             android:fontFamily="@font/montserrat_medium"
             android:layout_marginBottom="25dp"
             android:justificationMode="inter_word"></TextView>
+
+
+
+        <!--///////////////////treci kapelan//////////////////////////-->
+        <ImageView
+            android:id="@+id/kapelan3Image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/kapelan2Tekst"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/pater_arek"></ImageView>
+
+        <TextView
+            android:id="@+id/kapelan3Naslov1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/kapelan3Image"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="25dp"
+            android:text="@string/kapelan3_naslov1"
+            android:textColor="@color/duhosPlava"
+            android:textSize="20sp"
+            android:fontFamily="@font/firasans_bold"></TextView>
+
+        <TextView
+            android:id="@+id/kapelan3Naslov2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/kapelan3Naslov1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/kapelan3_naslov2"
+            android:textColor="@color/duhosPlava"
+            android:textSize="20sp"
+            android:fontFamily="@font/firasans_bold"></TextView>
+
+
+        <TextView
+            android:id="@+id/kapelan3Tekst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/kapelan3Naslov2"
+            android:layout_marginTop="25dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/kapelan3_tekst"
+            android:textColor="@color/duhosPlava"
+            android:textSize="16sp"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_marginBottom="25dp"
+            android:justificationMode="inter_word"></TextView>
+
+
     </RelativeLayout>
 </ScrollView>
