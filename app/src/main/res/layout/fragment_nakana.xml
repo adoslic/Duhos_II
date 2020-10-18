@@ -19,6 +19,7 @@
         android:drawablePadding="10dp"
         android:background="@drawable/rectangle_shape_shadow_small_radius"
         android:hint="Ime i prezime"
+         android:inputType="textCapSentences"
          android:textColorHint="@color/greyText"
         android:singleLine="true"
         android:padding="15dp"

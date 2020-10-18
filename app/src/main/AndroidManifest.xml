@@ -18,17 +18,17 @@
         android:roundIcon="@mipmap/ic_app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.duhos.duhosii.SplashScreenActivity">
+        <activity android:name="com.duhos.duhosii.SplashScreenActivity"
+                    android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name="com.duhos.duhosii.MainActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait">
+                    android:configChanges="orientation|keyboardHidden|screenSize"
+                    android:windowSoftInputMode="adjustPan"
+                    android:screenOrientation="portrait">
         </activity>
 
         <receiver android:name="com.duhos.duhosii.ReminderBroadcast"/>
