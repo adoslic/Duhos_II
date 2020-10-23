@@ -9,19 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/kapelan1Image"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:src="@drawable/davor"></ImageView>
-
         <TextView
             android:id="@+id/kapelan1Naslov1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/kapelan1Image"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="10dp"
             android:text="@string/kapelan1_naslov1"
             android:textColor="@color/duhosPlava"
             android:textSize="20sp"
@@ -38,6 +31,7 @@
             android:textColor="@color/duhosPlava"
             android:textSize="20sp"
             android:fontFamily="@font/firasans_bold"></TextView>
+
         <TextView
             android:id="@+id/mail1"
             android:layout_width="wrap_content"
@@ -45,16 +39,25 @@
             android:layout_below="@+id/kapelan1Naslov2"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:text="e-mail: dav.vuk@gmail.com"
             android:textColor="@color/duhosPlava"
             android:textSize="12sp"
             android:fontFamily="@font/montserrat_medium"
             android:textIsSelectable="true"></TextView>
+
+        <ImageView
+            android:id="@+id/kapelan1Image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/davor"
+            android:layout_below="@id/mail1"></ImageView>
+
         <TextView
             android:id="@+id/kapelan1Tekst"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/mail1"
+            android:layout_below="@+id/kapelan1Image"
             android:layout_marginTop="25dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
@@ -66,19 +69,12 @@
 
 
         <!--///////////////////drugi kapelan//////////////////////////-->
-        <ImageView
-            android:id="@+id/kapelan2Image"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@id/kapelan1Tekst"
-            android:layout_marginTop="25dp"
-            android:src="@drawable/mario"></ImageView>
 
         <TextView
             android:id="@+id/kapelan2Naslov1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/kapelan2Image"
+            android:layout_below="@+id/kapelan1Tekst"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="25dp"
             android:text="@string/kapelan2_naslov1"
@@ -105,17 +101,25 @@
             android:layout_below="@+id/kapelan2Naslov2"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:text="e-mail: m.zigman6@gmail.com"
             android:textColor="@color/duhosPlava"
             android:textSize="12sp"
             android:fontFamily="@font/montserrat_medium"
             android:textIsSelectable="true"></TextView>
 
+        <ImageView
+            android:id="@+id/kapelan2Image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/mail2"
+            android:src="@drawable/mario"></ImageView>
+
         <TextView
             android:id="@+id/kapelan2Tekst"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/mail2"
+            android:layout_below="@+id/kapelan2Image"
             android:layout_marginTop="25dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
@@ -126,32 +130,32 @@
             android:justificationMode="inter_word"></TextView>
 
 
-        <!--///////////////////treci kapelan//////////////////////////-->
+        <!--///////////////////prosli kapelani//////////////////////////-->
+        <TextView
+            android:id="@+id/bivsiKapelani"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/kapelan2Tekst"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="25dp"
+            android:text="@string/bivsi_kapelani"
+            android:textColor="@color/duhosPlava"
+            android:textSize="20sp"
+            android:fontFamily="@font/firasans_bold"></TextView>
         <ImageView
             android:id="@+id/kapelan3Image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_below="@id/kapelan2Tekst"
+            android:layout_below="@id/kapelan3Naslov2"
             android:layout_marginTop="25dp"
             android:src="@drawable/pater_arek"></ImageView>
 
-        <TextView
-            android:id="@+id/kapelan3Naslov1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/kapelan3Image"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="25dp"
-            android:text="@string/kapelan3_naslov1"
-            android:textColor="@color/duhosPlava"
-            android:textSize="20sp"
-            android:fontFamily="@font/firasans_bold"></TextView>
 
         <TextView
             android:id="@+id/kapelan3Naslov2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/kapelan3Naslov1"
+            android:layout_below="@+id/bivsiKapelani"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="10dp"
             android:text="@string/kapelan3_naslov2"
@@ -164,7 +168,7 @@
             android:id="@+id/kapelan3Tekst"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/kapelan3Naslov2"
+            android:layout_below="@+id/kapelan3Image"
             android:layout_marginTop="25dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"

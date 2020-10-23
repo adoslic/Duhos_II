@@ -191,6 +191,7 @@ public class MolitveneGrupeFragment extends Fragment {
                         itemListOpce.add(new Molitva(nazivOpce,datumOpce,tekstOpce));
                     }
                 }
+                Collections.reverse(itemListOpce);
                 for(int i=0;i<itemListOpce.size()-1;i++){
                     for(int j=0;j<itemListOpce.size()-i-1;j++) {
                         String date1String=itemListOpce.get(j).datum+" "+"00:00:00";
@@ -240,6 +241,7 @@ public class MolitveneGrupeFragment extends Fragment {
                         itemListMarijanske.add(new Molitva(nazivMarijanske,datumMarijanske,tekstMarijanske));
                     }
                 }
+                Collections.reverse(itemListMarijanske);
                 for(int i=0;i<itemListMarijanske.size()-1;i++){
                     for(int j=0;j<itemListMarijanske.size()-i-1;j++) {
                         String date1String=itemListMarijanske.get(j).datum+" "+"00:00:00";
@@ -289,6 +291,7 @@ public class MolitveneGrupeFragment extends Fragment {
                         itemListNadahnuca.add(new Molitva(nazivNadahnuca,datumNadahnuca,tekstNadahnuca));
                     }
                 }
+                Collections.reverse(itemListNadahnuca);
                 for(int i=0;i<itemListNadahnuca.size()-1;i++){
                     for(int j=0;j<itemListNadahnuca.size()-i-1;j++) {
                         String date1String=itemListNadahnuca.get(j).datum+" "+"00:00:00";
@@ -338,6 +341,7 @@ public class MolitveneGrupeFragment extends Fragment {
                         itemListPoboznosti.add(new Molitva(nazivPoboznosti,datumPoboznosti,tekstPoboznosti));
                     }
                 }
+                Collections.reverse(itemListPoboznosti);
                 for(int i=0;i<itemListPoboznosti.size()-1;i++){
                     for(int j=0;j<itemListPoboznosti.size()-i-1;j++) {
                         String date1String=itemListPoboznosti.get(j).datum+" "+"00:00:00";
