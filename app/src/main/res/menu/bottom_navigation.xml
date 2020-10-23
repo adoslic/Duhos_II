@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigacija_pjesmarica"
+        android:icon="@drawable/ic_pjesmarica"
+        android:title="Pjesmarica"></item>
+
+    <item
+        android:id="@+id/navigacija_kalendar"
+        android:icon="@drawable/ic_kalendar"
+        android:title="Kalendar"></item>
+
+    <item
+        android:id="@+id/navigacija_molitva"
+        android:icon="@drawable/ic_molitva"
+        android:title="Od srca k Srcu"></item>
+
+    <item
+        android:id="@+id/navigacija_multimedija"
+        android:icon="@drawable/ic_multimedija"
+        android:title="Novosti"></item>
+
+    <item
+        android:id="@+id/navigacija_pitanja"
+        android:icon="@drawable/ic_pitanja"
+        android:title="Pitanja"></item>
+</menu>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_layout_pitanja"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pitanje_odgovor_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_shape_shadow_small_radius"
+        android:padding="10dp">
+
+        <RelativeLayout
+            android:id="@+id/pitanjeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_shape"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            >
+            <TextView
+                android:id="@+id/idPitanje"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:padding="5dp"
+                android:textColor="@color/duhosPlava"
+                android:fontFamily="@font/firasans_semibold"
+                android:textSize="16sp"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:justificationMode="none">
+            </TextView>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/odgovorLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pitanjeLayout"
+            android:background="@drawable/clicked_pitanje_background"
+            android:visibility="gone"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/idOdgovor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:padding="5dp"
+                android:textColor="@color/white"
+                android:visibility="visible"
+                android:layout_centerHorizontal="true"
+                android:textSize="16sp"
+                android:fontFamily="@font/montserrat_regular"
+                android:autoLink="web"
+                android:textColorLink="@color/linkColor"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:justificationMode="none">
+            </TextView>
+
+            <ImageButton
+                android:id="@+id/share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_share"
+                android:layout_margin="10dp"
+                android:layout_below="@+id/idOdgovor"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/clicked_pitanje_background"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+</RelativeLayout>

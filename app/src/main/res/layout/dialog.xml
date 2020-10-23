@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/rectangle_shape">
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/xButtonLayout"
+            android:layout_alignParentRight="true"
+            android:layout_margin="5dp">
+        <ImageButton
+            android:id="@+id/xButton"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:src="@drawable/ic_x"
+            android:background="@color/white"
+            android:layout_centerInParent="true"></ImageButton>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/infoLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_below="@id/xButtonLayout"
+            android:layout_marginTop="10dp">
+
+            <RelativeLayout
+                android:id="@+id/infoDuhosLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+                <ImageView
+                    android:id="@+id/infoDuhosImage"
+                    android:src="@drawable/ic_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"></ImageView>
+                <TextView
+                    android:id="@+id/infoDuhosText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Općenito informacije"
+                    android:textColor="@color/duhosPlava"
+                    android:layout_toRightOf="@id/infoDuhosImage"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/firasans_regular"
+                    android:textSize="16sp"></TextView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/infoKapelaniLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/infoDuhosLayout"
+                android:padding="10dp">
+                <ImageView
+                    android:id="@+id/infoKapelaniImage"
+                    android:src="@drawable/ic_svecenik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"></ImageView>
+                <TextView
+                    android:id="@+id/infoKapelaniText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kapelani"
+                    android:textColor="@color/duhosPlava"
+                    android:layout_toRightOf="@id/infoKapelaniImage"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/firasans_regular"
+                    android:textSize="16sp"></TextView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/infoTimoviLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/infoKapelaniLayout"
+                android:padding="10dp">
+                <ImageView
+                    android:id="@+id/infoTimoviImage"
+                    android:src="@drawable/ic_timovi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    ></ImageView>
+                <TextView
+                    android:id="@+id/infoTimoviText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DUHOS timovi"
+                    android:textColor="@color/duhosPlava"
+                    android:layout_toRightOf="@id/infoTimoviImage"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/firasans_regular"
+                    android:textSize="16sp"></TextView>
+
+          </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/infoKnjiznicaLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/infoTimoviLayout"
+                android:padding="10dp">
+                <ImageView
+                    android:id="@+id/infoKnjiznicaImage"
+                    android:src="@drawable/ic_knjiznica"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"></ImageView>
+                <TextView
+                    android:id="@+id/infoKnjiznicaText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Knjižnica"
+                    android:textColor="@color/duhosPlava"
+                    android:layout_toRightOf="@id/infoKnjiznicaImage"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/firasans_regular"
+                    android:textSize="16sp"></TextView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/infoApk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/infoKnjiznicaLayout"
+                android:padding="10dp">
+                <ImageView
+                    android:id="@+id/infoApkImage"
+                    android:src="@drawable/ic_apk_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"></ImageView>
+                <TextView
+                    android:id="@+id/infoApkText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="O aplikaciji"
+                    android:textColor="@color/duhosPlava"
+                    android:layout_toRightOf="@id/infoApkImage"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/firasans_regular"
+                    android:textSize="16sp"></TextView>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+        <ImageButton
+            android:id="@+id/uclaniSeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/infoLayout"
+            android:src="@drawable/ic_buttonuclanise"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:layout_marginBottom="12dp"
+            android:background="@color/white"></ImageButton>
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+    <LinearLayout
+        android:id="@+id/editTextLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/sendNakanaButton">
+     <EditText
+        android:id="@+id/editTextIme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_imepitanja"
+        android:drawablePadding="10dp"
+        android:background="@drawable/rectangle_shape_shadow_small_radius"
+        android:hint="Ime i prezime"
+         android:inputType="textCapSentences"
+         android:textColorHint="@color/greyText"
+        android:singleLine="true"
+        android:padding="15dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/duhosPlava"
+         android:fontFamily="@font/montserrat_regular"
+         android:textSize="16sp">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/editTextNakana"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextIme"
+        android:drawableLeft="@drawable/ic_pitanjepitanja"
+        android:drawablePadding="10dp"
+        android:background="@drawable/rectangle_shape_shadow_small_radius"
+        android:hint="Molitvena nakana"
+        android:padding="15dp"
+        android:includeFontPadding="true"
+        android:inputType="textCapSentences|textMultiLine"
+        android:gravity="top"
+        android:textColor="@color/duhosPlava"
+        android:textColorHint="@color/greyText"
+        android:fontFamily="@font/montserrat_regular"
+        android:textSize="16sp">
+
+    </EditText>
+    </LinearLayout>
+    <ImageButton
+        android:id="@+id/sendNakanaButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_buttonsendmessage"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:paddingTop="20dp"
+        android:background="@color/grey"></ImageButton>
+
+</RelativeLayout>
