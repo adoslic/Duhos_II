@@ -130,10 +130,11 @@ public class PitajKapelanaFragment extends Fragment {
                     private String davorMail="dav.vuk@gmail.com";*/
                     String marioMail=getContext().getResources().getString(R.string.mailZaPitanjaKapelan2);
                     String davorMail=getContext().getResources().getString(R.string.mailZaPitanjaKapelan1);
+                    String message=pitanjeEditText.getText().toString().trim();
                     if(marioImageActive.getVisibility()==View.GONE && davorImageActive.getVisibility()==View.GONE){
                         Toast.makeText(getContext(),getEmojiByUnicode(0x1F446)+"Odaberi kapelana!",Toast.LENGTH_SHORT).show();
                     }
-                    else if(pitanjeEditText.getText().length()==0){
+                    else if(message.length()==0){
                         Toast.makeText(getContext(),getEmojiByUnicode(0x1F446)+"Unesi pitanje!",Toast.LENGTH_SHORT).show();
                     }
                     else{

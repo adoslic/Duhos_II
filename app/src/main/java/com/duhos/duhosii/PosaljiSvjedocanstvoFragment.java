@@ -108,7 +108,9 @@ public class PosaljiSvjedocanstvoFragment extends Fragment {
         sendNakanaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(nakanaEditText.getText().length()==0){
+                String svjedocanstvo=nakanaEditText.getText().toString();
+                svjedocanstvo=svjedocanstvo.trim();
+                if(svjedocanstvo.length()==0){
                     Toast.makeText(getContext(),getEmojiByUnicode(0x1F446)+"Unesi svjedočanstvo!",Toast.LENGTH_SHORT).show();
                 }
                 else{

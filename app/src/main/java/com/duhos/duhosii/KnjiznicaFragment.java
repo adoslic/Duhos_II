@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,8 +63,15 @@ public class KnjiznicaFragment extends Fragment {
 
     public void popisKnjiga() {
         if(URLUtil.isValidUrl(linkNaPopisKnjiga)) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkNaPopisKnjiga));
-            startActivity(browserIntent);
+            WebViewFragment frag = new WebViewFragment(linkNaPopisKnjiga, "Knjižnica");
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment_containter, frag);
+            int count = getFragmentManager().getBackStackEntryCount();
+            if(getFragmentManager().getBackStackEntryAt(count-1).getName() == "dialogBox"){
+                getFragmentManager().popBackStack();
+            }
+            ft.addToBackStack("dialogBox");
+            ft.commit();
         }
         else
             Toast.makeText(getContext(),getContext().getResources().getString(R.string.neispravanLinkString),Toast.LENGTH_SHORT).show();

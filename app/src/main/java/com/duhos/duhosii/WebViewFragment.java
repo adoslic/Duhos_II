@@ -16,12 +16,18 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 
-public class UclaniSeFragment extends Fragment {
+public class WebViewFragment extends Fragment {
 
     TextView zaglavlje;
     BottomNavigationView bottomNavigationView;
     WebView webView;
-    private String url="https://docs.google.com/forms/d/e/1FAIpQLSexlM7YCFchzTa-wF865I37NLCyKL9voPy0c0rcqnPjD1qV1A/viewform";
+    private String url;
+    private String zaglavljeText;
+
+    public WebViewFragment(String url,String zaglavljeText) {
+        this.zaglavljeText=zaglavljeText;
+        this.url = url;
+    }
 
     @Nullable
     @Override
@@ -35,14 +41,14 @@ public class UclaniSeFragment extends Fragment {
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         View view=mActionBar.getCustomView();
         zaglavlje=view.findViewById(R.id.naslov);
-        zaglavlje.setText(getContext().getResources().getString(R.string.duhosTimoviNaslov));
+        zaglavlje.setText(zaglavljeText);
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
 
-        View uclaniSeView=inflater.inflate(R.layout.fragment_uclani_se, container, false);
-        webView=uclaniSeView.findViewById(R.id.uclaniSeWebView);
+        View webViewView=inflater.inflate(R.layout.fragment_webview, container, false);
+        webView=webViewView.findViewById(R.id.webView);
 
 
         webView.getSettings().setJavaScriptEnabled(true);
@@ -51,7 +57,7 @@ public class UclaniSeFragment extends Fragment {
         webView.getSettings().setPluginState(WebSettings.PluginState.ON);
         webView.loadUrl(url);
 
-        return uclaniSeView;
+        return webViewView;
     }
 
 }
