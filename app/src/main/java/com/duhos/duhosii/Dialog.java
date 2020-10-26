@@ -133,7 +133,7 @@ public class Dialog extends AppCompatDialogFragment {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
-                UclaniSeFragment frag = new UclaniSeFragment();
+                WebViewFragment frag = new WebViewFragment("https://docs.google.com/forms/d/e/1FAIpQLSexlM7YCFchzTa-wF865I37NLCyKL9voPy0c0rcqnPjD1qV1A/viewform", "DUHOS timovi");
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment_containter, frag);
                 int count = getFragmentManager().getBackStackEntryCount();

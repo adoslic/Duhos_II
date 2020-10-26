@@ -19,6 +19,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
@@ -101,8 +102,15 @@ public class MultimedijaOpsirno extends Fragment {
 
     public void goToLink() {
         if(URLUtil.isValidUrl(medij.getLink())) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(medij.getLink()));
-            startActivity(browserIntent);
+            WebViewFragment frag = new WebViewFragment(medij.getLink().toString(), "Novosti");
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment_containter, frag);
+            int count = getFragmentManager().getBackStackEntryCount();
+            if(getFragmentManager().getBackStackEntryAt(count-1).getName() == "dialogBox"){
+                getFragmentManager().popBackStack();
+            }
+            ft.addToBackStack("dialogBox");
+            ft.commit();
         }
         else
             Toast.makeText(getContext(),getContext().getResources().getString(R.string.neispravanLinkString),Toast.LENGTH_SHORT).show();

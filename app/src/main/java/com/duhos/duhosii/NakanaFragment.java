@@ -109,7 +109,9 @@ public class NakanaFragment extends Fragment {
         sendNakanaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(nakanaEditText.getText().length()==0){
+                String nakana=nakanaEditText.getText().toString();
+                nakana=nakana.trim();
+                if(nakana.length()==0){
                     Toast.makeText(getContext(),getEmojiByUnicode(0x1F446)+"Unesi nakanu!",Toast.LENGTH_SHORT).show();
                 }
                 else{
