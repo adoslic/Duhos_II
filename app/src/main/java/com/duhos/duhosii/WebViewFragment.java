@@ -1,11 +1,14 @@
 package com.duhos.duhosii;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -57,6 +60,24 @@ public class WebViewFragment extends Fragment {
         webView.getSettings().setPluginState(WebSettings.PluginState.ON);
         webView.loadUrl(url);
 
+        webView.setWebViewClient(new WebViewClient()
+        {
+            public boolean shouldOverrideUrlLoading(WebView view, String url)
+            {
+                // all links  with in ur site will be open inside the webview
+                //links that start ur domain example(http://www.example.com/)
+                if (url != null && url.startsWith("htt")){
+                    return false;
+                }
+                // all links that points outside the site will be open in a normal android browser
+                else
+                {
+                    view.getContext().startActivity(
+                            new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                    return true;
+                }
+            }
+        });
         return webViewView;
     }
 

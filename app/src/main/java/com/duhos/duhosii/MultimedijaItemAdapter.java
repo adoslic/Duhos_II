@@ -52,7 +52,7 @@ public class MultimedijaItemAdapter extends RecyclerView.Adapter<MultimedijaItem
             holder.multimedijaLayout.setBackground(null);
             holder.itemLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_transition_animation));
 
-            holder.naslov.setText("\""+itemList.get(position).getNaslov()+"\"");
+            holder.naslov.setText(itemList.get(position).getNaslov());
 
             holder.itemLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
