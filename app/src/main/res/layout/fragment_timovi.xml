@@ -34,19 +34,12 @@
             android:fontFamily="@font/montserrat_medium"
             android:justificationMode="inter_word"></TextView>
 
-        <ImageView
-            android:id="@+id/cuposImage"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@id/stoZelimoTeskt"
-            android:layout_marginTop="25dp"
-            android:src="@drawable/cupos"></ImageView>
 
         <TextView
             android:id="@+id/cuposNaslov"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/cuposImage"
+            android:layout_below="@+id/stoZelimoTeskt"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="25dp"
             android:text="ČUPOS"
@@ -54,12 +47,19 @@
             android:textSize="20sp"
             android:fontFamily="@font/firasans_bold"></TextView>
 
+        <ImageView
+            android:id="@+id/cuposImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/cuposNaslov"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/cupos"></ImageView>
 
         <TextView
             android:id="@+id/cuposTekst"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/cuposNaslov"
+            android:layout_below="@+id/cuposImage"
             android:layout_marginTop="25dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
@@ -67,24 +67,14 @@
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_medium"
-            android:layout_marginBottom="25dp"
             android:justificationMode="inter_word"></TextView>
 
-
-
-        <ImageView
-            android:id="@+id/liturgijskiImage"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@id/cuposTekst"
-            android:layout_marginTop="25dp"
-            android:src="@drawable/liturgijski_tim"></ImageView>
 
         <TextView
             android:id="@+id/liturgijskiNaslov"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/liturgijskiImage"
+            android:layout_below="@+id/cuposTekst"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="25dp"
             android:text="LITURGIJSKI TIM"
@@ -93,11 +83,19 @@
             android:fontFamily="@font/firasans_bold"></TextView>
 
 
+        <ImageView
+            android:id="@+id/liturgijskiImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/liturgijskiNaslov"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/liturgijski_tim"></ImageView>
+
         <TextView
             android:id="@+id/liturgijskiTekst"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/liturgijskiNaslov"
+            android:layout_below="@+id/liturgijskiImage"
             android:layout_marginTop="25dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
@@ -105,23 +103,13 @@
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_medium"
-            android:layout_marginBottom="25dp"
             android:justificationMode="inter_word"></TextView>
-
-
-        <ImageView
-            android:id="@+id/medijskiImage"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@id/liturgijskiTekst"
-            android:layout_marginTop="25dp"
-            android:src="@drawable/medijski"></ImageView>
 
         <TextView
             android:id="@+id/medijskiNaslov"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/medijskiImage"
+            android:layout_below="@+id/liturgijskiTekst"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="25dp"
             android:text="MEDIJSKI TIM"
@@ -129,12 +117,19 @@
             android:textSize="20sp"
             android:fontFamily="@font/firasans_bold"></TextView>
 
+        <ImageView
+            android:id="@+id/medijskiImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/medijskiNaslov"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/medijski"></ImageView>
 
         <TextView
             android:id="@+id/medijskiTekst"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/medijskiNaslov"
+            android:layout_below="@+id/medijskiImage"
             android:layout_marginTop="25dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
@@ -142,23 +137,13 @@
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_medium"
-            android:layout_marginBottom="25dp"
             android:justificationMode="inter_word"></TextView>
-
-
-        <ImageView
-            android:id="@+id/bandImage"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@id/medijskiTekst"
-            android:layout_marginTop="25dp"
-            android:src="@drawable/duhos_band"></ImageView>
 
         <TextView
             android:id="@+id/bandNaslov"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/bandImage"
+            android:layout_below="@+id/medijskiTekst"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="25dp"
             android:text="DUHOS BAND"
@@ -166,12 +151,19 @@
             android:textSize="20sp"
             android:fontFamily="@font/firasans_bold"></TextView>
 
+        <ImageView
+            android:id="@+id/bandImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/bandNaslov"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/duhos_band"></ImageView>
 
         <TextView
             android:id="@+id/bandTeskt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/bandNaslov"
+            android:layout_below="@+id/bandImage"
             android:layout_marginTop="25dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
@@ -179,23 +171,13 @@
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_medium"
-            android:layout_marginBottom="25dp"
             android:justificationMode="inter_word"></TextView>
-
-
-        <ImageView
-            android:id="@+id/volonteriImage"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@id/bandTeskt"
-            android:layout_marginTop="25dp"
-            android:src="@drawable/volonteri"></ImageView>
 
         <TextView
             android:id="@+id/volonteriNaslov"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/volonteriImage"
+            android:layout_below="@+id/bandTeskt"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="25dp"
             android:text="VOLONTERSKI TIM"
@@ -203,12 +185,19 @@
             android:textSize="20sp"
             android:fontFamily="@font/firasans_bold"></TextView>
 
+        <ImageView
+            android:id="@+id/volonteriImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/volonteriNaslov"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/volonteri"></ImageView>
 
         <TextView
             android:id="@+id/volonteriTekst"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/volonteriNaslov"
+            android:layout_below="@+id/volonteriImage"
             android:layout_marginTop="25dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"

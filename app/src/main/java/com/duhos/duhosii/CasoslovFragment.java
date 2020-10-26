@@ -1,5 +1,7 @@
 package com.duhos.duhosii;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +9,7 @@ import android.view.ViewGroup;
 import android.webkit.URLUtil;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +57,24 @@ public class CasoslovFragment extends Fragment {
             casoslovWebView.getSettings().setUseWideViewPort(true);
             casoslovWebView.getSettings().setPluginState(WebSettings.PluginState.ON);
             casoslovWebView.loadUrl(url);
+
+            casoslovWebView.setWebViewClient(new WebViewClient()
+            {
+                public boolean shouldOverrideUrlLoading(WebView view, String url)
+                {
+                    if (url != null ){
+                        return false;
+                    }
+                    // all links that points outside the site will be open in a normal android browser
+                    else
+                    {
+                        view.getContext().startActivity(
+                                new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                        return true;
+                    }
+                }
+            });
+
         }
         else
             Toast.makeText(getContext(),getContext().getResources().getString(R.string.neispravanLinkString),Toast.LENGTH_SHORT).show();

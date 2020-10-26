@@ -1,6 +1,7 @@
 package com.duhos.duhosii;
 
 import android.content.Context;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,6 +69,7 @@ public class SliderAdapter extends PagerAdapter {
         slideImageView.setImageResource(slide_images[position]);
         slideHeaderView.setText(slide_headers[position]);
         slideDescriptionView.setText(slide_descriptions[position]);
+        slideDescriptionView.setMovementMethod(new ScrollingMovementMethod());
 
         container.addView(view);
 
