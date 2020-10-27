@@ -17,8 +17,7 @@
             <RelativeLayout
                 android:id="@+id/multimedijaLayout"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true">
+                android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/idNaslov"
                     android:layout_width="wrap_content"
@@ -28,8 +27,8 @@
                     android:fontFamily="@font/firasans_semibold"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="25dp"
-                    android:layout_centerInParent="true"
-                    android:justificationMode="inter_word"/>
+                    android:autoLink="web"
+                    android:layout_centerInParent="true"/>
 
             </RelativeLayout>
         </RelativeLayout>

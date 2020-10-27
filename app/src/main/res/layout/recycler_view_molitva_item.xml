@@ -41,7 +41,7 @@
                     android:fontFamily="@font/firasans_semibold"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:justificationMode="inter_word"/>
+                    android:autoLink="web"/>
                 <TextView
                     android:id="@+id/datum"
                     android:layout_width="wrap_content"

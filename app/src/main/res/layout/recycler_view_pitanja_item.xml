@@ -37,7 +37,8 @@
                 android:textColor="@color/duhosPlava"
                 android:fontFamily="@font/firasans_semibold"
                 android:textSize="16sp"
-                android:layout_centerHorizontal="true">
+                android:layout_centerHorizontal="true"
+                android:autoLink="web">
             </TextView>
 
         </RelativeLayout>

@@ -32,7 +32,7 @@
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_medium"
-            android:justificationMode="inter_word"></TextView>
+            android:autoLink="web"></TextView>
 
 
         <TextView
@@ -67,7 +67,7 @@
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_medium"
-            android:justificationMode="inter_word"></TextView>
+            android:autoLink="web"></TextView>
 
 
         <TextView
@@ -103,7 +103,7 @@
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_medium"
-            android:justificationMode="inter_word"></TextView>
+            android:autoLink="web"></TextView>
 
         <TextView
             android:id="@+id/medijskiNaslov"
@@ -137,7 +137,7 @@
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_medium"
-            android:justificationMode="inter_word"></TextView>
+            android:autoLink="web"></TextView>
 
         <TextView
             android:id="@+id/bandNaslov"
@@ -171,7 +171,7 @@
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_medium"
-            android:justificationMode="inter_word"></TextView>
+            android:autoLink="web"></TextView>
 
         <TextView
             android:id="@+id/volonteriNaslov"
@@ -206,6 +206,6 @@
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_medium"
             android:layout_marginBottom="25dp"
-            android:justificationMode="inter_word"></TextView>
+            android:autoLink="web"></TextView>
     </RelativeLayout>
 </ScrollView>
