@@ -65,7 +65,7 @@
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_medium"
-            android:justificationMode="inter_word"></TextView>
+            android:autoLink="web"></TextView>
 
 
         <!--///////////////////drugi kapelan//////////////////////////-->
@@ -127,7 +127,7 @@
             android:textColor="@color/duhosPlava"
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_medium"
-            android:justificationMode="inter_word"></TextView>
+            android:autoLink="web"></TextView>
 
 
         <!--///////////////////prosli kapelani//////////////////////////-->
@@ -177,7 +177,7 @@
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_medium"
             android:layout_marginBottom="25dp"
-            android:justificationMode="inter_word"></TextView>
+            android:autoLink="web"></TextView>
 
 
     </RelativeLayout>

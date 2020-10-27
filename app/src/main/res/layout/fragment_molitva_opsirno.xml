@@ -46,7 +46,6 @@
             android:layout_margin="10dp"
             android:textColor="@color/duhosPlava"
             android:fontFamily="@font/montserrat_medium"
-            android:justificationMode="inter_word"
             android:autoLink="web"
             android:textColorLink="@color/linkColor"></TextView>
         <ImageButton

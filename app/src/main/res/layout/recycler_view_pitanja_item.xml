@@ -22,12 +22,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_shape"
-            android:layout_centerHorizontal="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            >
+            android:layout_marginBottom="10dp">
             <TextView
                 android:id="@+id/idPitanje"
                 android:layout_width="wrap_content"
@@ -37,7 +35,7 @@
                 android:textColor="@color/duhosPlava"
                 android:fontFamily="@font/firasans_semibold"
                 android:textSize="16sp"
-                android:layout_centerHorizontal="true">
+                android:autoLink="web">
             </TextView>
 
         </RelativeLayout>
@@ -61,7 +59,6 @@
                 android:padding="5dp"
                 android:textColor="@color/white"
                 android:visibility="visible"
-                android:layout_centerHorizontal="true"
                 android:textSize="16sp"
                 android:fontFamily="@font/montserrat_regular"
                 android:autoLink="web"

@@ -44,7 +44,7 @@
                 android:paddingLeft="16dp"
                 android:textSize="16sp"
                 android:fontFamily="@font/montserrat_medium"
-                android:justificationMode="inter_word"></TextView>
+                android:autoLink="web"></TextView>
             <ImageButton
                 android:id="@+id/popisKnjigaButton"
                 android:layout_width="wrap_content"
