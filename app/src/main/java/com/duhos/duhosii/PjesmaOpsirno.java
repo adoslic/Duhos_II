@@ -33,7 +33,7 @@ public class PjesmaOpsirno extends Fragment {
     private View pjesmaricaView;
     private TextView naslov,tekstPjesme,izvodjac;
     private ImageView slika;
-    private ImageButton shareButton,pdfButton;
+    private ImageButton shareButton,pdfButton,youtubeButton;
     private ScrollView scrollView;
 
 
@@ -64,6 +64,8 @@ public class PjesmaOpsirno extends Fragment {
         slika=pjesmaricaView.findViewById(R.id.slikaOpsirno);
         shareButton=pjesmaricaView.findViewById(R.id.shareButton);
         pdfButton=pjesmaricaView.findViewById(R.id.pdfButton);
+        youtubeButton=pjesmaricaView.findViewById(R.id.youtubeButton);
+
         izvodjac=pjesmaricaView.findViewById(R.id.izvodjacOpsirno);
 
         scrollView=pjesmaricaView.findViewById(R.id.pjesmarica_opsirno_scollView);
@@ -76,6 +78,11 @@ public class PjesmaOpsirno extends Fragment {
             pdfButton.setImageDrawable(getActivity().getDrawable(R.drawable.ic_buttonakordimissing));
         else
             pdfButton.setImageDrawable(getActivity().getDrawable(R.drawable.ic_akordi_button));
+
+        if(pjesma.getYoutubeLink().equals("YouTube link je nedostupan"))
+            youtubeButton.setImageDrawable(getActivity().getDrawable(R.drawable.ic_buttonyoutubeinmissing));
+        else
+            youtubeButton.setImageDrawable(getActivity().getDrawable(R.drawable.ic_buttonyoutube));
 
         tekstPjesme.setText(formatedText);
 
@@ -97,12 +104,39 @@ public class PjesmaOpsirno extends Fragment {
             }
         });
 
+        youtubeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!pjesma.getYoutubeLink().equals("YouTube link je nedostupan")){
+                    goToYouTube();
+                }
+                else
+                    Toast.makeText(getContext(),"Link je trenutačno nedostupan",Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return pjesmaricaView;
     }
 
     private void goToAkordi() {
         if(URLUtil.isValidUrl(pjesma.getLink())) {
             WebViewFragment frag = new WebViewFragment(pjesma.getLink().toString(), "Pjesmarica");
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment_containter, frag);
+            int count = getFragmentManager().getBackStackEntryCount();
+            if(getFragmentManager().getBackStackEntryAt(count-1).getName() == "dialogBox"){
+                getFragmentManager().popBackStack();
+            }
+            ft.addToBackStack("dialogBox");
+            ft.commit();
+        }
+        else
+            Toast.makeText(getContext(),getContext().getResources().getString(R.string.neispravanLinkString),Toast.LENGTH_SHORT).show();
+    }
+
+    private void goToYouTube() {
+        if(URLUtil.isValidUrl(pjesma.getYoutubeLink())) {
+            WebViewFragment frag = new WebViewFragment(pjesma.getYoutubeLink().toString(), "Pjesmarica");
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_containter, frag);
             int count = getFragmentManager().getBackStackEntryCount();

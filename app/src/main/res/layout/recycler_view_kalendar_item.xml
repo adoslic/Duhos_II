@@ -17,7 +17,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/datumLayout"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:background="@color/grey">
                 <TextView
                     android:id="@+id/datum"
@@ -45,9 +46,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_below="@+id/dan"
-                    android:visibility="visible">
+                    android:visibility="visible"
+                    android:padding="5dp">
                     <ImageView
                         android:id="@+id/timeIcon"
                         android:layout_width="20dp"
@@ -74,7 +76,9 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="10dp"
                     android:layout_below="@+id/timeLayout"
-                    android:visibility="gone">
+                    android:visibility="gone"
+                    android:background="@drawable/alarm_background"
+                    android:padding="5dp">
                 <ImageView
                     android:id="@+id/alarmIcon"
                     android:layout_width="20dp"
@@ -85,21 +89,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@id/alarmIcon"
-                        android:text="Trala"
+                        android:text="--:--"
                         android:textColor="@color/duhosPlava"
                         android:fontFamily="@font/montserrat_medium"
                         android:layout_marginLeft="5dp"></TextView>
+
                     <TextView
                         android:id="@+id/dateDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="--.--.----."
+                        android:layout_toRightOf="@id/alarmIcon"
+                        android:text="--/--"
                         android:textColor="@color/duhosPlava"
                         android:fontFamily="@font/montserrat_medium"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_below="@+id/alarmTime"
-                        android:layout_centerHorizontal="true"></TextView>
+                        android:layout_marginLeft="5dp"></TextView>
+
                 </RelativeLayout>
             </RelativeLayout>
 

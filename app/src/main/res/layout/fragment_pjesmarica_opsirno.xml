@@ -60,7 +60,7 @@
             android:src="@drawable/ic_button_share"
             android:background="#55FFFFFF"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/pdfButton"
+            android:layout_below="@+id/youtubeButton"
             android:padding="10dp"
             android:layout_marginBottom="10dp"/>
 
@@ -72,6 +72,16 @@
             android:background="#55FFFFFF"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/tekstOpsirno"
+            android:padding="10dp" />
+
+        <ImageButton
+            android:id="@+id/youtubeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_buttonyoutube"
+            android:background="#55FFFFFF"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/pdfButton"
             android:padding="10dp" />
     </RelativeLayout>
 

@@ -56,7 +56,17 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
     private List<AlarmDate> konacnaListaAlarma=new ArrayList<>();
     private boolean cancelFlag=false;
     private boolean cancelKalendarFlag=false;
-
+    private boolean cancelKalendarFlagAlarmLayout=false;
+    private boolean cancelAlarmFlagAlarmLayout=false;
+    int alarmIDDoSad;
+    String vrijemeAlarmaDoSad="";
+    String datumAlarmaDoSad="";
+    int positionToDelete;
+    String danToAdd;
+    String mjesecToAdd;
+    String godinaToAdd;
+    String minToAdd;
+    String hToAdd;
     private ArrayList<Boolean> alarmVisibility = new ArrayList<>();
 
 
@@ -125,11 +135,24 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
 
         final boolean visible = alarmVisibility.get(position);
         if(visible==true){
+            Date date=new Date();
+            String todayDate=new SimpleDateFormat("dd/MM/yyyy").format(date);
             holder.alarmLayout.setVisibility(View.VISIBLE);
             for(int i=0;i<konacnaListaAlarma.size();i++) {
                     if (konacnaListaAlarma.get(i).getNaslov().toString().equals(itemList.get(position).getNaslov().toString())) {
-                        holder.alarmTime.setText(konacnaListaAlarma.get(i).getVrijeme().toString());
-                        holder.dateDate.setText(konacnaListaAlarma.get(i).getDatum().toString());
+                        String[] dateParts = konacnaListaAlarma.get(i).getDatum().toString().split("/");
+                        if(konacnaListaAlarma.get(i).getDatum().toString().equals(todayDate.toString())){
+                            holder.alarmTime.setText(konacnaListaAlarma.get(i).getVrijeme().toString());
+                            holder.dateDate.setText(dateParts[0].toString()+"/"+dateParts[1].toString() );
+                            holder.dateDate.setVisibility(View.GONE);
+                            holder.alarmTime.setVisibility(View.VISIBLE);
+                        }
+                        else {
+                            holder.alarmTime.setText(konacnaListaAlarma.get(i).getVrijeme().toString());
+                            holder.dateDate.setText(dateParts[0].toString()+"/"+dateParts[1].toString());
+                            holder.dateDate.setVisibility(View.VISIBLE);
+                            holder.alarmTime.setVisibility(View.GONE);
+                        }
                 }
             }
             holder.alarm = true;
@@ -158,7 +181,7 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
 
             String[] parts = itemList.get(position).datum.split("/");
             String dan = parts[0];
-            String mjesec = parts[1];
+            final String mjesec = parts[1];
 
             String dateString=itemList.get(position).datum;
             Date date=null;
@@ -235,6 +258,159 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                 holder.lokacija.setVisibility(View.GONE);
                 holder.obavijest.setVisibility(View.GONE);
             }
+
+
+            holder.alarmLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    for(int i=0;i<konacnaListaAlarma.size();i++) {
+                        if (konacnaListaAlarma.get(i).getNaslov().toString().equals(itemList.get(position).getNaslov().toString())) {
+                            vrijemeAlarmaDoSad=konacnaListaAlarma.get(i).getVrijeme().toString();
+                            datumAlarmaDoSad=konacnaListaAlarma.get(i).getDatum().toString();
+                            alarmIDDoSad=konacnaListaAlarma.get(i).alarmID;
+                            positionToDelete=i;
+                        }
+                    }
+                    cancelKalendarFlagAlarmLayout=false;
+                    Calendar mcurrentTime = Calendar.getInstance();
+                    final int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                    final int minute = mcurrentTime.get(Calendar.MINUTE);
+                    int my_day = mcurrentTime.get(Calendar.DAY_OF_MONTH);
+                    int my_month = mcurrentTime.get(Calendar.MONTH);
+                    int my_year = mcurrentTime.get(Calendar.YEAR);
+                    final DatePickerDialog mDatePicker;
+                    mDatePicker = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                             danToAdd = String.valueOf(dayOfMonth);
+                             mjesecToAdd = String.valueOf(month+1);
+                             godinaToAdd = String.valueOf(year);
+
+                            if (dayOfMonth < 10)
+                                danToAdd = "0" + danToAdd;
+                            else
+                                danToAdd = danToAdd;
+                            if (month+1 < 10)
+                                mjesecToAdd= "0" + mjesecToAdd;
+                            else
+                                mjesecToAdd = mjesecToAdd;
+                            godinaToAdd = godinaToAdd;
+
+                        }
+                    }, my_year, my_month, my_day);
+                    mDatePicker.show();
+
+                    mDatePicker.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            if(!cancelKalendarFlagAlarmLayout){
+                                final TimePickerDialog mTimePicker;
+                                //otvori dialog za odabir vremena alarma
+                                mTimePicker = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+                                    @Override
+                                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                                        minToAdd = String.valueOf(selectedMinute);
+                                        hToAdd = String.valueOf(selectedHour);
+                                        if (selectedHour < 10)
+                                            hToAdd = "0" + hToAdd;
+                                        else
+                                            hToAdd = hToAdd;
+
+                                        if (selectedMinute < 10)
+                                            minToAdd = "0" + minToAdd;
+                                        else
+                                            minToAdd = minToAdd;
+                                    }
+                                }, hour, minute, true);
+
+                                mTimePicker.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                                    @Override
+                                    public void onDismiss(DialogInterface dialog) {
+                                        if(!cancelAlarmFlagAlarmLayout){
+                                            unsetNotificationAlarm(alarmIDDoSad);
+                                            final RealmResults<AlarmDate> results = realm.where(AlarmDate.class).equalTo("datum",konacnaListaAlarma.get(positionToDelete).getDatum().toString()).equalTo("vrijeme",konacnaListaAlarma.get(positionToDelete).getVrijeme().toString()).equalTo("naslov",konacnaListaAlarma.get(positionToDelete).naslov).findAll();
+                                            realm.executeTransaction(new Realm.Transaction() {
+                                                @Override
+                                                public void execute(Realm realm) {
+                                                    results.deleteAllFromRealm();
+                                                }
+                                            });
+                                            konacnaListaAlarma.remove(positionToDelete);
+
+                                            AlarmDate alarmDate = new AlarmDate();
+                                            //*******************************************ovo sam dodao
+                                            alarmDate.setDatum(danToAdd+"/"+mjesecToAdd+"/"+godinaToAdd);
+                                            alarmDate.setVrijeme(hToAdd + ":" + minToAdd);
+                                            alarmDate.setNaslov(itemList.get(position).naslov);
+
+                                            Date date=new Date();
+                                            String todayDate=new SimpleDateFormat("dd/MM/yyyy").format(date);
+                                            if(todayDate.equals(danToAdd+"/"+mjesecToAdd+"/"+godinaToAdd)){
+                                                holder.alarmTime.setText(hToAdd + ":" + minToAdd);
+                                                holder.dateDate.setText(danToAdd+"/"+mjesecToAdd);
+                                                holder.dateDate.setVisibility(View.GONE);
+                                                holder.alarmTime.setVisibility(View.VISIBLE);
+                                            }
+                                            else{
+                                                holder.alarmTime.setText(hToAdd + ":" + minToAdd);
+                                                holder.dateDate.setText(danToAdd+"/"+mjesecToAdd);
+                                                holder.dateDate.setVisibility(View.VISIBLE);
+                                                holder.alarmTime.setVisibility(View.GONE);
+                                            }
+
+                                            Random random = new Random();
+                                            int randomID = random.nextInt(100000000);
+                                            alarmDate.setAlarmID(randomID);
+
+                                            //provjera postoji li vec takav alarm u bazi - mozda sada nebitno jer sam onemogucio da budu u bazi vise događaja istih parametara
+                                            boolean dataExist = false;
+                                            for (int i = 0; i < konacnaListaAlarma.size(); i++) {
+                                                if (konacnaListaAlarma.get(i).getDatum().equals(alarmDate.getDatum()) && konacnaListaAlarma.get(i).getVrijeme().equals(alarmDate.getVrijeme()) && konacnaListaAlarma.get(i).getNaslov().equals(alarmDate.getNaslov()) && konacnaListaAlarma.get(i).getAlarmID() == alarmDate.getAlarmID())
+                                                    dataExist = true;
+                                            }
+                                            if (dataExist == false) {
+                                                konacnaListaAlarma.add(alarmDate);
+                                                realm.beginTransaction();
+                                                realm.copyToRealm(alarmDate);
+                                                realm.commitTransaction();
+                                                realm.close();
+                                            }
+                                            createNotificationChannel();
+//*******************************************dodao prvi parametar novi datum  i zadnja dva da se ispise u notifikaciji
+                                            setNotificationAlarm(danToAdd+"/"+mjesecToAdd+"/"+godinaToAdd + " " + hToAdd + ":" + minToAdd, randomID, holder.naslov.getText().toString(), holder.lokacija.getText().toString(),itemList.get(position).getDatum().toString(),itemList.get(position).getVrijeme().toString());
+
+
+
+
+                                            //Toast.makeText(context,"OK",Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                                mTimePicker.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                    @Override
+                                    public void onCancel(DialogInterface dialog) {
+                                        cancelAlarmFlagAlarmLayout=true;
+                                        //Toast.makeText(context,"CANCEL",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                mTimePicker.show();
+                                //Toast.makeText(context,"OK",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    });
+
+                    mDatePicker.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                        @Override
+                        public void onCancel(DialogInterface dialog) {
+                            //Toast.makeText(context,"CANCEL",Toast.LENGTH_SHORT).show();
+                            cancelKalendarFlagAlarmLayout=true;
+                        }
+                    });
+                }
+            });
 
 
             //klik na gumb za dodavanje ili brisanje obavijesti
@@ -334,11 +510,25 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                                                     final boolean visible = alarmVisibility.get(position);
                                                     if (visible == true) {
                                                         holder.alarmLayout.setVisibility(View.VISIBLE);
-                                                        holder.alarmTime.setText(holder.sati + ":" + holder.minute);
-                                                        holder.dateDate.setText(holder.danMjeseca+"/"+holder.mjesec+"/"+holder.godina);
+                                                        Date date=new Date();
+                                                        String todayDate=new SimpleDateFormat("dd/MM/yyyy").format(date);
+                                                        if(todayDate.equals(holder.danMjeseca+"/"+holder.mjesec+"/"+holder.godina)){
+                                                            holder.alarmTime.setText(holder.sati + ":" + holder.minute);
+                                                            holder.dateDate.setText(holder.danMjeseca+"/"+holder.mjesec);
+                                                            holder.dateDate.setVisibility(View.GONE);
+                                                            holder.alarmTime.setVisibility(View.VISIBLE);
+                                                        }
+                                                        else{
+                                                            holder.alarmTime.setText(holder.sati + ":" + holder.minute);
+                                                            holder.dateDate.setText(holder.danMjeseca+"/"+holder.mjesec);
+                                                            holder.dateDate.setVisibility(View.VISIBLE);
+                                                            holder.alarmTime.setVisibility(View.GONE);
+                                                        }
                                                         holder.alarm = true;
                                                         holder.obavijest.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_deletenotification));
                                                     } else {
+                                                        holder.dateDate.setVisibility(View.VISIBLE);
+                                                        holder.alarmTime.setVisibility(View.VISIBLE);
                                                         holder.alarmLayout.setVisibility(View.GONE);
                                                         holder.dateDate.setText("");
                                                         holder.alarmTime.setText("");
@@ -365,7 +555,9 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                                                         if (konacnaListaAlarma.get(i).getDatum().equals(alarmDate.getDatum()) && konacnaListaAlarma.get(i).getVrijeme().equals(alarmDate.getVrijeme()) && konacnaListaAlarma.get(i).getNaslov().equals(alarmDate.getNaslov()) && konacnaListaAlarma.get(i).getAlarmID() == alarmDate.getAlarmID())
                                                             dataExist = true;
                                                     }
+
                                                     if (dataExist == false) {
+                                                        konacnaListaAlarma.add(alarmDate);
                                                         realm.beginTransaction();
                                                         realm.copyToRealm(alarmDate);
                                                         realm.commitTransaction();
@@ -423,14 +615,16 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                     //ako je postojao alarm, mozes ga samo obrisat
                     else{
                         //brisanje alarma i notifikacija za odabrano vrijeme
+                        String datumZaBrisanje="";
                         for(int i=0;i<konacnaListaAlarma.size();i++){
                             if( konacnaListaAlarma.get(i).getNaslov().equals(itemList.get(position).naslov) && konacnaListaAlarma.get(i).getVrijeme().equals(holder.alarmTime.getText().toString())){
                                 unsetNotificationAlarm(konacnaListaAlarma.get(i).alarmID);
+                                datumZaBrisanje=konacnaListaAlarma.get(i).getDatum().toString();
                                 konacnaListaAlarma.remove(i);
                                 i=0;
                             }
                         }
-                        final RealmResults<AlarmDate> results = realm.where(AlarmDate.class).equalTo("datum",holder.dateDate.getText().toString()).equalTo("vrijeme",holder.alarmTime.getText().toString()).equalTo("naslov",itemList.get(position).naslov).findAll();
+                        final RealmResults<AlarmDate> results = realm.where(AlarmDate.class).equalTo("datum",datumZaBrisanje).equalTo("vrijeme",holder.alarmTime.getText().toString()).equalTo("naslov",itemList.get(position).naslov).findAll();
                         realm.executeTransaction(new Realm.Transaction() {
                             @Override
                             public void execute(Realm realm) {
