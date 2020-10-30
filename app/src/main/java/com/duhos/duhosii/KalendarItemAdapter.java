@@ -328,9 +328,22 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                                     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                                     @Override
                                     public void onDismiss(DialogInterface dialog) {
-                                        if(!cancelAlarmFlagAlarmLayout){
+                                        if(!cancelAlarmFlagAlarmLayout) {
+                                            String vrijemeSdatumom = danToAdd + "/" + mjesecToAdd + "/" + godinaToAdd + " " + hToAdd + ":" + minToAdd + ":00";
+
+                                            Date vrijemeAlarma = null;
+                                            try {
+                                                vrijemeAlarma = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(vrijemeSdatumom);
+                                            } catch (ParseException e) {
+                                                e.printStackTrace();
+                                            }
+                                            if (vrijemeAlarma.before(new Date())) {
+                                                Toast.makeText(context, context.getResources().getString(R.string.odabranoJeProsloVrijeme), Toast.LENGTH_SHORT).show();
+                                            }
+                                            else{
+
                                             unsetNotificationAlarm(alarmIDDoSad);
-                                            final RealmResults<AlarmDate> results = realm.where(AlarmDate.class).equalTo("datum",konacnaListaAlarma.get(positionToDelete).getDatum().toString()).equalTo("vrijeme",konacnaListaAlarma.get(positionToDelete).getVrijeme().toString()).equalTo("naslov",konacnaListaAlarma.get(positionToDelete).naslov).findAll();
+                                            final RealmResults<AlarmDate> results = realm.where(AlarmDate.class).equalTo("datum", konacnaListaAlarma.get(positionToDelete).getDatum().toString()).equalTo("vrijeme", konacnaListaAlarma.get(positionToDelete).getVrijeme().toString()).equalTo("naslov", konacnaListaAlarma.get(positionToDelete).naslov).findAll();
                                             realm.executeTransaction(new Realm.Transaction() {
                                                 @Override
                                                 public void execute(Realm realm) {
@@ -341,21 +354,20 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
 
                                             AlarmDate alarmDate = new AlarmDate();
                                             //*******************************************ovo sam dodao
-                                            alarmDate.setDatum(danToAdd+"/"+mjesecToAdd+"/"+godinaToAdd);
+                                            alarmDate.setDatum(danToAdd + "/" + mjesecToAdd + "/" + godinaToAdd);
                                             alarmDate.setVrijeme(hToAdd + ":" + minToAdd);
                                             alarmDate.setNaslov(itemList.get(position).naslov);
 
-                                            Date date=new Date();
-                                            String todayDate=new SimpleDateFormat("dd/MM/yyyy").format(date);
-                                            if(todayDate.equals(danToAdd+"/"+mjesecToAdd+"/"+godinaToAdd)){
+                                            Date date = new Date();
+                                            String todayDate = new SimpleDateFormat("dd/MM/yyyy").format(date);
+                                            if (todayDate.equals(danToAdd + "/" + mjesecToAdd + "/" + godinaToAdd)) {
                                                 holder.alarmTime.setText(hToAdd + ":" + minToAdd);
-                                                holder.dateDate.setText(danToAdd+"/"+mjesecToAdd);
+                                                holder.dateDate.setText(danToAdd + "/" + mjesecToAdd);
                                                 holder.dateDate.setVisibility(View.GONE);
                                                 holder.alarmTime.setVisibility(View.VISIBLE);
-                                            }
-                                            else{
+                                            } else {
                                                 holder.alarmTime.setText(hToAdd + ":" + minToAdd);
-                                                holder.dateDate.setText(danToAdd+"/"+mjesecToAdd);
+                                                holder.dateDate.setText(danToAdd + "/" + mjesecToAdd);
                                                 holder.dateDate.setVisibility(View.VISIBLE);
                                                 holder.alarmTime.setVisibility(View.GONE);
                                             }
@@ -379,12 +391,9 @@ public class KalendarItemAdapter extends RecyclerView.Adapter<KalendarItemAdapte
                                             }
                                             createNotificationChannel();
 //*******************************************dodao prvi parametar novi datum  i zadnja dva da se ispise u notifikaciji
-                                            setNotificationAlarm(danToAdd+"/"+mjesecToAdd+"/"+godinaToAdd + " " + hToAdd + ":" + minToAdd, randomID, holder.naslov.getText().toString(), holder.lokacija.getText().toString(),itemList.get(position).getDatum().toString(),itemList.get(position).getVrijeme().toString());
-
-
-
-
+                                            setNotificationAlarm(danToAdd + "/" + mjesecToAdd + "/" + godinaToAdd + " " + hToAdd + ":" + minToAdd, randomID, holder.naslov.getText().toString(), holder.lokacija.getText().toString(), itemList.get(position).getDatum().toString(), itemList.get(position).getVrijeme().toString());
                                             //Toast.makeText(context,"OK",Toast.LENGTH_SHORT).show();
+                                        }
                                         }
                                     }
                                 });
