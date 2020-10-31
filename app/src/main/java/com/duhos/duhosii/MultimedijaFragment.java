@@ -166,8 +166,12 @@ public class MultimedijaFragment extends Fragment {
             if(connectionFlag) {
                 Log.d(TAG, "saving listview state");
                 mBundleRecyclerViewState = new Bundle();
-                mListState = recyclerView.getLayoutManager().onSaveInstanceState();
-                mBundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, mListState);
+                try{
+                    mListState = recyclerView.getLayoutManager().onSaveInstanceState();
+                    mBundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, mListState);
+                }
+                catch (Exception e){
+                }
             }
         super.onPause();
     }
