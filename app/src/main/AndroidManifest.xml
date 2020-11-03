@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/ic_app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.duhos.duhosii.SplashScreenActivity"
+        <activity android:name="com.duhos.duhosii.intro.SplashScreenActivity"
                     android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +31,7 @@
                     android:screenOrientation="portrait">
         </activity>
 
-        <receiver android:name="com.duhos.duhosii.ReminderBroadcast"/>
+        <receiver android:name="com.duhos.duhosii.utils.ReminderBroadcast"/>
     </application>
 
 </manifest>

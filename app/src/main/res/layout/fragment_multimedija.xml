@@ -1,6 +1,4 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
@@ -10,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/grey"
-        tools:context=".MultimedijaFragment">
+        tools:context=".news.NewsFragment">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/multimedijarecyclerView"
             android:layout_width="wrap_content"

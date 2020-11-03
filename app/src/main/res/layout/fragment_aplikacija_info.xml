@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
-    tools:context=".AplikacijaInfoFragment">
+    tools:context=".info.ApplicationInfoFragment">
 
 <androidx.viewpager.widget.ViewPager
     android:id="@+id/info_viewPager"
