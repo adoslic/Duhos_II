@@ -55,6 +55,7 @@ public class MolitvaOpsirno extends Fragment {
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
+        bottomNavigationView.setBackground(getContext().getResources().getDrawable(R.color.white));
 
         molitvaView = inflater.inflate(R.layout.fragment_molitva_opsirno, container, false);
         naslov=molitvaView.findViewById(R.id.naslovOpsirno);

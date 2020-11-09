@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView=findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         bottomNavigationView.setVisibility(View.VISIBLE);
+        bottomNavigationView.setBackground(this.getResources().getDrawable(R.color.white));
         onNewIntent(getIntent());
 
     }
@@ -51,26 +52,34 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                     Fragment selectedFragment=null;
-
+                    String fragment="";
                     switch (menuItem.getItemId()){
                         case R.id.navigacija_pjesmarica:
                             selectedFragment=new PjesmaricaFragment();
+                            fragment="pjesmarica";
                             break;
                         case R.id.navigacija_kalendar:
                             selectedFragment=new KalendarFragment();
+                            fragment="kalendar";
                             break;
                         case R.id.navigacija_molitva:
                             selectedFragment=new MolitveneGrupeFragment();
+                            fragment="molitva";
                             break;
                         case R.id.navigacija_multimedija:
                             selectedFragment=new MultimedijaFragment();
+                            fragment="multimedija";
                             break;
                         case R.id.navigacija_pitanja:
                             selectedFragment=new PitanjaFragment();
+                            fragment="pitanja";
                             break;
                     }
                     getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,selectedFragment).addToBackStack("").commit();
+                    if(fragment.equals("molitva"))
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,selectedFragment).addToBackStack("").commit();
+                    else
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,selectedFragment).addToBackStack(fragment).commit();
                     return true;
                 }
             };

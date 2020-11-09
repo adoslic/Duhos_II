@@ -1,6 +1,7 @@
 package com.duhos.duhosii;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -18,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -49,7 +52,9 @@ public class MolitveneGrupeFragment extends Fragment {
     private RelativeLayout molitvaTextLayout,marijanskeTextLayout,devetniceTextLayout,standardTextLayout;
     private RelativeLayout molitvaImageLayout,marijanskeImageLayout,devetniceImageLayout,standardImageLayout;
     private boolean connectionFlag=false;
-    private FloatingActionButton posaljiMolitvenuNakanu;
+    private FloatingActionButton posaljiMolitvenuNakanu,fabMenu,casoslovButton,svjedocanstvoButton;
+    private TextView svjedocanstvoFabText,nakanaFabText,casoslovFabText;
+    private boolean fabIsOpen;
     private DatabaseReference marijanskeReference,opceReference,poboznostiReference,nadahnucaReference;
     List<Molitva> itemListMarijanske = new ArrayList<>();
     List<Molitva> itemListOpce = new ArrayList<>();
@@ -59,16 +64,18 @@ public class MolitveneGrupeFragment extends Fragment {
     String opceZadnjiDatum;
     String nadahnucaZadnjiDatum;
     String poboznostiZadnjiDatum;
-
+    View viewActionBar;
+    private View mShadowView;
+    ActionBar mActionBar;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ActionBar mActionBar =  ((AppCompatActivity)getActivity()).getSupportActionBar();
+        mActionBar =  ((AppCompatActivity)getActivity()).getSupportActionBar();
         mActionBar.show();
         mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         mActionBar.setCustomView(R.layout.toolbar_without_back);
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
-        View viewActionBar=mActionBar.getCustomView();
+        viewActionBar=mActionBar.getCustomView();
 
 
 
@@ -78,20 +85,13 @@ public class MolitveneGrupeFragment extends Fragment {
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
+        bottomNavigationView.setBackground(getContext().getResources().getDrawable(R.color.white));
+
         checkInternetConnection();
 
         if(connectionFlag==true) {
             molitvaFragmentView = inflater.inflate(R.layout.fragment_grupe_molitvi, container, false);
 
-            posaljiMolitvenuNakanu=molitvaFragmentView.findViewById(R.id.posaljiMolitvenuNakanu);
-
-            posaljiMolitvenuNakanu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new NakanaFragment()).addToBackStack("").commit();
-
-                }
-            });
             marijanskeDatum=molitvaFragmentView.findViewById(R.id.datumMarije);
             opceDatum=molitvaFragmentView.findViewById(R.id.datumMolitve);
             poboznostiDatum=molitvaFragmentView.findViewById(R.id.datumStandard);
@@ -126,6 +126,98 @@ public class MolitveneGrupeFragment extends Fragment {
             marijanskeImageLayout = molitvaFragmentView.findViewById(R.id.slikaMarijeLayout);
             devetniceImageLayout = molitvaFragmentView.findViewById(R.id.slikaKruniceLayout);
             standardImageLayout = molitvaFragmentView.findViewById(R.id.slikaStandardLayout);
+
+            svjedocanstvoButton=molitvaFragmentView.findViewById(R.id.svjedocanstvoButton);
+            posaljiMolitvenuNakanu=molitvaFragmentView.findViewById(R.id.posaljiMolitvenuNakanu);
+            casoslovButton=molitvaFragmentView.findViewById(R.id.casoslovButton);
+            fabMenu=molitvaFragmentView.findViewById(R.id.fabMenu);
+
+            svjedocanstvoFabText=molitvaFragmentView.findViewById(R.id.svjedocanstvoFabText);
+            casoslovFabText=molitvaFragmentView.findViewById(R.id.casoslovFabText);
+            nakanaFabText=molitvaFragmentView.findViewById(R.id.nakanaFabText);
+
+            mShadowView=molitvaFragmentView.findViewById(R.id.shadowView);
+
+            svjedocanstvoButton.hide();
+            posaljiMolitvenuNakanu.hide();
+            casoslovButton.hide();
+
+            svjedocanstvoFabText.setVisibility(View.INVISIBLE);
+            casoslovFabText.setVisibility(View.INVISIBLE);
+            nakanaFabText.setVisibility(View.INVISIBLE);
+            fabIsOpen=false;
+
+            fabMenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(fabIsOpen){
+                        fabIsOpen=false;
+                        svjedocanstvoButton.hide();
+                        posaljiMolitvenuNakanu.hide();
+                        casoslovButton.hide();
+
+                        final OvershootInterpolator interpolator = new OvershootInterpolator();
+                        ViewCompat.animate(fabMenu).
+                                rotation(0f).
+                                withLayer().
+                                setDuration(300).
+                                setInterpolator(interpolator).
+                                start();
+
+                        svjedocanstvoFabText.setVisibility(View.INVISIBLE);
+                        casoslovFabText.setVisibility(View.INVISIBLE);
+                        nakanaFabText.setVisibility(View.INVISIBLE);
+
+                        mShadowView.setVisibility(View.GONE);
+                        mActionBar.show();
+                        bottomNavigationView.setBackground(getContext().getResources().getDrawable(R.color.white));
+                    }
+                    else{
+                        svjedocanstvoButton.show();
+                        posaljiMolitvenuNakanu.show();
+                        casoslovButton.show();
+                        final OvershootInterpolator interpolator = new OvershootInterpolator();
+                        ViewCompat.animate(fabMenu).
+                                rotation(135f).
+                                withLayer().
+                                setDuration(300).
+                                setInterpolator(interpolator).
+                                start();
+                        svjedocanstvoFabText.setVisibility(View.VISIBLE);
+                        casoslovFabText.setVisibility(View.VISIBLE);
+                        nakanaFabText.setVisibility(View.VISIBLE);
+
+                        mActionBar.hide();
+
+                        mShadowView.setVisibility(View.VISIBLE);
+                        bottomNavigationView.setBackground(getContext().getResources().getDrawable(R.color.shadowFABgrey));
+
+
+                        fabIsOpen=true;
+
+                        casoslovButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new CasoslovFragment()).addToBackStack("").commit();
+                            }
+                        });
+
+                        svjedocanstvoButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new PosaljiSvjedocanstvoFragment()).addToBackStack("").commit();
+                            }
+                        });
+
+                        posaljiMolitvenuNakanu.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new NakanaFragment()).addToBackStack("").commit();
+                            }
+                        });
+                    }
+                }
+            });
 
             molitvaImageLayout.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_transition_animation));
             molitvaTextLayout.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.scale_transition_animation));
