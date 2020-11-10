@@ -3,7 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
+        android:id="@+id/linearLayoutMolitve"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -275,14 +277,111 @@
 
     </LinearLayout>
 
-<com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:id="@+id/posaljiMolitvenuNakanu"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="end|bottom"
-    android:src="@drawable/ic_plus"
-    android:contentDescription="Pošalji molitvenu nakanu"
-    android:layout_alignParentRight="true"
-    android:layout_alignParentBottom="true"
-    android:layout_margin="32dp" />
+    <View
+        android:id="@+id/shadowView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/shadowFABgrey"
+        android:visibility="gone"
+        android:clickable="true"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/posaljiMolitvenuNakanu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_molitvenanakana"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_above="@+id/svjedocanstvoButton"
+        android:layout_alignParentRight="true"
+        android:visibility="invisible">
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+    <TextView
+        android:id="@+id/nakanaFabText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pošalji molitvenu nakanu"
+        android:layout_toLeftOf="@+id/posaljiMolitvenuNakanu"
+        android:layout_above="@+id/svjedocanstvoButton"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/fab_background"
+        android:padding="10dp"
+        android:textColor="@color/duhosPlava"
+        android:fontFamily="@font/firasans_regular"
+        android:textSize="14sp"
+        android:layout_marginRight="10dp"></TextView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/svjedocanstvoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_svjedocanstvo"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_above="@+id/casoslovButton"
+        android:layout_alignParentRight="true"
+        android:visibility="invisible">
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+    <TextView
+        android:id="@+id/svjedocanstvoFabText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pošalji svjedočanstvo"
+        android:layout_toLeftOf="@+id/svjedocanstvoButton"
+        android:layout_above="@+id/casoslovButton"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/fab_background"
+        android:padding="10dp"
+        android:textColor="@color/duhosPlava"
+        android:fontFamily="@font/firasans_regular"
+        android:textSize="14sp"
+        android:layout_marginRight="10dp"></TextView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/casoslovButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_casoslovbijela"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_above="@+id/containerLayout_FAB"
+        android:layout_alignParentRight="true"
+        android:visibility="invisible">
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+    <TextView
+        android:id="@+id/casoslovFabText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Časoslov"
+        android:layout_toLeftOf="@+id/casoslovButton"
+        android:layout_above="@+id/containerLayout_FAB"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/fab_background"
+        android:padding="10dp"
+        android:textColor="@color/duhosPlava"
+        android:fontFamily="@font/firasans_regular"
+        android:textSize="14sp"
+        android:layout_marginRight="10dp"></TextView>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/containerLayout_FAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="32dp"
+            android:src="@drawable/ic_plus"></com.google.android.material.floatingactionbutton.FloatingActionButton>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </RelativeLayout>

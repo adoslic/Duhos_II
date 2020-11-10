@@ -49,6 +49,7 @@ public class WebViewFragment extends Fragment {
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
+        bottomNavigationView.setBackground(getContext().getResources().getDrawable(R.color.white));
 
         View webViewView=inflater.inflate(R.layout.fragment_webview, container, false);
         webView=webViewView.findViewById(R.id.webView);

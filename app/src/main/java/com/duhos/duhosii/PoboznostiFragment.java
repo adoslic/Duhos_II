@@ -32,8 +32,6 @@ public class PoboznostiFragment extends Fragment {
     private View molitvaFragmentView;
     private MolitvaItemAdapter adapter;
     private static final String TAG ="TAG";
-    private FloatingActionButton casoslovButton;
-    private FloatingActionButton svjedocanstvoButton;
 
     public PoboznostiFragment(List<Molitva> itemList) {
         this.itemList=itemList;
@@ -54,18 +52,10 @@ public class PoboznostiFragment extends Fragment {
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
+        bottomNavigationView.setBackground(getContext().getResources().getDrawable(R.color.white));
 
         molitvaFragmentView = inflater.inflate(R.layout.fragment_molitva,container,false);
-        casoslovButton=molitvaFragmentView.findViewById(R.id.casoslovButton);
-        casoslovButton.hide();
-        svjedocanstvoButton=molitvaFragmentView.findViewById(R.id.svjedocanstvoButton);
-        svjedocanstvoButton.show();
-        svjedocanstvoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new PosaljiSvjedocanstvoFragment()).addToBackStack("").commit();
-            }
-        });
+
 
         onInit();
 
