@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/grey"
-        tools:context=".PitanjaFragment">
+        tools:context=".questions.QuestionsFragment">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/pitanjarecyclerView"
             android:layout_width="match_parent"

@@ -15,14 +15,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.duhos.duhosii.calendar.CalendarFragment;
+import com.duhos.duhosii.info.ApplicationInfoFragment;
+import com.duhos.duhosii.info.dialog.Dialog;
+import com.duhos.duhosii.news.NewsFragment;
+import com.duhos.duhosii.prayers.PrayerGroupsFragment;
+import com.duhos.duhosii.questions.QuestionsFragment;
+import com.duhos.duhosii.songs.SongsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-
     SharedPreferences sharedPreferences = null;
     SharedPreferences.Editor editor;
     private Boolean subFragment = false;
-
     BottomNavigationView bottomNavigationView;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -51,27 +56,27 @@ public class MainActivity extends AppCompatActivity {
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                    Fragment selectedFragment=null;
+                    Fragment selectedFragment = null;
                     String fragment="";
                     switch (menuItem.getItemId()){
                         case R.id.navigacija_pjesmarica:
-                            selectedFragment=new PjesmaricaFragment();
+                            selectedFragment = new SongsFragment();
                             fragment="pjesmarica";
                             break;
                         case R.id.navigacija_kalendar:
-                            selectedFragment=new KalendarFragment();
+                            selectedFragment=new CalendarFragment();
                             fragment="kalendar";
                             break;
                         case R.id.navigacija_molitva:
-                            selectedFragment=new MolitveneGrupeFragment();
+                            selectedFragment=new PrayerGroupsFragment();
                             fragment="molitva";
                             break;
                         case R.id.navigacija_multimedija:
-                            selectedFragment=new MultimedijaFragment();
+                            selectedFragment=new NewsFragment();
                             fragment="multimedija";
                             break;
                         case R.id.navigacija_pitanja:
-                            selectedFragment=new PitanjaFragment();
+                            selectedFragment=new QuestionsFragment();
                             fragment="pitanja";
                             break;
                     }
@@ -121,16 +126,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         if (sharedPreferences.getBoolean("firstRun", true)) {
             //You can perform anything over here. This will call only first time
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new AplikacijaInfoFragment()).addToBackStack("").commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new ApplicationInfoFragment()).addToBackStack("").commit();
             editor = sharedPreferences.edit();
             editor.putBoolean("firstRun", false);
-            editor.commit();
-
+            editor.apply();
         }
-
         String menuFragment = getIntent().getStringExtra("notification");
         if (menuFragment != null) {
             if (menuFragment.equals("openCalendar")) {

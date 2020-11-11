@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
-    tools:context=".SliderAdapter">
+    tools:context=".utils.SliderAdapter">
 
     <RelativeLayout
         android:id="@+id/infoLayout"
