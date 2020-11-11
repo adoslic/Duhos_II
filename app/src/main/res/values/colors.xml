@@ -13,4 +13,6 @@
     <color name="linkColor">#008EFF</color>
     <color name="alarmIconbackground">#C8D0D7</color>
     <color name="shadowFABgrey">#72403F3F</color>
+    <color name="actionBarFABShadow">#AAA9A9</color>
+
 </resources>

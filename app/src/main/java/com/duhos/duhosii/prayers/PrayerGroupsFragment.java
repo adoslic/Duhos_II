@@ -35,6 +35,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -70,6 +72,9 @@ public class PrayerGroupsFragment extends Fragment {
     View viewActionBar;
     private View mShadowView;
     ActionBar mActionBar;
+    TextView naslov;
+    RelativeLayout toolBar;
+    ImageButton menu;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -80,7 +85,9 @@ public class PrayerGroupsFragment extends Fragment {
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
         viewActionBar=mActionBar.getCustomView();
 
-
+        toolBar=viewActionBar.findViewById(R.id.toolBar);
+        naslov=viewActionBar.findViewById(R.id.naslov);
+        menu=viewActionBar.findViewById(R.id.menu);
 
         zaglavlje=viewActionBar.findViewById(R.id.naslov);
         zaglavlje.setText(getContext().getResources().getString(R.string.odSrcaKsrcuNaslov));
@@ -172,7 +179,13 @@ public class PrayerGroupsFragment extends Fragment {
                         nakanaFabText.setVisibility(View.INVISIBLE);
 
                         mShadowView.setVisibility(View.GONE);
-                        mActionBar.show();
+                        //mActionBar.show();
+
+                        mActionBar.setBackgroundDrawable(getContext().getResources().getDrawable(R.color.grey));
+                        naslov.setBackgroundDrawable(getContext().getResources().getDrawable(R.color.grey));
+                        toolBar.setBackground(getContext().getResources().getDrawable(R.color.grey));
+                        menu.setBackground(getContext().getResources().getDrawable(R.color.grey));
+
                         bottomNavigationView.setBackground(getContext().getResources().getDrawable(R.color.white));
                     }
                     else{
@@ -190,9 +203,20 @@ public class PrayerGroupsFragment extends Fragment {
                         casoslovFabText.setVisibility(View.VISIBLE);
                         nakanaFabText.setVisibility(View.VISIBLE);
 
-                        mActionBar.hide();
+                        //mActionBar.hide();
+                        mActionBar.setBackgroundDrawable(getContext().getResources().getDrawable(R.color.actionBarFABShadow));
+                        naslov.setBackgroundDrawable(getContext().getResources().getDrawable(R.color.actionBarFABShadow));
+                        toolBar.setBackground(getContext().getResources().getDrawable(R.color.actionBarFABShadow));
+                        menu.setBackground(getContext().getResources().getDrawable(R.color.actionBarFABShadow));
 
                         mShadowView.setVisibility(View.VISIBLE);
+
+                        mShadowView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                fabMenu.performClick();
+                            }
+                        });
                         bottomNavigationView.setBackground(getContext().getResources().getDrawable(R.color.shadowFABgrey));
 
 
