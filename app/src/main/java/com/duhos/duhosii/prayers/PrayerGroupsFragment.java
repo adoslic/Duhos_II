@@ -1,7 +1,6 @@
 package com.duhos.duhosii.prayers;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -34,8 +33,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -225,21 +222,21 @@ public class PrayerGroupsFragment extends Fragment {
                         casoslovButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new CasoslovFragment()).addToBackStack("").commit();
+                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new BreviaryFragment()).addToBackStack("").commit();
                             }
                         });
 
                         svjedocanstvoButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new PosaljiSvjedocanstvoFragment()).addToBackStack("").commit();
+                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new SendTestimonyFragment()).addToBackStack("").commit();
                             }
                         });
 
                         posaljiMolitvenuNakanu.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new NakanaFragment()).addToBackStack("").commit();
+                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new IntentionFragment()).addToBackStack("").commit();
                             }
                         });
                     }

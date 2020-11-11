@@ -126,7 +126,7 @@ public class CalendarItemAdapter extends RecyclerView.Adapter<CalendarItemAdapte
                     for(int j=0;j<itemList.size();j++) {
                         if(konacnaListaAlarma.get(i).getNaslov().equals(itemList.get(j).getNaslov())) {
                             alarmVisibility.set(j,false);
-                            unsetNotificationAlarm(konacnaListaAlarma.get(i).alarmID);
+                            unsetNotificationAlarm(konacnaListaAlarma.get(i).getAlarmID());
                         }
                     }
                     final RealmResults<AlarmDate> results = realm.where(AlarmDate.class).equalTo("datum", konacnaListaAlarma.get(i).getDatum()).equalTo("vrijeme", konacnaListaAlarma.get(i).getVrijeme()).equalTo("naslov", konacnaListaAlarma.get(i).getNaslov()).findAll();
