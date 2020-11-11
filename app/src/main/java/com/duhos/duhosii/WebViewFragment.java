@@ -1,11 +1,13 @@
 package com.duhos.duhosii;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -65,21 +67,30 @@ public class WebViewFragment extends Fragment {
         {
             public boolean shouldOverrideUrlLoading(WebView view, String url)
             {
-                // all links  with in ur site will be open inside the webview
-                //links that start ur domain example(http://www.example.com/)
-                if (url != null && url.startsWith("htt")){
+                if( URLUtil.isNetworkUrl(url) ) {
                     return false;
                 }
-                // all links that points outside the site will be open in a normal android browser
-                else
-                {
-                    view.getContext().startActivity(
-                            new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-                    return true;
+                if (appInstalledOrNot(url)) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity( intent );
+                } else {
+                    // do something if app is not installed
                 }
+                return true;
             }
         });
         return webViewView;
+    }
+
+    private boolean appInstalledOrNot(String uri) {
+        PackageManager pm = getActivity().getPackageManager();
+        try {
+            pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+        }
+
+        return false;
     }
 
 }
