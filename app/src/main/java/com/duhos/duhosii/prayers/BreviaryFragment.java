@@ -48,6 +48,7 @@ public class BreviaryFragment extends Fragment {
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
+        bottomNavigationView.setBackground(getContext().getResources().getDrawable(R.color.white));
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
 
         casoslovView = inflater.inflate(R.layout.fragment_casoslov,container,false);

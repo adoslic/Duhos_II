@@ -66,6 +66,8 @@ public class QuestionsFragment extends Fragment {
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
+        bottomNavigationView.setBackground(getContext().getResources().getDrawable(R.color.white));
+
         if(connectionFlag) {
             pitanjaFragmentView=inflater.inflate(R.layout.fragment_pitanja, container, false);
             pitanjaReference = FirebaseDatabase.getInstance().getReference("Pitanja");

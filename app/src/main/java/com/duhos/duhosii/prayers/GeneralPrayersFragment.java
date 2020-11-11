@@ -35,8 +35,6 @@ public class GeneralPrayersFragment extends Fragment {
     private View molitvaFragmentView;
     private PrayerItemAdapter adapter;
     private static final String TAG ="TAG";
-    private FloatingActionButton casoslovButton;
-    private FloatingActionButton svjedocanstvoButton;
 
 
     public GeneralPrayersFragment(List<Prayer> itemList) {
@@ -58,20 +56,12 @@ public class GeneralPrayersFragment extends Fragment {
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
+        bottomNavigationView.setBackground(getContext().getResources().getDrawable(R.color.white));
 
         molitvaFragmentView = inflater.inflate(R.layout.fragment_molitva,container,false);
 
-        casoslovButton=molitvaFragmentView.findViewById(R.id.casoslovButton);
 
-        casoslovButton.show();
-        casoslovButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new BreviaryFragment()).addToBackStack("").commit();
-            }
-        });
-        svjedocanstvoButton=molitvaFragmentView.findViewById(R.id.svjedocanstvoButton);
-        svjedocanstvoButton.hide();
+
 
         onInit();
 

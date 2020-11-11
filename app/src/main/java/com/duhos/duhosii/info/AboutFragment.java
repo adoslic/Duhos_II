@@ -37,6 +37,7 @@ public class AboutFragment extends Fragment {
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
+        bottomNavigationView.setBackground(getContext().getResources().getDrawable(R.color.white));
 
         View opcenitoFragmentView= inflater.inflate(R.layout.fragment_opcenito, container, false);
         opcenitoText=opcenitoFragmentView.findViewById(R.id.opcenitoText);

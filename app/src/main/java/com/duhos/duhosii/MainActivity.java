@@ -29,35 +29,6 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     private Boolean subFragment = false;
     BottomNavigationView bottomNavigationView;
-
-    private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener=
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                    Fragment selectedFragment = null;
-                    switch (menuItem.getItemId()){
-                        case R.id.navigacija_pjesmarica:
-                            selectedFragment = new SongsFragment();
-                            break;
-                        case R.id.navigacija_kalendar:
-                            selectedFragment=new CalendarFragment();
-                            break;
-                        case R.id.navigacija_molitva:
-                            selectedFragment=new PrayerGroupsFragment();
-                            break;
-                        case R.id.navigacija_multimedija:
-                            selectedFragment=new NewsFragment();
-                            break;
-                        case R.id.navigacija_pitanja:
-                            selectedFragment=new QuestionsFragment();
-                            break;
-                    }
-                    getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,selectedFragment).addToBackStack("").commit();
-                    return true;
-                }
-            };
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         sharedPreferences = getSharedPreferences("com.duhosii", MODE_PRIVATE);
 
-        //remove default action bar and set different action bar
+        //micanje default action bara i postavljanje posebnog
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.toolbar);
         ActionBar mActionBar = getSupportActionBar();
@@ -74,8 +45,49 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView=findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         bottomNavigationView.setVisibility(View.VISIBLE);
+        bottomNavigationView.setBackground(this.getResources().getDrawable(R.color.white));
         onNewIntent(getIntent());
+
     }
+
+
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener=
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    Fragment selectedFragment = null;
+                    String fragment="";
+                    switch (menuItem.getItemId()){
+                        case R.id.navigacija_pjesmarica:
+                            selectedFragment = new SongsFragment();
+                            fragment="pjesmarica";
+                            break;
+                        case R.id.navigacija_kalendar:
+                            selectedFragment=new CalendarFragment();
+                            fragment="kalendar";
+                            break;
+                        case R.id.navigacija_molitva:
+                            selectedFragment=new PrayerGroupsFragment();
+                            fragment="molitva";
+                            break;
+                        case R.id.navigacija_multimedija:
+                            selectedFragment=new NewsFragment();
+                            fragment="multimedija";
+                            break;
+                        case R.id.navigacija_pitanja:
+                            selectedFragment=new QuestionsFragment();
+                            fragment="pitanja";
+                            break;
+                    }
+                    getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    if(fragment.equals("molitva"))
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,selectedFragment).addToBackStack("").commit();
+                    else
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,selectedFragment).addToBackStack(fragment).commit();
+                    return true;
+                }
+            };
 
     public void otvoriDialog(View view) {
         final Dialog dialog=new Dialog();

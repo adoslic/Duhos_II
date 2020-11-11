@@ -27,4 +27,5 @@
         android:layout_centerVertical="true"
         android:onClick="otvoriDialog"
         />
+
 </RelativeLayout>

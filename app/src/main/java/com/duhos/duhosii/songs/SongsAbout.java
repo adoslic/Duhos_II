@@ -60,6 +60,8 @@ public class SongsAbout extends Fragment {
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
+        bottomNavigationView.setBackground(getContext().getResources().getDrawable(R.color.white));
+
 
         pjesmaricaView = inflater.inflate(R.layout.fragment_pjesmarica_opsirno, container, false);
         naslov=pjesmaricaView.findViewById(R.id.naslovOpsirno);

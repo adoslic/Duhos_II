@@ -70,6 +70,8 @@ public class AskChaplainFragment extends Fragment {
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
+        bottomNavigationView.setBackground(getContext().getResources().getDrawable(R.color.white));
+
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
         checkInternetConnection();
 

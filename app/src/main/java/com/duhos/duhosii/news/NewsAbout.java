@@ -57,6 +57,7 @@ public class NewsAbout extends Fragment {
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
+        bottomNavigationView.setBackground(getContext().getResources().getDrawable(R.color.white));
 
         multimedijaView = inflater.inflate(R.layout.fragment_multimedija_opsirno, container, false);
         naslov=multimedijaView.findViewById(R.id.naslovOpsirno);

@@ -72,6 +72,8 @@ public class NewsFragment extends Fragment {
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
+        bottomNavigationView.setBackground(getContext().getResources().getDrawable(R.color.white));
+
         if(connectionFlag) {
             multimedijaFragmentView=inflater.inflate(R.layout.fragment_multimedija, container, false);
             multimedijaReference = FirebaseDatabase.getInstance().getReference("Novosti");

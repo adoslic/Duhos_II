@@ -92,6 +92,7 @@ public class CalendarFragment extends Fragment implements DatePickerListener {
 
         bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
+        bottomNavigationView.setBackground(getContext().getResources().getDrawable(R.color.white));
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
         if(connectionFlag) {
             kalendarFragmentView=inflater.inflate(R.layout.fragment_kalendar, container, false);
