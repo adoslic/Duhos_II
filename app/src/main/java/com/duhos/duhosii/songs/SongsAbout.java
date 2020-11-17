@@ -34,9 +34,9 @@ public class SongsAbout extends Fragment {
     private BottomNavigationView bottomNavigationView;
     private Song song;
     private View pjesmaricaView;
-    private TextView naslov,tekstPjesme,izvodjac;
+    private TextView naslov, tekstPjesme, izvodjac;
     private ImageView slika;
-    private ImageButton shareButton,pdfButton,youtubeButton;
+    private ImageButton shareButton, pdfButton, youtubeButton;
     private ScrollView scrollView;
 
 
@@ -64,27 +64,27 @@ public class SongsAbout extends Fragment {
 
 
         pjesmaricaView = inflater.inflate(R.layout.fragment_pjesmarica_opsirno, container, false);
-        naslov=pjesmaricaView.findViewById(R.id.naslovOpsirno);
-        tekstPjesme=pjesmaricaView.findViewById(R.id.tekstOpsirno);
-        slika=pjesmaricaView.findViewById(R.id.slikaOpsirno);
-        shareButton=pjesmaricaView.findViewById(R.id.shareButton);
-        pdfButton=pjesmaricaView.findViewById(R.id.pdfButton);
-        youtubeButton=pjesmaricaView.findViewById(R.id.youtubeButton);
+        naslov = pjesmaricaView.findViewById(R.id.naslovOpsirno);
+        tekstPjesme = pjesmaricaView.findViewById(R.id.tekstOpsirno);
+        slika = pjesmaricaView.findViewById(R.id.slikaOpsirno);
+        shareButton = pjesmaricaView.findViewById(R.id.shareButton);
+        pdfButton = pjesmaricaView.findViewById(R.id.pdfButton);
+        youtubeButton = pjesmaricaView.findViewById(R.id.youtubeButton);
 
-        izvodjac=pjesmaricaView.findViewById(R.id.izvodjacOpsirno);
+        izvodjac = pjesmaricaView.findViewById(R.id.izvodjacOpsirno);
 
-        scrollView=pjesmaricaView.findViewById(R.id.pjesmarica_opsirno_scollView);
+        scrollView = pjesmaricaView.findViewById(R.id.pjesmarica_opsirno_scollView);
 
         naslov.setText(song.getNaslov());
         izvodjac.setText(song.getBend());
-        String formatedText= song.getTekstPjesme();
+        String formatedText = song.getTekstPjesme();
 
-        if(song.getLink().equals("Link je nedostupan"))
+        if (song.getLink().equals("Link je nedostupan"))
             pdfButton.setImageDrawable(getActivity().getDrawable(R.drawable.ic_buttonakordimissing));
         else
             pdfButton.setImageDrawable(getActivity().getDrawable(R.drawable.ic_akordi_button));
 
-        if(song.getYoutubeLink().equals("YouTube link je nedostupan"))
+        if (song.getYoutubeLink().equals("YouTube link je nedostupan"))
             youtubeButton.setImageDrawable(getActivity().getDrawable(R.drawable.ic_buttonyoutubeinmissing));
         else
             youtubeButton.setImageDrawable(getActivity().getDrawable(R.drawable.ic_buttonyoutube));
@@ -101,22 +101,20 @@ public class SongsAbout extends Fragment {
         pdfButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!song.getLink().equals("Link je nedostupan")){
+                if (!song.getLink().equals("Link je nedostupan")) {
                     goToAkordi();
-                }
-                else
-                    Toast.makeText(getContext(),"Link je trenutačno nedostupan",Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(getContext(), "Link je trenutačno nedostupan", Toast.LENGTH_SHORT).show();
             }
         });
 
         youtubeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!song.getYoutubeLink().equals("YouTube link je nedostupan")){
+                if (!song.getYoutubeLink().equals("YouTube link je nedostupan")) {
                     goToYouTube();
-                }
-                else
-                    Toast.makeText(getContext(),"Link je trenutačno nedostupan",Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(getContext(), "Link je trenutačno nedostupan", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -124,42 +122,40 @@ public class SongsAbout extends Fragment {
     }
 
     private void goToAkordi() {
-        if(URLUtil.isValidUrl(song.getLink())) {
+        if (URLUtil.isValidUrl(song.getLink())) {
             WebViewFragment frag = new WebViewFragment(song.getLink().toString(), "Pjesmarica");
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_containter, frag);
             int count = getFragmentManager().getBackStackEntryCount();
-            if(getFragmentManager().getBackStackEntryAt(count-1).getName() == "dialogBox"){
+            if (getFragmentManager().getBackStackEntryAt(count - 1).getName() == "dialogBox") {
                 getFragmentManager().popBackStack();
             }
             ft.addToBackStack("dialogBox");
             ft.commit();
-        }
-        else
-            Toast.makeText(getContext(),getContext().getResources().getString(R.string.neispravanLinkString),Toast.LENGTH_SHORT).show();
+        } else
+            Toast.makeText(getContext(), getContext().getResources().getString(R.string.neispravanLinkString), Toast.LENGTH_SHORT).show();
     }
 
     private void goToYouTube() {
-        if(URLUtil.isValidUrl(song.getYoutubeLink())) {
+        if (URLUtil.isValidUrl(song.getYoutubeLink())) {
             WebViewFragment frag = new WebViewFragment(song.getYoutubeLink().toString(), "Pjesmarica");
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_containter, frag);
             int count = getFragmentManager().getBackStackEntryCount();
-            if(getFragmentManager().getBackStackEntryAt(count-1).getName() == "dialogBox"){
+            if (getFragmentManager().getBackStackEntryAt(count - 1).getName() == "dialogBox") {
                 getFragmentManager().popBackStack();
             }
             ft.addToBackStack("dialogBox");
             ft.commit();
-        }
-        else
-            Toast.makeText(getContext(),getContext().getResources().getString(R.string.neispravanLinkString),Toast.LENGTH_SHORT).show();
+        } else
+            Toast.makeText(getContext(), getContext().getResources().getString(R.string.neispravanLinkString), Toast.LENGTH_SHORT).show();
     }
 
     public void share() {
         Intent share = new Intent();
         share.setAction(Intent.ACTION_SEND);
-        share.putExtra(Intent.EXTRA_TEXT,naslov.getText().toString()+" - "+ song.getBend() + "\n\n" + tekstPjesme.getText().toString());
-        share.putExtra(Intent.EXTRA_SUBJECT, naslov.getText().toString()+" - "+ song.getBend());
+        share.putExtra(Intent.EXTRA_TEXT, naslov.getText().toString() + " - " + song.getBend() + "\n\n" + tekstPjesme.getText().toString());
+        share.putExtra(Intent.EXTRA_SUBJECT, naslov.getText().toString() + " - " + song.getBend());
         share.setType("text/plain");
         getContext().startActivity(share.createChooser(share, "Share using"));
     }
@@ -168,6 +164,6 @@ public class SongsAbout extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity)getActivity()).SetNavItemChecked(0);
+        ((MainActivity) getActivity()).SetNavItemChecked(0);
     }
 }

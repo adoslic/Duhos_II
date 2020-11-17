@@ -41,8 +41,8 @@ public class QuestionsFragment extends Fragment {
 
     TextView zaglavlje;
     BottomNavigationView bottomNavigationView;
-    private boolean connectionFlag=false;
-    private View connectionFragmentView,pitanjaFragmentView;
+    private boolean connectionFlag = false;
+    private View connectionFragmentView, pitanjaFragmentView;
     private ImageButton osvjeziButton;
     private DatabaseReference pitanjaReference;
     private RecyclerView recyclerView;
@@ -53,13 +53,13 @@ public class QuestionsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ActionBar mActionBar =  ((AppCompatActivity)getActivity()).getSupportActionBar();
+        ActionBar mActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         mActionBar.show();
         mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         mActionBar.setCustomView(R.layout.toolbar_without_back);
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
-        View view=mActionBar.getCustomView();
-        zaglavlje=view.findViewById(R.id.naslov);
+        View view = mActionBar.getCustomView();
+        zaglavlje = view.findViewById(R.id.naslov);
         zaglavlje.setText(getContext().getResources().getString(R.string.pitanjaNaslov));
         checkInternetConnection();
 
@@ -68,15 +68,14 @@ public class QuestionsFragment extends Fragment {
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
         bottomNavigationView.setBackground(getContext().getResources().getDrawable(R.color.white));
 
-        if(connectionFlag) {
-            pitanjaFragmentView=inflater.inflate(R.layout.fragment_pitanja, container, false);
+        if (connectionFlag) {
+            pitanjaFragmentView = inflater.inflate(R.layout.fragment_pitanja, container, false);
             pitanjaReference = FirebaseDatabase.getInstance().getReference("Pitanja");
             try {
                 onInit();
-            }
-            catch(Exception e){
+            } catch (Exception e) {
                 connectionFragmentView = inflater.inflate(R.layout.no_internet_connection_fragment, container, false);
-                osvjeziButton=connectionFragmentView.findViewById(R.id.osvjeziButton);
+                osvjeziButton = connectionFragmentView.findViewById(R.id.osvjeziButton);
                 osvjeziButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -85,7 +84,7 @@ public class QuestionsFragment extends Fragment {
                 });
                 return connectionFragmentView;
             }
-            pitajKapelanaButton=pitanjaFragmentView.findViewById(R.id.pitajKapelanaButton);
+            pitajKapelanaButton = pitanjaFragmentView.findViewById(R.id.pitajKapelanaButton);
             pitajKapelanaButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -94,14 +93,13 @@ public class QuestionsFragment extends Fragment {
                 }
             });
             return pitanjaFragmentView;
-        }
-        else {
+        } else {
             connectionFragmentView = inflater.inflate(R.layout.no_internet_connection_fragment, container, false);
-            osvjeziButton=connectionFragmentView.findViewById(R.id.osvjeziButton);
+            osvjeziButton = connectionFragmentView.findViewById(R.id.osvjeziButton);
             osvjeziButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-            bottomNavigationView.findViewById(R.id.navigacija_pitanja).performClick();
+                    bottomNavigationView.findViewById(R.id.navigacija_pitanja).performClick();
                 }
             });
             return connectionFragmentView;
@@ -129,11 +127,11 @@ public class QuestionsFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 itemList.clear();
-                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    if(snapshot.exists()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    if (snapshot.exists()) {
                         final String pitanje = snapshot.child("Pitanje").getValue().toString();
                         final String odgovor = snapshot.child("Odgovor").getValue().toString();
-                        itemList.add(new Question(pitanje,odgovor));
+                        itemList.add(new Question(pitanje, odgovor));
                     }
                 }
                 Collections.reverse(itemList);
@@ -152,26 +150,24 @@ public class QuestionsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity)getActivity()).SetNavItemChecked(4);
+        ((MainActivity) getActivity()).SetNavItemChecked(4);
     }
 
     private void checkInternetConnection() {
-        ConnectivityManager connectivityManager=(ConnectivityManager) getActivity().getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork=connectivityManager.getActiveNetworkInfo();
-        if(null!=activeNetwork){
-            if(activeNetwork.getType()==ConnectivityManager.TYPE_WIFI){
-                connectionFlag=true;
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+        if (null != activeNetwork) {
+            if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
+                connectionFlag = true;
+            } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
+                connectionFlag = true;
             }
-            else if(activeNetwork.getType()==ConnectivityManager.TYPE_MOBILE){
-                connectionFlag=true;
-            }
-
-        }
-        else
-        {
-            connectionFlag=false;
+        } else {
+            connectionFlag = false;
         }
     }
 
-
+    public boolean checkHolder() {
+        return adapter.checkHolder();
+    }
 }
