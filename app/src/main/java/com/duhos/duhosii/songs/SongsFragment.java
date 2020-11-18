@@ -268,9 +268,12 @@ public class SongsFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void checkKeyboard() {
-        if(searchEditText.getVisibility() == View.GONE) {
-            assert getFragmentManager() != null;
-            getFragmentManager().popBackStack();
+        if (searchEditText.getVisibility() == View.GONE) {
+            boolean filter = adapter.getFilteredList();
+            if (filter) {
+                assert getFragmentManager() != null;
+                getFragmentManager().popBackStack();
+            }
         }
     }
 }
