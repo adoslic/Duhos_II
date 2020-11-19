@@ -216,6 +216,7 @@ public class SongsFragment extends Fragment {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onResume() {
         super.onResume();
@@ -234,6 +235,7 @@ public class SongsFragment extends Fragment {
             }, 50);
         }
         activity.setSubFragmentData(false);
+        checkKeyboard();
     }
 
     @Override
@@ -268,7 +270,7 @@ public class SongsFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void checkKeyboard() {
-        if (searchEditText.getVisibility() == View.GONE) {
+        if (searchEditText.getVisibility() == View.GONE && adapter != null) {
             boolean filter = adapter.getFilteredList();
             if (filter) {
                 assert getFragmentManager() != null;

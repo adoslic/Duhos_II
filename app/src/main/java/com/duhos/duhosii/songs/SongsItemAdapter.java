@@ -178,7 +178,7 @@ public class SongsItemAdapter extends RecyclerView.Adapter<SongsItemAdapter.View
         if(filteredList == null || (filteredList.size() == itemListFull.size())) {
             return true;
         } else {
-            filteredList.clear();
+            filteredList.addAll(itemListFull);
             getFilter().filter("");
             return false;
         }
