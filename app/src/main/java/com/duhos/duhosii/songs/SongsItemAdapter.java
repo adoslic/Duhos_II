@@ -33,51 +33,51 @@ import java.util.List;
 public class SongsItemAdapter extends RecyclerView.Adapter<SongsItemAdapter.ViewHolder> implements Filterable {
 
     private List<Song> itemList;
-    private List<Song> itemListFull;
+    List<Song> itemListFull;
     private Song sharedItem;
     private int sharedItemPosition;
     private AppCompatActivity activity;
     private Context context;
     boolean showShimmer = true;
     private int SHIMMER_ITEM_NUMBER = 6;
-    private boolean searchFlag=false;
-    private Filter itemFilter=new Filter() {
+    List<Song> filteredList;
+    private boolean searchFlag = false;
+    private Filter itemFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<Song> filteredList=new ArrayList<>();
-            if(constraint==null || constraint.length()==0 || searchFlag==true){
+            filteredList = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0 || searchFlag) {
                 filteredList.addAll(itemListFull);
-            }
-            else {
-                String filterPattern=constraint.toString().toLowerCase().trim();
-                for(Song item:itemListFull){
-                    if((item.getNaslov().toLowerCase()+" - "+item.getBend().toLowerCase()).contains(filterPattern) || (item.getNaslov().toLowerCase()+" "+item.getBend().toLowerCase()).contains(filterPattern)){
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (Song item : itemListFull) {
+                    if ((item.getNaslov().toLowerCase() + " - " + item.getBend().toLowerCase()).contains(filterPattern) || (item.getNaslov().toLowerCase() + " " + item.getBend().toLowerCase()).contains(filterPattern)) {
                         filteredList.add(item);
                     }
                 }
 
             }
-            if(filteredList.isEmpty()) {
+            if (filteredList.isEmpty()) {
                 Toast.makeText(context, "Nema rezultata pretrage", Toast.LENGTH_SHORT).show();
             }
 
 
-            FilterResults results=new FilterResults();
-            results.values=filteredList;
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
             return results;
         }
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-                itemList.clear();
-                itemList.addAll((List) results.values);
-                notifyDataSetChanged();
+            itemList.clear();
+            itemList.addAll((List) results.values);
+            notifyDataSetChanged();
         }
     };
 
     public SongsItemAdapter(List<Song> itemList) {
         this.itemList = itemList;
-        itemListFull=new ArrayList<>(itemList);
+        itemListFull = new ArrayList<>(itemList);
     }
 
     @NonNull
@@ -94,7 +94,7 @@ public class SongsItemAdapter extends RecyclerView.Adapter<SongsItemAdapter.View
 
     @Override
     public Filter getFilter() {
-        searchFlag=false;
+        searchFlag = false;
         return itemFilter;
     }
 
@@ -121,34 +121,25 @@ public class SongsItemAdapter extends RecyclerView.Adapter<SongsItemAdapter.View
 
             if (itemList.get(position).getBend().toString().toLowerCase().contains("duhos")) {
                 holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.duhos_logo));
-            }
-            else if (itemList.get(position).getBend().toString().toLowerCase().contains("duhos band")) {
+            } else if (itemList.get(position).getBend().toString().toLowerCase().contains("duhos band")) {
                 holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.duhos_logo));
-            }
-            else if (itemList.get(position).getBend().toString().toLowerCase().contains("duhos bend")) {
+            } else if (itemList.get(position).getBend().toString().toLowerCase().contains("duhos bend")) {
                 holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.duhos_logo));
-            }
-            else if (itemList.get(position).getBend().toString().toLowerCase().contains("emanuel")) {
+            } else if (itemList.get(position).getBend().toString().toLowerCase().contains("emanuel")) {
                 holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.emanuel));
-            }
-            else if (itemList.get(position).getBend().toString().toLowerCase().contains("fmk")) {
+            } else if (itemList.get(position).getBend().toString().toLowerCase().contains("fmk")) {
                 holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.fmk));
-            }
-            else if (itemList.get(position).getBend().toString().toLowerCase().contains("kristofori")) {
+            } else if (itemList.get(position).getBend().toString().toLowerCase().contains("kristofori")) {
                 holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.kristofori));
-            }
-            else if (itemList.get(position).getBend().toString().toLowerCase().contains("yeshua")) {
+            } else if (itemList.get(position).getBend().toString().toLowerCase().contains("yeshua")) {
                 holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_yeshuamusicicon));
-            }
-            else if (itemList.get(position).getBend().toString().toLowerCase().contains("božja pobjeda") ) {
+            } else if (itemList.get(position).getBend().toString().toLowerCase().contains("božja pobjeda")) {
                 holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.bozja_pobjeda));
-            }
-            else if (itemList.get(position).getBend().toString().toLowerCase().contains("hržica")) {
+            } else if (itemList.get(position).getBend().toString().toLowerCase().contains("hržica")) {
                 holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.hrzica));
-            }
-            else if (itemList.get(position).getBend().toString().toLowerCase().contains("dom molitve")) {
+            } else if (itemList.get(position).getBend().toString().toLowerCase().contains("dom molitve")) {
                 holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.dom_molitve_sb));
-            }else {
+            } else {
                 holder.slika.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_trzalica));
             }
 
@@ -159,33 +150,10 @@ public class SongsItemAdapter extends RecyclerView.Adapter<SongsItemAdapter.View
                     SongsAbout songsAbout = new SongsAbout(itemList.get(position));
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, songsAbout).addToBackStack("subFragment").commit();
                     UIUtil.hideKeyboard(activity);
-                    searchFlag=true;
+                    searchFlag = true;
                 }
             });
         }
-    }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-
-        TextView naslov;
-        ImageView slika;
-        RelativeLayout itemLayout,slikaLayout,tekstLayout;
-        ShimmerFrameLayout shimmerFrameLayout;
-
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            naslov = itemView.findViewById(R.id.naslov);
-            slika = itemView.findViewById(R.id.slika);
-            itemLayout=itemView.findViewById(R.id.itemLayout);
-            slikaLayout=itemView.findViewById(R.id.slikaLayout);
-            tekstLayout=itemView.findViewById(R.id.tekstLayout);
-            shimmerFrameLayout = itemView.findViewById(R.id.shimmer_layout_pjesme);
-
-
-        }
-
     }
 
     public void shareItem(int position) {
@@ -199,15 +167,48 @@ public class SongsItemAdapter extends RecyclerView.Adapter<SongsItemAdapter.View
         String naslov = itemList.get(position).getNaslov();
         Intent share = new Intent();
         share.setAction(Intent.ACTION_SEND);
-        share.putExtra(Intent.EXTRA_TEXT, naslov+"\n\n"+tekst);
+        share.putExtra(Intent.EXTRA_TEXT, naslov + "\n\n" + tekst);
         share.putExtra(Intent.EXTRA_SUBJECT, naslov);
         share.setType("text/plain");
         context.startActivity(share.createChooser(share, "Share using"));
 
     }
 
+    boolean getFilteredList() {
+        if(filteredList == null || (filteredList.size() == itemListFull.size())) {
+            return true;
+        } else {
+            filteredList.addAll(itemListFull);
+            getFilter().filter("");
+            return false;
+        }
+    }
+
     private void undoDelete() {
         itemList.add(sharedItemPosition, sharedItem);
         notifyItemInserted(sharedItemPosition);
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        TextView naslov;
+        ImageView slika;
+        RelativeLayout itemLayout, slikaLayout, tekstLayout;
+        ShimmerFrameLayout shimmerFrameLayout;
+
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            naslov = itemView.findViewById(R.id.naslov);
+            slika = itemView.findViewById(R.id.slika);
+            itemLayout = itemView.findViewById(R.id.itemLayout);
+            slikaLayout = itemView.findViewById(R.id.slikaLayout);
+            tekstLayout = itemView.findViewById(R.id.tekstLayout);
+            shimmerFrameLayout = itemView.findViewById(R.id.shimmer_layout_pjesme);
+
+
+        }
+
     }
 }

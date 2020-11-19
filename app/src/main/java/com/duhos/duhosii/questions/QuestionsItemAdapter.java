@@ -36,10 +36,13 @@ public class QuestionsItemAdapter extends RecyclerView.Adapter<QuestionsItemAdap
 
     private int pitanjePosition;
     private boolean pitanjeShow = false;
-    private boolean doAnimation=true;
+    QuestionsItemAdapter.ViewHolder myHolder;
+    private boolean doAnimation = true;
+
     public QuestionsItemAdapter(List<Question> itemList) {
         this.itemList = itemList;
     }
+
     RecyclerView mRecyclerView;
 
 
@@ -48,6 +51,7 @@ public class QuestionsItemAdapter extends RecyclerView.Adapter<QuestionsItemAdap
         super.onAttachedToRecyclerView(recyclerView);
         mRecyclerView = recyclerView;
     }
+
     @NonNull
     @Override
     public QuestionsItemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -58,53 +62,51 @@ public class QuestionsItemAdapter extends RecyclerView.Adapter<QuestionsItemAdap
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull final QuestionsItemAdapter.ViewHolder holder, final int position) {
-
-        context = holder.pitanjeOdgovorLayout.getContext();
+        myHolder = holder;
+        context = myHolder.pitanjeOdgovorLayout.getContext();
 
         if (showShimmer) {
-            holder.shimmerFrameLayout.startShimmer();
+            myHolder.shimmerFrameLayout.startShimmer();
         } else {
 
             if (doAnimation)
-                holder.pitanjeOdgovorLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_transition_animation));
+                myHolder.pitanjeOdgovorLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_transition_animation));
 
-            holder.shimmerFrameLayout.stopShimmer();
-            holder.shimmerFrameLayout.setShimmer(null);
+            myHolder.shimmerFrameLayout.stopShimmer();
+            myHolder.shimmerFrameLayout.setShimmer(null);
 
-            holder.pitanje.setBackground(null);
-            holder.odgovor.setBackground(null);
+            myHolder.pitanje.setBackground(null);
+            myHolder.odgovor.setBackground(null);
 
-            holder.pitanje.setText(itemList.get(position).getPitanje());
-            holder.odgovor.setText(itemList.get(position).getOdgovor());
+            myHolder.pitanje.setText(itemList.get(position).getPitanje());
+            myHolder.odgovor.setText(itemList.get(position).getOdgovor());
 
             if (pitanjePosition == position && pitanjeShow) {
-                holder.isExpanded = true;
-                holder.odgovorLayout.setVisibility(View.VISIBLE);
-                holder.pitanjeOdgovorLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.clicked_pitanje_background));
-                holder.pitanjeLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.clicked_pitanje_background));
-                holder.pitanje.setTextColor(ContextCompat.getColor(context, R.color.white));
+                myHolder.isExpanded = true;
+                myHolder.odgovorLayout.setVisibility(View.VISIBLE);
+                myHolder.pitanjeOdgovorLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.clicked_pitanje_background));
+                myHolder.pitanjeLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.clicked_pitanje_background));
+                myHolder.pitanje.setTextColor(ContextCompat.getColor(context, R.color.white));
                 Typeface firaSansItalic = Typeface.createFromAsset(context.getAssets(), "fonts/firasans_semibolditalic.ttf");
-                holder.pitanje.setTypeface(firaSansItalic);
-            }
-            else {
-                holder.isExpanded = false;
-                holder.odgovorLayout.setVisibility(View.GONE);
-                holder.pitanjeOdgovorLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangle_shape_shadow_small_radius));
-                holder.pitanjeLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.white));
-                holder.pitanje.setTextColor(ContextCompat.getColor(context, R.color.duhosPlava));
+                myHolder.pitanje.setTypeface(firaSansItalic);
+            } else {
+                myHolder.isExpanded = false;
+                myHolder.odgovorLayout.setVisibility(View.GONE);
+                myHolder.pitanjeOdgovorLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.rectangle_shape_shadow_small_radius));
+                myHolder.pitanjeLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.white));
+                myHolder.pitanje.setTextColor(ContextCompat.getColor(context, R.color.duhosPlava));
                 Typeface firaSansSemiBold = Typeface.createFromAsset(context.getAssets(), "fonts/firasans_semibold.ttf");
-                holder.pitanje.setTypeface(firaSansSemiBold);
-
+                myHolder.pitanje.setTypeface(firaSansSemiBold);
             }
 
-            holder.pitanjeOdgovorLayout.setOnClickListener(new View.OnClickListener() {
+            myHolder.pitanjeOdgovorLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!holder.isExpanded) {
+                    if (!myHolder.isExpanded) {
                         pitanjePosition = position;
                         pitanjeShow = true;
                         doAnimation = false;
-                        LinearLayoutManager layoutManager = (LinearLayoutManager)mRecyclerView.getLayoutManager();
+                        LinearLayoutManager layoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
                         layoutManager.scrollToPositionWithOffset(position, 0);
                         notifyDataSetChanged();
                     } else {
@@ -115,25 +117,27 @@ public class QuestionsItemAdapter extends RecyclerView.Adapter<QuestionsItemAdap
                 }
             });
 
-            holder.odgovor.setOnClickListener(new View.OnClickListener() {
+            myHolder.odgovor.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!holder.isExpanded) {
+                    if (!pitanjeShow) {
                         pitanjePosition = position;
                         pitanjeShow = true;
                         doAnimation = false;
-                        LinearLayoutManager layoutManager = (LinearLayoutManager)mRecyclerView.getLayoutManager();
+                        LinearLayoutManager layoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
                         layoutManager.scrollToPositionWithOffset(position, 0);
                         notifyDataSetChanged();
                     } else {
                         pitanjeShow = false;
                         doAnimation = false;
+                        LinearLayoutManager layoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
+                        layoutManager.scrollToPositionWithOffset(pitanjePosition, 0);
                         notifyDataSetChanged();
                     }
                 }
             });
 
-            holder.shareButton.setOnClickListener(new View.OnClickListener() {
+            myHolder.shareButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     shareItem(position);
@@ -147,28 +151,6 @@ public class QuestionsItemAdapter extends RecyclerView.Adapter<QuestionsItemAdap
         return showShimmer ? SHIMMER_ITEM_NUMBER : itemList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-
-        TextView pitanje, odgovor;
-        ImageButton shareButton;
-        RelativeLayout pitanjeLayout,odgovorLayout,pitanjeOdgovorLayout;
-        ShimmerFrameLayout shimmerFrameLayout;
-        private boolean isExpanded = false;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            pitanje = itemView.findViewById(R.id.idPitanje);
-            odgovor = itemView.findViewById(R.id.idOdgovor);
-            shareButton = itemView.findViewById(R.id.share);
-            pitanjeLayout=itemView.findViewById(R.id.pitanjeLayout);
-            odgovorLayout=itemView.findViewById(R.id.odgovorLayout);
-            pitanjeOdgovorLayout=itemView.findViewById(R.id.pitanje_odgovor_layout);
-            shimmerFrameLayout = itemView.findViewById(R.id.shimmer_layout_pitanja);
-
-        }
-
-    }
     public void shareItem(int position) {
         sharedItem = itemList.get(position);
         sharedItemPosition = position;
@@ -178,7 +160,7 @@ public class QuestionsItemAdapter extends RecyclerView.Adapter<QuestionsItemAdap
 
         String odgovor = itemList.get(position).getOdgovor().toString();
         String pitanje = itemList.get(position).getPitanje().toString();
-        String tekst = pitanje+"\n\n"+odgovor;
+        String tekst = pitanje + "\n\n" + odgovor;
         Intent share = new Intent();
         share.setAction(Intent.ACTION_SEND);
         share.putExtra(Intent.EXTRA_TEXT, tekst);
@@ -188,8 +170,38 @@ public class QuestionsItemAdapter extends RecyclerView.Adapter<QuestionsItemAdap
 
     }
 
+    public boolean checkHolder() {
+        if (pitanjeShow) {
+            myHolder.odgovor.performClick();
+            return true;
+        } else return false;
+    }
+
     private void undoDelete() {
         itemList.add(sharedItemPosition, sharedItem);
         notifyItemInserted(sharedItemPosition);
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        TextView pitanje, odgovor;
+        ImageButton shareButton;
+        RelativeLayout pitanjeLayout, odgovorLayout, pitanjeOdgovorLayout;
+        ShimmerFrameLayout shimmerFrameLayout;
+        private boolean isExpanded = false;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            pitanje = itemView.findViewById(R.id.idPitanje);
+            odgovor = itemView.findViewById(R.id.idOdgovor);
+            shareButton = itemView.findViewById(R.id.share);
+            pitanjeLayout = itemView.findViewById(R.id.pitanjeLayout);
+            odgovorLayout = itemView.findViewById(R.id.odgovorLayout);
+            pitanjeOdgovorLayout = itemView.findViewById(R.id.pitanje_odgovor_layout);
+            shimmerFrameLayout = itemView.findViewById(R.id.shimmer_layout_pitanja);
+
+        }
+
     }
 }
