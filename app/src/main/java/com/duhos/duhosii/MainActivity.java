@@ -1,9 +1,11 @@
 package com.duhos.duhosii;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,15 +23,22 @@ import com.duhos.duhosii.news.NewsFragment;
 import com.duhos.duhosii.prayers.PrayerGroupsFragment;
 import com.duhos.duhosii.questions.QuestionsFragment;
 import com.duhos.duhosii.songs.SongsFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
+
+import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences = null;
     SharedPreferences.Editor editor;
     private Boolean subFragment = false;
     BottomNavigationView bottomNavigationView;
+    private FirebaseAuth mAuth;
 
     private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -81,18 +90,37 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sharedPreferences = getSharedPreferences("com.duhosii", MODE_PRIVATE);
-
         //micanje default action bara i postavljanje posebnog
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.toolbar);
         ActionBar mActionBar = getSupportActionBar();
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
 
+
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         bottomNavigationView.setVisibility(View.VISIBLE);
         bottomNavigationView.setBackground(this.getResources().getDrawable(R.color.white));
         onNewIntent(getIntent());
+        mAuth = FirebaseAuth.getInstance();
+        connectToFirebase();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    void connectToFirebase() {
+        String email = "duhos.com@gmail.com";
+        String password = "adminDuhos20";
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "signInWithEmail:success");
+                        } else {
+                            Log.d(TAG, "signInWithEmail:fail");
+                        }
+                    }
+                });
     }
 
     public void otvoriDialog(View view) {
