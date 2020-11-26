@@ -60,6 +60,7 @@ misa i Euharistijskih klanjanja u sklopu naših susreta, ali i nedjeljne svete m
     <string name="nemaPodatakaUbazi">Nema predviđenih događaja za odabrani datum!</string>
     <string name="kadObavijestStize">Obavijest će stići na dan događaja u odabrano vrijeme!</string>
     <string name="odabranoJeProsloVrijeme">Odabrali ste vrijeme koje je prošlo! Pokušajte ponovno!</string>
+    <string name="odabranoJeVrijemeNakonDogadjaja">Odabrali ste vrijeme alarma nakon trenutnog događaja! Pokušajte ponovno!</string>
 
     <string name="kapelaniNaslov">Kapelani</string>
 

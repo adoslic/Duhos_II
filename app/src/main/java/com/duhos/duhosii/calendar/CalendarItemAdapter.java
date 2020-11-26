@@ -79,6 +79,7 @@ public class CalendarItemAdapter extends RecyclerView.Adapter<CalendarItemAdapte
     private ArrayList<Boolean> alarmVisibility;
 
 
+
     public CalendarItemAdapter(List<Event> itemList, List<AlarmDate> konacnaListaAlarma, ArrayList<Boolean> alarmVisibility) {
         this.itemList = itemList;
         this.konacnaListaAlarma=konacnaListaAlarma;
@@ -192,9 +193,8 @@ public class CalendarItemAdapter extends RecyclerView.Adapter<CalendarItemAdapte
             String[] parts = itemList.get(position).getDatum().split("/");
             String dan = parts[0];
             final String mjesec = parts[1];
-
-            String dateString=itemList.get(position).getDatum();
             Date date=null;
+            String dateString=itemList.get(position).getDatum();
             try {
                 date =new SimpleDateFormat("dd/MM/yyyy").parse(dateString);
             } catch (ParseException e) {
@@ -347,8 +347,18 @@ public class CalendarItemAdapter extends RecyclerView.Adapter<CalendarItemAdapte
                                             } catch (ParseException e) {
                                                 e.printStackTrace();
                                             }
+                                            Date datumDogadjajaDateFormat=new Date();
+                                            String datumDogadjaja=itemList.get(position).getDatum();
+                                            try {
+                                                datumDogadjajaDateFormat =new SimpleDateFormat("dd/MM/yyyy").parse(datumDogadjaja);
+                                            } catch (ParseException e) {
+                                                e.printStackTrace();
+                                            }
                                             if (vrijemeAlarma.before(new Date())) {
                                                 Toast.makeText(context, context.getResources().getString(R.string.odabranoJeProsloVrijeme), Toast.LENGTH_SHORT).show();
+                                            }
+                                            else if(vrijemeAlarma.after(datumDogadjajaDateFormat)){
+                                                Toast.makeText(context, context.getResources().getString(R.string.odabranoJeVrijemeNakonDogadjaja), Toast.LENGTH_SHORT).show();
                                             }
                                             else{
 
@@ -522,9 +532,20 @@ public class CalendarItemAdapter extends RecyclerView.Adapter<CalendarItemAdapte
                                                 } catch (ParseException e) {
                                                     e.printStackTrace();
                                                 }
+                                                Date datumDogadjajaDateFormat=new Date();
+                                                String datumDogadjaja=itemList.get(position).getDatum();
+                                                try {
+                                                    datumDogadjajaDateFormat =new SimpleDateFormat("dd/MM/yyyy").parse(datumDogadjaja);
+                                                } catch (ParseException e) {
+                                                    e.printStackTrace();
+                                                }
                                                 if (vrijemeAlarma.before(new Date())) {
                                                     Toast.makeText(context, context.getResources().getString(R.string.odabranoJeProsloVrijeme), Toast.LENGTH_SHORT).show();
-                                                } else {
+                                                }
+                                                else if(vrijemeAlarma.after(datumDogadjajaDateFormat)){
+                                                    Toast.makeText(context, context.getResources().getString(R.string.odabranoJeVrijemeNakonDogadjaja), Toast.LENGTH_SHORT).show();
+                                                }
+                                                else {
                                                     alarmVisibility.set(position, true);
                                                     final boolean visible = alarmVisibility.get(position);
                                                     if (visible) {
