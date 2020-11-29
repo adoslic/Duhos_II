@@ -1,6 +1,5 @@
 package com.duhos.duhosii;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -30,12 +29,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
+
 import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences = null;
     SharedPreferences.Editor editor;
     private Boolean subFragment = false;
+    private boolean songAbout = false;
     BottomNavigationView bottomNavigationView;
     private FirebaseAuth mAuth;
 
@@ -212,6 +213,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void setSubFragmentData(Boolean subFragment) {
         this.subFragment = subFragment;
+    }
+
+    public boolean getSongAbout() {
+        return songAbout;
+    }
+
+    public void setSongAbout(Boolean songAbout) {
+        this.songAbout = songAbout;
     }
 
 }
