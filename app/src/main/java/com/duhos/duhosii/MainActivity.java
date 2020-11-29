@@ -30,7 +30,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
-
 import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity {
