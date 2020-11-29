@@ -48,6 +48,7 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventList
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class SongsFragment extends Fragment {
 
@@ -236,6 +237,7 @@ public class SongsFragment extends Fragment {
         }
         activity.setSubFragmentData(false);
         checkKeyboard();
+        ((MainActivity) Objects.requireNonNull(getActivity())).setSongAbout(false);
     }
 
     @Override
@@ -270,9 +272,10 @@ public class SongsFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void checkKeyboard() {
+        boolean songAbout = ((MainActivity) Objects.requireNonNull(getActivity())).getSongAbout();
         if (searchEditText.getVisibility() == View.GONE && adapter != null) {
             boolean filter = adapter.getFilteredList();
-            if (filter) {
+            if (filter && !songAbout) {
                 assert getFragmentManager() != null;
                 getFragmentManager().popBackStack();
             }

@@ -1,6 +1,5 @@
 package com.duhos.duhosii;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -37,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences = null;
     SharedPreferences.Editor editor;
     private Boolean subFragment = false;
+    private boolean songAbout = false;
     BottomNavigationView bottomNavigationView;
     private FirebaseAuth mAuth;
 
@@ -213,6 +213,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void setSubFragmentData(Boolean subFragment) {
         this.subFragment = subFragment;
+    }
+
+    public boolean getSongAbout() {
+        return songAbout;
+    }
+
+    public void setSongAbout(Boolean songAbout) {
+        this.songAbout = songAbout;
     }
 
 }

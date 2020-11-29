@@ -28,6 +28,8 @@ import com.duhos.duhosii.prayers.WebViewFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 
+import java.util.Objects;
+
 public class SongsAbout extends Fragment {
 
     private TextView zaglavlje;
@@ -62,6 +64,7 @@ public class SongsAbout extends Fragment {
         bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_AUTO);
         bottomNavigationView.setBackground(getContext().getResources().getDrawable(R.color.white));
 
+        ((MainActivity) Objects.requireNonNull(getActivity())).setSongAbout(true);
 
         pjesmaricaView = inflater.inflate(R.layout.fragment_pjesmarica_opsirno, container, false);
         naslov = pjesmaricaView.findViewById(R.id.naslovOpsirno);
