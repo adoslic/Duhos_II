@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class QuestionsFragment extends Fragment {
 
@@ -141,7 +140,7 @@ public class QuestionsFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w(TAG, getContext().getResources().getString(R.string.greskaUbaziString), databaseError.toException());
+                Log.w("TAG", getContext().getResources().getString(R.string.greskaUbaziString), databaseError.toException());
             }
         });
 

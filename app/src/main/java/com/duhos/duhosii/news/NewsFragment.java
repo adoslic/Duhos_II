@@ -38,7 +38,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class NewsFragment extends Fragment {
 
@@ -135,7 +134,7 @@ public class NewsFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w(TAG, getContext().getResources().getString(R.string.greskaUbaziString), databaseError.toException());
+                Log.w("TAG", getContext().getResources().getString(R.string.greskaUbaziString), databaseError.toException());
             }
         });
 
@@ -169,7 +168,7 @@ public class NewsFragment extends Fragment {
     public void onPause() {
         // Save ListView state @ onPause
             if(connectionFlag) {
-                Log.d(TAG, "saving listview state");
+                Log.d("TAG", "saving listview state");
                 mBundleRecyclerViewState = new Bundle();
                 try{
                     mListState = recyclerView.getLayoutManager().onSaveInstanceState();

@@ -37,7 +37,9 @@
             android:textSize="14sp"
             android:textColor="@color/duhosPlava"
             android:fontFamily="@font/firasans_medium"
-            android:textIsSelectable="true"></TextView>
+            android:textIsSelectable="true"
+            android:textAlignment="center"
+            android:gravity="center"></TextView>
 
         <TextView
             android:id="@+id/tekstOpsirno"
