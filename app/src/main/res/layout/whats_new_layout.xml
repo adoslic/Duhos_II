@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/rectangle_shape">
+
+        <RelativeLayout
+            android:id="@+id/infoWhatsNew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+            <TextView
+                android:id="@+id/whatNewHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Što je novo?"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/duhosPlava"
+                android:textSize="22sp"
+                android:fontFamily="@font/firasans_semibold"></TextView>
+            <ImageView
+                android:id="@+id/whatsNewImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/sto_je_novo_prva"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/whatNewHeader"
+                android:layout_marginTop="10dp"></ImageView>
+            <TextView
+                android:id="@+id/whatsNewText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/whatsNewImage"
+                android:text="@string/whatsNewText1"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/whatsNewTextColor"
+                android:layout_marginBottom="14dp"></TextView>
+
+            <ImageButton
+                android:id="@+id/buttonNastavi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_button_nastavi"
+                android:background="@color/white"
+                android:layout_below="@+id/whatsNewText"
+                android:layout_margin="10dp"
+                android:layout_alignParentRight="true">
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/buttonOdustani"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_button_odustani"
+                android:background="@color/white"
+                android:layout_below="@+id/whatsNewText"
+                android:layout_margin="10dp"
+                android:layout_alignParentLeft="true">
+            </ImageButton>
+        </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>
