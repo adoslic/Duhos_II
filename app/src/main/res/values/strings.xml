@@ -62,6 +62,10 @@ misa i Euharistijskih klanjanja u sklopu naših susreta, ali i nedjeljne svete m
     <string name="odabranoJeProsloVrijeme">Odabrali ste vrijeme koje je prošlo! Pokušajte ponovno!</string>
     <string name="odabranoJeVrijemeNakonDogadjaja">Odabrali ste vrijeme alarma nakon trenutnog događaja! Pokušajte ponovno!</string>
 
+    <string name="whatsNewText1">Postavili smo mogućnost uređivanja postavljenog alarma!</string>
+    <string name="whatsNewText2">Na jednome mjestu pronađi časoslov i mogućnost slanja nakane i svjedočanstva!</string>
+    <string name="whatsNewText3">Optimizirali smo našu mobilnu aplikaciju!</string>
+
     <string name="kapelaniNaslov">Kapelani</string>
 
     <string name="knjiznicaString">Knjižnica</string>

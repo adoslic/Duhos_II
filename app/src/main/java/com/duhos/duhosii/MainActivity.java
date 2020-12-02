@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.duhos.duhosii.calendar.CalendarFragment;
 import com.duhos.duhosii.info.ApplicationInfoFragment;
 import com.duhos.duhosii.info.dialog.Dialog;
+import com.duhos.duhosii.info.dialog.WhatsNewDialog;
 import com.duhos.duhosii.news.NewsFragment;
 import com.duhos.duhosii.prayers.PrayerGroupsFragment;
 import com.duhos.duhosii.questions.QuestionsFragment;
@@ -182,6 +183,8 @@ public class MainActivity extends AppCompatActivity {
         if (sharedPreferences.getBoolean("firstRun", true)) {
             //You can perform anything over here. This will call only first time
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new ApplicationInfoFragment()).addToBackStack("").commit();
+            //final WhatsNewDialog whatsNewDialog = new WhatsNewDialog();
+            //whatsNewDialog.show(getSupportFragmentManager(), "dialog");
             editor = sharedPreferences.edit();
             editor.putBoolean("firstRun", false);
             editor.apply();

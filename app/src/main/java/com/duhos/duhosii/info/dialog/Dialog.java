@@ -33,7 +33,7 @@ public class Dialog extends AppCompatDialogFragment {
 
         final AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
         LayoutInflater inflater=getActivity().getLayoutInflater();
-        View view=inflater.inflate(R.layout.dialog,null);
+        View view=inflater.inflate(R.layout.whats_new_layout,null);
 
         infoDuhos=view.findViewById(R.id.infoDuhosLayout);
         infoKapelani=view.findViewById(R.id.infoKapelaniLayout);
