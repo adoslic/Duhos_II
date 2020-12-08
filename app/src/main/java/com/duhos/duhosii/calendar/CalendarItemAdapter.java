@@ -349,8 +349,9 @@ public class CalendarItemAdapter extends RecyclerView.Adapter<CalendarItemAdapte
                                             }
                                             Date datumDogadjajaDateFormat=new Date();
                                             String datumDogadjaja=itemList.get(position).getDatum();
+                                            String vrijemeDogadjaja=itemList.get(position).getVrijeme();
                                             try {
-                                                datumDogadjajaDateFormat =new SimpleDateFormat("dd/MM/yyyy").parse(datumDogadjaja);
+                                                datumDogadjajaDateFormat =new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").parse(datumDogadjaja+" "+vrijemeDogadjaja+":00");
                                             } catch (ParseException e) {
                                                 e.printStackTrace();
                                             }
@@ -534,8 +535,10 @@ public class CalendarItemAdapter extends RecyclerView.Adapter<CalendarItemAdapte
                                                 }
                                                 Date datumDogadjajaDateFormat=new Date();
                                                 String datumDogadjaja=itemList.get(position).getDatum();
+                                                String vrijemeDogadjaja=itemList.get(position).getVrijeme();
+
                                                 try {
-                                                    datumDogadjajaDateFormat =new SimpleDateFormat("dd/MM/yyyy").parse(datumDogadjaja);
+                                                    datumDogadjajaDateFormat =new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").parse(datumDogadjaja+" "+vrijemeDogadjaja+":00");
                                                 } catch (ParseException e) {
                                                     e.printStackTrace();
                                                 }
