@@ -1,6 +1,7 @@
 package com.duhos.duhosii;
 
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,7 +19,6 @@ import androidx.fragment.app.Fragment;
 import com.duhos.duhosii.calendar.CalendarFragment;
 import com.duhos.duhosii.info.ApplicationInfoFragment;
 import com.duhos.duhosii.info.dialog.Dialog;
-import com.duhos.duhosii.info.dialog.WhatsNewDialog;
 import com.duhos.duhosii.news.NewsFragment;
 import com.duhos.duhosii.prayers.PrayerGroupsFragment;
 import com.duhos.duhosii.questions.QuestionsFragment;
@@ -26,12 +26,17 @@ import com.duhos.duhosii.songs.SongsFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
 import static android.content.ContentValues.TAG;
+import static com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE;
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences = null;
@@ -40,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean songAbout = false;
     BottomNavigationView bottomNavigationView;
     private FirebaseAuth mAuth;
+    int MY_REQUEST_CODE = 777;
+    private AppUpdateManager appUpdateManager;
 
     private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -97,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
         ActionBar mActionBar = getSupportActionBar();
         mActionBar.setBackgroundDrawable(this.getResources().getDrawable(R.color.grey));
 
+        appUpdateManager = AppUpdateManagerFactory.create(this);
+        checkUpdate();
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
@@ -180,6 +189,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        appUpdateManager
+                .getAppUpdateInfo()
+                .addOnSuccessListener(appUpdateInfo -> {
+                    if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+                        // If an in-app update is already running, resume the update.
+                        try {
+                            appUpdateManager.startUpdateFlowForResult(
+                                    appUpdateInfo,
+                                    IMMEDIATE,
+                                    this,
+                                    MY_REQUEST_CODE);
+                        } catch (IntentSender.SendIntentException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
         if (sharedPreferences.getBoolean("firstRun", true)) {
             //You can perform anything over here. This will call only first time
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter, new ApplicationInfoFragment()).addToBackStack("").commit();
@@ -224,6 +251,47 @@ public class MainActivity extends AppCompatActivity {
 
     public void setSongAbout(Boolean songAbout) {
         this.songAbout = songAbout;
+    }
+
+    private void checkUpdate() {
+        // Returns an intent object that you use to check for an update.
+        com.google.android.play.core.tasks.Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+
+        // Checks that the platform will allow the specified type of update.
+        Log.d(TAG, "Checking for updates");
+
+        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                    && appUpdateInfo.isUpdateTypeAllowed(IMMEDIATE)) {
+                Log.d(TAG, "Update available");
+                // Request the update.
+                try {
+                    appUpdateManager.startUpdateFlowForResult(
+                            // Pass the intent that is returned by 'getAppUpdateInfo()'.
+                            appUpdateInfo,
+                            IMMEDIATE,
+                            // The current activity making the update request.
+                            this,
+                            // Include a request code to later monitor this update request.
+                            MY_REQUEST_CODE);
+                } catch (IntentSender.SendIntentException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Log.d(TAG, "No Update available");
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MY_REQUEST_CODE) {
+            if (resultCode != RESULT_OK) {
+                Log.d(TAG, "Update flow failed! Result code: " + resultCode);
+                // If the update is cancelled or fails,
+                // you can request to start the update again.
+            }
+        }
     }
 
 }
