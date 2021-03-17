@@ -3,6 +3,8 @@ package com.duhos.duhosii;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import com.duhos.duhosii.calendar.CalendarFragment;
 import com.duhos.duhosii.info.ApplicationInfoFragment;
 import com.duhos.duhosii.info.dialog.Dialog;
+import com.duhos.duhosii.info.dialog.WhatsNewDialog;
 import com.duhos.duhosii.news.NewsFragment;
 import com.duhos.duhosii.prayers.PrayerGroupsFragment;
 import com.duhos.duhosii.questions.QuestionsFragment;
@@ -214,7 +217,27 @@ public class MainActivity extends AppCompatActivity {
             //whatsNewDialog.show(getSupportFragmentManager(), "dialog");
             editor = sharedPreferences.edit();
             editor.putBoolean("firstRun", false);
+            editor.putLong("lastRunVersionCode", 0);
             editor.apply();
+        } else {
+            PackageInfo pInfo = null;
+            try {
+                pInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_META_DATA);
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+            assert pInfo != null;
+
+            if (!sharedPreferences.getAll().containsKey("lastRunVersionCode")
+                    && sharedPreferences.getLong( "lastRunVersionCode", 2) < pInfo.versionCode
+                    && pInfo.versionCode == 3) {
+                final WhatsNewDialog dialog = new WhatsNewDialog();
+                dialog.show(getSupportFragmentManager(), "whatsIsNew");
+
+                editor = sharedPreferences.edit();
+                editor.putLong("lastRunVersionCode", pInfo.versionCode);
+                editor.apply();
+            }
         }
         String menuFragment = getIntent().getStringExtra("notification");
         if (menuFragment != null) {
