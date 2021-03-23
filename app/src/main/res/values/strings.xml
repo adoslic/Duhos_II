@@ -90,8 +90,9 @@ misa i Euharistijskih klanjanja u sklopu naših susreta, ali i nedjeljne svete m
     <string name="opceniteInformacijeString">Općenito informacije</string>
 
     <string name="pitanjeDisclaimer">Prilikom slanja pitanja za našeg kapelana, unos imena i prezimena nije nužan ukoliko želiš ostati anoniman, a u suprotnom će ime i prezime biti vidljivo samo kapelanu. Nakon što kapelan odgovori, pitanje i odgovor ćemo objaviti u aplikaciji.</string>
-    <string name="mailZaPitanjaKapelan2">m.zigman6@gmail.com</string>
-    <string name="mailZaPitanjaKapelan1">dav.vuk@gmail.com</string>
+    <string name="marioMail">m.zigman6@gmail.com</string>
+    <string name="davorMail">dav.vuk@gmail.com</string>
+    <string name="duhosMail">duhos.com@gmail.com</string>
     <string name="pitajKapelanaNaslov">Pitaj kapelana</string>
     <string name="pitanjaNaslov">Pitanja</string>
 

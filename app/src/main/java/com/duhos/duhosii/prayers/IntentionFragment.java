@@ -34,9 +34,7 @@ public class IntentionFragment extends Fragment {
     BottomNavigationView bottomNavigationView;
     private View nakanaFragmentView;
     String text="Prilikom slanja molitvene nakane unos imena i prezimena nije nužan ukoliko želiš ostati anoniman. Molitvena nakana se neće prikazivati u aplikaciji nego ćemo za nju moliti na sljedećem klanjanju.";
-    /*private String marioMail="m.zigman6@gmail.com";*/
-    private String marioMail="duhos.com@gmail.com";
-    private EditText imeEditText,nakanaEditText;
+    private EditText imeEditText, nakanaEditText;
     private ImageButton sendNakanaButton;
     private int padding;
     private float density;
@@ -141,8 +139,9 @@ public class IntentionFragment extends Fragment {
         else
             subject="Nakana od anonimnog pošiljatelja";
 
+        String duhosMail = getContext().getResources().getString(R.string.duhosMail);
         String message=nakanaEditText.getText().toString();
-        JavaMailAPI javaMailAPI = new JavaMailAPI(getContext(), marioMail,subject , message);
+        JavaMailAPI javaMailAPI = new JavaMailAPI(getContext(), duhosMail, subject , message);
         javaMailAPI.execute();
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new GoBackFragment("nakana")).commit();
     }
