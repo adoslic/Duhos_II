@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (!sharedPreferences.getAll().containsKey("lastRunVersionCode")
                     && sharedPreferences.getLong( "lastRunVersionCode", 2) < pInfo.versionCode
-                    && pInfo.versionCode == 3) {
+                    && pInfo.versionCode == 4 ) {
                 final WhatsNewDialog dialog = new WhatsNewDialog();
                 dialog.show(getSupportFragmentManager(), "whatsIsNew");
 
