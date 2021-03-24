@@ -34,8 +34,6 @@ public class SendTestimonyFragment extends Fragment {
     BottomNavigationView bottomNavigationView;
     private View nakanaFragmentView;
     String text="Prilikom slanja svjedočanstva unos imena i prezimena nije nužan ukoliko želiš ostati anoniman. Svjedočanstvo će uskoro nakon slanja biti vidljivo u aplikaciji i na web stranici DUHOS-a.";
-    private String marioMail="m.zigman6@gmail.com";
-    //private String marioMail="kresimirtomic1998@gmail.com";
     private EditText imeEditText,nakanaEditText;
     private ImageButton sendNakanaButton;
     private int padding;
@@ -140,8 +138,9 @@ public class SendTestimonyFragment extends Fragment {
         else
             subject="Svjedočanstvo od anonimnog pošiljatelja";
 
+        String marioMail = getContext().getResources().getString(R.string.marioMail);
         String message=nakanaEditText.getText().toString();
-        JavaMailAPI javaMailAPI = new JavaMailAPI(getContext(), marioMail,subject , message);
+        JavaMailAPI javaMailAPI = new JavaMailAPI(getContext(), marioMail, subject , message);
         javaMailAPI.execute();
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_containter,new GoBackFragment("svjedočanstvo")).commit();
     }

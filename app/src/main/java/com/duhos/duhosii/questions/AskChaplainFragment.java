@@ -133,10 +133,8 @@ public class AskChaplainFragment extends Fragment {
             sendMessageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /*private String marioMail="m.zigman6@gmail.com";
-                    private String davorMail="dav.vuk@gmail.com";*/
-                    String marioMail=getContext().getResources().getString(R.string.mailZaPitanjaKapelan2);
-                    String davorMail=getContext().getResources().getString(R.string.mailZaPitanjaKapelan1);
+                    String marioMail = getContext().getResources().getString(R.string.marioMail);
+                    String davorMail = getContext().getResources().getString(R.string.davorMail);
                     String message=pitanjeEditText.getText().toString().trim();
                     if(marioImageActive.getVisibility()==View.GONE && davorImageActive.getVisibility()==View.GONE){
                         Toast.makeText(getContext(),getEmojiByUnicode(0x1F446)+"Odaberi kapelana!",Toast.LENGTH_SHORT).show();
